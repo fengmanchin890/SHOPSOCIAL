@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react"
+import { ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -152,31 +152,11 @@ export default function CartPage() {
                       <p className="font-semibold text-gray-900 mt-2">${item.price.toLocaleString()}</p>
                     </div>
 
-                    {/* Quantity Controls */}
+                    {/* Quantity Display */}
                     <div className="flex items-center space-x-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleDecreaseQuantity(itemKey, item.quantity)}
-                        disabled={item.quantity <= 1 || isUpdating[itemKey]}
-                        className="h-10 w-10 p-0 rounded-md hover:bg-red-50 hover:border-red-300 active:bg-red-100 transition-colors"
-                        aria-label="減少數量"
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
                       <div className="w-16 text-center bg-gray-50 rounded border py-2 px-2">
                         <span className="text-sm font-medium">{item.quantity}</span>
                       </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleIncreaseQuantity(itemKey, item.quantity)}
-                        disabled={item.quantity >= 99 || isUpdating[itemKey]}
-                        className="h-10 w-10 p-0 rounded-md hover:bg-green-50 hover:border-green-300 active:bg-green-100 transition-colors"
-                        aria-label="增加數量"
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
                     </div>
 
                     {/* Subtotal */}
@@ -191,17 +171,6 @@ export default function CartPage() {
                         ${subtotal.toLocaleString()}
                       </p>
                     </div>
-
-                    {/* Remove Button */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleRemoveItem(itemKey, item.name)}
-                      className="text-red-600 hover:text-white hover:bg-red-600 active:bg-red-700 transition-colors rounded-full h-8 w-8 p-0"
-                      aria-label="刪除商品"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
