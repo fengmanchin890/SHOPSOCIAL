@@ -42,35 +42,35 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const propertyTypes = ["整套房屋", "獨立房間", "共享房間", "工作室", "民宿", "青年旅館", "共享空間"]
-  const priceTypes = ["每晚", "每週", "每月", "長期租賃"]
+  const propertyTypes = ["Nhà nguyên căn", "Phòng riêng", "Phòng chung", "Studio", "Homestay", "Nhà nghỉ", "Không gian chung"]
+  const priceTypes = ["Mỗi đêm", "Mỗi tuần", "Mỗi tháng", "Thuê dài hạn"]
   const availableAmenities = [
-    "WiFi網路",
-    "空調",
-    "暖氣",
-    "廚房",
-    "洗衣機",
-    "烘乾機",
-    "停車位",
-    "電梯",
-    "陽台",
-    "花園",
-    "游泳池",
-    "健身房",
-    "24小時門禁",
-    "管理員",
-    "寵物友善",
-    "吸煙區",
+    "WiFi", 
+    "Máy lạnh", 
+    "Máy sưởi", 
+    "Bếp", 
+    "Máy giặt", 
+    "Máy sấy", 
+    "Chỗ đậu xe", 
+    "Thang máy", 
+    "Ban công", 
+    "Vườn", 
+    "Hồ bơi", 
+    "Phòng tập gym", 
+    "An ninh 24/7", 
+    "Quản lý tòa nhà", 
+    "Thân thiện với thú cưng", 
+    "Khu vực hút thuốc"
   ]
   const availableRules = [
-    "禁止吸煙",
-    "禁止寵物",
-    "禁止聚會",
-    "保持安靜",
-    "清潔維護",
-    "訪客登記",
-    "門禁時間",
-    "垃圾分類",
+    "Không hút thuốc",
+    "Không thú cưng",
+    "Không tổ chức tiệc",
+    "Giữ yên lặng",
+    "Giữ sạch sẽ",
+    "Đăng ký khách",
+    "Giờ giới nghiêm",
+    "Phân loại rác",
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,8 +78,8 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
 
     if (!isPremiumMember) {
       toast({
-        title: "需要會員權限",
-        description: "請升級為會員以使用新增出租住宿功能",
+        title: "Cần quyền thành viên",
+        description: "Vui lòng nâng cấp thành viên để sử dụng tính năng thêm chỗ ở",
         variant: "destructive",
       })
       return
@@ -87,8 +87,8 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
 
     if (!formData.title || !formData.description || !formData.type || !formData.location || !formData.price) {
       toast({
-        title: "請填寫必填欄位",
-        description: "標題、描述、類型、地點和價格為必填項",
+        title: "Vui lòng điền các trường bắt buộc",
+        description: "Tiêu đề, mô tả, loại chỗ ở, vị trí và giá là bắt buộc",
         variant: "destructive",
       })
       return
@@ -100,15 +100,15 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
       toast({
-        title: "住宿新增成功！",
-        description: `住宿「${formData.title}」已成功提交審核，審核通過後將顯示在平台上`,
+        title: "Thêm chỗ ở thành công!",
+        description: `Chỗ ở "${formData.title}" đã được gửi để xét duyệt và sẽ hiển thị trên nền tảng sau khi được phê duyệt`,
       })
 
       onSuccess()
     } catch (error) {
       toast({
-        title: "新增失敗",
-        description: "住宿新增過程中發生錯誤，請稍後再試",
+        title: "Thêm thất bại",
+        description: "Đã xảy ra lỗi khi thêm chỗ ở, vui lòng thử lại sau",
         variant: "destructive",
       })
     } finally {
@@ -145,30 +145,30 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Home className="h-6 w-6 text-blue-500" />
-          <h2 className="text-2xl font-bold">新增出租住宿</h2>
+          <h2 className="text-2xl font-bold">Thêm chỗ ở trao đổi</h2>
         </div>
         <p className="text-gray-500 text-sm">
-          填寫以下表單，將您的住宿加入我們的平台。新增的住宿將在審核後顯示給用戶。
+          Điền thông tin bên dưới để thêm chỗ ở của bạn vào nền tảng. Chỗ ở sẽ được hiển thị sau khi được phê duyệt.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="title">住宿標題 *</Label>
+          <Label htmlFor="title">Tiêu đề chỗ ở *</Label>
           <Input
             id="title"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            placeholder="請輸入住宿標題"
+            placeholder="Nhập tiêu đề chỗ ở"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="type">住宿類型 *</Label>
+          <Label htmlFor="type">Loại chỗ ở *</Label>
           <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇住宿類型" />
+              <SelectValue placeholder="Chọn loại chỗ ở" />
             </SelectTrigger>
             <SelectContent>
               {propertyTypes.map((type) => (
@@ -182,12 +182,12 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">住宿描述 *</Label>
+        <Label htmlFor="description">Mô tả chỗ ở *</Label>
         <Textarea
           id="description"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          placeholder="請詳細描述您的住宿環境、設施和特色"
+          placeholder="Mô tả chi tiết về chỗ ở, môi trường và đặc điểm"
           rows={4}
           required
         />
@@ -195,46 +195,46 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="location">地區 *</Label>
+          <Label htmlFor="location">Khu vực *</Label>
           <Input
             id="location"
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            placeholder="例：台北市、胡志明市"
+            placeholder="Ví dụ: Quận 2, TP.HCM"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="address">詳細地址</Label>
+          <Label htmlFor="address">Địa chỉ chi tiết</Label>
           <Input
             id="address"
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-            placeholder="請輸入完整地址"
+            placeholder="Nhập địa chỉ đầy đủ"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="price">租金價格 *</Label>
+          <Label htmlFor="price">Giá thuê *</Label>
           <Input
             id="price"
             type="number"
             value={formData.price}
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            placeholder="請輸入價格"
+            placeholder="Nhập giá"
             min="0"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="priceType">計價方式</Label>
+          <Label htmlFor="priceType">Loại giá</Label>
           <Select value={formData.priceType} onValueChange={(value) => setFormData({ ...formData, priceType: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇計價方式" />
+              <SelectValue placeholder="Chọn loại giá" />
             </SelectTrigger>
             <SelectContent>
               {priceTypes.map((type) => (
@@ -249,15 +249,15 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="bedrooms">臥室數量</Label>
+          <Label htmlFor="bedrooms">Số phòng ngủ</Label>
           <Select value={formData.bedrooms} onValueChange={(value) => setFormData({ ...formData, bedrooms: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇臥室數" />
+              <SelectValue placeholder="Chọn số phòng ngủ" />
             </SelectTrigger>
             <SelectContent>
               {[0, 1, 2, 3, 4, 5].map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num === 0 ? "無獨立臥室" : `${num} 間臥室`}
+                  {num === 0 ? "Không có phòng ngủ riêng" : `${num} phòng ngủ`}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -265,15 +265,15 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="bathrooms">浴室數量</Label>
+          <Label htmlFor="bathrooms">Số phòng tắm</Label>
           <Select value={formData.bathrooms} onValueChange={(value) => setFormData({ ...formData, bathrooms: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇浴室數" />
+              <SelectValue placeholder="Chọn số phòng tắm" />
             </SelectTrigger>
             <SelectContent>
               {[1, 2, 3, 4, 5].map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num} 間浴室
+                  {num} phòng tắm
                 </SelectItem>
               ))}
             </SelectContent>
@@ -281,15 +281,15 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="maxGuests">最大入住人數</Label>
+          <Label htmlFor="maxGuests">Số khách tối đa</Label>
           <Select value={formData.maxGuests} onValueChange={(value) => setFormData({ ...formData, maxGuests: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇人數" />
+              <SelectValue placeholder="Chọn số khách" />
             </SelectTrigger>
             <SelectContent>
               {[1, 2, 3, 4, 5, 6, 8, 10].map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num} 人
+                  {num} người
                 </SelectItem>
               ))}
             </SelectContent>
@@ -298,7 +298,7 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label>設施服務 (可多選)</Label>
+        <Label>Tiện nghi (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableAmenities.map((amenity) => (
             <div key={amenity} className="flex items-center space-x-2">
@@ -316,7 +316,7 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label>住宿規則 (可多選)</Label>
+        <Label>Nội quy (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableRules.map((rule) => (
             <div key={rule} className="flex items-center space-x-2">
@@ -335,38 +335,38 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="checkIn">入住時間</Label>
+          <Label htmlFor="checkIn">Giờ nhận phòng</Label>
           <Input
             id="checkIn"
             value={formData.checkIn}
             onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-            placeholder="例：15:00"
+            placeholder="Ví dụ: 15:00"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="checkOut">退房時間</Label>
+          <Label htmlFor="checkOut">Giờ trả phòng</Label>
           <Input
             id="checkOut"
             value={formData.checkOut}
             onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-            placeholder="例：11:00"
+            placeholder="Ví dụ: 11:00"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="cancellationPolicy">取消政策</Label>
+          <Label htmlFor="cancellationPolicy">Chính sách hủy</Label>
           <Select
             value={formData.cancellationPolicy}
             onValueChange={(value) => setFormData({ ...formData, cancellationPolicy: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder="選擇取消政策" />
+              <SelectValue placeholder="Chọn chính sách hủy" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="flexible">彈性取消</SelectItem>
-              <SelectItem value="moderate">適中取消</SelectItem>
-              <SelectItem value="strict">嚴格取消</SelectItem>
+              <SelectItem value="flexible">Linh hoạt</SelectItem>
+              <SelectItem value="moderate">Trung bình</SelectItem>
+              <SelectItem value="strict">Nghiêm ngặt</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -374,45 +374,45 @@ export function AddRentalForm({ onSuccess, onCancel }: AddRentalFormProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="phone">聯絡電話</Label>
+          <Label htmlFor="phone">Số điện thoại</Label>
           <Input
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            placeholder="請輸入聯絡電話"
+            placeholder="Nhập số điện thoại liên hệ"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">電子郵件</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            placeholder="請輸入電子郵件"
+            placeholder="Nhập địa chỉ email"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="image">住宿照片</Label>
+        <Label htmlFor="image">Hình ảnh chỗ ở</Label>
         <div className="border border-dashed rounded-md p-6 text-center">
           <input type="file" id="image" accept="image/*" onChange={handleImageChange} className="hidden" />
           <label htmlFor="image" className="cursor-pointer flex flex-col items-center justify-center">
             <Upload className="h-10 w-10 text-gray-400 mb-2" />
-            <span className="text-sm font-medium">{formData.image ? formData.image.name : "點擊上傳住宿照片"}</span>
-            <span className="text-xs text-gray-500 mt-1">支援 JPG、PNG 格式，建議尺寸 1200x800 像素</span>
+            <span className="text-sm font-medium">{formData.image ? formData.image.name : "Nhấp để tải lên hình ảnh chỗ ở"}</span>
+            <span className="text-xs text-gray-500 mt-1">Hỗ trợ định dạng JPG, PNG, kích thước đề xuất 1200x800 pixel</span>
           </label>
         </div>
       </div>
 
       <div className="flex justify-end space-x-2 pt-4 border-t">
         <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
-          取消
+          Hủy
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "處理中..." : "新增住宿"}
+          {isSubmitting ? "Đang xử lý..." : "Thêm chỗ ở"}
         </Button>
       </div>
     </form>

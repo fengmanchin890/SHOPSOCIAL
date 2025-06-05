@@ -36,14 +36,14 @@ export function MembershipUpgradeDialog({ children, requiredFeature }: Membershi
       const success = await upgradeMembership(planId, isTrial)
       if (success) {
         toast({
-          title: isTrial ? "試用開始！" : "升級成功！",
-          description: isTrial ? "您已開始7天免費試用，盡情體驗所有功能！" : "感謝您的支持，所有功能已解鎖！",
+          title: isTrial ? "Dùng thử bắt đầu!" : "Nâng cấp thành công!",
+          description: isTrial ? "Bạn đã bắt đầu 7 ngày dùng thử miễn phí, hãy trải nghiệm tất cả tính năng!" : "Cảm ơn sự ủng hộ của bạn, tất cả tính năng đã được mở khóa!",
         })
       }
     } catch (error) {
       toast({
-        title: "升級失敗",
-        description: "請稍後再試或聯繫客服",
+        title: "Nâng cấp thất bại",
+        description: "Vui lòng thử lại sau hoặc liên hệ bộ phận hỗ trợ",
         variant: "destructive",
       })
     } finally {
@@ -63,19 +63,19 @@ export function MembershipUpgradeDialog({ children, requiredFeature }: Membershi
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Crown className="h-6 w-6 text-yellow-500" />
-            升級會員解鎖所有功能
+            Nâng cấp thành viên để mở khóa tất cả tính năng
           </DialogTitle>
           <DialogDescription>
-            {requiredFeature ? `使用「${requiredFeature}」功能需要升級會員` : "升級會員享受完整的生活貿易體驗"}
+            {requiredFeature ? `Để sử dụng tính năng "${requiredFeature}" cần nâng cấp thành viên` : "Nâng cấp thành viên để trải nghiệm đầy đủ nền tảng thương mại đời sống"}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* 功能對比 */}
+          {/* Tính năng so sánh */}
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
-            <h3 className="text-lg font-semibold mb-4">會員專享功能</h3>
+            <h3 className="text-lg font-semibold mb-4">Tính năng thành viên</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {["體驗美食模組", "探索住宿交換", "搭訕共遊", "參加語言交流", "報名專家課程", "新增活動功能"].map(
+              {["Trải nghiệm ẩm thực", "Khám phá nhà ở", "Cùng đi khám phá", "Trao đổi ngôn ngữ", "Khóa học chuyên môn", "Tạo hoạt động mới"].map(
                 (feature) => (
                   <div key={feature} className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-500" />
@@ -86,7 +86,7 @@ export function MembershipUpgradeDialog({ children, requiredFeature }: Membershi
             </div>
           </div>
 
-          {/* 會員方案 */}
+          {/* Gói thành viên */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {availablePlans.map((plan) => (
               <Card
@@ -95,7 +95,7 @@ export function MembershipUpgradeDialog({ children, requiredFeature }: Membershi
               >
                 {plan.popular && (
                   <div className="absolute top-0 right-0 bg-blue-500 text-white px-3 py-1 text-xs font-medium">
-                    最受歡迎
+                    Phổ biến nhất
                   </div>
                 )}
 
@@ -108,10 +108,10 @@ export function MembershipUpgradeDialog({ children, requiredFeature }: Membershi
                   </CardTitle>
                   <CardDescription>
                     <div className="text-3xl font-bold text-gray-900">
-                      {plan.price === 0 ? "免費" : `NT$${plan.price.toLocaleString()}`}
+                      {plan.price === 0 ? "Miễn phí" : `${plan.price.toLocaleString()}₫`}
                     </div>
                     <div className="text-sm text-gray-500">
-                      {plan.duration === 7 ? "7天試用" : plan.duration === 30 ? "每月" : "每年"}
+                      {plan.duration === 7 ? "7 ngày dùng thử" : plan.duration === 30 ? "mỗi tháng" : "mỗi năm"}
                     </div>
                   </CardDescription>
                 </CardHeader>
@@ -133,18 +133,18 @@ export function MembershipUpgradeDialog({ children, requiredFeature }: Membershi
                     onClick={() => handleUpgrade(plan.id, plan.id === "trial")}
                   >
                     {isUpgrading && selectedPlan === plan.id
-                      ? "處理中..."
+                      ? "Đang xử lý..."
                       : plan.id === "trial"
                         ? isTrialAvailable
-                          ? "開始免費試用"
-                          : "試用已使用"
-                        : "立即升級"}
+                          ? "Bắt đầu dùng thử miễn phí"
+                          : "Đã dùng thử"
+                        : "Nâng cấp ngay"}
                   </Button>
 
                   {plan.id === "yearly" && (
                     <div className="text-center">
                       <Badge variant="secondary" className="text-xs">
-                        相比月費節省 NT$588
+                        Tiết kiệm 588.000₫ so với gói tháng
                       </Badge>
                     </div>
                   )}
@@ -153,25 +153,25 @@ export function MembershipUpgradeDialog({ children, requiredFeature }: Membershi
             ))}
           </div>
 
-          {/* 保證說明 */}
+          {/* Cam kết */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h4 className="font-semibold mb-2">升級保證</h4>
+            <h4 className="font-semibold mb-2">Cam kết của chúng tôi</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-green-500" />
-                <span>7天免費試用，無需信用卡</span>
+                <span>7 ngày dùng thử miễn phí, không cần thẻ tín dụng</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-green-500" />
-                <span>隨時可以取消，無違約金</span>
+                <span>Hủy bất cứ lúc nào, không phí phạt</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-green-500" />
-                <span>24/7 客服支援</span>
+                <span>Hỗ trợ khách hàng 24/7</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-green-500" />
-                <span>安全加密付款</span>
+                <span>Thanh toán an toàn, bảo mật</span>
               </div>
             </div>
           </div>

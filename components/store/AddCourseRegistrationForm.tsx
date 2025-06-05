@@ -50,37 +50,37 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const categories = ["商業技能", "語言學習", "文化藝術", "科技數位", "專業認證", "生活技能", "創業指導", "職業發展"]
-  const formats = ["線上課程", "實體課程", "混合式", "一對一", "小班制", "大班制", "工作坊", "研習營"]
-  const levels = ["初級", "中級", "高級", "專業級", "所有級別"]
-  const languages = ["中文", "英語", "越南語", "日語", "韓語"]
+  const categories = ["Kỹ năng kinh doanh", "Học ngôn ngữ", "Nghệ thuật và văn hóa", "Công nghệ số", "Chứng chỉ chuyên môn", "Kỹ năng sống", "Hướng dẫn khởi nghiệp", "Phát triển nghề nghiệp"]
+  const formats = ["Khóa học trực tuyến", "Khóa học trực tiếp", "Học kết hợp", "Học 1-1", "Lớp nhỏ", "Lớp lớn", "Hội thảo", "Trại hè"]
+  const levels = ["Sơ cấp", "Trung cấp", "Cao cấp", "Chuyên gia", "Tất cả cấp độ"]
+  const languages = ["Tiếng Việt", "Tiếng Anh", "Tiếng Hàn", "Tiếng Nhật", "Tiếng Trung"]
   const availableTopics = [
-    "基礎理論",
-    "實務操作",
-    "案例分析",
-    "專題討論",
-    "實作練習",
-    "考試準備",
-    "認證輔導",
-    "職場應用",
-    "創新思維",
-    "團隊合作",
-    "領導管理",
-    "溝通技巧",
+    "Lý thuyết cơ bản",
+    "Thực hành",
+    "Phân tích tình huống",
+    "Thảo luận chuyên đề",
+    "Bài tập thực tế",
+    "Ôn thi",
+    "Hướng dẫn chứng chỉ",
+    "Ứng dụng thực tế",
+    "Tư duy sáng tạo",
+    "Làm việc nhóm",
+    "Kỹ năng lãnh đạo",
+    "Kỹ năng giao tiếp",
   ]
   const availableMaterials = [
-    "課程講義",
-    "教科書",
-    "線上資源",
-    "實戰案例",
-    "工具軟體",
-    "認證考題",
-    "影音教材",
-    "練習題庫",
-    "參考資料",
-    "證書範本",
-    "作業模板",
-    "評量工具",
+    "Tài liệu giảng dạy",
+    "Sách giáo khoa",
+    "Tài nguyên trực tuyến",
+    "Tình huống thực tế",
+    "Phần mềm công cụ",
+    "Đề thi chứng chỉ",
+    "Tài liệu video",
+    "Ngân hàng bài tập",
+    "Tài liệu tham khảo",
+    "Mẫu chứng chỉ",
+    "Mẫu bài tập",
+    "Công cụ đánh giá",
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,8 +88,8 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
 
     if (!isPremiumMember) {
       toast({
-        title: "需要會員權限",
-        description: "請升級為會員以使用新增課程報名功能",
+        title: "Cần quyền thành viên",
+        description: "Vui lòng nâng cấp thành viên để sử dụng tính năng thêm khóa học",
         variant: "destructive",
       })
       return
@@ -97,8 +97,8 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
 
     if (!formData.title || !formData.description || !formData.category || !formData.instructor || !formData.price) {
       toast({
-        title: "請填寫必填欄位",
-        description: "課程標題、描述、類別、講師和價格為必填項",
+        title: "Vui lòng điền các trường bắt buộc",
+        description: "Tiêu đề khóa học, mô tả, danh mục, giảng viên và giá là bắt buộc",
         variant: "destructive",
       })
       return
@@ -110,15 +110,15 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
       toast({
-        title: "課程新增成功！",
-        description: `課程「${formData.title}」已成功提交審核，審核通過後將開放報名`,
+        title: "Thêm khóa học thành công!",
+        description: `Khóa học "${formData.title}" đã được gửi để xét duyệt và sẽ mở đăng ký sau khi được phê duyệt`,
       })
 
       onSuccess()
     } catch (error) {
       toast({
-        title: "新增失敗",
-        description: "課程新增過程中發生錯誤，請稍後再試",
+        title: "Thêm thất bại",
+        description: "Đã xảy ra lỗi khi thêm khóa học, vui lòng thử lại sau",
         variant: "destructive",
       })
     } finally {
@@ -155,28 +155,28 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <GraduationCap className="h-6 w-6 text-indigo-500" />
-          <h2 className="text-2xl font-bold">新增課程報名</h2>
+          <h2 className="text-2xl font-bold">Thêm khóa học</h2>
         </div>
-        <p className="text-gray-500 text-sm">填寫以下表單，創建您的專業課程。新增的課程將在審核後開放報名。</p>
+        <p className="text-gray-500 text-sm">Điền thông tin bên dưới để tạo khóa học chuyên môn. Khóa học sẽ được mở đăng ký sau khi được phê duyệt.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="title">課程標題 *</Label>
+          <Label htmlFor="title">Tiêu đề khóa học *</Label>
           <Input
             id="title"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            placeholder="請輸入課程標題"
+            placeholder="Nhập tiêu đề khóa học"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="category">課程類別 *</Label>
+          <Label htmlFor="category">Danh mục khóa học *</Label>
           <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇課程類別" />
+              <SelectValue placeholder="Chọn danh mục khóa học" />
             </SelectTrigger>
             <SelectContent>
               {categories.map((category) => (
@@ -190,12 +190,12 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">課程描述 *</Label>
+        <Label htmlFor="description">Mô tả khóa học *</Label>
         <Textarea
           id="description"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          placeholder="請詳細描述您的課程內容、學習目標和特色"
+          placeholder="Mô tả chi tiết nội dung khóa học, mục tiêu và đặc điểm nổi bật"
           rows={4}
           required
         />
@@ -203,21 +203,21 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="instructor">授課講師 *</Label>
+          <Label htmlFor="instructor">Giảng viên *</Label>
           <Input
             id="instructor"
             value={formData.instructor}
             onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
-            placeholder="請輸入講師姓名"
+            placeholder="Nhập tên giảng viên"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="format">授課形式</Label>
+          <Label htmlFor="format">Hình thức học</Label>
           <Select value={formData.format} onValueChange={(value) => setFormData({ ...formData, format: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇授課形式" />
+              <SelectValue placeholder="Chọn hình thức học" />
             </SelectTrigger>
             <SelectContent>
               {formats.map((format) => (
@@ -232,41 +232,41 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="duration">課程時長</Label>
+          <Label htmlFor="duration">Thời lượng khóa học</Label>
           <Input
             id="duration"
             value={formData.duration}
             onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-            placeholder="例：8週、40小時"
+            placeholder="Ví dụ: 8 tuần, 40 giờ"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="price">課程價格 (NT$) *</Label>
+          <Label htmlFor="price">Học phí (VNĐ) *</Label>
           <Input
             id="price"
             type="number"
             value={formData.price}
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            placeholder="請輸入價格"
+            placeholder="Nhập học phí"
             min="0"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="maxStudents">最大學員數</Label>
+          <Label htmlFor="maxStudents">Số học viên tối đa</Label>
           <Select
             value={formData.maxStudents}
             onValueChange={(value) => setFormData({ ...formData, maxStudents: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder="選擇人數" />
+              <SelectValue placeholder="Chọn số học viên" />
             </SelectTrigger>
             <SelectContent>
               {[5, 10, 15, 20, 25, 30, 50, 100].map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num} 人
+                  {num} người
                 </SelectItem>
               ))}
             </SelectContent>
@@ -276,10 +276,10 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="level">課程級別</Label>
+          <Label htmlFor="level">Cấp độ khóa học</Label>
           <Select value={formData.level} onValueChange={(value) => setFormData({ ...formData, level: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇級別" />
+              <SelectValue placeholder="Chọn cấp độ" />
             </SelectTrigger>
             <SelectContent>
               {levels.map((level) => (
@@ -292,10 +292,10 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="language">授課語言</Label>
+          <Label htmlFor="language">Ngôn ngữ giảng dạy</Label>
           <Select value={formData.language} onValueChange={(value) => setFormData({ ...formData, language: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇語言" />
+              <SelectValue placeholder="Chọn ngôn ngữ" />
             </SelectTrigger>
             <SelectContent>
               {languages.map((language) => (
@@ -310,7 +310,7 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="startDate">開課日期</Label>
+          <Label htmlFor="startDate">Ngày khai giảng</Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -321,7 +321,7 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {selectedStartDate ? format(selectedStartDate, "PPP") : "選擇開課日期"}
+                {selectedStartDate ? format(selectedStartDate, "PPP") : "Chọn ngày khai giảng"}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
@@ -331,7 +331,7 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="endDate">結課日期</Label>
+          <Label htmlFor="endDate">Ngày kết thúc</Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -342,7 +342,7 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {selectedEndDate ? format(selectedEndDate, "PPP") : "選擇結課日期"}
+                {selectedEndDate ? format(selectedEndDate, "PPP") : "Chọn ngày kết thúc"}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
@@ -354,28 +354,28 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="schedule">上課時間</Label>
+          <Label htmlFor="schedule">Lịch học</Label>
           <Input
             id="schedule"
             value={formData.schedule}
             onChange={(e) => setFormData({ ...formData, schedule: e.target.value })}
-            placeholder="例：每週二、四 19:00-21:00"
+            placeholder="Ví dụ: Thứ Ba, Thứ Năm 19:00-21:00"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="location">上課地點</Label>
+          <Label htmlFor="location">Địa điểm học</Label>
           <Input
             id="location"
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            placeholder="請輸入上課地點"
+            placeholder="Nhập địa điểm học"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label>課程主題 (可多選)</Label>
+        <Label>Chủ đề khóa học (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableTopics.map((topic) => (
             <div key={topic} className="flex items-center space-x-2">
@@ -393,7 +393,7 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
       </div>
 
       <div className="space-y-2">
-        <Label>教學材料 (可多選)</Label>
+        <Label>Tài liệu học tập (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableMaterials.map((material) => (
             <div key={material} className="flex items-center space-x-2">
@@ -411,23 +411,23 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="requirements">報名要求</Label>
+        <Label htmlFor="requirements">Yêu cầu đầu vào</Label>
         <Textarea
           id="requirements"
           value={formData.requirements}
           onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
-          placeholder="請說明報名的先備條件或特殊要求"
+          placeholder="Mô tả các yêu cầu đầu vào hoặc điều kiện đặc biệt"
           rows={3}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="refundPolicy">退費政策</Label>
+        <Label htmlFor="refundPolicy">Chính sách hoàn tiền</Label>
         <Textarea
           id="refundPolicy"
           value={formData.refundPolicy}
           onChange={(e) => setFormData({ ...formData, refundPolicy: e.target.value })}
-          placeholder="請說明課程的退費規則和政策"
+          placeholder="Mô tả chính sách hoàn tiền và quy định của khóa học"
           rows={3}
         />
       </div>
@@ -438,50 +438,50 @@ export function AddCourseRegistrationForm({ onSuccess, onCancel }: AddCourseRegi
           checked={formData.certificate}
           onCheckedChange={(checked) => setFormData({ ...formData, certificate: checked as boolean })}
         />
-        <Label htmlFor="certificate">完成課程可獲得認證證書</Label>
+        <Label htmlFor="certificate">Cấp chứng chỉ sau khi hoàn thành khóa học</Label>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="phone">聯絡電話</Label>
+          <Label htmlFor="phone">Số điện thoại liên hệ</Label>
           <Input
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            placeholder="請輸入聯絡電話"
+            placeholder="Nhập số điện thoại liên hệ"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">電子郵件</Label>
+          <Label htmlFor="email">Email liên hệ</Label>
           <Input
             id="email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            placeholder="請輸入電子郵件"
+            placeholder="Nhập địa chỉ email liên hệ"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="image">課程封面</Label>
+        <Label htmlFor="image">Hình ảnh khóa học</Label>
         <div className="border border-dashed rounded-md p-6 text-center">
           <input type="file" id="image" accept="image/*" onChange={handleImageChange} className="hidden" />
           <label htmlFor="image" className="cursor-pointer flex flex-col items-center justify-center">
             <Upload className="h-10 w-10 text-gray-400 mb-2" />
-            <span className="text-sm font-medium">{formData.image ? formData.image.name : "點擊上傳課程封面"}</span>
-            <span className="text-xs text-gray-500 mt-1">支援 JPG、PNG 格式，建議尺寸 1200x800 像素</span>
+            <span className="text-sm font-medium">{formData.image ? formData.image.name : "Nhấp để tải lên hình ảnh khóa học"}</span>
+            <span className="text-xs text-gray-500 mt-1">Hỗ trợ định dạng JPG, PNG, kích thước đề xuất 1200x800 pixel</span>
           </label>
         </div>
       </div>
 
       <div className="flex justify-end space-x-2 pt-4 border-t">
         <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
-          取消
+          Hủy
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "處理中..." : "新增課程"}
+          {isSubmitting ? "Đang xử lý..." : "Thêm khóa học"}
         </Button>
       </div>
     </form>

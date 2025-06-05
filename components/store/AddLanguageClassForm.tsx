@@ -42,36 +42,36 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const languages = ["中文", "英語", "越南語", "日語", "韓語", "法語", "德語", "西班牙語"]
-  const levels = ["初級", "中級", "高級", "商務級", "母語級", "混合級別"]
-  const formats = ["實體課程", "線上課程", "一對一教學", "小班制", "大班制", "工作坊", "沉浸式體驗"]
+  const languages = ["Tiếng Việt", "Tiếng Anh", "Tiếng Hàn", "Tiếng Nhật", "Tiếng Trung", "Tiếng Pháp", "Tiếng Đức", "Tiếng Tây Ban Nha"]
+  const levels = ["Sơ cấp", "Trung cấp", "Cao cấp", "Thương mại", "Bản ngữ", "Đa cấp độ"]
+  const formats = ["Lớp học trực tiếp", "Lớp học trực tuyến", "Dạy kèm 1-1", "Nhóm nhỏ", "Nhóm lớn", "Hội thảo", "Trải nghiệm đắm chìm"]
   const availableActivities = [
-    "自由對話",
-    "主題討論",
-    "角色扮演",
-    "遊戲互動",
-    "文化分享",
-    "新聞討論",
-    "商務對話",
-    "旅遊會話",
-    "寫作練習",
-    "聽力訓練",
-    "發音矯正",
-    "語法教學",
+    "Trò chuyện tự do",
+    "Thảo luận chủ đề",
+    "Đóng vai",
+    "Trò chơi tương tác",
+    "Chia sẻ văn hóa",
+    "Thảo luận tin tức",
+    "Hội thoại thương mại",
+    "Hội thoại du lịch",
+    "Luyện viết",
+    "Luyện nghe",
+    "Sửa phát âm",
+    "Dạy ngữ pháp",
   ]
   const availableMaterials = [
-    "教科書",
-    "講義",
-    "音頻資料",
-    "視頻教材",
-    "練習冊",
-    "字典",
-    "文化手冊",
-    "線上資源",
-    "APP使用",
-    "遊戲道具",
-    "白板",
-    "投影設備",
+    "Sách giáo khoa",
+    "Tài liệu",
+    "Tài liệu âm thanh",
+    "Tài liệu video",
+    "Sách bài tập",
+    "Từ điển",
+    "Sách văn hóa",
+    "Tài nguyên trực tuyến",
+    "Ứng dụng",
+    "Đồ chơi trò chơi",
+    "Bảng trắng",
+    "Máy chiếu",
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -79,8 +79,8 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
 
     if (!isPremiumMember) {
       toast({
-        title: "需要會員權限",
-        description: "請升級為會員以使用新增語言教室功能",
+        title: "Cần quyền thành viên",
+        description: "Vui lòng nâng cấp thành viên để sử dụng tính năng thêm lớp ngôn ngữ",
         variant: "destructive",
       })
       return
@@ -88,8 +88,8 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
 
     if (!formData.title || !formData.description || !formData.language || !formData.level || !formData.price) {
       toast({
-        title: "請填寫必填欄位",
-        description: "課程標題、描述、語言、級別和價格為必填項",
+        title: "Vui lòng điền các trường bắt buộc",
+        description: "Tiêu đề, mô tả, ngôn ngữ, cấp độ và giá là bắt buộc",
         variant: "destructive",
       })
       return
@@ -101,15 +101,15 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
       toast({
-        title: "語言教室新增成功！",
-        description: `課程「${formData.title}」已成功提交審核，審核通過後將顯示在平台上`,
+        title: "Thêm lớp ngôn ngữ thành công!",
+        description: `Lớp học "${formData.title}" đã được gửi để xét duyệt và sẽ hiển thị trên nền tảng sau khi được phê duyệt`,
       })
 
       onSuccess()
     } catch (error) {
       toast({
-        title: "新增失敗",
-        description: "課程新增過程中發生錯誤，請稍後再試",
+        title: "Thêm thất bại",
+        description: "Đã xảy ra lỗi khi thêm lớp học, vui lòng thử lại sau",
         variant: "destructive",
       })
     } finally {
@@ -146,28 +146,28 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Users className="h-6 w-6 text-green-500" />
-          <h2 className="text-2xl font-bold">新增語言教室</h2>
+          <h2 className="text-2xl font-bold">Thêm lớp ngôn ngữ</h2>
         </div>
-        <p className="text-gray-500 text-sm">填寫以下表單，創建您的語言課程。新增的課程將在審核後顯示給用戶。</p>
+        <p className="text-gray-500 text-sm">Điền thông tin bên dưới để tạo lớp học ngôn ngữ. Lớp học sẽ được hiển thị sau khi được phê duyệt.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="title">課程標題 *</Label>
+          <Label htmlFor="title">Tiêu đề lớp học *</Label>
           <Input
             id="title"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            placeholder="請輸入課程標題"
+            placeholder="Nhập tiêu đề lớp học"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="language">教學語言 *</Label>
+          <Label htmlFor="language">Ngôn ngữ giảng dạy *</Label>
           <Select value={formData.language} onValueChange={(value) => setFormData({ ...formData, language: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇教學語言" />
+              <SelectValue placeholder="Chọn ngôn ngữ giảng dạy" />
             </SelectTrigger>
             <SelectContent>
               {languages.map((language) => (
@@ -181,12 +181,12 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">課程描述 *</Label>
+        <Label htmlFor="description">Mô tả lớp học *</Label>
         <Textarea
           id="description"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          placeholder="請詳細描述您的課程內容、教學方法和特色"
+          placeholder="Mô tả chi tiết về nội dung lớp học, phương pháp giảng dạy và đặc điểm nổi bật"
           rows={4}
           required
         />
@@ -194,10 +194,10 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="level">課程級別 *</Label>
+          <Label htmlFor="level">Cấp độ *</Label>
           <Select value={formData.level} onValueChange={(value) => setFormData({ ...formData, level: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇級別" />
+              <SelectValue placeholder="Chọn cấp độ" />
             </SelectTrigger>
             <SelectContent>
               {levels.map((level) => (
@@ -210,10 +210,10 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="format">授課形式</Label>
+          <Label htmlFor="format">Hình thức học</Label>
           <Select value={formData.format} onValueChange={(value) => setFormData({ ...formData, format: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇授課形式" />
+              <SelectValue placeholder="Chọn hình thức học" />
             </SelectTrigger>
             <SelectContent>
               {formats.map((format) => (
@@ -226,53 +226,53 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="location">上課地點</Label>
+          <Label htmlFor="location">Địa điểm học</Label>
           <Input
             id="location"
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            placeholder="請輸入上課地點"
+            placeholder="Nhập địa điểm học"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="price">課程價格 (NT$) *</Label>
+          <Label htmlFor="price">Học phí (VNĐ) *</Label>
           <Input
             id="price"
             type="number"
             value={formData.price}
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            placeholder="請輸入價格"
+            placeholder="Nhập học phí"
             min="0"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="duration">課程時長</Label>
+          <Label htmlFor="duration">Thời lượng khóa học</Label>
           <Input
             id="duration"
             value={formData.duration}
             onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-            placeholder="例：2小時、8週"
+            placeholder="Ví dụ: 2 giờ, 8 tuần"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="maxParticipants">最大學員數</Label>
+          <Label htmlFor="maxParticipants">Số học viên tối đa</Label>
           <Select
             value={formData.maxParticipants}
             onValueChange={(value) => setFormData({ ...formData, maxParticipants: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder="選擇人數" />
+              <SelectValue placeholder="Chọn số học viên" />
             </SelectTrigger>
             <SelectContent>
               {[1, 2, 4, 6, 8, 10, 12, 15, 20, 25, 30].map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num} 人
+                  {num} người
                 </SelectItem>
               ))}
             </SelectContent>
@@ -282,39 +282,39 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="instructor">授課老師</Label>
+          <Label htmlFor="instructor">Giáo viên</Label>
           <Input
             id="instructor"
             value={formData.instructor}
             onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
-            placeholder="請輸入老師姓名"
+            placeholder="Nhập tên giáo viên"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="schedule">上課時間</Label>
+          <Label htmlFor="schedule">Lịch học</Label>
           <Input
             id="schedule"
             value={formData.schedule}
             onChange={(e) => setFormData({ ...formData, schedule: e.target.value })}
-            placeholder="例：每週三 19:00-21:00"
+            placeholder="Ví dụ: Thứ Tư 19:00-21:00"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="qualifications">老師資歷</Label>
+        <Label htmlFor="qualifications">Trình độ giáo viên</Label>
         <Textarea
           id="qualifications"
           value={formData.qualifications}
           onChange={(e) => setFormData({ ...formData, qualifications: e.target.value })}
-          placeholder="請介紹授課老師的教學經驗和專業資格"
+          placeholder="Mô tả kinh nghiệm giảng dạy và trình độ chuyên môn của giáo viên"
           rows={3}
         />
       </div>
 
       <div className="space-y-2">
-        <Label>教學活動 (可多選)</Label>
+        <Label>Hoạt động học tập (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableActivities.map((activity) => (
             <div key={activity} className="flex items-center space-x-2">
@@ -332,7 +332,7 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
       </div>
 
       <div className="space-y-2">
-        <Label>教學材料 (可多選)</Label>
+        <Label>Tài liệu học tập (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableMaterials.map((material) => (
             <div key={material} className="flex items-center space-x-2">
@@ -350,57 +350,57 @@ export function AddLanguageClassForm({ onSuccess, onCancel }: AddLanguageClassFo
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="targetAudience">適合對象</Label>
+        <Label htmlFor="targetAudience">Đối tượng phù hợp</Label>
         <Textarea
           id="targetAudience"
           value={formData.targetAudience}
           onChange={(e) => setFormData({ ...formData, targetAudience: e.target.value })}
-          placeholder="請說明課程適合的學員類型和學習目標"
+          placeholder="Mô tả đối tượng học viên phù hợp và mục tiêu học tập"
           rows={3}
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="phone">聯絡電話</Label>
+          <Label htmlFor="phone">Số điện thoại</Label>
           <Input
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            placeholder="請輸入聯絡電話"
+            placeholder="Nhập số điện thoại liên hệ"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">電子郵件</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            placeholder="請輸入電子郵件"
+            placeholder="Nhập địa chỉ email"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="image">課程照片</Label>
+        <Label htmlFor="image">Hình ảnh lớp học</Label>
         <div className="border border-dashed rounded-md p-6 text-center">
           <input type="file" id="image" accept="image/*" onChange={handleImageChange} className="hidden" />
           <label htmlFor="image" className="cursor-pointer flex flex-col items-center justify-center">
             <Upload className="h-10 w-10 text-gray-400 mb-2" />
-            <span className="text-sm font-medium">{formData.image ? formData.image.name : "點擊上傳課程照片"}</span>
-            <span className="text-xs text-gray-500 mt-1">支援 JPG、PNG 格式，建議尺寸 1200x800 像素</span>
+            <span className="text-sm font-medium">{formData.image ? formData.image.name : "Nhấp để tải lên hình ảnh lớp học"}</span>
+            <span className="text-xs text-gray-500 mt-1">Hỗ trợ định dạng JPG, PNG, kích thước đề xuất 1200x800 pixel</span>
           </label>
         </div>
       </div>
 
       <div className="flex justify-end space-x-2 pt-4 border-t">
         <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
-          取消
+          Hủy
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "處理中..." : "新增課程"}
+          {isSubmitting ? "Đang xử lý..." : "Thêm lớp học"}
         </Button>
       </div>
     </form>

@@ -46,45 +46,45 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const categories = ["文化體驗", "美食探索", "攝影之旅", "戶外活動", "城市導覽", "藝術文化", "自然生態", "歷史古蹟"]
-  const difficulties = ["輕鬆", "初級", "中級", "進階", "專業"]
+  const categories = ["Trải nghiệm văn hóa", "Khám phá ẩm thực", "Tour chụp ảnh", "Hoạt động ngoài trời", "Tour thành phố", "Nghệ thuật", "Sinh thái", "Di tích lịch sử"]
+  const difficulties = ["Dễ dàng", "Cơ bản", "Trung bình", "Nâng cao", "Chuyên nghiệp"]
   const availableHighlights = [
-    "專業導覽",
-    "在地體驗",
-    "文化交流",
-    "美食品嚐",
-    "拍照打卡",
-    "手作體驗",
-    "歷史解說",
-    "自然景觀",
-    "交通接送",
-    "小團體",
-    "個人化服務",
-    "紀念品",
+    "Hướng dẫn chuyên nghiệp",
+    "Trải nghiệm địa phương",
+    "Giao lưu văn hóa",
+    "Thưởng thức ẩm thực",
+    "Chụp ảnh check-in",
+    "Trải nghiệm làm thủ công",
+    "Giới thiệu lịch sử",
+    "Cảnh quan thiên nhiên",
+    "Đưa đón",
+    "Nhóm nhỏ",
+    "Dịch vụ cá nhân hóa",
+    "Quà lưu niệm",
   ]
   const availableIncludes = [
-    "門票",
-    "交通",
-    "餐食",
-    "飲料",
-    "導覽服務",
-    "器材使用",
-    "保險",
-    "紀念品",
-    "拍照服務",
-    "翻譯服務",
-    "住宿",
-    "接送服務",
+    "Vé vào cổng",
+    "Phương tiện di chuyển",
+    "Bữa ăn",
+    "Đồ uống",
+    "Hướng dẫn viên",
+    "Thiết bị",
+    "Bảo hiểm",
+    "Quà lưu niệm",
+    "Dịch vụ chụp ảnh",
+    "Dịch vụ phiên dịch",
+    "Chỗ ở",
+    "Đưa đón",
   ]
-  const availableLanguages = ["中文", "英語", "越南語", "日語", "韓語"]
+  const availableLanguages = ["Tiếng Việt", "Tiếng Anh", "Tiếng Hàn", "Tiếng Trung", "Tiếng Nhật"]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!isPremiumMember) {
       toast({
-        title: "需要會員權限",
-        description: "請升級為會員以使用新增共遊活動功能",
+        title: "Cần quyền thành viên",
+        description: "Vui lòng nâng cấp thành viên để sử dụng tính năng thêm hoạt động cùng đi",
         variant: "destructive",
       })
       return
@@ -92,8 +92,8 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
 
     if (!formData.title || !formData.description || !formData.category || !formData.location || !formData.price) {
       toast({
-        title: "請填寫必填欄位",
-        description: "活動標題、描述、類別、地點和價格為必填項",
+        title: "Vui lòng điền các trường bắt buộc",
+        description: "Tiêu đề, mô tả, danh mục, địa điểm và giá là bắt buộc",
         variant: "destructive",
       })
       return
@@ -105,15 +105,15 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
       toast({
-        title: "共遊活動新增成功！",
-        description: `活動「${formData.title}」已成功提交審核，審核通過後將顯示在平台上`,
+        title: "Thêm hoạt động thành công!",
+        description: `Hoạt động "${formData.title}" đã được gửi để xét duyệt và sẽ hiển thị trên nền tảng sau khi được phê duyệt`,
       })
 
       onSuccess()
     } catch (error) {
       toast({
-        title: "新增失敗",
-        description: "活動新增過程中發生錯誤，請稍後再試",
+        title: "Thêm thất bại",
+        description: "Đã xảy ra lỗi khi thêm hoạt động, vui lòng thử lại sau",
         variant: "destructive",
       })
     } finally {
@@ -159,28 +159,28 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Users2 className="h-6 w-6 text-purple-500" />
-          <h2 className="text-2xl font-bold">新增共遊活動</h2>
+          <h2 className="text-2xl font-bold">Thêm hoạt động cùng đi</h2>
         </div>
-        <p className="text-gray-500 text-sm">填寫以下表單，創建您的共遊活動。新增的活動將在審核後顯示給用戶。</p>
+        <p className="text-gray-500 text-sm">Điền thông tin bên dưới để tạo hoạt động cùng đi. Hoạt động sẽ được hiển thị sau khi được phê duyệt.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="title">活動標題 *</Label>
+          <Label htmlFor="title">Tiêu đề hoạt động *</Label>
           <Input
             id="title"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            placeholder="請輸入活動標題"
+            placeholder="Nhập tiêu đề hoạt động"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="category">活動類別 *</Label>
+          <Label htmlFor="category">Danh mục hoạt động *</Label>
           <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇活動類別" />
+              <SelectValue placeholder="Chọn danh mục hoạt động" />
             </SelectTrigger>
             <SelectContent>
               {categories.map((category) => (
@@ -194,12 +194,12 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">活動描述 *</Label>
+        <Label htmlFor="description">Mô tả hoạt động *</Label>
         <Textarea
           id="description"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          placeholder="請詳細描述您的活動內容、行程安排和特色"
+          placeholder="Mô tả chi tiết về hoạt động, lịch trình và đặc điểm nổi bật"
           rows={4}
           required
         />
@@ -207,64 +207,64 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="location">活動地點 *</Label>
+          <Label htmlFor="location">Địa điểm hoạt động *</Label>
           <Input
             id="location"
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            placeholder="請輸入活動地點"
+            placeholder="Nhập địa điểm hoạt động"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="organizer">主辦方</Label>
+          <Label htmlFor="organizer">Người tổ chức</Label>
           <Input
             id="organizer"
             value={formData.organizer}
             onChange={(e) => setFormData({ ...formData, organizer: e.target.value })}
-            placeholder="請輸入主辦方名稱"
+            placeholder="Nhập tên người/đơn vị tổ chức"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="price">活動價格 (NT$) *</Label>
+          <Label htmlFor="price">Giá hoạt động (VNĐ) *</Label>
           <Input
             id="price"
             type="number"
             value={formData.price}
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            placeholder="請輸入價格"
+            placeholder="Nhập giá"
             min="0"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="duration">活動時長</Label>
+          <Label htmlFor="duration">Thời gian hoạt động</Label>
           <Input
             id="duration"
             value={formData.duration}
             onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-            placeholder="例：3小時、半天、一日"
+            placeholder="Ví dụ: 3 giờ, nửa ngày, 1 ngày"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="maxParticipants">最大參與人數</Label>
+          <Label htmlFor="maxParticipants">Số người tham gia tối đa</Label>
           <Select
             value={formData.maxParticipants}
             onValueChange={(value) => setFormData({ ...formData, maxParticipants: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder="選擇人數" />
+              <SelectValue placeholder="Chọn số người" />
             </SelectTrigger>
             <SelectContent>
               {[5, 8, 10, 12, 15, 20, 25, 30, 50].map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num} 人
+                  {num} người
                 </SelectItem>
               ))}
             </SelectContent>
@@ -274,13 +274,13 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="difficulty">活動難度</Label>
+          <Label htmlFor="difficulty">Mức độ khó</Label>
           <Select
             value={formData.difficulty}
             onValueChange={(value) => setFormData({ ...formData, difficulty: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder="選擇難度" />
+              <SelectValue placeholder="Chọn mức độ" />
             </SelectTrigger>
             <SelectContent>
               {difficulties.map((difficulty) => (
@@ -293,17 +293,17 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="ageRange">適合年齡</Label>
+          <Label htmlFor="ageRange">Độ tuổi phù hợp</Label>
           <Input
             id="ageRange"
             value={formData.ageRange}
             onChange={(e) => setFormData({ ...formData, ageRange: e.target.value })}
-            placeholder="例：18-65歲"
+            placeholder="Ví dụ: 18-65 tuổi"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="date">活動日期</Label>
+          <Label htmlFor="date">Ngày hoạt động</Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -311,7 +311,7 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
                 className={cn("w-full justify-start text-left font-normal", !selectedDate && "text-muted-foreground")}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {selectedDate ? format(selectedDate, "PPP") : "選擇日期"}
+                {selectedDate ? format(selectedDate, "PPP") : "Chọn ngày"}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
@@ -322,7 +322,7 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
       </div>
 
       <div className="space-y-2">
-        <Label>活動亮點 (可多選)</Label>
+        <Label>Điểm nổi bật (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableHighlights.map((highlight) => (
             <div key={highlight} className="flex items-center space-x-2">
@@ -340,7 +340,7 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
       </div>
 
       <div className="space-y-2">
-        <Label>費用包含 (可多選)</Label>
+        <Label>Bao gồm trong giá (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableIncludes.map((include) => (
             <div key={include} className="flex items-center space-x-2">
@@ -358,7 +358,7 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
       </div>
 
       <div className="space-y-2">
-        <Label>服務語言 (可多選)</Label>
+        <Label>Ngôn ngữ hỗ trợ (có thể chọn nhiều)</Label>
         <div className="flex flex-wrap gap-2">
           {availableLanguages.map((language) => (
             <div key={language} className="flex items-center space-x-2">
@@ -376,57 +376,57 @@ export function AddTravelActivityForm({ onSuccess, onCancel }: AddTravelActivity
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="requirements">參與要求</Label>
+        <Label htmlFor="requirements">Yêu cầu tham gia</Label>
         <Textarea
           id="requirements"
           value={formData.requirements}
           onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
-          placeholder="請說明參與活動的特殊要求或注意事項"
+          placeholder="Mô tả các yêu cầu đặc biệt hoặc lưu ý khi tham gia hoạt động"
           rows={3}
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="phone">聯絡電話</Label>
+          <Label htmlFor="phone">Số điện thoại</Label>
           <Input
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            placeholder="請輸入聯絡電話"
+            placeholder="Nhập số điện thoại liên hệ"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">電子郵件</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            placeholder="請輸入電子郵件"
+            placeholder="Nhập địa chỉ email"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="image">活動照片</Label>
+        <Label htmlFor="image">Hình ảnh hoạt động</Label>
         <div className="border border-dashed rounded-md p-6 text-center">
           <input type="file" id="image" accept="image/*" onChange={handleImageChange} className="hidden" />
           <label htmlFor="image" className="cursor-pointer flex flex-col items-center justify-center">
             <Upload className="h-10 w-10 text-gray-400 mb-2" />
-            <span className="text-sm font-medium">{formData.image ? formData.image.name : "點擊上傳活動照片"}</span>
-            <span className="text-xs text-gray-500 mt-1">支援 JPG、PNG 格式，建議尺寸 1200x800 像素</span>
+            <span className="text-sm font-medium">{formData.image ? formData.image.name : "Nhấp để tải lên hình ảnh hoạt động"}</span>
+            <span className="text-xs text-gray-500 mt-1">Hỗ trợ định dạng JPG, PNG, kích thước đề xuất 1200x800 pixel</span>
           </label>
         </div>
       </div>
 
       <div className="flex justify-end space-x-2 pt-4 border-t">
         <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
-          取消
+          Hủy
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "處理中..." : "新增活動"}
+          {isSubmitting ? "Đang xử lý..." : "Thêm hoạt động"}
         </Button>
       </div>
     </form>

@@ -37,33 +37,33 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const cuisineTypes = ["台灣料理", "越南料理", "中式料理", "日式料理", "韓式料理", "西式料理", "素食料理", "海鮮料理"]
+  const cuisineTypes = ["Món Việt", "Món Hàn", "Món Trung", "Món Nhật", "Món Thái", "Món Âu", "Món chay", "Hải sản"]
   const priceRanges = [
-    "經濟實惠 (NT$100-300)",
-    "中等價位 (NT$300-600)",
-    "高檔餐廳 (NT$600-1200)",
-    "頂級餐廳 (NT$1200+)",
+    "Giá rẻ (50.000-150.000₫)",
+    "Giá trung bình (150.000-300.000₫)",
+    "Giá cao (300.000-600.000₫)",
+    "Giá cao cấp (600.000₫+)",
   ]
   const availableSpecialties = [
-    "招牌菜",
-    "季節限定",
-    "手工製作",
-    "有機食材",
-    "無添加",
-    "傳統工藝",
-    "創意料理",
-    "健康餐點",
+    "Món đặc sản",
+    "Món theo mùa",
+    "Món tự chế biến",
+    "Nguyên liệu hữu cơ",
+    "Không phụ gia",
+    "Công thức truyền thống",
+    "Món sáng tạo",
+    "Món ăn lành mạnh",
   ]
-  const availableAmenities = ["免費WiFi", "停車場", "包廂", "外送服務", "預約制", "兒童友善", "寵物友善", "無障礙設施"]
-  const availableLanguages = ["中文", "英語", "越南語", "日語", "韓語"]
+  const availableAmenities = ["WiFi miễn phí", "Bãi đỗ xe", "Phòng riêng", "Giao hàng", "Đặt chỗ trước", "Thân thiện với trẻ em", "Thân thiện với thú cưng", "Lối đi cho người khuyết tật"]
+  const availableLanguages = ["Tiếng Việt", "Tiếng Anh", "Tiếng Hàn", "Tiếng Trung", "Tiếng Nhật"]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!isPremiumMember) {
       toast({
-        title: "需要會員權限",
-        description: "請升級為會員以使用新增餐廳功能",
+        title: "Cần quyền thành viên",
+        description: "Vui lòng nâng cấp thành viên để sử dụng tính năng thêm nhà hàng",
         variant: "destructive",
       })
       return
@@ -71,8 +71,8 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
 
     if (!formData.name || !formData.description || !formData.cuisine || !formData.location) {
       toast({
-        title: "請填寫必填欄位",
-        description: "餐廳名稱、描述、料理類型和地點為必填項",
+        title: "Vui lòng điền các trường bắt buộc",
+        description: "Tên nhà hàng, mô tả, loại ẩm thực và địa điểm là bắt buộc",
         variant: "destructive",
       })
       return
@@ -84,16 +84,16 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
       toast({
-        title: "餐廳新增成功！",
-        description: `餐廳「${formData.name}」已成功提交審核，審核通過後將顯示在平台上`,
+        title: "Thêm nhà hàng thành công!",
+        description: `Nhà hàng "${formData.name}" đã được gửi để xét duyệt và sẽ hiển thị trên nền tảng sau khi được phê duyệt`,
       })
 
-      // 將表單數據傳遞給父組件
+      // Truyền dữ liệu biểu mẫu cho component cha
       onSuccess(formData)
     } catch (error) {
       toast({
-        title: "新增失敗",
-        description: "餐廳新增過程中發生錯誤，請稍後再試",
+        title: "Thêm thất bại",
+        description: "Đã xảy ra lỗi khi thêm nhà hàng, vui lòng thử lại sau",
         variant: "destructive",
       })
     } finally {
@@ -139,30 +139,30 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <ChefHat className="h-6 w-6 text-orange-500" />
-          <h2 className="text-2xl font-bold">新增餐廳</h2>
+          <h2 className="text-2xl font-bold">Thêm nhà hàng</h2>
         </div>
         <p className="text-gray-500 text-sm">
-          填寫以下表單，將您的餐廳加入我們的平台。新增的餐廳將在審核後顯示給用戶。
+          Điền thông tin bên dưới để thêm nhà hàng của bạn vào nền tảng. Nhà hàng sẽ được hiển thị sau khi được phê duyệt.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="name">餐廳名稱 *</Label>
+          <Label htmlFor="name">Tên nhà hàng *</Label>
           <Input
             id="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder="請輸入餐廳名稱"
+            placeholder="Nhập tên nhà hàng"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="cuisine">料理類型 *</Label>
+          <Label htmlFor="cuisine">Loại ẩm thực *</Label>
           <Select value={formData.cuisine} onValueChange={(value) => setFormData({ ...formData, cuisine: value })}>
             <SelectTrigger>
-              <SelectValue placeholder="選擇料理類型" />
+              <SelectValue placeholder="Chọn loại ẩm thực" />
             </SelectTrigger>
             <SelectContent>
               {cuisineTypes.map((type) => (
@@ -176,12 +176,12 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">餐廳描述 *</Label>
+        <Label htmlFor="description">Mô tả nhà hàng *</Label>
         <Textarea
           id="description"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          placeholder="請詳細描述您的餐廳特色、環境和服務"
+          placeholder="Mô tả chi tiết về nhà hàng, đặc trưng, không gian và dịch vụ"
           rows={4}
           required
         />
@@ -189,59 +189,59 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="location">地區 *</Label>
+          <Label htmlFor="location">Khu vực *</Label>
           <Input
             id="location"
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            placeholder="例：台北市、胡志明市"
+            placeholder="Ví dụ: Quận 1, TP.HCM"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="address">詳細地址</Label>
+          <Label htmlFor="address">Địa chỉ chi tiết</Label>
           <Input
             id="address"
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-            placeholder="請輸入完整地址"
+            placeholder="Nhập địa chỉ đầy đủ"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="phone">聯絡電話</Label>
+          <Label htmlFor="phone">Số điện thoại</Label>
           <Input
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            placeholder="請輸入聯絡電話"
+            placeholder="Nhập số điện thoại liên hệ"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">電子郵件</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            placeholder="請輸入電子郵件"
+            placeholder="Nhập địa chỉ email"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="priceRange">價位範圍</Label>
+          <Label htmlFor="priceRange">Khoảng giá</Label>
           <Select
             value={formData.priceRange}
             onValueChange={(value) => setFormData({ ...formData, priceRange: value })}
           >
             <SelectTrigger>
-              <SelectValue placeholder="選擇價位範圍" />
+              <SelectValue placeholder="Chọn khoảng giá" />
             </SelectTrigger>
             <SelectContent>
               {priceRanges.map((range) => (
@@ -254,18 +254,18 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="openingHours">營業時間</Label>
+          <Label htmlFor="openingHours">Giờ mở cửa</Label>
           <Input
             id="openingHours"
             value={formData.openingHours}
             onChange={(e) => setFormData({ ...formData, openingHours: e.target.value })}
-            placeholder="例：週一至週日 11:00-22:00"
+            placeholder="Ví dụ: Thứ 2 - Chủ nhật, 10:00 - 22:00"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label>餐廳特色 (可多選)</Label>
+        <Label>Món đặc trưng (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableSpecialties.map((specialty) => (
             <div key={specialty} className="flex items-center space-x-2">
@@ -283,7 +283,7 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
       </div>
 
       <div className="space-y-2">
-        <Label>設施服務 (可多選)</Label>
+        <Label>Tiện ích (có thể chọn nhiều)</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableAmenities.map((amenity) => (
             <div key={amenity} className="flex items-center space-x-2">
@@ -301,7 +301,7 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
       </div>
 
       <div className="space-y-2">
-        <Label>服務語言 (可多選)</Label>
+        <Label>Ngôn ngữ phục vụ (có thể chọn nhiều)</Label>
         <div className="flex flex-wrap gap-2">
           {availableLanguages.map((language) => (
             <div key={language} className="flex items-center space-x-2">
@@ -319,23 +319,23 @@ export function AddRestaurantForm({ onSuccess, onCancel }: AddRestaurantFormProp
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="image">餐廳照片</Label>
+        <Label htmlFor="image">Hình ảnh nhà hàng</Label>
         <div className="border border-dashed rounded-md p-6 text-center">
           <input type="file" id="image" accept="image/*" onChange={handleImageChange} className="hidden" />
           <label htmlFor="image" className="cursor-pointer flex flex-col items-center justify-center">
             <Upload className="h-10 w-10 text-gray-400 mb-2" />
-            <span className="text-sm font-medium">{formData.image ? formData.image.name : "點擊上傳餐廳照片"}</span>
-            <span className="text-xs text-gray-500 mt-1">支援 JPG、PNG 格式，建議尺寸 1200x800 像素</span>
+            <span className="text-sm font-medium">{formData.image ? formData.image.name : "Nhấp để tải lên hình ảnh nhà hàng"}</span>
+            <span className="text-xs text-gray-500 mt-1">Hỗ trợ định dạng JPG, PNG, kích thước đề xuất 1200x800 pixel</span>
           </label>
         </div>
       </div>
 
       <div className="flex justify-end space-x-2 pt-4 border-t">
         <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
-          取消
+          Hủy
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "處理中..." : "新增餐廳"}
+          {isSubmitting ? "Đang xử lý..." : "Thêm nhà hàng"}
         </Button>
       </div>
     </form>
