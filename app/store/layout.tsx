@@ -16,6 +16,7 @@ import { CollaborationProvider } from "@/components/store/CollaborationProvider"
 import { PriceAlertsProvider } from "@/components/store/PriceAlertsProvider"
 import { AIRecommendationsProvider } from "@/components/store/AIRecommendationsProvider"
 import { MobileAppProvider } from "@/components/store/MobileAppProvider"
+import { B2BProvider } from "@/components/store/B2BProvider"
 
 export default function StoreLayout({
   children,
@@ -38,11 +39,13 @@ export default function StoreLayout({
                             <PriceAlertsProvider>
                               <AIRecommendationsProvider>
                                 <CompareProvider>
-                                  <div className="min-h-screen bg-white">
-                                    <Header />
-                                    <main className="pt-16">{children}</main>
-                                    <Footer />
-                                  </div>
+                                  <B2BProvider>
+                                    <div className="min-h-screen bg-white">
+                                      <Header />
+                                      <main className="pt-16">{children}</main>
+                                      <Footer />
+                                    </div>
+                                  </B2BProvider>
                                 </CompareProvider>
                               </AIRecommendationsProvider>
                             </PriceAlertsProvider>
