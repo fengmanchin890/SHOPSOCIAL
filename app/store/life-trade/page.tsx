@@ -11,6 +11,7 @@ import { MembershipStatus } from "@/components/store/MembershipStatus"
 import { AddActivityForm } from "@/components/store/AddActivityForm"
 import { useMembership } from "@/components/store/MembershipProvider"
 import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Video, Download, Shield, Clock, Target } from "lucide-react"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -18,7 +19,8 @@ export default function LifeTradePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [activeTab, setActiveTab] = useState("overview")
   const [showAddActivity, setShowAddActivity] = useState(false)
-  const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "courses">("food")
+  const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "courses" | "cultural">("food")
+  const { t } = useI18n()
 
   // Kiểm tra trạng thái đăng nhập khi trang được tải
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function LifeTradePage() {
     }
   }, [router])
 
-  const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "courses") => {
+  const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "courses" | "cultural") => {
     if (!isPremiumMember) {
       return
     }
@@ -51,8 +53,8 @@ export default function LifeTradePage() {
   if (showAddActivity) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <Button variant="outline\" onClick={() => setShowAddActivity(false)} className="mb-6">
-          ← Quay lại
+        <Button variant="outline" onClick={() => setShowAddActivity(false)} className="mb-6">
+          ← {t("button.back")}
         </Button>
         <AddActivityForm 
           moduleType={addActivityType} 
@@ -67,9 +69,9 @@ export default function LifeTradePage() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Nền tảng thương mại đời sống</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{t("lifeTrade.title")}</h1>
           <p className="text-gray-600 mt-2">
-            Kết nối cộng đồng người Việt tại nước ngoài và người nước ngoài tại Việt Nam
+            {t("lifeTrade.description")}
           </p>
         </div>
         <MembershipStatus />
@@ -77,12 +79,12 @@ export default function LifeTradePage() {
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
         <TabsList className="grid grid-cols-2 md:grid-cols-6 gap-2">
-          <TabsTrigger value="overview">Tổng quan</TabsTrigger>
-          <TabsTrigger value="food">Ẩm thực</TabsTrigger>
-          <TabsTrigger value="accommodation">Nhà ở</TabsTrigger>
-          <TabsTrigger value="travel">Cùng đi</TabsTrigger>
-          <TabsTrigger value="language">Ngôn ngữ</TabsTrigger>
-          <TabsTrigger value="culture">Đa văn hóa</TabsTrigger>
+          <TabsTrigger value="overview">{t("lifeTrade.overview")}</TabsTrigger>
+          <TabsTrigger value="food">{t("lifeTrade.food")}</TabsTrigger>
+          <TabsTrigger value="accommodation">{t("lifeTrade.accommodation")}</TabsTrigger>
+          <TabsTrigger value="travel">{t("lifeTrade.travel")}</TabsTrigger>
+          <TabsTrigger value="language">{t("lifeTrade.language")}</TabsTrigger>
+          <TabsTrigger value="culture">{t("lifeTrade.culture")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -91,28 +93,24 @@ export default function LifeTradePage() {
               <div className="aspect-video bg-gradient-to-r from-blue-500 to-purple-600 relative">
                 <div className="absolute inset-0 flex items-center justify-center text-white">
                   <div className="text-center p-6">
-                    <h2 className="text-2xl font-bold mb-2">Chào mừng đến với Nền tảng thương mại đời sống</h2>
-                    <p>Kết nối, chia sẻ và trải nghiệm cuộc sống mới</p>
+                    <h2 className="text-2xl font-bold mb-2">{t("platform.name")}</h2>
+                    <p>{t("platform.slogan")}</p>
                   </div>
                 </div>
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-4">🎯 Nhóm người dùng mục tiêu</h3>
+                <h3 className="text-xl font-semibold mb-4">🎯 {t("targetUsers.title")}</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-medium">👩‍🎓 Sinh viên quốc tế:</h4>
+                    <h4 className="font-medium">👩‍🎓 {t("targetUsers.students")}:</h4>
                     <ul className="ml-6 list-disc text-gray-600 space-y-1">
-                      <li>Chưa quen ngôn ngữ, muốn kết bạn, muốn trải nghiệm văn hóa và ẩm thực địa phương</li>
-                      <li>Tìm việc làm thêm, trao đổi nhà ở, tiết kiệm chi phí</li>
-                      <li>Luyện ngôn ngữ, tham gia các khóa học thực tế</li>
+                      <li>{t("targetUsers.students.desc")}</li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium">👰 Người nước ngoài kết hôn và định cư:</h4>
+                    <h4 className="font-medium">👰 {t("targetUsers.married")}:</h4>
                     <ul className="ml-6 list-disc text-gray-600 space-y-1">
-                      <li>Muốn hòa nhập cuộc sống địa phương, tham gia hoạt động cộng đồng</li>
-                      <li>Học ngôn ngữ địa phương, kết bạn mới</li>
-                      <li>Tìm cơ hội học tập và việc làm thêm</li>
+                      <li>{t("targetUsers.married.desc")}</li>
                     </ul>
                   </div>
                 </div>
@@ -122,8 +120,8 @@ export default function LifeTradePage() {
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Các tính năng chính</CardTitle>
-                  <CardDescription>Khám phá các dịch vụ độc đáo của nền tảng</CardDescription>
+                  <CardTitle>{t("features.title")}</CardTitle>
+                  <CardDescription>{t("platform.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -131,8 +129,8 @@ export default function LifeTradePage() {
                       <Link href="/store/life-trade?tab=food">
                         <ChefHat className="h-5 w-5 mr-2 text-orange-500" />
                         <div className="text-left">
-                          <div className="font-medium">Trải nghiệm ẩm thực</div>
-                          <div className="text-xs text-gray-500">Khám phá ẩm thực địa phương</div>
+                          <div className="font-medium">{t("features.food")}</div>
+                          <div className="text-xs text-gray-500">{t("features.food.desc")}</div>
                         </div>
                       </Link>
                     </Button>
@@ -140,8 +138,8 @@ export default function LifeTradePage() {
                       <Link href="/store/life-trade?tab=accommodation">
                         <Home className="h-5 w-5 mr-2 text-blue-500" />
                         <div className="text-left">
-                          <div className="font-medium">Trao đổi nhà ở</div>
-                          <div className="text-xs text-gray-500">Tìm chỗ ở hoặc trao đổi</div>
+                          <div className="font-medium">{t("features.accommodation")}</div>
+                          <div className="text-xs text-gray-500">{t("features.accommodation.desc")}</div>
                         </div>
                       </Link>
                     </Button>
@@ -149,8 +147,8 @@ export default function LifeTradePage() {
                       <Link href="/store/life-trade?tab=travel">
                         <Users2 className="h-5 w-5 mr-2 text-purple-500" />
                         <div className="text-left">
-                          <div className="font-medium">Cùng đi khám phá</div>
-                          <div className="text-xs text-gray-500">Tìm bạn đồng hành</div>
+                          <div className="font-medium">{t("features.travel")}</div>
+                          <div className="text-xs text-gray-500">{t("features.travel.desc")}</div>
                         </div>
                       </Link>
                     </Button>
@@ -158,8 +156,8 @@ export default function LifeTradePage() {
                       <Link href="/store/life-trade?tab=language">
                         <School className="h-5 w-5 mr-2 text-green-500" />
                         <div className="text-left">
-                          <div className="font-medium">Trao đổi ngôn ngữ</div>
-                          <div className="text-xs text-gray-500">Học và dạy ngôn ngữ</div>
+                          <div className="font-medium">{t("features.language")}</div>
+                          <div className="text-xs text-gray-500">{t("features.language.desc")}</div>
                         </div>
                       </Link>
                     </Button>
@@ -167,8 +165,8 @@ export default function LifeTradePage() {
                       <Link href="/store/life-trade?tab=culture">
                         <Book className="h-5 w-5 mr-2 text-red-500" />
                         <div className="text-left">
-                          <div className="font-medium">Trung tâm đa văn hóa</div>
-                          <div className="text-xs text-gray-500">Tài nguyên hòa nhập</div>
+                          <div className="font-medium">{t("features.culture")}</div>
+                          <div className="text-xs text-gray-500">{t("features.culture.desc")}</div>
                         </div>
                       </Link>
                     </Button>
@@ -178,7 +176,7 @@ export default function LifeTradePage() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Hoạt động gần đây</CardTitle>
+                  <CardTitle>{t("recentActivities.title")}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -187,8 +185,8 @@ export default function LifeTradePage() {
                         <ChefHat className="h-5 w-5 text-blue-600" />
                       </div>
                       <div>
-                        <h4 className="font-medium">Lớp nấu ăn món Việt</h4>
-                        <p className="text-sm text-gray-600">Hướng dẫn nấu phở và các món truyền thống</p>
+                        <h4 className="font-medium">{t("recentActivities.cookingClass")}</h4>
+                        <p className="text-sm text-gray-600">{t("recentActivities.cookingClass.desc")}</p>
                         <p className="text-xs text-gray-500 mt-1">Hôm nay, 14:00 - Quận 1, TP.HCM</p>
                       </div>
                     </div>
@@ -197,8 +195,8 @@ export default function LifeTradePage() {
                         <School className="h-5 w-5 text-green-600" />
                       </div>
                       <div>
-                        <h4 className="font-medium">Trao đổi tiếng Việt - tiếng Anh</h4>
-                        <p className="text-sm text-gray-600">Gặp gỡ hàng tuần tại quán cà phê</p>
+                        <h4 className="font-medium">{t("recentActivities.languageExchange")}</h4>
+                        <p className="text-sm text-gray-600">{t("recentActivities.languageExchange.desc")}</p>
                         <p className="text-xs text-gray-500 mt-1">Thứ Bảy, 15:00 - Quận 3, TP.HCM</p>
                       </div>
                     </div>
@@ -207,8 +205,8 @@ export default function LifeTradePage() {
                         <Users2 className="h-5 w-5 text-purple-600" />
                       </div>
                       <div>
-                        <h4 className="font-medium">Tour khám phá chợ Bến Thành</h4>
-                        <p className="text-sm text-gray-600">Khám phá ẩm thực và văn hóa chợ truyền thống</p>
+                        <h4 className="font-medium">{t("recentActivities.marketTour")}</h4>
+                        <p className="text-sm text-gray-600">{t("recentActivities.marketTour.desc")}</p>
                         <p className="text-xs text-gray-500 mt-1">Chủ Nhật, 09:00 - Quận 1, TP.HCM</p>
                       </div>
                     </div>
@@ -221,11 +219,11 @@ export default function LifeTradePage() {
 
         <TabsContent value="food" className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">🍱 Khám phá ẩm thực (Eat & Meet)</h2>
+            <h2 className="text-2xl font-bold">{t("food.title")}</h2>
             {isPremiumMember && (
               <Button onClick={() => handleAddActivity("food")}>
                 <Plus className="h-4 w-4 mr-2" />
-                Thêm trải nghiệm
+                {t("food.addExperience")}
               </Button>
             )}
           </div>
@@ -234,27 +232,27 @@ export default function LifeTradePage() {
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="md:w-1/3">
-                  <h3 className="text-xl font-semibold mb-4 text-orange-800">Hệ thống khám phá ẩm thực thông minh</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-orange-800">{t("food.smartDiscovery")}</h3>
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
                       <MapPin className="h-5 w-5 text-orange-600 mt-0.5" />
                       <div>
-                        <p className="font-medium">Đề xuất dựa trên vị trí</p>
-                        <p className="text-sm text-gray-600">Tự động gợi ý nhà hàng Việt và món ăn địa phương trong bán kính 5-10km</p>
+                        <p className="font-medium">{t("food.locationBased")}</p>
+                        <p className="text-sm text-gray-600">{t("food.locationBased.desc")}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <Star className="h-5 w-5 text-orange-600 mt-0.5" />
                       <div>
-                        <p className="font-medium">Hồ sơ khẩu vị cá nhân</p>
-                        <p className="text-sm text-gray-600">Tạo hồ sơ hương vị (mức độ cay, sở thích ngọt, hạn chế ăn uống) để nhận đề xuất cá nhân hóa</p>
+                        <p className="font-medium">{t("food.tasteProfile")}</p>
+                        <p className="text-sm text-gray-600">{t("food.tasteProfile.desc")}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <Home className="h-5 w-5 text-orange-600 mt-0.5" />
                       <div>
-                        <p className="font-medium">Chế độ "Nhớ nhà"</p>
-                        <p className="text-sm text-gray-600">Tìm món ăn có hương vị gần giống với ẩm thực vùng miền Việt Nam (Bắc, Trung, Nam)</p>
+                        <p className="font-medium">{t("food.homesickMode")}</p>
+                        <p className="text-sm text-gray-600">{t("food.homesickMode.desc")}</p>
                       </div>
                     </div>
                   </div>
@@ -321,7 +319,7 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 14:00</p>
                     <p>Quận 1, TP.HCM</p>
                   </div>
-                  <Button size="sm">Đăng ký</Button>
+                  <Button size="sm">{t("button.register")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -343,7 +341,7 @@ export default function LifeTradePage() {
                     <p>Chủ Nhật, 18:00</p>
                     <p>Quận 4, TP.HCM</p>
                   </div>
-                  <Button size="sm">Đăng ký</Button>
+                  <Button size="sm">{t("button.register")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -365,7 +363,7 @@ export default function LifeTradePage() {
                     <p>Thứ Sáu, 19:00</p>
                     <p>Quận 7, TP.HCM</p>
                   </div>
-                  <Button size="sm">Đăng ký</Button>
+                  <Button size="sm">{t("button.register")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -373,7 +371,7 @@ export default function LifeTradePage() {
 
           <div className="flex justify-center mt-4">
             <Button variant="outline">
-              Xem thêm trải nghiệm ẩm thực
+              {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -381,11 +379,11 @@ export default function LifeTradePage() {
 
         <TabsContent value="accommodation" className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">🏡 Trao đổi nhà ở (Live & Help)</h2>
+            <h2 className="text-2xl font-bold">{t("accommodation.title")}</h2>
             {isPremiumMember && (
               <Button onClick={() => handleAddActivity("accommodation")}>
                 <Plus className="h-4 w-4 mr-2" />
-                Thêm chỗ ở
+                {t("accommodation.addListing")}
               </Button>
             )}
           </div>
@@ -481,7 +479,7 @@ export default function LifeTradePage() {
                     <p>Quận 2, TP.HCM</p>
                     <p>Có sẵn: Ngay bây giờ</p>
                   </div>
-                  <Button size="sm">Liên hệ</Button>
+                  <Button size="sm">{t("button.contact")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -503,7 +501,7 @@ export default function LifeTradePage() {
                     <p>Quận 7, TP.HCM</p>
                     <p>Có sẵn: Tháng sau</p>
                   </div>
-                  <Button size="sm">Liên hệ</Button>
+                  <Button size="sm">{t("button.contact")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -525,7 +523,7 @@ export default function LifeTradePage() {
                     <p>Quận 3, TP.HCM</p>
                     <p>Có sẵn: Ngay bây giờ</p>
                   </div>
-                  <Button size="sm">Liên hệ</Button>
+                  <Button size="sm">{t("button.contact")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -533,7 +531,7 @@ export default function LifeTradePage() {
 
           <div className="flex justify-center mt-4">
             <Button variant="outline">
-              Xem thêm chỗ ở
+              {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -541,11 +539,11 @@ export default function LifeTradePage() {
 
         <TabsContent value="travel" className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">🧑‍🤝‍🧑 Cùng đi khám phá (Explore Together)</h2>
+            <h2 className="text-2xl font-bold">{t("travel.title")}</h2>
             {isPremiumMember && (
               <Button onClick={() => handleAddActivity("travel")}>
                 <Plus className="h-4 w-4 mr-2" />
-                Thêm hoạt động
+                {t("travel.addActivity")}
               </Button>
             )}
           </div>
@@ -641,7 +639,7 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 09:00</p>
                     <p>Quận 1, TP.HCM</p>
                   </div>
-                  <Button size="sm">Tham gia</Button>
+                  <Button size="sm">{t("button.join")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -663,7 +661,7 @@ export default function LifeTradePage() {
                     <p>Chủ Nhật, 07:00</p>
                     <p>Vũng Tàu</p>
                   </div>
-                  <Button size="sm">Tham gia</Button>
+                  <Button size="sm">{t("button.join")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -685,7 +683,7 @@ export default function LifeTradePage() {
                     <p>Thứ Sáu, 19:00</p>
                     <p>Quận 5, TP.HCM</p>
                   </div>
-                  <Button size="sm">Tham gia</Button>
+                  <Button size="sm">{t("button.join")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -693,7 +691,7 @@ export default function LifeTradePage() {
 
           <div className="flex justify-center mt-4">
             <Button variant="outline">
-              Xem thêm hoạt động
+              {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -701,11 +699,11 @@ export default function LifeTradePage() {
 
         <TabsContent value="language" className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">🗣️ Trao đổi ngôn ngữ (Language Swap)</h2>
+            <h2 className="text-2xl font-bold">{t("language.title")}</h2>
             {isPremiumMember && (
               <Button onClick={() => handleAddActivity("language")}>
                 <Plus className="h-4 w-4 mr-2" />
-                Thêm lớp học
+                {t("language.addClass")}
               </Button>
             )}
           </div>
@@ -801,7 +799,7 @@ export default function LifeTradePage() {
                     <p>Thứ Ba & Thứ Năm, 18:00</p>
                     <p>Quận 1, TP.HCM</p>
                   </div>
-                  <Button size="sm">Đăng ký</Button>
+                  <Button size="sm">{t("button.register")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -823,7 +821,7 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 15:00</p>
                     <p>Quận 3, TP.HCM</p>
                   </div>
-                  <Button size="sm">Tham gia</Button>
+                  <Button size="sm">{t("button.join")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -845,7 +843,7 @@ export default function LifeTradePage() {
                     <p>Thứ Tư & Thứ Sáu, 19:00</p>
                     <p>Quận 7, TP.HCM</p>
                   </div>
-                  <Button size="sm">Đăng ký</Button>
+                  <Button size="sm">{t("button.register")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -853,7 +851,7 @@ export default function LifeTradePage() {
 
           <div className="flex justify-center mt-4">
             <Button variant="outline">
-              Xem thêm lớp học
+              {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -861,11 +859,11 @@ export default function LifeTradePage() {
 
         <TabsContent value="culture" className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">📚 Trung tâm đa văn hóa (Multicultural Hub)</h2>
+            <h2 className="text-2xl font-bold">{t("culture.title")}</h2>
             {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("courses")}>
+              <Button onClick={() => handleAddActivity("cultural")}>
                 <Plus className="h-4 w-4 mr-2" />
-                Thêm tài nguyên
+                {t("culture.addResource")}
               </Button>
             )}
           </div>
@@ -961,7 +959,7 @@ export default function LifeTradePage() {
                     <p>Khóa học trực tuyến</p>
                     <p>5 mô-đun, tự học</p>
                   </div>
-                  <Button size="sm">Xem khóa học</Button>
+                  <Button size="sm">{t("button.viewMore")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -983,7 +981,7 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 10:00</p>
                     <p>Trực tuyến qua Zoom</p>
                   </div>
-                  <Button size="sm">Đăng ký</Button>
+                  <Button size="sm">{t("button.register")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -1005,7 +1003,7 @@ export default function LifeTradePage() {
                     <p>Chủ Nhật, 12:00-20:00</p>
                     <p>Công viên Lê Văn Tám</p>
                   </div>
-                  <Button size="sm">Tham gia</Button>
+                  <Button size="sm">{t("button.join")}</Button>
                 </div>
               </CardContent>
             </Card>
@@ -1013,7 +1011,7 @@ export default function LifeTradePage() {
 
           <div className="flex justify-center mt-4">
             <Button variant="outline">
-              Xem thêm tài nguyên
+              {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>

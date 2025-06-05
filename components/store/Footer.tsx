@@ -1,15 +1,20 @@
+"use client"
+
 import Link from "next/link"
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react"
+import { useI18n } from "@/contexts/i18n-context"
 
 export function Footer() {
+  const { t } = useI18n()
+  
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">ShopLogo</h3>
-            <p className="text-gray-400 mb-4">Cung cấp sản phẩm và dịch vụ chất lượng, biến việc mua sắm thành niềm vui.</p>
+            <h3 className="text-lg font-semibold mb-4">{t("platform.name")}</h3>
+            <p className="text-gray-400 mb-4">{t("platform.description")}</p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
               <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
@@ -19,26 +24,26 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Liên kết nhanh</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("nav.home")}</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
                 <Link href="/store/home" className="hover:text-white">
-                  Trang chủ
+                  {t("nav.home")}
                 </Link>
               </li>
               <li>
                 <Link href="/store/products" className="hover:text-white">
-                  Tất cả sản phẩm
+                  {t("nav.products")}
                 </Link>
               </li>
               <li>
                 <Link href="/store/about" className="hover:text-white">
-                  Về chúng tôi
+                  {t("nav.about")}
                 </Link>
               </li>
               <li>
                 <Link href="/store/user/profile" className="hover:text-white">
-                  Trung tâm thành viên
+                  {t("nav.lifeServices")}
                 </Link>
               </li>
             </ul>
@@ -46,7 +51,7 @@ export function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Danh mục sản phẩm</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("nav.products")}</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
                 <Link href="/store/products?category=men" className="hover:text-white">
@@ -92,7 +97,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 ShopLogo. Đã đăng ký bản quyền.</p>
+          <p>&copy; 2024 {t("platform.name")}. Đã đăng ký bản quyền.</p>
         </div>
       </div>
     </footer>
