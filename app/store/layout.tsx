@@ -18,6 +18,7 @@ import { AIRecommendationsProvider } from "@/components/store/AIRecommendationsP
 import { MobileAppProvider } from "@/components/store/MobileAppProvider"
 import { B2BProvider } from "@/components/store/B2BProvider"
 import { BlockchainProvider } from "@/components/store/BlockchainProvider"
+import { ARVRProvider } from "@/components/store/ARVRProvider"
 
 export default function StoreLayout({
   children,
@@ -42,11 +43,13 @@ export default function StoreLayout({
                                 <CompareProvider>
                                   <B2BProvider>
                                     <BlockchainProvider>
-                                      <div className="min-h-screen bg-white">
-                                        <Header />
-                                        <main className="pt-16">{children}</main>
-                                        <Footer />
-                                      </div>
+                                      <ARVRProvider>
+                                        <div className="min-h-screen bg-white">
+                                          <Header />
+                                          <main className="pt-16">{children}</main>
+                                          <Footer />
+                                        </div>
+                                      </ARVRProvider>
                                     </BlockchainProvider>
                                   </B2BProvider>
                                 </CompareProvider>
