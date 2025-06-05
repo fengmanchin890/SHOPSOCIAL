@@ -13,6 +13,8 @@ import {
   Building,
   Globe,
   ArrowRight,
+  Star,
+  Truck,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -627,7 +629,8 @@ export default function B2BDashboard() {
                       </div>
                     </div>
                     
-                    <div className="bg-white p-4 rounded-lg border-2 border-blue-200">
+                    <div className="bg-white p-4 rounde
+d-lg border-2 border-blue-200">
                       <div className="flex justify-between items-center">
                         <div>
                           <h4 className="font-medium">Giá bán đề xuất:</h4>
@@ -1193,13 +1196,13 @@ export default function B2BDashboard() {
                   </div>
                   
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Lô hàng đang vận chuyển</h3>
+                    <h3 className="font-semibold">Lô hàng của tôi</h3>
                     <div className="border rounded-lg p-4">
                       <div className="flex items-center justify-between mb-3">
                         <div>
-                          <h4 className="font-semibold">Lô hàng #VN12345</h4>
+                          <h4 className="font-semibold">Lô hàng #SH12345</h4>
                           <p className="text-sm text-gray-600">
-                            Ngày gửi: {new Date().toLocaleDateString()} • Dịch vụ: EMS
+                            Ngày gửi: {new Date().toLocaleDateString()} • Dịch vụ: Gói Nhanh
                           </p>
                         </div>
                         <Badge variant="default">Đang vận chuyển</Badge>
@@ -1207,12 +1210,12 @@ export default function B2BDashboard() {
                       
                       <div className="mb-4">
                         <div className="w-full bg-gray-200 rounded-full h-2.5">
-                          <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: "65%" }}></div>
+                          <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: "45%" }}></div>
                         </div>
                         <div className="flex justify-between mt-1 text-xs text-gray-500">
-                          <span>Đã gửi</span>
+                          <span>Đã nhận</span>
+                          <span>Đang xử lý</span>
                           <span>Đang vận chuyển</span>
-                          <span>Đã đến</span>
                           <span>Đã giao</span>
                         </div>
                       </div>
@@ -1220,20 +1223,30 @@ export default function B2BDashboard() {
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div>
                           <span className="text-gray-500">Mã vận đơn:</span>
-                          <p className="font-medium">EMS123456789VN</p>
+                          <p className="font-medium">SH123456789VN</p>
                         </div>
                         <div>
                           <span className="text-gray-500">Trọng lượng:</span>
-                          <p className="font-medium">3.5 kg</p>
+                          <p className="font-medium">12.5 kg</p>
                         </div>
                         <div>
-                          <span className="text-gray-500">Vị trí hiện tại:</span>
-                          <p className="font-medium">Trung tâm phân loại</p>
+                          <span className="text-gray-500">Địa chỉ nhận:</span>
+                          <p className="font-medium">Hà Nội, Việt Nam</p>
                         </div>
                         <div>
                           <span className="text-gray-500">Dự kiến giao:</span>
                           <p className="font-medium">15/06/2024</p>
                         </div>
+                      </div>
+                      
+                      <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                        <h5 className="text-sm font-medium text-blue-800 mb-2">Nội dung lô hàng</h5>
+                        <ul className="text-sm space-y-1 text-blue-700">
+                          <li>• Quần áo (5kg)</li>
+                          <li>• Đồ điện tử (2kg)</li>
+                          <li>• Thực phẩm đóng gói (3kg)</li>
+                          <li>• Quà tặng (2.5kg)</li>
+                        </ul>
                       </div>
                       
                       <div className="flex items-center justify-end mt-4">
@@ -1501,7 +1514,7 @@ export default function B2BDashboard() {
                   <CardTitle>Gửi hàng về quê</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="p-4 bg-green-50 rounded-lg border border-green-200 mb-6">
+                  <div className="p-6 bg-green-50 rounded-lg border border-green-200 mb-6">
                     <h3 className="font-semibold text-green-800 mb-2">Dịch vụ gửi hàng về quê</h3>
                     <p className="text-sm text-green-700 mb-4">
                       Gửi hàng hóa, quà tặng và đồ dùng cá nhân về quê với chi phí hợp lý và đảm bảo an toàn.
