@@ -51,7 +51,7 @@ export default function LifeTradePage() {
   if (showAddActivity) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <Button variant="outline\" onClick={() => setShowAddActivity(false)} className=\"mb-6">
+        <Button variant="outline" onClick={() => setShowAddActivity(false)} className="mb-6">
           ← Quay lại
         </Button>
         <AddActivityForm 
@@ -523,7 +523,6 @@ export default function LifeTradePage() {
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-500">
                     <p>Quận 3, TP.HCM</p>
-                
                     <p>Có sẵn: Ngay bây giờ</p>
                   </div>
                   <Button size="sm">Liên hệ</Button>
