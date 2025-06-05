@@ -54,7 +54,7 @@ export function MembershipStatus() {
         <div className="flex gap-2">
           {currentMembership?.isTrial && (
             <MembershipUpgradeDialog>
-              <Button variant="outline" size="sm">
+              <Button variant="outline\" size="sm">
                 Nâng cấp thành viên chính thức
               </Button>
             </MembershipUpgradeDialog>
