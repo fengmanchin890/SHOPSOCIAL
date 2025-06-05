@@ -17,6 +17,7 @@ import { PriceAlertsProvider } from "@/components/store/PriceAlertsProvider"
 import { AIRecommendationsProvider } from "@/components/store/AIRecommendationsProvider"
 import { MobileAppProvider } from "@/components/store/MobileAppProvider"
 import { B2BProvider } from "@/components/store/B2BProvider"
+import { BlockchainProvider } from "@/components/store/BlockchainProvider"
 
 export default function StoreLayout({
   children,
@@ -40,11 +41,13 @@ export default function StoreLayout({
                               <AIRecommendationsProvider>
                                 <CompareProvider>
                                   <B2BProvider>
-                                    <div className="min-h-screen bg-white">
-                                      <Header />
-                                      <main className="pt-16">{children}</main>
-                                      <Footer />
-                                    </div>
+                                    <BlockchainProvider>
+                                      <div className="min-h-screen bg-white">
+                                        <Header />
+                                        <main className="pt-16">{children}</main>
+                                        <Footer />
+                                      </div>
+                                    </BlockchainProvider>
                                   </B2BProvider>
                                 </CompareProvider>
                               </AIRecommendationsProvider>
