@@ -5,9 +5,10 @@ import { AddRentalForm } from "./AddRentalForm"
 import { AddTravelActivityForm } from "./AddTravelActivityForm"
 import { AddLanguageClassForm } from "./AddLanguageClassForm"
 import { AddCourseRegistrationForm } from "./AddCourseRegistrationForm"
+import { AddCulturalResourceForm } from "./AddCulturalResourceForm"
 
 interface AddActivityFormProps {
-  moduleType: "food" | "accommodation" | "travel" | "language" | "courses"
+  moduleType: "food" | "accommodation" | "travel" | "language" | "courses" | "cultural"
   onSuccess: () => void
   onCancel: () => void
 }
@@ -24,6 +25,8 @@ export function AddActivityForm({ moduleType, onSuccess, onCancel }: AddActivity
       return <AddLanguageClassForm onSuccess={onSuccess} onCancel={onCancel} />
     case "courses":
       return <AddCourseRegistrationForm onSuccess={onSuccess} onCancel={onCancel} />
+    case "cultural":
+      return <AddCulturalResourceForm onSuccess={onSuccess} onCancel={onCancel} />
     default:
       return null
   }
