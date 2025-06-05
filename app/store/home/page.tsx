@@ -12,22 +12,22 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Banner with Taiwan-Vietnam Lifestyle Image */}
+      {/* Hero Banner Carousel */}
       <section className="relative">
         <div className="aspect-[3/1] md:aspect-[4/1] overflow-hidden">
           <Image
-            src="/images/image copy.png"
-            alt="LiveTrade Connect - 生活貿易一站式平台"
+            src={banners[0].image || "/placeholder.svg"}
+            alt={banners[0].title}
             width={1200}
             height={500}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
             <div className="text-center text-white">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">LiveTrade Connect</h1>
-              <p className="text-lg md:text-xl mb-8">生活 × 貿易一站式平台，讓你買得到、玩得到、學得到、交得到！</p>
+              <h1 className="text-4xl md:text-6xl font-bold mb-4">{banners[0].title}</h1>
+              <p className="text-lg md:text-xl mb-8">{banners[0].subtitle}</p>
               <Button size="lg" asChild>
-                <Link href="/store/products">
+                <Link href={banners[0].link}>
                   立即購買 <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -36,65 +36,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Life Trade Services Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">生活貿易服務</h2>
-            <p className="text-gray-600">探索我們的跨國生活服務</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            <Link href="/store/life-trade/food" className="group">
-              <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-semibold text-gray-900 mb-2">體驗美食模組</h3>
-                  <ArrowRight className="h-4 w-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </CardContent>
-              </Card>
-            </Link>
-            
-            <Link href="/store/life-trade/accommodation" className="group">
-              <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-semibold text-gray-900 mb-2">探索住宿交換</h3>
-                  <ArrowRight className="h-4 w-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </CardContent>
-              </Card>
-            </Link>
-            
-            <Link href="/store/life-trade/travel" className="group">
-              <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-semibold text-gray-900 mb-2">預約導遊服務</h3>
-                  <ArrowRight className="h-4 w-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </CardContent>
-              </Card>
-            </Link>
-            
-            <Link href="/store/life-trade/language" className="group">
-              <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-semibold text-gray-900 mb-2">參加語言交流</h3>
-                  <ArrowRight className="h-4 w-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </CardContent>
-              </Card>
-            </Link>
-            
-            <Link href="/store/life-trade/courses" className="group">
-              <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-semibold text-gray-900 mb-2">報名專家課程</h3>
-                  <ArrowRight className="h-4 w-4 mx-auto mt-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Categories Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">商品分類</h2>
@@ -127,7 +70,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-12">
             <div>
@@ -151,7 +94,7 @@ export default function HomePage() {
 
       {/* Popular Products */}
       {popularProducts.length > 0 && (
-        <section className="py-16">
+        <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">熱門商品</h2>
@@ -168,7 +111,7 @@ export default function HomePage() {
       )}
 
       {/* Features Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
