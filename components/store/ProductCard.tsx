@@ -103,14 +103,14 @@ export function ProductCard({ product }: ProductCardProps) {
         {inCompare && (
           <Badge className="absolute top-2 right-2 bg-blue-600">
             <Scale className="h-3 w-3 mr-1" />
-            比較中
+            Đang so sánh
           </Badge>
         )}
 
         {/* Stock Status */}
         {!product.inStock && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-t-lg">
-            <Badge variant="destructive">缺貨中</Badge>
+            <Badge variant="destructive">Hết hàng</Badge>
           </div>
         )}
 

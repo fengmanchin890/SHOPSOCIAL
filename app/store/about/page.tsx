@@ -6,40 +6,40 @@ import { Button } from "@/components/ui/button"
 export default function AboutPage() {
   const teamMembers = [
     {
-      name: "張執行長",
-      position: "創辦人 & 執行長",
+      name: "Giám đốc Trương",
+      position: "Nhà sáng lập & Giám đốc điều hành",
       image: "/placeholder.svg?height=300&width=300",
-      description: "擁有 15 年電商經驗，致力於提供最優質的購物體驗。",
+      description: "Có 15 năm kinh nghiệm trong thương mại điện tử, cam kết mang đến trải nghiệm mua sắm tốt nhất.",
     },
     {
-      name: "李設計師",
-      position: "首席設計師",
+      name: "Nhà thiết kế Lý",
+      position: "Trưởng phòng thiết kế",
       image: "/placeholder.svg?height=300&width=300",
-      description: "專精於時尚設計，為品牌注入創新與美感。",
+      description: "Chuyên gia trong thiết kế thời trang, mang đến sự đổi mới và thẩm mỹ cho thương hiệu.",
     },
     {
-      name: "王經理",
-      position: "營運經理",
+      name: "Quản lý Vương",
+      position: "Giám đốc vận hành",
       image: "/placeholder.svg?height=300&width=300",
-      description: "負責日常營運管理，確保每個環節都完美執行。",
+      description: "Phụ trách quản lý vận hành hàng ngày, đảm bảo mọi khâu đều hoàn hảo.",
     },
   ]
 
   const values = [
     {
       icon: Heart,
-      title: "用心服務",
-      description: "我們用心對待每一位顧客，提供最貼心的服務體驗。",
+      title: "Phục vụ tận tâm",
+      description: "Chúng tôi phục vụ mỗi khách hàng với tất cả tâm huyết, mang đến trải nghiệm dịch vụ chu đáo nhất.",
     },
     {
       icon: Award,
-      title: "品質保證",
-      description: "嚴選優質商品，確保每件商品都符合最高品質標準。",
+      title: "Đảm bảo chất lượng",
+      description: "Lựa chọn sản phẩm chất lượng cao, đảm bảo mỗi sản phẩm đều đạt tiêu chuẩn cao nhất.",
     },
     {
       icon: Users,
-      title: "顧客至上",
-      description: "以顧客需求為出發點，持續改善與創新服務內容。",
+      title: "Khách hàng là trên hết",
+      description: "Lấy nhu cầu khách hàng làm trọng tâm, liên tục cải tiến và đổi mới dịch vụ.",
     },
   ]
 
@@ -48,9 +48,9 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">關於我們</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Về chúng tôi</h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            我們致力於為您提供最優質的商品與服務，讓購物成為一種享受
+            Chúng tôi cam kết mang đến cho bạn những sản phẩm và dịch vụ chất lượng nhất, biến việc mua sắm thành niềm vui
           </p>
         </div>
       </section>
@@ -60,25 +60,23 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">我們的故事</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Câu chuyện của chúng tôi</h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  ShopLogo 成立於 2020 年，起初只是一個小小的線上商店， 懷著為顧客提供優質商品的初心開始了我們的旅程。
+                  ShopLogo được thành lập vào năm 2020, ban đầu chỉ là một cửa hàng trực tuyến nhỏ, bắt đầu hành trình với tâm niệm mang đến sản phẩm chất lượng cho khách hàng.
                 </p>
                 <p>
-                  經過四年的努力與成長，我們已經服務了超過 10,000 位顧客，
-                  建立了完整的供應鏈體系，並持續擴展我們的商品類別。
+                  Sau bốn năm nỗ lực và phát triển, chúng tôi đã phục vụ hơn 10.000 khách hàng, xây dựng hệ thống chuỗi cung ứng hoàn chỉnh và không ngừng mở rộng danh mục sản phẩm.
                 </p>
                 <p>
-                  我們相信，每一次購物都應該是愉快的體驗。因此，我們不斷改善服務品質，
-                  從商品挑選、網站體驗到客戶服務，每個環節都力求完美。
+                  Chúng tôi tin rằng mỗi lần mua sắm đều phải là trải nghiệm thú vị. Vì vậy, chúng tôi liên tục cải thiện chất lượng dịch vụ, từ việc lựa chọn sản phẩm, trải nghiệm trang web đến dịch vụ khách hàng, mỗi khâu đều hướng tới sự hoàn hảo.
                 </p>
               </div>
             </div>
             <div className="aspect-square overflow-hidden rounded-lg">
               <Image
                 src="/placeholder.svg?height=500&width=500"
-                alt="公司辦公室"
+                alt="Văn phòng công ty"
                 width={500}
                 height={500}
                 className="w-full h-full object-cover"
@@ -92,9 +90,9 @@ export default function AboutPage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">我們的價值觀</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Giá trị cốt lõi</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              這些核心價值觀指引著我們的每一個決策，也是我們與顧客建立信任的基礎
+              Những giá trị cốt lõi này định hướng mọi quyết định của chúng tôi, đồng thời là nền tảng để xây dựng niềm tin với khách hàng
             </p>
           </div>
 
@@ -118,8 +116,8 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">我們的團隊</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">一群充滿熱忱的專業人士，共同為提供最佳購物體驗而努力</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Đội ngũ của chúng tôi</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Một nhóm chuyên gia đầy nhiệt huyết, cùng nhau nỗ lực mang đến trải nghiệm mua sắm tốt nhất</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -149,25 +147,25 @@ export default function AboutPage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">聯絡我們</h2>
-            <p className="text-gray-600">有任何問題或建議，歡迎隨時與我們聯繫</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Liên hệ với chúng tôi</h2>
+            <p className="text-gray-600">Nếu có bất kỳ câu hỏi hoặc đề xuất nào, hãy liên hệ với chúng tôi bất cứ lúc nào</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center text-lg">
                   <MapPin className="h-5 w-5 mr-2 text-blue-600" />
-                  地址
+                  Địa chỉ
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  台北市信義區
+                  Quận Tân Bình, TP.HCM
                   <br />
-                  信義路五段7號
+                  Đường Cộng Hòa
                   <br />
-                  10樓
+                  Tầng 10
                 </p>
               </CardContent>
             </Card>
@@ -176,16 +174,16 @@ export default function AboutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center text-lg">
                   <Phone className="h-5 w-5 mr-2 text-green-600" />
-                  電話
+                  Điện thoại
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  客服專線：
+                  Đường dây nóng:
                   <br />
-                  02-1234-5678
+                  028-1234-5678
                   <br />
-                  週一至週五 9:00-18:00
+                  Thứ Hai đến Thứ Sáu 9:00-18:00
                 </p>
               </CardContent>
             </Card>
@@ -194,17 +192,17 @@ export default function AboutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center text-lg">
                   <Mail className="h-5 w-5 mr-2 text-purple-600" />
-                  電子郵件
+                  Email
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  一般諮詢：
+                  Thông tin chung:
                   <br />
                   service@shop.com
                   <br />
                   <br />
-                  合作洽談：
+                  Hợp tác kinh doanh:
                   <br />
                   business@shop.com
                 </p>
@@ -215,20 +213,20 @@ export default function AboutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center text-lg">
                   <Clock className="h-5 w-5 mr-2 text-orange-600" />
-                  營業時間
+                  Giờ làm việc
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  線上商店：24/7
+                  Cửa hàng trực tuyến: 24/7
                   <br />
-                  客服時間：
+                  Giờ hỗ trợ khách hàng:
                   <br />
-                  週一至週五 9:00-18:00
+                  Thứ Hai đến Thứ Sáu 9:00-18:00
                   <br />
-                  週六 10:00-17:00
+                  Thứ Bảy 10:00-17:00
                   <br />
-                  週日休息
+                  Chủ Nhật nghỉ
                 </p>
               </CardContent>
             </Card>
@@ -237,7 +235,7 @@ export default function AboutPage() {
           <div className="text-center mt-12">
             <Button size="lg">
               <Mail className="h-5 w-5 mr-2" />
-              立即聯繫我們
+              Liên hệ ngay
             </Button>
           </div>
         </div>

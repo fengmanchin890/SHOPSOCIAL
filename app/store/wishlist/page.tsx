@@ -51,10 +51,10 @@ export default function WishlistPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <Heart className="h-24 w-24 mx-auto text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">收藏清單是空的</h1>
-          <p className="text-gray-600 mb-8">還沒有添加任何商品到收藏清單</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Danh sách yêu thích trống</h1>
+          <p className="text-gray-600 mb-8">Chưa có sản phẩm nào trong danh sách yêu thích</p>
           <Button asChild>
-            <Link href="/store/products">開始購物</Link>
+            <Link href="/store/products">Bắt đầu mua sắm</Link>
           </Button>
         </div>
       </div>
@@ -64,16 +64,16 @@ export default function WishlistPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">我的收藏清單</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Danh sách yêu thích</h1>
         <div className="flex space-x-4">
           <Button variant="outline" asChild>
             <Link href="/store/compare">
               <Scale className="h-4 w-4 mr-2" />
-              查看比較
+              Xem so sánh
             </Link>
           </Button>
           <Button variant="outline" onClick={clearWishlist}>
-            清空收藏清單
+            Xóa danh sách yêu thích
           </Button>
         </div>
       </div>
@@ -102,7 +102,7 @@ export default function WishlistPage() {
               {isInCompare(item.id) && (
                 <Badge className="absolute top-2 left-2 bg-blue-600">
                   <Scale className="h-3 w-3 mr-1" />
-                  已比較
+                  Đã so sánh
                 </Badge>
               )}
             </div>
@@ -125,7 +125,7 @@ export default function WishlistPage() {
                 <div className="flex space-x-2">
                   <Button onClick={() => handleAddToCart(item)} className="flex-1">
                     <ShoppingCart className="h-4 w-4 mr-2" />
-                    加入購物車
+                    Thêm vào giỏ hàng
                   </Button>
                   <Button variant="outline" asChild className="flex-none">
                     <Link href={`/store/products/${item.id}`}>
@@ -141,7 +141,7 @@ export default function WishlistPage() {
                   className="w-full"
                 >
                   <Scale className="h-4 w-4 mr-2" />
-                  {isInCompare(item.id) ? "已加入比較" : canAddMore ? "加入比較" : "比較已滿"}
+                  {isInCompare(item.id) ? "Đã thêm vào so sánh" : canAddMore ? "Thêm vào so sánh" : "Danh sách so sánh đã đầy"}
                 </Button>
               </div>
             </CardContent>

@@ -8,7 +8,7 @@ import { mockProducts, categories, banners } from "@/lib/mock-data"
 
 export default function HomePage() {
   const featuredProducts = mockProducts.slice(0, 4)
-  const popularProducts = mockProducts.filter((p) => p.tags.includes("熱門")).slice(0, 4)
+  const popularProducts = mockProducts.filter((p) => p.tags.includes("Phổ biến")).slice(0, 4)
 
   return (
     <div className="min-h-screen">
@@ -28,7 +28,7 @@ export default function HomePage() {
               <p className="text-lg md:text-xl mb-8">{banners[0].subtitle}</p>
               <Button size="lg" asChild>
                 <Link href={banners[0].link}>
-                  立即購買 <ArrowRight className="ml-2 h-4 w-4" />
+                  Mua ngay <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -40,8 +40,8 @@ export default function HomePage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">商品分類</h2>
-            <p className="text-gray-600">探索我們精心挑選的各類商品</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Danh mục sản phẩm</h2>
+            <p className="text-gray-600">Khám phá các loại sản phẩm được chọn lọc kỹ lưỡng</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -74,12 +74,12 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">精選商品</h2>
-              <p className="text-gray-600">為您精心挑選的優質商品</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Sản phẩm nổi bật</h2>
+              <p className="text-gray-600">Những sản phẩm chất lượng được chọn lọc dành cho bạn</p>
             </div>
             <Button variant="outline" asChild>
               <Link href="/store/products">
-                查看全部 <ArrowRight className="ml-2 h-4 w-4" />
+                Xem tất cả <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -97,8 +97,8 @@ export default function HomePage() {
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">熱門商品</h2>
-              <p className="text-gray-600">最受歡迎的商品推薦</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Sản phẩm phổ biến</h2>
+              <p className="text-gray-600">Những sản phẩm được ưa chuộng nhất</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -118,32 +118,32 @@ export default function HomePage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Truck className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">免費配送</h3>
-              <p className="text-gray-600 text-sm">滿千免運，全台配送</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Miễn phí vận chuyển</h3>
+              <p className="text-gray-600 text-sm">Miễn phí vận chuyển cho đơn hàng trên 1 triệu, giao hàng toàn quốc</p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield className="h-8 w-8 text-green-600" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">品質保證</h3>
-              <p className="text-gray-600 text-sm">嚴選商品，品質保證</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Đảm bảo chất lượng</h3>
+              <p className="text-gray-600 text-sm">Sản phẩm chọn lọc, đảm bảo chất lượng</p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Headphones className="h-8 w-8 text-purple-600" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">客服支援</h3>
-              <p className="text-gray-600 text-sm">24/7 客服服務</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Hỗ trợ khách hàng</h3>
+              <p className="text-gray-600 text-sm">Dịch vụ khách hàng 24/7</p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <RotateCcw className="h-8 w-8 text-orange-600" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">退換貨</h3>
-              <p className="text-gray-600 text-sm">7天無條件退換貨</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Đổi trả hàng</h3>
+              <p className="text-gray-600 text-sm">Đổi trả trong vòng 7 ngày không cần lý do</p>
             </div>
           </div>
         </div>

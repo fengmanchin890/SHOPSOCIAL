@@ -43,10 +43,10 @@ import Link from "next/link"
 // Mock user data
 const mockUser = {
   id: "1",
-  name: "王小明",
-  email: "wang@example.com",
+  name: "Nguyễn Văn A",
+  email: "nguyen@example.com",
   phone: "0912-345-678",
-  address: "台北市信義區信義路五段7號",
+  address: "123 Đường Nguyễn Huệ, Quận 1, TP.HCM",
   joinDate: "2023-01-15",
 }
 
@@ -58,8 +58,8 @@ const mockOrders = [
     status: "delivered",
     total: 3680,
     items: [
-      { name: "經典牛仔外套", quantity: 1, price: 2980 },
-      { name: "舒適棉質T恤", quantity: 1, price: 680 },
+      { name: "Áo khoác jean cổ điển", quantity: 1, price: 2980 },
+      { name: "Áo thun cotton thoáng mát", quantity: 1, price: 680 },
     ],
   },
   {
@@ -67,22 +67,22 @@ const mockOrders = [
     date: "2024-01-10",
     status: "shipping",
     total: 1680,
-    items: [{ name: "優雅連身洋裝", quantity: 1, price: 1680 }],
+    items: [{ name: "Đầm dài thanh lịch", quantity: 1, price: 1680 }],
   },
   {
     id: "ORD-003",
     date: "2024-01-05",
     status: "processing",
     total: 4500,
-    items: [{ name: "真皮手提包", quantity: 1, price: 4500 }],
+    items: [{ name: "Túi xách da thật", quantity: 1, price: 4500 }],
   },
 ]
 
 const statusMap = {
-  processing: { label: "處理中", color: "bg-yellow-100 text-yellow-800" },
-  shipping: { label: "配送中", color: "bg-blue-100 text-blue-800" },
-  delivered: { label: "已送達", color: "bg-green-100 text-green-800" },
-  cancelled: { label: "已取消", color: "bg-red-100 text-red-800" },
+  processing: { label: "Đang xử lý", color: "bg-yellow-100 text-yellow-800" },
+  shipping: { label: "Đang giao hàng", color: "bg-blue-100 text-blue-800" },
+  delivered: { label: "Đã giao hàng", color: "bg-green-100 text-green-800" },
+  cancelled: { label: "Đã hủy", color: "bg-red-100 text-red-800" },
 }
 
 export default function ProfilePage() {
@@ -107,7 +107,7 @@ export default function ProfilePage() {
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [customerMessage, setCustomerMessage] = useState("")
-  const [selectedLanguage, setSelectedLanguage] = useState("zh-TW")
+  const [selectedLanguage, setSelectedLanguage] = useState("vi-VN")
 
   // Notification settings
   const [notifications, setNotifications] = useState({
@@ -128,8 +128,8 @@ export default function ProfilePage() {
   })
 
   const handleSaveProfile = () => {
-    // 模擬保存用戶資料
-    alert("個人資料已更新！")
+    // Mô phỏng lưu thông tin người dùng
+    alert("Thông tin cá nhân đã được cập nhật!")
     setIsEditing(false)
   }
 
@@ -140,14 +140,14 @@ export default function ProfilePage() {
 
   const handleChangePassword = () => {
     if (newPassword !== confirmPassword) {
-      alert("新密碼與確認密碼不符！")
+      alert("Mật khẩu mới và xác nhận mật khẩu không khớp!")
       return
     }
     if (newPassword.length < 6) {
-      alert("密碼長度至少需要6個字符！")
+      alert("Mật khẩu phải có ít nhất 6 ký tự!")
       return
     }
-    alert("密碼已成功更新！")
+    alert("Mật khẩu đã được cập nhật thành công!")
     setShowPasswordDialog(false)
     setCurrentPassword("")
     setNewPassword("")
@@ -155,32 +155,32 @@ export default function ProfilePage() {
   }
 
   const handleSaveNotifications = () => {
-    alert("通知設定已保存！")
+    alert("Cài đặt thông báo đã được lưu!")
     setShowNotificationDialog(false)
   }
 
   const handleSavePrivacy = () => {
-    alert("隱私設定已保存！")
+    alert("Cài đặt quyền riêng tư đã được lưu!")
     setShowPrivacyDialog(false)
   }
 
   const handleSaveLanguage = () => {
     alert(
-      `語言已切換為 ${selectedLanguage === "zh-TW" ? "繁體中文" : selectedLanguage === "zh-CN" ? "簡體中文" : "英文"}！`,
+      `Ngôn ngữ đã được chuyển sang ${selectedLanguage === "vi-VN" ? "Tiếng Việt" : selectedLanguage === "zh-CN" ? "Tiếng Trung Giản thể" : "Tiếng Anh"}!`,
     )
     setShowLanguageDialog(false)
   }
 
   const handleContactSupport = () => {
     if (customerMessage.trim()) {
-      alert(`客服訊息已發送！\n訊息: ${customerMessage}\n客服將在24小時內回覆您。`)
+      alert(`Tin nhắn hỗ trợ đã được gửi!\nNội dung: ${customerMessage}\nBộ phận hỗ trợ sẽ phản hồi trong vòng 24 giờ.`)
       setShowContactDialog(false)
       setCustomerMessage("")
     }
   }
 
   const handleDownloadData = () => {
-    // 模擬下載個人資料
+    // Mô phỏng tải dữ liệu cá nhân
     const userData = {
       profile: mockUser,
       orders: mockOrders,
@@ -199,26 +199,26 @@ export default function ProfilePage() {
     document.body.removeChild(link)
     URL.revokeObjectURL(url)
 
-    alert("個人資料已下載到您的裝置！")
+    alert("Dữ liệu cá nhân đã được tải về thiết bị của bạn!")
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">會員中心</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Trung tâm thành viên</h1>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="profile" className="flex items-center">
             <User className="h-4 w-4 mr-2" />
-            個人資料
+            Thông tin cá nhân
           </TabsTrigger>
           <TabsTrigger value="orders" className="flex items-center">
             <Package className="h-4 w-4 mr-2" />
-            訂單記錄
+            Lịch sử đơn hàng
           </TabsTrigger>
           <TabsTrigger value="settings" className="flex items-center">
             <Settings className="h-4 w-4 mr-2" />
-            帳戶設定
+            Cài đặt tài khoản
           </TabsTrigger>
         </TabsList>
 
@@ -228,21 +228,21 @@ export default function ProfilePage() {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>基本資料</CardTitle>
+                  <CardTitle>Thông tin cơ bản</CardTitle>
                   {!isEditing ? (
                     <Button variant="outline" size="sm" onClick={() => setIsEditing(true)}>
                       <Edit className="h-4 w-4 mr-2" />
-                      編輯
+                      Chỉnh sửa
                     </Button>
                   ) : (
                     <div className="flex space-x-2">
                       <Button variant="outline" size="sm" onClick={handleCancelEdit}>
                         <X className="h-4 w-4 mr-2" />
-                        取消
+                        Hủy
                       </Button>
                       <Button size="sm" onClick={handleSaveProfile}>
                         <Save className="h-4 w-4 mr-2" />
-                        保存
+                        Lưu
                       </Button>
                     </div>
                   )}
@@ -252,30 +252,30 @@ export default function ProfilePage() {
                 {!isEditing ? (
                   <>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">姓名</label>
+                      <label className="text-sm font-medium text-gray-600">Họ tên</label>
                       <p className="text-gray-900">{mockUser.name}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">電子郵件</label>
+                      <label className="text-sm font-medium text-gray-600">Email</label>
                       <p className="text-gray-900">{mockUser.email}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">電話</label>
+                      <label className="text-sm font-medium text-gray-600">Số điện thoại</label>
                       <p className="text-gray-900">{mockUser.phone}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">地址</label>
+                      <label className="text-sm font-medium text-gray-600">Địa chỉ</label>
                       <p className="text-gray-900">{mockUser.address}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">加入日期</label>
+                      <label className="text-sm font-medium text-gray-600">Ngày tham gia</label>
                       <p className="text-gray-900">{mockUser.joinDate}</p>
                     </div>
                   </>
                 ) : (
                   <>
                     <div>
-                      <Label htmlFor="name">姓名</Label>
+                      <Label htmlFor="name">Họ tên</Label>
                       <Input
                         id="name"
                         value={editedUser.name}
@@ -283,7 +283,7 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="email">電子郵件</Label>
+                      <Label htmlFor="email">Email</Label>
                       <Input
                         id="email"
                         type="email"
@@ -292,7 +292,7 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">電話</Label>
+                      <Label htmlFor="phone">Số điện thoại</Label>
                       <Input
                         id="phone"
                         value={editedUser.phone}
@@ -300,7 +300,7 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="address">地址</Label>
+                      <Label htmlFor="address">Địa chỉ</Label>
                       <Input
                         id="address"
                         value={editedUser.address}
@@ -314,24 +314,24 @@ export default function ProfilePage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>會員統計</CardTitle>
+                <CardTitle>Thống kê thành viên</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-4 bg-blue-50 rounded-lg">
                     <p className="text-2xl font-bold text-blue-600">{mockOrders.length}</p>
-                    <p className="text-sm text-gray-600">總訂單數</p>
+                    <p className="text-sm text-gray-600">Tổng số đơn hàng</p>
                   </div>
                   <div className="text-center p-4 bg-green-50 rounded-lg">
                     <p className="text-2xl font-bold text-green-600">
                       ${mockOrders.reduce((sum, order) => sum + order.total, 0).toLocaleString()}
                     </p>
-                    <p className="text-sm text-gray-600">總消費金額</p>
+                    <p className="text-sm text-gray-600">Tổng chi tiêu</p>
                   </div>
                 </div>
                 <div className="text-center p-4 bg-purple-50 rounded-lg">
-                  <p className="text-lg font-semibold text-purple-600">一般會員</p>
-                  <p className="text-sm text-gray-600">再消費 $2,000 升級為 VIP 會員</p>
+                  <p className="text-lg font-semibold text-purple-600">Thành viên thường</p>
+                  <p className="text-sm text-gray-600">Chi tiêu thêm $2,000 để nâng cấp lên thành viên VIP</p>
                 </div>
               </CardContent>
             </Card>
@@ -342,7 +342,7 @@ export default function ProfilePage() {
         <TabsContent value="orders">
           <Card>
             <CardHeader>
-              <CardTitle>訂單記錄</CardTitle>
+              <CardTitle>Lịch sử đơn hàng</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -350,8 +350,8 @@ export default function ProfilePage() {
                   <div key={order.id} className="border rounded-lg p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <h3 className="font-semibold text-gray-900">訂單 #{order.id}</h3>
-                        <p className="text-sm text-gray-600">下單日期: {order.date}</p>
+                        <h3 className="font-semibold text-gray-900">Đơn hàng #{order.id}</h3>
+                        <p className="text-sm text-gray-600">Ngày đặt: {order.date}</p>
                       </div>
                       <div className="text-right">
                         <Badge className={statusMap[order.status as keyof typeof statusMap].color}>
@@ -378,7 +378,7 @@ export default function ProfilePage() {
                       <Button variant="outline" size="sm" asChild>
                         <Link href={`/store/user/orders/${order.id}`}>
                           <Eye className="h-4 w-4 mr-2" />
-                          查看詳情
+                          Xem chi tiết
                         </Link>
                       </Button>
                     </div>
@@ -394,7 +394,7 @@ export default function ProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card>
               <CardHeader>
-                <CardTitle>帳戶設定</CardTitle>
+                <CardTitle>Cài đặt tài khoản</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Change Password */}
@@ -402,17 +402,17 @@ export default function ProfilePage() {
                   <DialogTrigger asChild>
                     <Button variant="outline" className="w-full justify-start">
                       <Key className="h-4 w-4 mr-2" />
-                      修改密碼
+                      Đổi mật khẩu
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>修改密碼</DialogTitle>
-                      <DialogDescription>請輸入您的當前密碼和新密碼</DialogDescription>
+                      <DialogTitle>Đổi mật khẩu</DialogTitle>
+                      <DialogDescription>Vui lòng nhập mật khẩu hiện tại và mật khẩu mới</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="currentPassword">當前密碼</Label>
+                        <Label htmlFor="currentPassword">Mật khẩu hiện tại</Label>
                         <Input
                           id="currentPassword"
                           type="password"
@@ -421,7 +421,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="newPassword">新密碼</Label>
+                        <Label htmlFor="newPassword">Mật khẩu mới</Label>
                         <Input
                           id="newPassword"
                           type="password"
@@ -430,7 +430,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="confirmPassword">確認新密碼</Label>
+                        <Label htmlFor="confirmPassword">Xác nhận mật khẩu mới</Label>
                         <Input
                           id="confirmPassword"
                           type="password"
@@ -441,9 +441,9 @@ export default function ProfilePage() {
                     </div>
                     <DialogFooter>
                       <Button variant="outline" onClick={() => setShowPasswordDialog(false)}>
-                        取消
+                        Hủy
                       </Button>
-                      <Button onClick={handleChangePassword}>更新密碼</Button>
+                      <Button onClick={handleChangePassword}>Cập nhật mật khẩu</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -453,17 +453,17 @@ export default function ProfilePage() {
                   <DialogTrigger asChild>
                     <Button variant="outline" className="w-full justify-start">
                       <Bell className="h-4 w-4 mr-2" />
-                      通知設定
+                      Cài đặt thông báo
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>通知設定</DialogTitle>
-                      <DialogDescription>管理您的通知偏好</DialogDescription>
+                      <DialogTitle>Cài đặt thông báo</DialogTitle>
+                      <DialogDescription>Quản lý tùy chọn thông báo của bạn</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="email-notifications">電子郵件通知</Label>
+                        <Label htmlFor="email-notifications">Thông báo qua email</Label>
                         <Switch
                           id="email-notifications"
                           checked={notifications.email}
@@ -471,7 +471,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="sms-notifications">簡訊通知</Label>
+                        <Label htmlFor="sms-notifications">Thông báo qua SMS</Label>
                         <Switch
                           id="sms-notifications"
                           checked={notifications.sms}
@@ -479,7 +479,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="push-notifications">推播通知</Label>
+                        <Label htmlFor="push-notifications">Thông báo đẩy</Label>
                         <Switch
                           id="push-notifications"
                           checked={notifications.push}
@@ -487,7 +487,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="marketing-notifications">行銷通知</Label>
+                        <Label htmlFor="marketing-notifications">Thông báo tiếp thị</Label>
                         <Switch
                           id="marketing-notifications"
                           checked={notifications.marketing}
@@ -495,7 +495,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="order-notifications">訂單更新</Label>
+                        <Label htmlFor="order-notifications">Cập nhật đơn hàng</Label>
                         <Switch
                           id="order-notifications"
                           checked={notifications.orderUpdates}
@@ -503,7 +503,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="price-notifications">價格提醒</Label>
+                        <Label htmlFor="price-notifications">Thông báo giá</Label>
                         <Switch
                           id="price-notifications"
                           checked={notifications.priceAlerts}
@@ -513,9 +513,9 @@ export default function ProfilePage() {
                     </div>
                     <DialogFooter>
                       <Button variant="outline" onClick={() => setShowNotificationDialog(false)}>
-                        取消
+                        Hủy
                       </Button>
-                      <Button onClick={handleSaveNotifications}>保存設定</Button>
+                      <Button onClick={handleSaveNotifications}>Lưu cài đặt</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -525,17 +525,17 @@ export default function ProfilePage() {
                   <DialogTrigger asChild>
                     <Button variant="outline" className="w-full justify-start">
                       <Shield className="h-4 w-4 mr-2" />
-                      隱私設定
+                      Cài đặt quyền riêng tư
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>隱私設定</DialogTitle>
-                      <DialogDescription>管理您的隱私偏好</DialogDescription>
+                      <DialogTitle>Cài đặt quyền riêng tư</DialogTitle>
+                      <DialogDescription>Quản lý tùy chọn quyền riêng tư của bạn</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="profile-visible">公開個人檔案</Label>
+                        <Label htmlFor="profile-visible">Hồ sơ công khai</Label>
                         <Switch
                           id="profile-visible"
                           checked={privacy.profileVisible}
@@ -543,7 +543,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="purchase-history">顯示購買記錄</Label>
+                        <Label htmlFor="purchase-history">Hiển thị lịch sử mua hàng</Label>
                         <Switch
                           id="purchase-history"
                           checked={privacy.showPurchaseHistory}
@@ -551,7 +551,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="data-collection">允許數據收集</Label>
+                        <Label htmlFor="data-collection">Cho phép thu thập dữ liệu</Label>
                         <Switch
                           id="data-collection"
                           checked={privacy.allowDataCollection}
@@ -559,7 +559,7 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="share-partners">與合作夥伴分享</Label>
+                        <Label htmlFor="share-partners">Chia sẻ với đối tác</Label>
                         <Switch
                           id="share-partners"
                           checked={privacy.shareWithPartners}
@@ -569,9 +569,9 @@ export default function ProfilePage() {
                     </div>
                     <DialogFooter>
                       <Button variant="outline" onClick={() => setShowPrivacyDialog(false)}>
-                        取消
+                        Hủy
                       </Button>
-                      <Button onClick={handleSavePrivacy}>保存設定</Button>
+                      <Button onClick={handleSavePrivacy}>Lưu cài đặt</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -581,36 +581,36 @@ export default function ProfilePage() {
                   <DialogTrigger asChild>
                     <Button variant="outline" className="w-full justify-start">
                       <Globe className="h-4 w-4 mr-2" />
-                      語言設定
+                      Cài đặt ngôn ngữ
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>語言設定</DialogTitle>
-                      <DialogDescription>選擇您偏好的語言</DialogDescription>
+                      <DialogTitle>Cài đặt ngôn ngữ</DialogTitle>
+                      <DialogDescription>Chọn ngôn ngữ ưa thích của bạn</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="language">選擇語言</Label>
+                        <Label htmlFor="language">Chọn ngôn ngữ</Label>
                         <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="zh-TW">繁體中文</SelectItem>
-                            <SelectItem value="zh-CN">簡體中文</SelectItem>
-                            <SelectItem value="en">English</SelectItem>
-                            <SelectItem value="ja">日本語</SelectItem>
-                            <SelectItem value="ko">한국어</SelectItem>
+                            <SelectItem value="vi-VN">Tiếng Việt</SelectItem>
+                            <SelectItem value="zh-CN">Tiếng Trung Giản thể</SelectItem>
+                            <SelectItem value="en">Tiếng Anh</SelectItem>
+                            <SelectItem value="ja">Tiếng Nhật</SelectItem>
+                            <SelectItem value="ko">Tiếng Hàn</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                     </div>
                     <DialogFooter>
                       <Button variant="outline" onClick={() => setShowLanguageDialog(false)}>
-                        取消
+                        Hủy
                       </Button>
-                      <Button onClick={handleSaveLanguage}>保存設定</Button>
+                      <Button onClick={handleSaveLanguage}>Lưu cài đặt</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -619,13 +619,13 @@ export default function ProfilePage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>其他操作</CardTitle>
+                <CardTitle>Thao tác khác</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Download Personal Data */}
                 <Button variant="outline" className="w-full justify-start" onClick={handleDownloadData}>
                   <Download className="h-4 w-4 mr-2" />
-                  下載個人資料
+                  Tải xuống dữ liệu cá nhân
                 </Button>
 
                 {/* Contact Support */}
@@ -633,36 +633,36 @@ export default function ProfilePage() {
                   <DialogTrigger asChild>
                     <Button variant="outline" className="w-full justify-start">
                       <MessageCircle className="h-4 w-4 mr-2" />
-                      聯繫客服
+                      Liên hệ hỗ trợ
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>聯繫客服</DialogTitle>
-                      <DialogDescription>有任何問題嗎？請告訴我們，我們會盡快回覆您。</DialogDescription>
+                      <DialogTitle>Liên hệ hỗ trợ</DialogTitle>
+                      <DialogDescription>Bạn có vấn đề gì? Hãy cho chúng tôi biết, chúng tôi sẽ phản hồi sớm nhất có thể.</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="customerMessage">您的訊息</Label>
+                        <Label htmlFor="customerMessage">Tin nhắn của bạn</Label>
                         <Textarea
                           id="customerMessage"
-                          placeholder="請描述您的問題或需求..."
+                          placeholder="Vui lòng mô tả vấn đề hoặc yêu cầu của bạn..."
                           value={customerMessage}
                           onChange={(e) => setCustomerMessage(e.target.value)}
                         />
                       </div>
                       <div className="text-sm text-gray-600">
-                        <p>• 客服時間：週一至週五 9:00-18:00</p>
-                        <p>• 預計回覆時間：24小時內</p>
-                        <p>• 緊急問題請撥打：02-1234-5678</p>
+                        <p>• Giờ hỗ trợ: Thứ Hai đến Thứ Sáu 9:00-18:00</p>
+                        <p>• Thời gian phản hồi dự kiến: trong vòng 24 giờ</p>
+                        <p>• Đối với vấn đề khẩn cấp, vui lòng gọi: 028-1234-5678</p>
                       </div>
                     </div>
                     <DialogFooter>
                       <Button variant="outline" onClick={() => setShowContactDialog(false)}>
-                        取消
+                        Hủy
                       </Button>
                       <Button onClick={handleContactSupport} disabled={!customerMessage.trim()}>
-                        發送訊息
+                        Gửi tin nhắn
                       </Button>
                     </DialogFooter>
                   </DialogContent>
@@ -673,46 +673,46 @@ export default function ProfilePage() {
                   <DialogTrigger asChild>
                     <Button variant="outline" className="w-full justify-start">
                       <HelpCircle className="h-4 w-4 mr-2" />
-                      常見問題
+                      Câu hỏi thường gặp
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl">
                     <DialogHeader>
-                      <DialogTitle>常見問題</DialogTitle>
-                      <DialogDescription>以下是一些常見問題的解答</DialogDescription>
+                      <DialogTitle>Câu hỏi thường gặp</DialogTitle>
+                      <DialogDescription>Dưới đây là một số câu trả lời cho các câu hỏi thường gặp</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 max-h-96 overflow-y-auto">
                       <div>
-                        <h4 className="font-semibold">如何修改訂單？</h4>
-                        <p className="text-sm text-gray-600">訂單確認後30分鐘內可以修改，請聯繫客服協助處理。</p>
+                        <h4 className="font-semibold">Làm thế nào để sửa đổi đơn hàng?</h4>
+                        <p className="text-sm text-gray-600">Đơn hàng có thể được sửa đổi trong vòng 30 phút sau khi xác nhận, vui lòng liên hệ bộ phận hỗ trợ để được hỗ trợ.</p>
                       </div>
                       <Separator />
                       <div>
-                        <h4 className="font-semibold">退換貨政策是什麼？</h4>
-                        <p className="text-sm text-gray-600">商品到貨後7天內可申請退換貨，商品需保持原狀且包裝完整。</p>
+                        <h4 className="font-semibold">Chính sách đổi trả hàng là gì?</h4>
+                        <p className="text-sm text-gray-600">Sản phẩm có thể được đổi trả trong vòng 7 ngày sau khi nhận hàng, sản phẩm phải còn nguyên trạng và đầy đủ bao bì.</p>
                       </div>
                       <Separator />
                       <div>
-                        <h4 className="font-semibold">如何追蹤我的訂單？</h4>
+                        <h4 className="font-semibold">Làm thế nào để theo dõi đơn hàng?</h4>
                         <p className="text-sm text-gray-600">
-                          您可以在「訂單記錄」中查看訂單狀態，或使用追蹤編號在物流網站查詢。
+                          Bạn có thể xem trạng thái đơn hàng trong phần "Lịch sử đơn hàng" hoặc sử dụng mã vận đơn để tra cứu trên trang web của đơn vị vận chuyển.
                         </p>
                       </div>
                       <Separator />
                       <div>
-                        <h4 className="font-semibold">忘記密碼怎麼辦？</h4>
+                        <h4 className="font-semibold">Tôi quên mật khẩu thì phải làm sao?</h4>
                         <p className="text-sm text-gray-600">
-                          點擊登入頁面的「忘記密碼」，輸入您的電子郵件地址即可重設密碼。
+                          Nhấp vào "Quên mật khẩu" trên trang đăng nhập, nhập địa chỉ email của bạn để đặt lại mật khẩu.
                         </p>
                       </div>
                       <Separator />
                       <div>
-                        <h4 className="font-semibold">如何成為VIP會員？</h4>
-                        <p className="text-sm text-gray-600">累計消費滿$10,000即可自動升級為VIP會員，享受更多優惠。</p>
+                        <h4 className="font-semibold">Làm thế nào để trở thành thành viên VIP?</h4>
+                        <p className="text-sm text-gray-600">Tích lũy chi tiêu đạt $10,000 sẽ tự động nâng cấp lên thành viên VIP, được hưởng nhiều ưu đãi hơn.</p>
                       </div>
                     </div>
                     <DialogFooter>
-                      <Button onClick={() => setShowFAQDialog(false)}>關閉</Button>
+                      <Button onClick={() => setShowFAQDialog(false)}>Đóng</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -720,7 +720,7 @@ export default function ProfilePage() {
                 <Separator />
                 <Button variant="destructive" className="w-full justify-start">
                   <LogOut className="h-4 w-4 mr-2" />
-                  登出帳戶
+                  Đăng xuất
                 </Button>
               </CardContent>
             </Card>

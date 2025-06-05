@@ -58,7 +58,7 @@ export default function ComparePage() {
     useCollaboration()
   const { createAlert, alerts, getActiveAlertsCount } = usePriceAlerts()
 
-  // 狀態管理
+  // Quản lý trạng thái
   const [filters, setFilters] = useState<ComparisonFilters>({
     showOnlyInStock: false,
     priceRange: [0, 10000],
@@ -77,13 +77,13 @@ export default function ComparePage() {
   const [socialTabOpen, setSocialTabOpen] = useState(false)
   const [exportFormat, setExportFormat] = useState<"pdf" | "image" | "csv">("pdf")
 
-  // 社交數據
+  // Dữ liệu xã hội
   const comparisonId = "current-comparison"
   const socialData = getSocialData(comparisonId)
 
-  // 處理加入購物車
+  // Xử lý thêm vào giỏ hàng
   const handleAddToCart = (item: any) => {
-    // 創建購物車商品對象
+    // Tạo đối tượng sản phẩm cho giỏ hàng
     const cartItem = {
       id: item.id,
       name: item.name,
@@ -92,44 +92,44 @@ export default function ComparePage() {
       quantity: 1,
     }
 
-    // 添加到購物車
+    // Thêm vào giỏ hàng
     addItem(cartItem)
 
-    // 顯示成功訊息
+    // Hiển thị thông báo thành công
     toast({
-      title: "已加入購物車",
-      description: `${item.name} 已成功加入購物車`,
+      title: "Đã thêm vào giỏ hàng",
+      description: `${item.name} đã được thêm vào giỏ hàng thành công`,
     })
   }
 
-  // 儲存比較清單
+  // Lưu danh sách so sánh
   const handleSaveSession = () => {
     if (sessionName.trim() && items.length > 0) {
       saveSession(sessionName.trim(), items)
       setSessionName("")
       toast({
-        title: "已儲存比較清單",
-        description: `比較清單「${sessionName.trim()}」已成功儲存`,
+        title: "Đã lưu danh sách so sánh",
+        description: `Danh sách so sánh "${sessionName.trim()}" đã được lưu thành công`,
       })
     } else {
       toast({
-        title: "無法儲存",
-        description: "請輸入名稱並確保比較清單不為空",
+        title: "Không thể lưu",
+        description: "Vui lòng nhập tên và đảm bảo danh sách so sánh không trống",
         variant: "destructive",
       })
     }
   }
 
-  // 載入比較清單
+  // Tải danh sách so sánh
   const handleLoadSession = (sessionItems: any[]) => {
     loadFromHistory(sessionItems)
     toast({
-      title: "已載入比較清單",
-      description: "已成功載入儲存的比較清單",
+      title: "Đã tải danh sách so sánh",
+      description: "Đã tải thành công danh sách so sánh đã lưu",
     })
   }
 
-  // 分享比較清單
+  // Chia sẻ danh sách so sánh
   const handleShare = () => {
     const comparisonData = {
       items: items.map((item) => item.id),
@@ -141,86 +141,86 @@ export default function ComparePage() {
     navigator.clipboard.writeText(url)
     shareComparison(comparisonId)
     toast({
-      title: "已複製分享連結",
-      description: "比較清單分享連結已複製到剪貼簿",
+      title: "Đã sao chép liên kết chia sẻ",
+      description: "Liên kết chia sẻ danh sách so sánh đã được sao chép vào bộ nhớ tạm",
     })
   }
 
-  // 匯出比較清單
+  // Xuất danh sách so sánh
   const handleExport = async (format: "pdf" | "image" | "csv") => {
     setExportFormat(format)
     toast({
-      title: "正在準備匯出",
-      description: `正在準備以 ${format.toUpperCase()} 格式匯出比較清單`,
+      title: "Đang chuẩn bị xuất",
+      description: `Đang chuẩn bị xuất danh sách so sánh dưới dạng ${format.toUpperCase()}`,
     })
 
     setTimeout(() => {
       toast({
-        title: "匯出成功",
-        description: `比較清單已成功匯出為 ${format.toUpperCase()} 格式`,
+        title: "Xuất thành công",
+        description: `Danh sách so sánh đã được xuất thành công dưới dạng ${format.toUpperCase()}`,
       })
     }, 1500)
   }
 
-  // 添加評論
+  // Thêm bình luận
   const handleAddComment = () => {
     if (newComment.trim()) {
       addComment(comparisonId, newComment.trim())
       setNewComment("")
       toast({
-        title: "評論已發布",
-        description: "您的評論已成功發布",
+        title: "Đã đăng bình luận",
+        description: "Bình luận của bạn đã được đăng thành công",
       })
     }
   }
 
-  // 設置價格提醒
+  // Thiết lập cảnh báo giá
   const handleCreatePriceAlert = (item: any) => {
-    const itemTargetPrice = targetPrice[item.id] || item.price * 0.9 // 預設為原價的90%
+    const itemTargetPrice = targetPrice[item.id] || item.price * 0.9 // Mặc định là 90% giá gốc
     createAlert(item.id, item.name, item.image, item.price, itemTargetPrice)
     toast({
-      title: "價格提醒已設置",
-      description: `當 ${item.name} 價格低於 $${itemTargetPrice.toLocaleString()} 時將通知您`,
+      title: "Đã thiết lập cảnh báo giá",
+      description: `Bạn sẽ nhận được thông báo khi giá ${item.name} giảm xuống dưới $${itemTargetPrice.toLocaleString()}`,
     })
   }
 
-  // 創建協作會話
+  // Tạo phiên hợp tác
   const handleCreateCollaboration = () => {
     if (collaborationName.trim()) {
       const sessionId = createSession(collaborationName.trim())
       setCollaborationName("")
       toast({
-        title: "協作會話已創建",
-        description: `協作會話「${collaborationName.trim()}」已成功創建，ID: ${sessionId}`,
+        title: "Đã tạo phiên hợp tác",
+        description: `Phiên hợp tác "${collaborationName.trim()}" đã được tạo thành công, ID: ${sessionId}`,
       })
     }
   }
 
-  // 加入協作會話
+  // Tham gia phiên hợp tác
   const handleJoinCollaboration = () => {
     if (joinSessionId.trim()) {
       joinSession(joinSessionId.trim())
       setJoinSessionId("")
       toast({
-        title: "已加入協作會話",
-        description: "您已成功加入協作會話",
+        title: "Đã tham gia phiên hợp tác",
+        description: "Bạn đã tham gia phiên hợp tác thành công",
       })
     }
   }
 
-  // 邀請用戶
+  // Mời người dùng
   const handleInviteUser = () => {
     if (inviteEmail.trim()) {
       inviteUser(inviteEmail.trim())
       setInviteEmail("")
       toast({
-        title: "邀請已發送",
-        description: `邀請已發送至 ${inviteEmail.trim()}`,
+        title: "Đã gửi lời mời",
+        description: `Lời mời đã được gửi đến ${inviteEmail.trim()}`,
       })
     }
   }
 
-  // 應用篩選
+  // Áp dụng bộ lọc
   const filteredItems = items.filter((item) => {
     if (filters.showOnlyInStock && !item.inStock) return false
     if (item.price < filters.priceRange[0] || item.price > filters.priceRange[1]) return false
@@ -233,12 +233,12 @@ export default function ComparePage() {
     return true
   })
 
-  // 獲取所有特徵和類別
+  // Lấy tất cả tính năng và danh mục
   const allFeatures = Array.from(new Set(items.flatMap((item) => item.features)))
   const allCategories = Array.from(new Set(items.map((item) => item.category)))
   const maxPrice = Math.max(...items.map((item) => item.price), 10000)
 
-  // 更新價格範圍篩選
+  // Cập nhật bộ lọc phạm vi giá
   const handlePriceRangeChange = (value: number[]) => {
     setFilters({
       ...filters,
@@ -246,7 +246,7 @@ export default function ComparePage() {
     })
   }
 
-  // 更新類別篩選
+  // Cập nhật bộ lọc danh mục
   const handleCategoryChange = (category: string) => {
     setFilters({
       ...filters,
@@ -256,7 +256,7 @@ export default function ComparePage() {
     })
   }
 
-  // 更新特徵篩選
+  // Cập nhật bộ lọc tính năng
   const handleFeatureChange = (feature: string) => {
     setFilters({
       ...filters,
@@ -266,7 +266,7 @@ export default function ComparePage() {
     })
   }
 
-  // 更新評分篩選
+  // Cập nhật bộ lọc đánh giá
   const handleRatingChange = (rating: number) => {
     setFilters({
       ...filters,
@@ -274,7 +274,7 @@ export default function ComparePage() {
     })
   }
 
-  // 重置篩選
+  // Đặt lại bộ lọc
   const handleResetFilters = () => {
     setFilters({
       showOnlyInStock: false,
@@ -285,20 +285,20 @@ export default function ComparePage() {
     })
   }
 
-  // 如果比較清單為空
+  // Nếu danh sách so sánh trống
   if (items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <Scale className="h-24 w-24 mx-auto text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">商品比較清單是空的</h1>
-          <p className="text-gray-600 mb-8">從收藏清單或商品頁面添加商品來進行比較</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Danh sách so sánh trống</h1>
+          <p className="text-gray-600 mb-8">Thêm sản phẩm từ danh sách yêu thích hoặc trang sản phẩm để so sánh</p>
           <div className="flex justify-center space-x-4">
             <Button asChild>
-              <Link href="/store/products">瀏覽商品</Link>
+              <Link href="/store/products">Xem sản phẩm</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/store/wishlist">查看收藏清單</Link>
+              <Link href="/store/wishlist">Xem danh sách yêu thích</Link>
             </Button>
           </div>
         </div>
@@ -308,7 +308,7 @@ export default function ComparePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* 協作狀態 */}
+      {/* Trạng thái hợp tác */}
       {isCollaborating && (
         <Card className="mb-6 bg-blue-50 border-blue-200">
           <CardContent className="p-4">
@@ -316,8 +316,8 @@ export default function ComparePage() {
               <div className="flex items-center space-x-4">
                 <Users className="h-5 w-5 text-blue-600" />
                 <div>
-                  <h3 className="font-semibold text-blue-900">協作模式</h3>
-                  <p className="text-sm text-blue-700">正在與 {activeUsers.length} 位用戶協作</p>
+                  <h3 className="font-semibold text-blue-900">Chế độ hợp tác</h3>
+                  <p className="text-sm text-blue-700">Đang hợp tác với {activeUsers.length} người dùng</p>
                 </div>
                 <div className="flex -space-x-2">
                   {activeUsers.slice(0, 3).map((user) => (
@@ -334,7 +334,7 @@ export default function ComparePage() {
                 </div>
               </div>
               <Button variant="outline" size="sm" onClick={leaveSession}>
-                離開協作
+                Rời khỏi hợp tác
               </Button>
             </div>
           </CardContent>
@@ -343,42 +343,42 @@ export default function ComparePage() {
 
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">商品比較</h1>
-          <p className="text-gray-600 mt-2">比較 {filteredItems.length} 個商品的詳細資訊</p>
+          <h1 className="text-3xl font-bold text-gray-900">So sánh sản phẩm</h1>
+          <p className="text-gray-600 mt-2">So sánh {filteredItems.length} sản phẩm chi tiết</p>
         </div>
       </div>
 
-      {/* 功能按鈕工具列 */}
+      {/* Thanh công cụ chức năng */}
       <div className="flex flex-wrap gap-2 mb-6 overflow-x-auto pb-2">
-        {/* 社交按鈕 */}
+        {/* Nút xã hội */}
         <Dialog open={socialTabOpen} onOpenChange={setSocialTabOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Heart className="h-4 w-4" />
-              <span>社交 ({socialData.likes})</span>
+              <span>Xã hội ({socialData.likes})</span>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>社交互動</DialogTitle>
+              <DialogTitle>Tương tác xã hội</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 mt-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Heart className={`h-5 w-5 ${socialData.likedByUser ? "fill-red-500 text-red-500" : ""}`} />
-                  <span>{socialData.likes} 人喜歡</span>
+                  <span>{socialData.likes} người thích</span>
                 </div>
                 <Button
                   variant={socialData.likedByUser ? "default" : "outline"}
                   size="sm"
                   onClick={() => likeComparison(comparisonId)}
                 >
-                  {socialData.likedByUser ? "已喜歡" : "喜歡"}
+                  {socialData.likedByUser ? "Đã thích" : "Thích"}
                 </Button>
               </div>
 
               <div>
-                <h4 className="font-medium mb-2">評分</h4>
+                <h4 className="font-medium mb-2">Đánh giá</h4>
                 <div className="flex items-center gap-2">
                   <div className="flex">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -396,7 +396,7 @@ export default function ComparePage() {
               </div>
 
               <div>
-                <h4 className="font-medium mb-2">評論</h4>
+                <h4 className="font-medium mb-2">Bình luận</h4>
                 <div className="space-y-3 max-h-60 overflow-y-auto">
                   {socialData.comments.map((comment) => (
                     <div key={comment.id} className="bg-gray-50 p-3 rounded-md">
@@ -427,13 +427,13 @@ export default function ComparePage() {
                 </div>
                 <div className="flex items-center gap-2 mt-3">
                   <Textarea
-                    placeholder="添加評論..."
+                    placeholder="Thêm bình luận..."
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     className="min-h-[60px]"
                   />
                   <Button onClick={handleAddComment} disabled={!newComment.trim()}>
-                    發布
+                    Đăng
                   </Button>
                 </div>
               </div>
@@ -441,68 +441,68 @@ export default function ComparePage() {
           </DialogContent>
         </Dialog>
 
-        {/* 協作按鈕 */}
+        {/* Nút hợp tác */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <UserPlus className="h-4 w-4" />
-              <span>協作</span>
+              <span>Hợp tác</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>協作比較</DialogTitle>
+              <DialogTitle>So sánh hợp tác</DialogTitle>
             </DialogHeader>
             <Tabs defaultValue="create">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="create">創建協作</TabsTrigger>
-                <TabsTrigger value="join">加入協作</TabsTrigger>
+                <TabsTrigger value="create">Tạo hợp tác</TabsTrigger>
+                <TabsTrigger value="join">Tham gia hợp tác</TabsTrigger>
               </TabsList>
               <TabsContent value="create" className="space-y-4 mt-4">
                 <div>
-                  <label className="text-sm font-medium">協作名稱</label>
+                  <label className="text-sm font-medium">Tên hợp tác</label>
                   <Input
-                    placeholder="輸入協作名稱"
+                    placeholder="Nhập tên hợp tác"
                     value={collaborationName}
                     onChange={(e) => setCollaborationName(e.target.value)}
                   />
                 </div>
                 <Button onClick={handleCreateCollaboration} disabled={!collaborationName.trim()}>
-                  創建協作會話
+                  Tạo phiên hợp tác
                 </Button>
               </TabsContent>
               <TabsContent value="join" className="space-y-4 mt-4">
                 <div>
-                  <label className="text-sm font-medium">會話 ID</label>
+                  <label className="text-sm font-medium">ID phiên</label>
                   <Input
-                    placeholder="輸入會話 ID"
+                    placeholder="Nhập ID phiên"
                     value={joinSessionId}
                     onChange={(e) => setJoinSessionId(e.target.value)}
                   />
                 </div>
                 <Button onClick={handleJoinCollaboration} disabled={!joinSessionId.trim()}>
-                  加入協作會話
+                  Tham gia phiên hợp tác
                 </Button>
               </TabsContent>
             </Tabs>
             {isCollaborating && (
               <div className="mt-4 space-y-4">
                 <div className="bg-blue-50 p-3 rounded-md">
-                  <h4 className="font-medium mb-2">當前協作</h4>
+                  <h4 className="font-medium mb-2">Hợp tác hiện tại</h4>
                   <p className="text-sm">
-                    {currentSession?.name} ({activeUsers.length} 位用戶在線)
+                    {currentSession?.name} ({activeUsers.length} người dùng trực tuyến)
                   </p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium">邀請用戶</label>
+                  <label className="text-sm font-medium">Mời người dùng</label>
                   <div className="flex gap-2 mt-1">
                     <Input
-                      placeholder="輸入電子郵件"
+                      placeholder="Nhập email"
                       value={inviteEmail}
                       onChange={(e) => setInviteEmail(e.target.value)}
                     />
                     <Button onClick={handleInviteUser} disabled={!inviteEmail.trim()}>
-                      邀請
+                      Mời
                     </Button>
                   </div>
                 </div>
@@ -511,20 +511,20 @@ export default function ComparePage() {
           </DialogContent>
         </Dialog>
 
-        {/* 價格提醒按鈕 */}
+        {/* Nút cảnh báo giá */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Bell className="h-4 w-4" />
-              <span>價格提醒</span>
+              <span>Cảnh báo giá</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>設置價格提醒</DialogTitle>
+              <DialogTitle>Thiết lập cảnh báo giá</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 mt-4">
-              <p className="text-sm text-gray-600">當商品價格降至目標價格時，系統將通知您。</p>
+              <p className="text-sm text-gray-600">Khi giá sản phẩm giảm xuống mức giá mục tiêu, hệ thống sẽ thông báo cho bạn.</p>
               {items.map((item) => (
                 <div key={item.id} className="border rounded-md p-3">
                   <div className="flex items-center gap-3">
@@ -533,15 +533,15 @@ export default function ComparePage() {
                     </div>
                     <div className="flex-1">
                       <h4 className="font-medium text-sm line-clamp-1">{item.name}</h4>
-                      <p className="text-sm text-gray-600">目前價格: ${item.price.toLocaleString()}</p>
+                      <p className="text-sm text-gray-600">Giá hiện tại: ${item.price.toLocaleString()}</p>
                     </div>
                   </div>
                   <div className="mt-3">
-                    <label className="text-xs font-medium">目標價格</label>
+                    <label className="text-xs font-medium">Giá mục tiêu</label>
                     <div className="flex items-center gap-2 mt-1">
                       <Input
                         type="number"
-                        placeholder="輸入目標價格"
+                        placeholder="Nhập giá mục tiêu"
                         value={targetPrice[item.id] || Math.floor(item.price * 0.9)}
                         onChange={(e) =>
                           setTargetPrice({
@@ -551,14 +551,14 @@ export default function ComparePage() {
                         }
                         className="w-full"
                       />
-                      <Button onClick={() => handleCreatePriceAlert(item)}>設置</Button>
+                      <Button onClick={() => handleCreatePriceAlert(item)}>Thiết lập</Button>
                     </div>
                   </div>
                 </div>
               ))}
               {alerts.length > 0 && (
                 <div className="mt-4">
-                  <h4 className="font-medium mb-2">已設置的提醒</h4>
+                  <h4 className="font-medium mb-2">Cảnh báo đã thiết lập</h4>
                   <div className="space-y-2">
                     {alerts.map((alert) => (
                       <div key={alert.id} className="bg-gray-50 p-2 rounded-md flex items-center justify-between">
@@ -573,11 +573,11 @@ export default function ComparePage() {
                           </div>
                           <div>
                             <p className="text-xs font-medium line-clamp-1">{alert.productName}</p>
-                            <p className="text-xs text-gray-600">目標: ${alert.targetPrice.toLocaleString()}</p>
+                            <p className="text-xs text-gray-600">Mục tiêu: ${alert.targetPrice.toLocaleString()}</p>
                           </div>
                         </div>
                         <Badge variant={alert.isActive ? "default" : "outline"}>
-                          {alert.isActive ? "已啟用" : "已停用"}
+                          {alert.isActive ? "Đã kích hoạt" : "Đã tắt"}
                         </Badge>
                       </div>
                     ))}
@@ -588,21 +588,21 @@ export default function ComparePage() {
           </DialogContent>
         </Dialog>
 
-        {/* 篩選按鈕 */}
+        {/* Nút lọc */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Filter className="h-4 w-4" />
-              <span>篩選</span>
+              <span>Lọc</span>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>篩選選項</DialogTitle>
+              <DialogTitle>Tùy chọn lọc</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 mt-4">
               <div>
-                <h4 className="font-medium mb-2">價格範圍</h4>
+                <h4 className="font-medium mb-2">Phạm vi giá</h4>
                 <div className="px-2">
                   <Slider
                     defaultValue={[filters.priceRange[0], filters.priceRange[1]]}
@@ -619,7 +619,7 @@ export default function ComparePage() {
               </div>
 
               <div>
-                <h4 className="font-medium mb-2">庫存狀態</h4>
+                <h4 className="font-medium mb-2">Tình trạng kho</h4>
                 <div className="flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -628,14 +628,14 @@ export default function ComparePage() {
                     onChange={(e) => setFilters({ ...filters, showOnlyInStock: e.target.checked })}
                   />
                   <label htmlFor="inStock" className="text-sm">
-                    僅顯示有庫存的商品
+                    Chỉ hiển thị sản phẩm còn hàng
                   </label>
                 </div>
               </div>
 
               {allCategories.length > 0 && (
                 <div>
-                  <h4 className="font-medium mb-2">類別</h4>
+                  <h4 className="font-medium mb-2">Danh mục</h4>
                   <div className="space-y-1">
                     {allCategories.map((category) => (
                       <div key={category} className="flex items-center space-x-2">
@@ -656,7 +656,7 @@ export default function ComparePage() {
 
               {allFeatures.length > 0 && (
                 <div>
-                  <h4 className="font-medium mb-2">特徵</h4>
+                  <h4 className="font-medium mb-2">Tính năng</h4>
                   <div className="space-y-1 max-h-40 overflow-y-auto">
                     {allFeatures.map((feature) => (
                       <div key={feature} className="flex items-center space-x-2">
@@ -676,7 +676,7 @@ export default function ComparePage() {
               )}
 
               <div>
-                <h4 className="font-medium mb-2">最低評分</h4>
+                <h4 className="font-medium mb-2">Đánh giá tối thiểu</h4>
                 <div className="flex items-center space-x-1">
                   {[1, 2, 3, 4, 5].map((rating) => (
                     <Star
@@ -692,50 +692,50 @@ export default function ComparePage() {
 
               <div className="flex justify-between pt-4">
                 <Button variant="outline" onClick={handleResetFilters}>
-                  重置
+                  Đặt lại
                 </Button>
-                <Button onClick={() => setShowFilters(false)}>應用篩選</Button>
+                <Button onClick={() => setShowFilters(false)}>Áp dụng bộ lọc</Button>
               </div>
             </div>
           </DialogContent>
         </Dialog>
 
-        {/* 儲存按鈕 */}
+        {/* Nút lưu */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Save className="h-4 w-4" />
-              <span>儲存</span>
+              <span>Lưu</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>儲存比較清單</DialogTitle>
+              <DialogTitle>Lưu danh sách so sánh</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 mt-4">
               <div>
-                <label className="text-sm font-medium">比較清單名稱</label>
-                <Input placeholder="輸入名稱" value={sessionName} onChange={(e) => setSessionName(e.target.value)} />
+                <label className="text-sm font-medium">Tên danh sách so sánh</label>
+                <Input placeholder="Nhập tên" value={sessionName} onChange={(e) => setSessionName(e.target.value)} />
               </div>
               <Button onClick={handleSaveSession} disabled={!sessionName.trim() || items.length === 0}>
-                儲存比較清單
+                Lưu danh sách so sánh
               </Button>
 
               {sessions.length > 0 && (
                 <div className="mt-6">
-                  <h4 className="font-medium mb-2">已儲存的比較清單</h4>
+                  <h4 className="font-medium mb-2">Danh sách so sánh đã lưu</h4>
                   <div className="space-y-2 max-h-60 overflow-y-auto">
                     {sessions.map((session) => (
                       <div key={session.id} className="flex items-center justify-between bg-gray-50 p-3 rounded-md">
                         <div>
                           <h5 className="font-medium text-sm">{session.name}</h5>
                           <p className="text-xs text-gray-500">
-                            {new Date(session.createdAt).toLocaleDateString()} · {session.items.length} 件商品
+                            {new Date(session.createdAt).toLocaleDateString()} · {session.items.length} sản phẩm
                           </p>
                         </div>
                         <div className="flex gap-2">
                           <Button variant="outline" size="sm" onClick={() => handleLoadSession(session.items)}>
-                            載入
+                            Tải
                           </Button>
                           <Button variant="ghost" size="sm" onClick={() => deleteSession(session.id)}>
                             <X className="h-4 w-4" />
@@ -745,7 +745,7 @@ export default function ComparePage() {
                     ))}
                   </div>
                   <Button variant="outline" className="mt-2 w-full" onClick={clearHistory}>
-                    清空歷史記錄
+                    Xóa lịch sử
                   </Button>
                 </div>
               )}
@@ -753,20 +753,20 @@ export default function ComparePage() {
           </DialogContent>
         </Dialog>
 
-        {/* 記錄按鈕 */}
+        {/* Nút lịch sử */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
-              <span>記錄</span>
+              <span>Lịch sử</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>比較記錄</DialogTitle>
+              <DialogTitle>Lịch sử so sánh</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 mt-4">
-              <p className="text-sm text-gray-600">查看您最近比較過的商品和價格變化。</p>
+              <p className="text-sm text-gray-600">Xem các sản phẩm bạn đã so sánh gần đây và thay đổi giá.</p>
 
               <div className="space-y-3">
                 {items.map((item) => (
@@ -793,10 +793,10 @@ export default function ComparePage() {
                       </div>
                     </div>
                     <div className="mt-3">
-                      <h5 className="text-xs font-medium mb-1">價格歷史</h5>
+                      <h5 className="text-xs font-medium mb-1">Lịch sử giá</h5>
                       <div className="h-10 bg-gray-100 rounded-md relative">
                         <div className="absolute inset-0 flex items-center justify-center text-xs text-gray-500">
-                          價格歷史圖表
+                          Biểu đồ lịch sử giá
                         </div>
                       </div>
                     </div>
@@ -807,28 +807,28 @@ export default function ComparePage() {
           </DialogContent>
         </Dialog>
 
-        {/* 分享按鈕 */}
+        {/* Nút chia sẻ */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Share2 className="h-4 w-4" />
-              <span>分享</span>
+              <span>Chia sẻ</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>分享比較清單</DialogTitle>
+              <DialogTitle>Chia sẻ danh sách so sánh</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 mt-4">
-              <p className="text-sm text-gray-600">創建一個可分享的連結，讓其他人也能查看您的比較清單。</p>
+              <p className="text-sm text-gray-600">Tạo liên kết có thể chia sẻ để người khác cũng có thể xem danh sách so sánh của bạn.</p>
 
               <Button onClick={handleShare} className="w-full">
-                創建分享連結
+                Tạo liên kết chia sẻ
               </Button>
 
               {shareUrl && (
                 <div className="mt-4">
-                  <label className="text-sm font-medium">分享連結</label>
+                  <label className="text-sm font-medium">Liên kết chia sẻ</label>
                   <div className="flex items-center gap-2 mt-1">
                     <Input value={shareUrl} readOnly />
                     <Button
@@ -836,19 +836,19 @@ export default function ComparePage() {
                       onClick={() => {
                         navigator.clipboard.writeText(shareUrl)
                         toast({
-                          title: "已複製",
-                          description: "分享連結已複製到剪貼簿",
+                          title: "Đã sao chép",
+                          description: "Liên kết chia sẻ đã được sao chép vào bộ nhớ tạm",
                         })
                       }}
                     >
-                      複製
+                      Sao chép
                     </Button>
                   </div>
                 </div>
               )}
 
               <div className="border-t pt-4 mt-4">
-                <h4 className="font-medium mb-3">分享到社交媒體</h4>
+                <h4 className="font-medium mb-3">Chia sẻ lên mạng xã hội</h4>
                 <div className="flex gap-2">
                   <Button variant="outline" className="flex-1">
                     Facebook
@@ -865,77 +865,77 @@ export default function ComparePage() {
           </DialogContent>
         </Dialog>
 
-        {/* 匯出按鈕 */}
+        {/* Nút xuất */}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <FileDown className="h-4 w-4" />
-              <span>匯出</span>
+              <span>Xuất</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>匯出比較清單</DialogTitle>
+              <DialogTitle>Xuất danh sách so sánh</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 mt-4">
-              <p className="text-sm text-gray-600">將您的比較清單匯出為不同格式，方便保存或分享。</p>
+              <p className="text-sm text-gray-600">Xuất danh sách so sánh dưới nhiều định dạng khác nhau để lưu trữ hoặc chia sẻ.</p>
 
               <div className="space-y-2">
                 <Button variant="outline" className="w-full justify-start" onClick={() => handleExport("pdf")}>
                   <FileDown className="h-4 w-4 mr-2" />
-                  匯出為 PDF
+                  Xuất dưới dạng PDF
                 </Button>
                 <Button variant="outline" className="w-full justify-start" onClick={() => handleExport("image")}>
                   <FileDown className="h-4 w-4 mr-2" />
-                  匯出為圖片
+                  Xuất dưới dạng hình ảnh
                 </Button>
                 <Button variant="outline" className="w-full justify-start" onClick={() => handleExport("csv")}>
                   <FileDown className="h-4 w-4 mr-2" />
-                  匯出為 CSV
+                  Xuất dưới dạng CSV
                 </Button>
               </div>
 
               {exportFormat && (
                 <div className="mt-4 bg-gray-50 p-3 rounded-md">
-                  <p className="text-sm">正在準備 {exportFormat.toUpperCase()} 格式的比較清單...</p>
+                  <p className="text-sm">Đang chuẩn bị danh sách so sánh dưới dạng {exportFormat.toUpperCase()}...</p>
                 </div>
               )}
             </div>
           </DialogContent>
         </Dialog>
 
-        {/* 清空比較清單按鈕 */}
+        {/* Nút xóa danh sách so sánh */}
         <Button
           variant="outline"
           className="flex items-center gap-2"
           onClick={() => {
-            if (confirm("確定要清空比較清單嗎？")) {
+            if (confirm("Bạn có chắc chắn muốn xóa danh sách so sánh không?")) {
               clearCompare()
               toast({
-                title: "已清空比較清單",
-                description: "所有商品已從比較清單中移除",
+                title: "Đã xóa danh sách so sánh",
+                description: "Tất cả sản phẩm đã được xóa khỏi danh sách so sánh",
               })
             }
           }}
         >
           <Trash2 className="h-4 w-4" />
-          <span>清空比較清單</span>
+          <span>Xóa danh sách so sánh</span>
         </Button>
       </div>
 
-      {/* 手機版警告 */}
+      {/* Cảnh báo phiên bản di động */}
       <div className="md:hidden mb-6">
         <Card className="bg-yellow-50 border-yellow-200">
           <CardContent className="p-4">
-            <p className="text-sm text-yellow-800">💡 建議使用桌面版或平板橫向模式以獲得最佳比較體驗</p>
+            <p className="text-sm text-yellow-800">💡 Nên sử dụng phiên bản máy tính hoặc máy tính bảng ngang để có trải nghiệm so sánh tốt nhất</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* 比較表格 */}
+      {/* Bảng so sánh */}
       <div className="overflow-x-auto" id="comparison-table">
         <div className="min-w-full">
-          {/* 商品圖片和基本信息 */}
+          {/* Hình ảnh sản phẩm và thông tin cơ bản */}
           <Card className="mb-6">
             <CardContent className="p-0">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0">
@@ -990,12 +990,12 @@ export default function ComparePage() {
                           disabled={!item.inStock}
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
-                          {item.inStock ? "加入購物車" : "缺貨中"}
+                          {item.inStock ? "Thêm vào giỏ hàng" : "Hết hàng"}
                         </Button>
                         <Button variant="outline" asChild className="w-full">
                           <Link href={`/store/products/${item.id}`}>
                             <ArrowRight className="h-4 w-4 mr-2" />
-                            查看詳情
+                            Xem chi tiết
                           </Link>
                         </Button>
                       </div>
@@ -1006,11 +1006,11 @@ export default function ComparePage() {
             </CardContent>
           </Card>
 
-          {/* 其他比較內容保持不變... */}
+          {/* Các nội dung so sánh khác giữ nguyên... */}
         </div>
       </div>
 
-      {/* AI 推薦 */}
+      {/* Đề xuất AI */}
       <AIRecommendationsPanel className="mt-8" />
     </div>
   )

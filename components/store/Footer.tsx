@@ -9,7 +9,7 @@ export function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="text-lg font-semibold mb-4">ShopLogo</h3>
-            <p className="text-gray-400 mb-4">提供優質商品與服務，讓購物成為一種享受。</p>
+            <p className="text-gray-400 mb-4">Cung cấp sản phẩm và dịch vụ chất lượng, biến việc mua sắm thành niềm vui.</p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
               <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
@@ -19,26 +19,26 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">快速連結</h3>
+            <h3 className="text-lg font-semibold mb-4">Liên kết nhanh</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
                 <Link href="/store/home" className="hover:text-white">
-                  首頁
+                  Trang chủ
                 </Link>
               </li>
               <li>
                 <Link href="/store/products" className="hover:text-white">
-                  所有商品
+                  Tất cả sản phẩm
                 </Link>
               </li>
               <li>
                 <Link href="/store/about" className="hover:text-white">
-                  關於我們
+                  Về chúng tôi
                 </Link>
               </li>
               <li>
                 <Link href="/store/user/profile" className="hover:text-white">
-                  會員中心
+                  Trung tâm thành viên
                 </Link>
               </li>
             </ul>
@@ -46,26 +46,26 @@ export function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">商品分類</h3>
+            <h3 className="text-lg font-semibold mb-4">Danh mục sản phẩm</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
                 <Link href="/store/products?category=men" className="hover:text-white">
-                  男裝
+                  Thời trang nam
                 </Link>
               </li>
               <li>
                 <Link href="/store/products?category=women" className="hover:text-white">
-                  女裝
+                  Thời trang nữ
                 </Link>
               </li>
               <li>
                 <Link href="/store/products?category=accessories" className="hover:text-white">
-                  配件
+                  Phụ kiện
                 </Link>
               </li>
               <li>
                 <Link href="/store/products?category=shoes" className="hover:text-white">
-                  鞋類
+                  Giày dép
                 </Link>
               </li>
             </ul>
@@ -73,11 +73,11 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">聯絡我們</h3>
+            <h3 className="text-lg font-semibold mb-4">Liên hệ</h3>
             <div className="space-y-2 text-gray-400">
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-2" />
-                <span>02-1234-5678</span>
+                <span>028-1234-5678</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-2" />
@@ -85,14 +85,14 @@ export function Footer() {
               </div>
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 mr-2" />
-                <span>台北市信義區信義路五段7號</span>
+                <span>123 Đường Nguyễn Huệ, Quận 1, TP.HCM</span>
               </div>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 ShopLogo. All rights reserved.</p>
+          <p>&copy; 2024 ShopLogo. Đã đăng ký bản quyền.</p>
         </div>
       </div>
     </footer>

@@ -59,14 +59,14 @@ export default function CheckoutPage() {
 
     // Validate form based on payment method
     if (formData.paymentMethod === "cod" && !formData.convenienceStore) {
-      alert("請選擇便利商店")
+      alert("Vui lòng chọn cửa hàng tiện lợi")
       setIsSubmitting(false)
       return
     }
 
     if (formData.paymentMethod === "credit") {
       if (!formData.cardNumber || !formData.cardName || !formData.cardExpiry || !formData.cardCvc) {
-        alert("請填寫完整的信用卡資訊")
+        alert("Vui lòng điền đầy đủ thông tin thẻ tín dụng")
         setIsSubmitting(false)
         return
       }
@@ -88,10 +88,10 @@ export default function CheckoutPage() {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">購物車是空的</h1>
-          <p className="text-gray-600 mb-8">請先添加商品到購物車</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Giỏ hàng trống</h1>
+          <p className="text-gray-600 mb-8">Vui lòng thêm sản phẩm vào giỏ hàng trước</p>
           <Button asChild>
-            <Link href="/store/products">開始購物</Link>
+            <Link href="/store/products">Bắt đầu mua sắm</Link>
           </Button>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">結帳</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Thanh toán</h1>
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -111,13 +111,13 @@ export default function CheckoutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <User className="h-5 w-5 mr-2" />
-                  個人資訊
+                  Thông tin cá nhân
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="firstName">姓氏 *</Label>
+                    <Label htmlFor="firstName">Họ *</Label>
                     <Input
                       id="firstName"
                       value={formData.firstName}
@@ -126,7 +126,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="lastName">名字 *</Label>
+                    <Label htmlFor="lastName">Tên *</Label>
                     <Input
                       id="lastName"
                       value={formData.lastName}
@@ -137,7 +137,7 @@ export default function CheckoutPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="email">電子郵件 *</Label>
+                  <Label htmlFor="email">Email *</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                     <Input
@@ -152,7 +152,7 @@ export default function CheckoutPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">電話號碼 *</Label>
+                  <Label htmlFor="phone">Số điện thoại *</Label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                     <Input
@@ -173,24 +173,24 @@ export default function CheckoutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <MapPin className="h-5 w-5 mr-2" />
-                  配送地址
+                  Địa chỉ giao hàng
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="address">地址 *</Label>
+                  <Label htmlFor="address">Địa chỉ *</Label>
                   <Input
                     id="address"
                     value={formData.address}
                     onChange={(e) => handleInputChange("address", e.target.value)}
-                    placeholder="請輸入完整地址"
+                    placeholder="Vui lòng nhập địa chỉ đầy đủ"
                     required
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="city">城市 *</Label>
+                    <Label htmlFor="city">Thành phố *</Label>
                     <Input
                       id="city"
                       value={formData.city}
@@ -199,7 +199,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="postalCode">郵遞區號 *</Label>
+                    <Label htmlFor="postalCode">Mã bưu điện *</Label>
                     <Input
                       id="postalCode"
                       value={formData.postalCode}
@@ -216,7 +216,7 @@ export default function CheckoutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <CreditCard className="h-5 w-5 mr-2" />
-                  付款方式
+                  Phương thức thanh toán
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -229,8 +229,8 @@ export default function CheckoutPage() {
                     <Label htmlFor="cod" className="flex-1 cursor-pointer">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-medium">貨到付款</p>
-                          <p className="text-sm text-gray-600">收到商品時付款</p>
+                          <p className="font-medium">Thanh toán khi nhận hàng</p>
+                          <p className="text-sm text-gray-600">Thanh toán khi nhận được hàng</p>
                         </div>
                         <Truck className="h-5 w-5 text-gray-400" />
                       </div>
@@ -239,19 +239,19 @@ export default function CheckoutPage() {
 
                   {formData.paymentMethod === "cod" && (
                     <div className="mt-4 ml-6 p-4 bg-gray-50 rounded-lg">
-                      <Label htmlFor="convenienceStore" className="mb-2 block">選擇便利商店 *</Label>
+                      <Label htmlFor="convenienceStore" className="mb-2 block">Chọn cửa hàng tiện lợi *</Label>
                       <Select 
                         value={formData.convenienceStore} 
                         onValueChange={(value) => handleInputChange("convenienceStore", value)}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="請選擇便利商店" />
+                          <SelectValue placeholder="Vui lòng chọn cửa hàng tiện lợi" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="7-11">7-11</SelectItem>
-                          <SelectItem value="family-mart">全家</SelectItem>
-                          <SelectItem value="hi-life">萊爾富</SelectItem>
-                          <SelectItem value="ok-mart">OK超商</SelectItem>
+                          <SelectItem value="family-mart">FamilyMart</SelectItem>
+                          <SelectItem value="hi-life">Hi-Life</SelectItem>
+                          <SelectItem value="ok-mart">OK Mart</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -262,8 +262,8 @@ export default function CheckoutPage() {
                     <Label htmlFor="credit" className="flex-1 cursor-pointer">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-medium">信用卡付款</p>
-                          <p className="text-sm text-gray-600">安全的線上付款</p>
+                          <p className="font-medium">Thanh toán bằng thẻ tín dụng</p>
+                          <p className="text-sm text-gray-600">Thanh toán trực tuyến an toàn</p>
                         </div>
                         <CreditCard className="h-5 w-5 text-gray-400" />
                       </div>
@@ -273,7 +273,7 @@ export default function CheckoutPage() {
                   {formData.paymentMethod === "credit" && (
                     <div className="mt-4 ml-6 p-4 bg-gray-50 rounded-lg space-y-4">
                       <div>
-                        <Label htmlFor="cardNumber" className="mb-1 block">卡號 *</Label>
+                        <Label htmlFor="cardNumber" className="mb-1 block">Số thẻ *</Label>
                         <Input
                           id="cardNumber"
                           placeholder="1234 5678 9012 3456"
@@ -282,17 +282,17 @@ export default function CheckoutPage() {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="cardName" className="mb-1 block">持卡人姓名 *</Label>
+                        <Label htmlFor="cardName" className="mb-1 block">Tên chủ thẻ *</Label>
                         <Input
                           id="cardName"
-                          placeholder="請輸入卡片上的姓名"
+                          placeholder="Vui lòng nhập tên trên thẻ"
                           value={formData.cardName}
                           onChange={(e) => handleInputChange("cardName", e.target.value)}
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="cardExpiry" className="mb-1 block">有效期限 (MM/YY) *</Label>
+                          <Label htmlFor="cardExpiry" className="mb-1 block">Ngày hết hạn (MM/YY) *</Label>
                           <Input
                             id="cardExpiry"
                             placeholder="MM/YY"
@@ -301,7 +301,7 @@ export default function CheckoutPage() {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="cardCvc" className="mb-1 block">安全碼 (CVC) *</Label>
+                          <Label htmlFor="cardCvc" className="mb-1 block">Mã bảo mật (CVC) *</Label>
                           <Input
                             id="cardCvc"
                             placeholder="123"
@@ -319,11 +319,11 @@ export default function CheckoutPage() {
             {/* Order Notes */}
             <Card>
               <CardHeader>
-                <CardTitle>訂單備註</CardTitle>
+                <CardTitle>Ghi chú đơn hàng</CardTitle>
               </CardHeader>
               <CardContent>
                 <Textarea
-                  placeholder="有任何特殊需求或備註嗎？（選填）"
+                  placeholder="Bạn có yêu cầu đặc biệt hoặc ghi chú nào không? (Tùy chọn)"
                   value={formData.notes}
                   onChange={(e) => handleInputChange("notes", e.target.value)}
                   rows={3}
@@ -336,7 +336,7 @@ export default function CheckoutPage() {
           <div className="lg:col-span-1">
             <Card className="sticky top-4">
               <CardHeader>
-                <CardTitle>訂單摘要</CardTitle>
+                <CardTitle>Tóm tắt đơn hàng</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Order Items */}
@@ -355,10 +355,10 @@ export default function CheckoutPage() {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900 truncate">{item.name}</p>
                         <div className="text-xs text-gray-600">
-                          {item.size && <span>尺寸: {item.size} </span>}
-                          {item.color && <span>顏色: {item.color}</span>}
+                          {item.size && <span>Kích thước: {item.size} </span>}
+                          {item.color && <span>Màu sắc: {item.color}</span>}
                         </div>
-                        <p className="text-xs text-gray-600">數量: {item.quantity}</p>
+                        <p className="text-xs text-gray-600">Số lượng: {item.quantity}</p>
                       </div>
                       <p className="text-sm font-medium">${(item.price * item.quantity).toLocaleString()}</p>
                     </div>
@@ -370,32 +370,32 @@ export default function CheckoutPage() {
                 {/* Pricing */}
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>商品小計</span>
+                    <span>Tổng tiền sản phẩm</span>
                     <span>${total.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>運費</span>
-                    <span>{shippingCost === 0 ? "免費" : `$${shippingCost}`}</span>
+                    <span>Phí vận chuyển</span>
+                    <span>{shippingCost === 0 ? "Miễn phí" : `$${shippingCost}`}</span>
                   </div>
                 </div>
 
                 <Separator />
 
                 <div className="flex justify-between font-semibold text-lg">
-                  <span>總計</span>
+                  <span>Tổng cộng</span>
                   <span>${finalTotal.toLocaleString()}</span>
                 </div>
 
                 {/* Submit Button */}
                 <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-                  {isSubmitting ? "處理中..." : "確認訂單"}
+                  {isSubmitting ? "Đang xử lý..." : "Xác nhận đơn hàng"}
                 </Button>
 
                 {/* Security Info */}
                 <div className="text-xs text-gray-600 space-y-1">
-                  <p>• 您的個人資訊將被安全保護</p>
-                  <p>• 支援 7 天無條件退換貨</p>
-                  <p>• 如有問題請聯繫客服</p>
+                  <p>• Thông tin cá nhân của bạn sẽ được bảo mật an toàn</p>
+                  <p>• Hỗ trợ đổi trả trong vòng 7 ngày không cần lý do</p>
+                  <p>• Nếu có vấn đề, vui lòng liên hệ bộ phận hỗ trợ khách hàng</p>
                 </div>
               </CardContent>
             </Card>

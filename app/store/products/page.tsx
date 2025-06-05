@@ -87,8 +87,8 @@ export default function ProductsPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">所有商品</h1>
-        <p className="text-gray-600">探索我們精心挑選的商品系列</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">Tất cả sản phẩm</h1>
+        <p className="text-gray-600">Khám phá bộ sưu tập sản phẩm được chọn lọc kỹ lưỡng của chúng tôi</p>
       </div>
 
       {/* Search and Filters */}
@@ -98,7 +98,7 @@ export default function ProductsPage() {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="搜尋商品..."
+            placeholder="Tìm kiếm sản phẩm..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -110,7 +110,7 @@ export default function ProductsPage() {
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={() => setShowFilters(!showFilters)}>
               <Filter className="h-4 w-4 mr-2" />
-              篩選
+              Lọc
             </Button>
 
             <div className="flex gap-1">
@@ -132,17 +132,17 @@ export default function ProductsPage() {
           </div>
 
           <div className="flex gap-4 items-center">
-            <span className="text-sm text-gray-600">共 {filteredProducts.length} 項商品</span>
+            <span className="text-sm text-gray-600">Tổng cộng {filteredProducts.length} sản phẩm</span>
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="排序方式" />
+                <SelectValue placeholder="Sắp xếp theo" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="default">預設排序</SelectItem>
-                <SelectItem value="price-low">價格：低到高</SelectItem>
-                <SelectItem value="price-high">價格：高到低</SelectItem>
-                <SelectItem value="rating">評分最高</SelectItem>
-                <SelectItem value="newest">最新商品</SelectItem>
+                <SelectItem value="default">Mặc định</SelectItem>
+                <SelectItem value="price-low">Giá: Thấp đến cao</SelectItem>
+                <SelectItem value="price-high">Giá: Cao đến thấp</SelectItem>
+                <SelectItem value="rating">Đánh giá cao nhất</SelectItem>
+                <SelectItem value="newest">Mới nhất</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -156,7 +156,7 @@ export default function ProductsPage() {
             {/* Categories */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">商品分類</CardTitle>
+                <CardTitle className="text-lg">Danh mục sản phẩm</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {categories.map((category) => (
@@ -175,7 +175,7 @@ export default function ProductsPage() {
             {/* Price Range */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">價格範圍</CardTitle>
+                <CardTitle className="text-lg">Khoảng giá</CardTitle>
               </CardHeader>
               <CardContent>
                 <Select value={priceRange} onValueChange={setPriceRange}>
@@ -183,10 +183,10 @@ export default function ProductsPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">所有價格</SelectItem>
-                    <SelectItem value="under-1000">$1,000 以下</SelectItem>
+                    <SelectItem value="all">Tất cả mức giá</SelectItem>
+                    <SelectItem value="under-1000">Dưới $1,000</SelectItem>
                     <SelectItem value="1000-3000">$1,000 - $3,000</SelectItem>
-                    <SelectItem value="over-3000">$3,000 以上</SelectItem>
+                    <SelectItem value="over-3000">Trên $3,000</SelectItem>
                   </SelectContent>
                 </Select>
               </CardContent>
@@ -198,7 +198,7 @@ export default function ProductsPage() {
         <div className="flex-1">
           {filteredProducts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">找不到符合條件的商品</p>
+              <p className="text-gray-500 text-lg">Không tìm thấy sản phẩm phù hợp</p>
             </div>
           ) : (
             <div

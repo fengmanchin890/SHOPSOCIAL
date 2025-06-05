@@ -33,8 +33,8 @@ export default function ProductDetailPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">商品不存在</h1>
-          <p className="text-gray-600">找不到您要查看的商品</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Sản phẩm không tồn tại</h1>
+          <p className="text-gray-600">Không tìm thấy sản phẩm bạn muốn xem</p>
         </div>
       </div>
     )
@@ -144,7 +144,7 @@ export default function ProductDetailPage() {
               {inCompare && (
                 <Badge className="bg-blue-600">
                   <Scale className="h-3 w-3 mr-1" />
-                  已加入比較
+                  Đã thêm vào so sánh
                 </Badge>
               )}
             </div>
@@ -166,7 +166,7 @@ export default function ProductDetailPage() {
                 ))}
               </div>
               <span className="ml-2 text-sm text-gray-600">
-                {product.rating} ({product.reviewCount} 評價)
+                {product.rating} ({product.reviewCount} đánh giá)
               </span>
             </div>
 
@@ -186,10 +186,10 @@ export default function ProductDetailPage() {
             {/* Size Selection */}
             {product.sizes && (
               <div>
-                <Label className="text-sm font-medium mb-2 block">尺寸</Label>
+                <Label className="text-sm font-medium mb-2 block">Kích thước</Label>
                 <Select value={selectedSize} onValueChange={setSelectedSize}>
                   <SelectTrigger>
-                    <SelectValue placeholder="選擇尺寸" />
+                    <SelectValue placeholder="Chọn kích thước" />
                   </SelectTrigger>
                   <SelectContent>
                     {product.sizes.map((size) => (
@@ -205,10 +205,10 @@ export default function ProductDetailPage() {
             {/* Color Selection */}
             {product.colors && (
               <div>
-                <Label className="text-sm font-medium mb-2 block">顏色</Label>
+                <Label className="text-sm font-medium mb-2 block">Màu sắc</Label>
                 <Select value={selectedColor} onValueChange={setSelectedColor}>
                   <SelectTrigger>
-                    <SelectValue placeholder="選擇顏色" />
+                    <SelectValue placeholder="Chọn màu sắc" />
                   </SelectTrigger>
                   <SelectContent>
                     {product.colors.map((color) => (
@@ -223,7 +223,7 @@ export default function ProductDetailPage() {
 
             {/* Quantity */}
             <div>
-              <Label className="text-sm font-medium mb-2 block">數量</Label>
+              <Label className="text-sm font-medium mb-2 block">Số lượng</Label>
               <div className="flex items-center space-x-2">
                 <Button
                   variant="outline"
@@ -246,7 +246,7 @@ export default function ProductDetailPage() {
             <div className="flex space-x-4">
               <Button size="lg" className="flex-1" onClick={handleAddToCart} disabled={!product.inStock}>
                 <ShoppingCart className="h-5 w-5 mr-2" />
-                {product.inStock ? "加入購物車" : "缺貨中"}
+                {product.inStock ? "Thêm vào giỏ hàng" : "Hết hàng"}
               </Button>
               <Button
                 variant="outline"
@@ -273,11 +273,11 @@ export default function ProductDetailPage() {
             {/* Action Status */}
             <div className="text-sm space-y-1">
               {product.inStock ? (
-                <span className="text-green-600">✓ 現貨供應</span>
+                <span className="text-green-600">✓ Còn hàng</span>
               ) : (
-                <span className="text-red-600">✗ 暫時缺貨</span>
+                <span className="text-red-600">✗ Tạm hết hàng</span>
               )}
-              {!canAddMore && !inCompare && <div className="text-amber-600">⚠ 比較清單已滿 (最多4個商品)</div>}
+              {!canAddMore && !inCompare && <div className="text-amber-600">⚠ Danh sách so sánh đã đầy (tối đa 4 sản phẩm)</div>}
             </div>
           </div>
 
@@ -285,15 +285,15 @@ export default function ProductDetailPage() {
           <div className="grid grid-cols-3 gap-4 pt-6 border-t">
             <div className="text-center">
               <Truck className="h-6 w-6 mx-auto mb-2 text-blue-600" />
-              <p className="text-xs text-gray-600">免費配送</p>
+              <p className="text-xs text-gray-600">Miễn phí vận chuyển</p>
             </div>
             <div className="text-center">
               <Shield className="h-6 w-6 mx-auto mb-2 text-green-600" />
-              <p className="text-xs text-gray-600">品質保證</p>
+              <p className="text-xs text-gray-600">Đảm bảo chất lượng</p>
             </div>
             <div className="text-center">
               <RotateCcw className="h-6 w-6 mx-auto mb-2 text-orange-600" />
-              <p className="text-xs text-gray-600">7天退換</p>
+              <p className="text-xs text-gray-600">Đổi trả trong 7 ngày</p>
             </div>
           </div>
         </div>
@@ -303,9 +303,9 @@ export default function ProductDetailPage() {
       <div className="mb-16">
         <Tabs defaultValue="description" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">商品描述</TabsTrigger>
-            <TabsTrigger value="features">產品特色</TabsTrigger>
-            <TabsTrigger value="reviews">顧客評價</TabsTrigger>
+            <TabsTrigger value="description">Mô tả sản phẩm</TabsTrigger>
+            <TabsTrigger value="features">Đặc điểm sản phẩm</TabsTrigger>
+            <TabsTrigger value="reviews">Đánh giá khách hàng</TabsTrigger>
           </TabsList>
 
           <TabsContent value="description" className="mt-6">
@@ -335,9 +335,9 @@ export default function ProductDetailPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="text-center text-gray-500">
-                  <p>評價功能開發中...</p>
+                  <p>Tính năng đánh giá đang phát triển...</p>
                   <p className="text-sm mt-2">
-                    目前評分：{product.rating} 星 ({product.reviewCount} 則評價)
+                    Đánh giá hiện tại: {product.rating} sao ({product.reviewCount} đánh giá)
                   </p>
                 </div>
               </CardContent>
@@ -349,7 +349,7 @@ export default function ProductDetailPage() {
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">相關商品</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Sản phẩm liên quan</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />

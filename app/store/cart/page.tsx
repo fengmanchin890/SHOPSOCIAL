@@ -19,12 +19,12 @@ export default function CartPage() {
   const [shippingFee, setShippingFee] = useState(total >= 1000 ? 0 : 100)
   const [highlightShipping, setHighlightShipping] = useState(false)
 
-  // 監控總金額變化
+  // Theo dõi thay đổi tổng tiền
   useEffect(() => {
     if (previousTotal !== total) {
       setHighlightTotal(true)
 
-      // 檢查運費是否需要變化
+      // Kiểm tra xem phí vận chuyển có cần thay đổi không
       const newShippingFee = total >= 1000 ? 0 : 100
       if (shippingFee !== newShippingFee) {
         setShippingFee(newShippingFee)
@@ -47,31 +47,31 @@ export default function CartPage() {
   }
 
   const handleIncreaseQuantity = (itemId: string, currentQuantity: number) => {
-    if (isUpdating[itemId]) return // 防止重複點擊
+    if (isUpdating[itemId]) return // Ngăn chặn nhấp chuột nhiều lần
 
     setIsUpdating((prev) => ({ ...prev, [itemId]: true }))
-    console.log("增加數量：", itemId, "目前數量：", currentQuantity)
+    console.log("Tăng số lượng:", itemId, "Số lượng hiện tại:", currentQuantity)
 
     const newQuantity = Math.min(99, currentQuantity + 1)
     updateQuantity(itemId, newQuantity)
     highlightPrice(itemId)
 
     toast({
-      title: "數量已更新",
-      description: `數量已增加至 ${newQuantity}`,
+      title: "Đã cập nhật số lượng",
+      description: `Số lượng đã tăng lên ${newQuantity}`,
     })
 
-    // 短暫延遲以防止連續點擊
+    // Trì hoãn ngắn để ngăn nhấp chuột liên tục
     setTimeout(() => {
       setIsUpdating((prev) => ({ ...prev, [itemId]: false }))
     }, 300)
   }
 
   const handleDecreaseQuantity = (itemId: string, currentQuantity: number) => {
-    if (isUpdating[itemId]) return // 防止重複點擊
+    if (isUpdating[itemId]) return // Ngăn chặn nhấp chuột nhiều lần
 
     setIsUpdating((prev) => ({ ...prev, [itemId]: true }))
-    console.log("減少數量：", itemId, "目前數量：", currentQuantity)
+    console.log("Giảm số lượng:", itemId, "Số lượng hiện tại:", currentQuantity)
 
     if (currentQuantity > 1) {
       const newQuantity = currentQuantity - 1
@@ -79,24 +79,24 @@ export default function CartPage() {
       highlightPrice(itemId)
 
       toast({
-        title: "數量已更新",
-        description: `數量已減少至 ${newQuantity}`,
+        title: "Đã cập nhật số lượng",
+        description: `Số lượng đã giảm xuống ${newQuantity}`,
       })
     }
 
-    // 短暫延遲以防止連續點擊
+    // Trì hoãn ngắn để ngăn nhấp chuột liên tục
     setTimeout(() => {
       setIsUpdating((prev) => ({ ...prev, [itemId]: false }))
     }, 300)
   }
 
   const handleRemoveItem = (itemId: string, itemName: string) => {
-    console.log("刪除商品：", itemId, itemName)
+    console.log("Xóa sản phẩm:", itemId, itemName)
     removeItem(itemId)
 
     toast({
-      title: "商品已移除",
-      description: `${itemName} 已從購物車中移除`,
+      title: "Đã xóa sản phẩm",
+      description: `${itemName} đã được xóa khỏi giỏ hàng`,
       variant: "destructive",
     })
   }
@@ -106,10 +106,10 @@ export default function CartPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <ShoppingBag className="h-24 w-24 mx-auto text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">購物車是空的</h1>
-          <p className="text-gray-600 mb-8">還沒有添加任何商品到購物車</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Giỏ hàng trống</h1>
+          <p className="text-gray-600 mb-8">Chưa có sản phẩm nào trong giỏ hàng</p>
           <Button asChild>
-            <Link href="/store/products">開始購物</Link>
+            <Link href="/store/products">Bắt đầu mua sắm</Link>
           </Button>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default function CartPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">購物車</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Giỏ hàng</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
@@ -143,11 +143,11 @@ export default function CartPage() {
                     </div>
 
                     {/* Product Info */}
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-gray-900 mb-1">{item.name}</h3>
                       <div className="text-sm text-gray-600 space-y-1">
-                        {item.size && <p>尺寸: {item.size}</p>}
-                        {item.color && <p>顏色: {item.color}</p>}
+                        {item.size && <p>Kích thước: {item.size}</p>}
+                        {item.color && <p>Màu sắc: {item.color}</p>}
                       </div>
                       <p className="font-semibold text-gray-900 mt-2">${item.price.toLocaleString()}</p>
                     </div>
@@ -184,14 +184,14 @@ export default function CartPage() {
               onClick={() => {
                 clearCart()
                 toast({
-                  title: "購物車已清空",
-                  description: "所有商品已從購物車中移除",
+                  title: "Đã xóa giỏ hàng",
+                  description: "Tất cả sản phẩm đã được xóa khỏi giỏ hàng",
                   variant: "destructive",
                 })
               }}
               className="hover:bg-red-50 hover:border-red-300 hover:text-red-700"
             >
-              清空購物車
+              Xóa giỏ hàng
             </Button>
           </div>
         </div>
@@ -200,12 +200,12 @@ export default function CartPage() {
         <div className="lg:col-span-1">
           <Card className="sticky top-4 border-gray-200">
             <CardHeader>
-              <CardTitle>訂單摘要</CardTitle>
+              <CardTitle>Tóm tắt đơn hàng</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span>商品小計</span>
+                  <span>Tổng tiền sản phẩm</span>
                   <span
                     className={`font-medium ${
                       highlightTotal ? "text-green-600 bg-green-50 px-2 py-1 rounded transition-all duration-500" : ""
@@ -215,7 +215,7 @@ export default function CartPage() {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>運費</span>
+                  <span>Phí vận chuyển</span>
                   <span
                     className={`${
                       highlightShipping
@@ -223,7 +223,7 @@ export default function CartPage() {
                         : ""
                     }`}
                   >
-                    {shippingFee === 0 ? <span className="text-green-600">免費</span> : `$${shippingFee}`}
+                    {shippingFee === 0 ? <span className="text-green-600">Miễn phí</span> : `$${shippingFee}`}
                   </span>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default function CartPage() {
               <Separator />
 
               <div className="flex justify-between font-semibold text-lg">
-                <span>總計</span>
+                <span>Tổng cộng</span>
                 <span
                   className={`${
                     highlightTotal || highlightShipping
@@ -245,18 +245,18 @@ export default function CartPage() {
 
               <div className="space-y-2">
                 <Button className="w-full" size="lg" asChild>
-                  <Link href="/store/checkout">前往結帳</Link>
+                  <Link href="/store/checkout">Tiến hành thanh toán</Link>
                 </Button>
                 <Button variant="outline" className="w-full" asChild>
-                  <Link href="/store/products">繼續購物</Link>
+                  <Link href="/store/products">Tiếp tục mua sắm</Link>
                 </Button>
               </div>
 
               {/* Shipping Info */}
               <div className="text-sm text-gray-600 space-y-1">
-                <p>• 滿 $1,000 免運費</p>
-                <p>• 預計 2-3 個工作天送達</p>
-                <p>• 支援 7 天無條件退換貨</p>
+                <p>• Miễn phí vận chuyển cho đơn hàng từ $1,000</p>
+                <p>• Dự kiến giao hàng trong 2-3 ngày làm việc</p>
+                <p>• Hỗ trợ đổi trả trong 7 ngày không cần lý do</p>
               </div>
             </CardContent>
           </Card>
