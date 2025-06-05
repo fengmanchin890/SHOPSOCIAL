@@ -16,6 +16,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { Separator } from "@/components/ui/separator"
 import { useCart } from "@/components/store/CartProvider"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -36,6 +37,13 @@ export default function CheckoutPage() {
 
     // Payment
     paymentMethod: "cod",
+    convenienceStore: "",
+    
+    // Credit Card Info
+    cardNumber: "",
+    cardName: "",
+    cardExpiry: "",
+    cardCvc: "",
 
     // Notes
     notes: "",
@@ -48,6 +56,21 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+    // Validate form based on payment method
+    if (formData.paymentMethod === "cod" && !formData.convenienceStore) {
+      alert("請選擇便利商店")
+      setIsSubmitting(false)
+      return
+    }
+
+    if (formData.paymentMethod === "credit") {
+      if (!formData.cardNumber || !formData.cardName || !formData.cardExpiry || !formData.cardCvc) {
+        alert("請填寫完整的信用卡資訊")
+        setIsSubmitting(false)
+        return
+      }
+    }
 
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -214,7 +237,27 @@ export default function CheckoutPage() {
                     </Label>
                   </div>
 
-                  <div className="flex items-center space-x-2 p-4 border rounded-lg">
+                  {formData.paymentMethod === "cod" && (
+                    <div className="mt-4 ml-6 p-4 bg-gray-50 rounded-lg">
+                      <Label htmlFor="convenienceStore" className="mb-2 block">選擇便利商店 *</Label>
+                      <Select 
+                        value={formData.convenienceStore} 
+                        onValueChange={(value) => handleInputChange("convenienceStore", value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="請選擇便利商店" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="7-11">7-11</SelectItem>
+                          <SelectItem value="family-mart">全家</SelectItem>
+                          <SelectItem value="hi-life">萊爾富</SelectItem>
+                          <SelectItem value="ok-mart">OK超商</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
+
+                  <div className="flex items-center space-x-2 p-4 border rounded-lg mt-4">
                     <RadioGroupItem value="credit" id="credit" />
                     <Label htmlFor="credit" className="flex-1 cursor-pointer">
                       <div className="flex items-center justify-between">
@@ -226,6 +269,49 @@ export default function CheckoutPage() {
                       </div>
                     </Label>
                   </div>
+
+                  {formData.paymentMethod === "credit" && (
+                    <div className="mt-4 ml-6 p-4 bg-gray-50 rounded-lg space-y-4">
+                      <div>
+                        <Label htmlFor="cardNumber" className="mb-1 block">卡號 *</Label>
+                        <Input
+                          id="cardNumber"
+                          placeholder="1234 5678 9012 3456"
+                          value={formData.cardNumber}
+                          onChange={(e) => handleInputChange("cardNumber", e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="cardName" className="mb-1 block">持卡人姓名 *</Label>
+                        <Input
+                          id="cardName"
+                          placeholder="請輸入卡片上的姓名"
+                          value={formData.cardName}
+                          onChange={(e) => handleInputChange("cardName", e.target.value)}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="cardExpiry" className="mb-1 block">有效期限 (MM/YY) *</Label>
+                          <Input
+                            id="cardExpiry"
+                            placeholder="MM/YY"
+                            value={formData.cardExpiry}
+                            onChange={(e) => handleInputChange("cardExpiry", e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="cardCvc" className="mb-1 block">安全碼 (CVC) *</Label>
+                          <Input
+                            id="cardCvc"
+                            placeholder="123"
+                            value={formData.cardCvc}
+                            onChange={(e) => handleInputChange("cardCvc", e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </RadioGroup>
               </CardContent>
             </Card>
