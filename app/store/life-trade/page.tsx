@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MembershipStatus } from "@/components/store/MembershipStatus"
 import { AddActivityForm } from "@/components/store/AddActivityForm"
 import { useMembership } from "@/components/store/MembershipProvider"
-import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star } from "lucide-react"
+import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Video, Download, Shield, Clock, Target } from "lucide-react"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -523,6 +523,7 @@ export default function LifeTradePage() {
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-500">
                     <p>Quận 3, TP.HCM</p>
+                
                     <p>Có sẵn: Ngay bây giờ</p>
                   </div>
                   <Button size="sm">Liên hệ</Button>
