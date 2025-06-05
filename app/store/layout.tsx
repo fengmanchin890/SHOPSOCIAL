@@ -19,6 +19,7 @@ import { MobileAppProvider } from "@/components/store/MobileAppProvider"
 import { B2BProvider } from "@/components/store/B2BProvider"
 import { BlockchainProvider } from "@/components/store/BlockchainProvider"
 import { ARVRProvider } from "@/components/store/ARVRProvider"
+import { IoTProvider } from "@/components/store/IoTProvider"
 
 export default function StoreLayout({
   children,
@@ -44,11 +45,13 @@ export default function StoreLayout({
                                   <B2BProvider>
                                     <BlockchainProvider>
                                       <ARVRProvider>
-                                        <div className="min-h-screen bg-white">
-                                          <Header />
-                                          <main className="pt-16">{children}</main>
-                                          <Footer />
-                                        </div>
+                                        <IoTProvider>
+                                          <div className="min-h-screen bg-white">
+                                            <Header />
+                                            <main className="pt-16">{children}</main>
+                                            <Footer />
+                                          </div>
+                                        </IoTProvider>
                                       </ARVRProvider>
                                     </BlockchainProvider>
                                   </B2BProvider>
