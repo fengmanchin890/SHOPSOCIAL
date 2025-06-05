@@ -62,7 +62,7 @@ export default function HomePage() {
               <CardFooter>
                 <Button asChild className="w-full">
                   <Link href="/store/home">
-                    Khám phá nền tảng thương mại điện tử
+                    Vào nền tảng thương mại điện tử
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -90,7 +90,7 @@ export default function HomePage() {
               <CardFooter>
                 <Button asChild className="w-full">
                   <Link href="/store/b2b">
-                    Khám phá nền tảng B2B
+                    Vào nền tảng B2B
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -118,7 +118,7 @@ export default function HomePage() {
               <CardFooter>
                 <Button asChild className="w-full">
                   <Link href="/store/features">
-                    Khám phá tính năng nâng cao
+                    Xem tính năng nâng cao
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
