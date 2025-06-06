@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { MembershipStatus } from "@/components/store/MembershipStatus"
 import { AddActivityForm } from "@/components/store/AddActivityForm"
 import { useMembership } from "@/components/store/MembershipProvider"
-import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Video, Download, Shield, Clock, Target } from "lucide-react"
+import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, Clock, Target } from "lucide-react"
 import { useI18n } from "@/contexts/i18n-context"
 import { ActivityCard } from "@/components/store/ActivityCard"
 import { AddNewActivityDialog } from "@/components/store/AddNewActivityDialog"
@@ -605,7 +605,7 @@ export default function LifeTradePage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <FileText className="h-5 w-5 text-blue-600 mt-0.5" />
+                      <Book className="h-5 w-5 text-blue-600 mt-0.5" />
                       <div>
                         <p className="font-medium">Mẫu hợp đồng</p>
                         <p className="text-sm text-gray-600">Hợp đồng thuê nhà được dịch sẵn sang tiếng Việt với giải thích thuật ngữ pháp lý</p>
