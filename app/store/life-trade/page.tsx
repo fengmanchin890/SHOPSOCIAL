@@ -14,6 +14,7 @@ import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin,
 import { useI18n } from "@/contexts/i18n-context"
 import { ActivityCard } from "@/components/store/ActivityCard"
 import { AddNewActivityDialog } from "@/components/store/AddNewActivityDialog"
+import { ViewMoreActivitiesDialog } from "@/components/store/ViewMoreActivitiesDialog"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -23,6 +24,7 @@ export default function LifeTradePage() {
   const [showAddActivity, setShowAddActivity] = useState(false)
   const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "culture">("food")
   const { t, language } = useI18n()
+  const [viewMoreType, setViewMoreType] = useState<"food" | "accommodation" | "travel" | "language" | "culture" | null>(null)
 
   // State for storing activities
   const [activities, setActivities] = useState({
@@ -199,6 +201,27 @@ export default function LifeTradePage() {
       [addActivityType]: [...prev[addActivityType], newActivity]
     }))
     setShowAddActivity(false)
+  }
+
+  const handleViewMore = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
+    setViewMoreType(type)
+  }
+
+  const getViewMoreTitle = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
+    switch (type) {
+      case "food":
+        return language === "vi" ? "Tất cả trải nghiệm ẩm thực" : language === "zh-TW" ? "所有美食體驗" : "All Food Experiences"
+      case "accommodation":
+        return language === "vi" ? "Tất cả chỗ ở" : language === "zh-TW" ? "所有住宿" : "All Accommodations"
+      case "travel":
+        return language === "vi" ? "Tất cả hoạt động cùng đi" : language === "zh-TW" ? "所有一起探索活動" : "All Travel Activities"
+      case "language":
+        return language === "vi" ? "Tất cả lớp học ngôn ngữ" : language === "zh-TW" ? "所有語言課程" : "All Language Classes"
+      case "culture":
+        return language === "vi" ? "Tất cả tài nguyên văn hóa" : language === "zh-TW" ? "所有文化資源" : "All Cultural Resources"
+      default:
+        return language === "vi" ? "Tất cả hoạt động" : language === "zh-TW" ? "所有活動" : "All Activities"
+    }
   }
 
   if (!isLoggedIn) {
@@ -456,7 +479,7 @@ export default function LifeTradePage() {
           </div>
 
           <div className="flex justify-center mt-4">
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => handleViewMore("food")}>
               {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -562,7 +585,7 @@ export default function LifeTradePage() {
           </div>
 
           <div className="flex justify-center mt-4">
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => handleViewMore("accommodation")}>
               {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -668,7 +691,7 @@ export default function LifeTradePage() {
           </div>
 
           <div className="flex justify-center mt-4">
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => handleViewMore("travel")}>
               {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -774,7 +797,7 @@ export default function LifeTradePage() {
           </div>
 
           <div className="flex justify-center mt-4">
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => handleViewMore("language")}>
               {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -880,7 +903,7 @@ export default function LifeTradePage() {
           </div>
 
           <div className="flex justify-center mt-4">
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => handleViewMore("culture")}>
               {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -895,6 +918,17 @@ export default function LifeTradePage() {
         activityType={addActivityType}
         onSuccess={handleAddActivitySuccess}
       />
+
+      {/* View More Activities Dialog */}
+      {viewMoreType && (
+        <ViewMoreActivitiesDialog
+          open={!!viewMoreType}
+          onOpenChange={(open) => !open && setViewMoreType(null)}
+          title={getViewMoreTitle(viewMoreType)}
+          activities={activities[viewMoreType]}
+          type={viewMoreType}
+        />
+      )}
     </div>
   )
 }
