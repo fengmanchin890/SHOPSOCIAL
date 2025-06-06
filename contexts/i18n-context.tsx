@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from "react"
 import i18n from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
-import LanguageDetector from "i18next-browser-languagedetector"
 
 // Define available languages
 export const languages = [
@@ -863,43 +862,23 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | null>(null)
 
-// Initialize i18next only once with proper environment detection
+// Initialize i18next only once
 let isInitialized = false
 
 const initializeI18n = () => {
   if (isInitialized) return
   
-  const isClient = typeof window !== 'undefined'
-  
-  if (isClient) {
-    // Client-side initialization with language detector
-    i18n
-      .use(LanguageDetector)
-      .use(initReactI18next)
-      .init({
-        resources,
-        fallbackLng: "en",
-        interpolation: {
-          escapeValue: false,
-        },
-        detection: {
-          order: ['localStorage', 'navigator'],
-          caches: ['localStorage'],
-        },
-      })
-  } else {
-    // Server-side initialization without language detector
-    i18n
-      .use(initReactI18next)
-      .init({
-        resources,
-        fallbackLng: "en",
-        lng: "en", // Set default language for SSR
-        interpolation: {
-          escapeValue: false,
-        },
-      })
-  }
+  // Initialize without language detector to prevent hydration mismatch
+  i18n
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: "en",
+      lng: "en", // Always start with English for consistent SSR/client rendering
+      interpolation: {
+        escapeValue: false,
+      },
+    })
   
   isInitialized = true
 }
@@ -907,8 +886,28 @@ const initializeI18n = () => {
 // Initialize i18n
 initializeI18n()
 
+// Helper function to detect user's preferred language
+const detectUserLanguage = (): string => {
+  if (typeof window === 'undefined') return 'en'
+  
+  // Check localStorage first
+  const savedLanguage = localStorage.getItem('i18nextLng')
+  if (savedLanguage && languages.some(lang => lang.code === savedLanguage)) {
+    return savedLanguage
+  }
+  
+  // Check browser language
+  const browserLanguage = navigator.language
+  const supportedLanguage = languages.find(lang => 
+    browserLanguage.startsWith(lang.code) || browserLanguage === lang.code
+  )
+  
+  return supportedLanguage?.code || 'en'
+}
+
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState('en') // Start with fallback language
+  const [language, setLanguage] = useState('en') // Always start with English
+  const [isHydrated, setIsHydrated] = useState(false)
   
   // Define the translation function
   const { t } = useTranslation()
@@ -919,23 +918,32 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       i18n.changeLanguage(lang);
       setLanguage(lang);
       
-      // Set HTML lang attribute and direction
-      if (typeof document !== 'undefined') {
+      // Save to localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('i18nextLng', lang)
         document.documentElement.lang = lang;
       }
     };
   }, []);
 
-  // Listen for language changes and detect language on client side only
+  // Handle client-side hydration and language detection
   useEffect(() => {
-    const handleLanguageChanged = () => {
-      setLanguage(i18n.language);
-    };
-
-    // Set initial language from i18n after hydration
-    if (typeof window !== 'undefined') {
-      setLanguage(i18n.language);
+    if (typeof window !== 'undefined' && !isHydrated) {
+      setIsHydrated(true)
+      
+      // Detect and set user's preferred language after hydration
+      const preferredLanguage = detectUserLanguage()
+      if (preferredLanguage !== 'en') {
+        changeLanguage(preferredLanguage)
+      }
     }
+  }, [changeLanguage, isHydrated])
+
+  // Listen for language changes
+  useEffect(() => {
+    const handleLanguageChanged = (lng: string) => {
+      setLanguage(lng);
+    };
 
     i18n.on('languageChanged', handleLanguageChanged);
     return () => {
