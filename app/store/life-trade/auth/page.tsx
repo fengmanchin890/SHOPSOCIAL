@@ -28,6 +28,7 @@ export default function AuthPage() {
   const [isVerifying, setIsVerifying] = useState(false)
   const [isSendingOtp, setIsSendingOtp] = useState(false)
   const [userType, setUserType] = useState<"student" | "married" | "worker">("student")
+  const [agreeTerms, setAgreeTerms] = useState(false)
   
   // Registration form
   const [registerForm, setRegisterForm] = useState({
@@ -220,7 +221,7 @@ export default function AuthPage() {
       localStorage.setItem("lifeTradeUserType", userType)
       
       // Automatically upgrade to trial membership if not already
-      await upgradeMembership("trial", true)
+      const hasTrial = await upgradeMembership("trial", true)
       
       toast({
         title: language === "zh-TW" ? "登入成功" : 

@@ -26,7 +26,6 @@ export default function LifeTradePage() {
   const router = useRouter()
   const { isPremiumMember } = useMembership()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [hasMounted, setHasMounted] = useState(false)
   const [activeTab, setActiveTab] = useState("overview")
   const [showAddActivity, setShowAddActivity] = useState(false)
   const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "culture">("food")
@@ -182,15 +181,8 @@ export default function LifeTradePage() {
     ]
   })
 
-  // Prevent hydration mismatch by only rendering after client mount
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
-
   // Check login status when page loads
   useEffect(() => {
-    if (!hasMounted) return
-    
     const authStatus = localStorage.getItem("lifeTradeAuth")
     if (authStatus === "authenticated") {
       setIsLoggedIn(true)
@@ -198,7 +190,7 @@ export default function LifeTradePage() {
       // Redirect to login page if not logged in
       router.push("/store/life-trade/auth")
     }
-  }, [router, hasMounted])
+  }, [router])
 
   const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
     if (!isPremiumMember) {
@@ -260,11 +252,6 @@ export default function LifeTradePage() {
             ? "所有活動" 
             : "All Activities"
     }
-  }
-
-  // Don't render anything until component has mounted on client
-  if (!hasMounted) {
-    return null
   }
 
   if (!isLoggedIn) {
