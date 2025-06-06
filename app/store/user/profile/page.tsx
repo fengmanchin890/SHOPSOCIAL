@@ -39,6 +39,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
+import { useI18n } from "@/contexts/i18n-context"
 
 // Mock user data
 const mockUser = {
@@ -89,6 +90,7 @@ export default function ProfilePage() {
   const searchParams = useSearchParams()
   const defaultTab = searchParams.get("tab") || "profile"
   const [activeTab, setActiveTab] = useState(defaultTab)
+  const { t } = useI18n()
 
   // Profile editing state
   const [isEditing, setIsEditing] = useState(false)
@@ -204,21 +206,21 @@ export default function ProfilePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Trung tâm thành viên</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">{t("profile.title")}</h1>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="profile" className="flex items-center">
             <User className="h-4 w-4 mr-2" />
-            Thông tin cá nhân
+            {t("profile.info")}
           </TabsTrigger>
           <TabsTrigger value="orders" className="flex items-center">
             <Package className="h-4 w-4 mr-2" />
-            Lịch sử đơn hàng
+            {t("profile.orders")}
           </TabsTrigger>
           <TabsTrigger value="settings" className="flex items-center">
             <Settings className="h-4 w-4 mr-2" />
-            Cài đặt tài khoản
+            {t("profile.settings")}
           </TabsTrigger>
         </TabsList>
 
@@ -228,21 +230,21 @@ export default function ProfilePage() {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>Thông tin cơ bản</CardTitle>
+                  <CardTitle>{t("profile.basicInfo")}</CardTitle>
                   {!isEditing ? (
                     <Button variant="outline" size="sm" onClick={() => setIsEditing(true)}>
                       <Edit className="h-4 w-4 mr-2" />
-                      Chỉnh sửa
+                      {t("profile.edit")}
                     </Button>
                   ) : (
                     <div className="flex space-x-2">
                       <Button variant="outline" size="sm" onClick={handleCancelEdit}>
                         <X className="h-4 w-4 mr-2" />
-                        Hủy
+                        {t("profile.cancel")}
                       </Button>
                       <Button size="sm" onClick={handleSaveProfile}>
                         <Save className="h-4 w-4 mr-2" />
-                        Lưu
+                        {t("profile.save")}
                       </Button>
                     </div>
                   )}
@@ -252,30 +254,30 @@ export default function ProfilePage() {
                 {!isEditing ? (
                   <>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Họ tên</label>
+                      <label className="text-sm font-medium text-gray-600">{t("profile.name")}</label>
                       <p className="text-gray-900">{mockUser.name}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Email</label>
+                      <label className="text-sm font-medium text-gray-600">{t("profile.email")}</label>
                       <p className="text-gray-900">{mockUser.email}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Số điện thoại</label>
+                      <label className="text-sm font-medium text-gray-600">{t("profile.phone")}</label>
                       <p className="text-gray-900">{mockUser.phone}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Địa chỉ</label>
+                      <label className="text-sm font-medium text-gray-600">{t("profile.address")}</label>
                       <p className="text-gray-900">{mockUser.address}</p>
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-600">Ngày tham gia</label>
+                      <label className="text-sm font-medium text-gray-600">{t("profile.joinDate")}</label>
                       <p className="text-gray-900">{mockUser.joinDate}</p>
                     </div>
                   </>
                 ) : (
                   <>
                     <div>
-                      <Label htmlFor="name">Họ tên</Label>
+                      <Label htmlFor="name">{t("profile.name")}</Label>
                       <Input
                         id="name"
                         value={editedUser.name}
@@ -283,7 +285,7 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{t("profile.email")}</Label>
                       <Input
                         id="email"
                         type="email"
@@ -292,7 +294,7 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Số điện thoại</Label>
+                      <Label htmlFor="phone">{t("profile.phone")}</Label>
                       <Input
                         id="phone"
                         value={editedUser.phone}
@@ -300,7 +302,7 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="address">Địa chỉ</Label>
+                      <Label htmlFor="address">{t("profile.address")}</Label>
                       <Input
                         id="address"
                         value={editedUser.address}
@@ -314,19 +316,19 @@ export default function ProfilePage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Thống kê thành viên</CardTitle>
+                <CardTitle>{t("profile.stats")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-4 bg-blue-50 rounded-lg">
                     <p className="text-2xl font-bold text-blue-600">{mockOrders.length}</p>
-                    <p className="text-sm text-gray-600">Tổng số đơn hàng</p>
+                    <p className="text-sm text-gray-600">{t("profile.totalOrders")}</p>
                   </div>
                   <div className="text-center p-4 bg-green-50 rounded-lg">
                     <p className="text-2xl font-bold text-green-600">
                       ${mockOrders.reduce((sum, order) => sum + order.total, 0).toLocaleString()}
                     </p>
-                    <p className="text-sm text-gray-600">Tổng chi tiêu</p>
+                    <p className="text-sm text-gray-600">{t("profile.totalSpent")}</p>
                   </div>
                 </div>
                 <div className="text-center p-4 bg-purple-50 rounded-lg">
@@ -342,7 +344,7 @@ export default function ProfilePage() {
         <TabsContent value="orders">
           <Card>
             <CardHeader>
-              <CardTitle>Lịch sử đơn hàng</CardTitle>
+              <CardTitle>{t("profile.orders")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -394,7 +396,7 @@ export default function ProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card>
               <CardHeader>
-                <CardTitle>Cài đặt tài khoản</CardTitle>
+                <CardTitle>{t("profile.settings")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Change Password */}

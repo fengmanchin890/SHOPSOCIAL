@@ -10,11 +10,13 @@ import { useWishlist } from "@/components/store/WishlistProvider"
 import { useCart } from "@/components/store/CartProvider"
 import { useCompare } from "@/components/store/CompareProvider"
 import { mockProducts } from "@/lib/mock-data"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function WishlistPage() {
   const { items, removeItem, clearWishlist } = useWishlist()
   const { addItem } = useCart()
   const { addItem: addToCompare, isInCompare, canAddMore } = useCompare()
+  const { t } = useI18n()
 
   const handleAddToCart = (item: any) => {
     addItem({
@@ -51,10 +53,10 @@ export default function WishlistPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <Heart className="h-24 w-24 mx-auto text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Danh sách yêu thích trống</h1>
-          <p className="text-gray-600 mb-8">Chưa có sản phẩm nào trong danh sách yêu thích</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">{t("wishlist.empty")}</h1>
+          <p className="text-gray-600 mb-8">{t("wishlist.emptyMessage")}</p>
           <Button asChild>
-            <Link href="/store/products">Bắt đầu mua sắm</Link>
+            <Link href="/store/products">{t("wishlist.startShopping")}</Link>
           </Button>
         </div>
       </div>
@@ -64,16 +66,16 @@ export default function WishlistPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Danh sách yêu thích</h1>
+        <h1 className="text-3xl font-bold text-gray-900">{t("wishlist.title")}</h1>
         <div className="flex space-x-4">
           <Button variant="outline" asChild>
             <Link href="/store/compare">
               <Scale className="h-4 w-4 mr-2" />
-              Xem so sánh
+              {t("wishlist.viewCompare")}
             </Link>
           </Button>
           <Button variant="outline" onClick={clearWishlist}>
-            Xóa danh sách yêu thích
+            {t("wishlist.clearWishlist")}
           </Button>
         </div>
       </div>
@@ -125,7 +127,7 @@ export default function WishlistPage() {
                 <div className="flex space-x-2">
                   <Button onClick={() => handleAddToCart(item)} className="flex-1">
                     <ShoppingCart className="h-4 w-4 mr-2" />
-                    Thêm vào giỏ hàng
+                    {t("wishlist.addToCart")}
                   </Button>
                   <Button variant="outline" asChild className="flex-none">
                     <Link href={`/store/products/${item.id}`}>
@@ -141,7 +143,7 @@ export default function WishlistPage() {
                   className="w-full"
                 >
                   <Scale className="h-4 w-4 mr-2" />
-                  {isInCompare(item.id) ? "Đã thêm vào so sánh" : canAddMore ? "Thêm vào so sánh" : "Danh sách so sánh đã đầy"}
+                  {isInCompare(item.id) ? "Đã thêm vào so sánh" : canAddMore ? t("wishlist.addToCompare") : "Danh sách so sánh đã đầy"}
                 </Button>
               </div>
             </CardContent>

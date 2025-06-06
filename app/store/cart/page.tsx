@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { useCart } from "@/components/store/CartProvider"
 import { toast } from "@/hooks/use-toast"
 import { useState, useEffect } from "react"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function CartPage() {
   const { items, total, updateQuantity, removeItem, clearCart } = useCart()
@@ -18,6 +19,7 @@ export default function CartPage() {
   const [highlightTotal, setHighlightTotal] = useState(false)
   const [shippingFee, setShippingFee] = useState(total >= 1000 ? 0 : 100)
   const [highlightShipping, setHighlightShipping] = useState(false)
+  const { t } = useI18n()
 
   // Theo dõi thay đổi tổng tiền
   useEffect(() => {
@@ -106,10 +108,10 @@ export default function CartPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <ShoppingBag className="h-24 w-24 mx-auto text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Giỏ hàng trống</h1>
-          <p className="text-gray-600 mb-8">Chưa có sản phẩm nào trong giỏ hàng</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">{t("cart.empty")}</h1>
+          <p className="text-gray-600 mb-8">{t("cart.emptyMessage")}</p>
           <Button asChild>
-            <Link href="/store/products">Bắt đầu mua sắm</Link>
+            <Link href="/store/products">{t("cart.startShopping")}</Link>
           </Button>
         </div>
       </div>
@@ -118,7 +120,7 @@ export default function CartPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Giỏ hàng</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">{t("cart.title")}</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
@@ -191,7 +193,7 @@ export default function CartPage() {
               }}
               className="hover:bg-red-50 hover:border-red-300 hover:text-red-700"
             >
-              Xóa giỏ hàng
+              {t("cart.clearCart")}
             </Button>
           </div>
         </div>
@@ -200,12 +202,12 @@ export default function CartPage() {
         <div className="lg:col-span-1">
           <Card className="sticky top-4 border-gray-200">
             <CardHeader>
-              <CardTitle>Tóm tắt đơn hàng</CardTitle>
+              <CardTitle>{t("cart.summary")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span>Tổng tiền sản phẩm</span>
+                  <span>{t("cart.subtotal")}</span>
                   <span
                     className={`font-medium ${
                       highlightTotal ? "text-green-600 bg-green-50 px-2 py-1 rounded transition-all duration-500" : ""
@@ -215,7 +217,7 @@ export default function CartPage() {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Phí vận chuyển</span>
+                  <span>{t("cart.shipping")}</span>
                   <span
                     className={`${
                       highlightShipping
@@ -223,7 +225,7 @@ export default function CartPage() {
                         : ""
                     }`}
                   >
-                    {shippingFee === 0 ? <span className="text-green-600">Miễn phí</span> : `$${shippingFee}`}
+                    {shippingFee === 0 ? <span className="text-green-600">{t("cart.freeShipping")}</span> : `$${shippingFee}`}
                   </span>
                 </div>
               </div>
@@ -231,7 +233,7 @@ export default function CartPage() {
               <Separator />
 
               <div className="flex justify-between font-semibold text-lg">
-                <span>Tổng cộng</span>
+                <span>{t("cart.total")}</span>
                 <span
                   className={`${
                     highlightTotal || highlightShipping
@@ -245,18 +247,18 @@ export default function CartPage() {
 
               <div className="space-y-2">
                 <Button className="w-full" size="lg" asChild>
-                  <Link href="/store/checkout">Tiến hành thanh toán</Link>
+                  <Link href="/store/checkout">{t("cart.checkout")}</Link>
                 </Button>
                 <Button variant="outline" className="w-full" asChild>
-                  <Link href="/store/products">Tiếp tục mua sắm</Link>
+                  <Link href="/store/products">{t("cart.continueShopping")}</Link>
                 </Button>
               </div>
 
               {/* Shipping Info */}
               <div className="text-sm text-gray-600 space-y-1">
-                <p>• Miễn phí vận chuyển cho đơn hàng từ $1,000</p>
-                <p>• Dự kiến giao hàng trong 2-3 ngày làm việc</p>
-                <p>• Hỗ trợ đổi trả trong 7 ngày không cần lý do</p>
+                <p>{t("cart.shippingInfo")}</p>
+                <p>{t("cart.deliveryInfo")}</p>
+                <p>{t("cart.returnInfo")}</p>
               </div>
             </CardContent>
           </Card>

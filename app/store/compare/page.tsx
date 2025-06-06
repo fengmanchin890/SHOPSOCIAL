@@ -38,6 +38,7 @@ import { useCollaboration } from "@/components/store/CollaborationProvider"
 import { usePriceAlerts } from "@/components/store/PriceAlertsProvider"
 import { AIRecommendationsPanel } from "@/components/store/AIRecommendationsPanel"
 import { toast } from "@/hooks/use-toast"
+import { useI18n } from "@/contexts/i18n-context"
 
 interface ComparisonFilters {
   showOnlyInStock: boolean
@@ -57,6 +58,7 @@ export default function ComparePage() {
   const { currentSession, activeUsers, createSession, joinSession, leaveSession, inviteUser, isCollaborating } =
     useCollaboration()
   const { createAlert, alerts, getActiveAlertsCount } = usePriceAlerts()
+  const { t } = useI18n()
 
   // Quản lý trạng thái
   const [filters, setFilters] = useState<ComparisonFilters>({
@@ -291,14 +293,14 @@ export default function ComparePage() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <Scale className="h-24 w-24 mx-auto text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Danh sách so sánh trống</h1>
-          <p className="text-gray-600 mb-8">Thêm sản phẩm từ danh sách yêu thích hoặc trang sản phẩm để so sánh</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">{t("compare.empty")}</h1>
+          <p className="text-gray-600 mb-8">{t("compare.emptyMessage")}</p>
           <div className="flex justify-center space-x-4">
             <Button asChild>
-              <Link href="/store/products">Xem sản phẩm</Link>
+              <Link href="/store/products">{t("compare.viewProducts")}</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/store/wishlist">Xem danh sách yêu thích</Link>
+              <Link href="/store/wishlist">{t("compare.viewWishlist")}</Link>
             </Button>
           </div>
         </div>
@@ -343,7 +345,7 @@ export default function ComparePage() {
 
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">So sánh sản phẩm</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{t("compare.title")}</h1>
           <p className="text-gray-600 mt-2">So sánh {filteredItems.length} sản phẩm chi tiết</p>
         </div>
       </div>
@@ -355,7 +357,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Heart className="h-4 w-4" />
-              <span>Xã hội ({socialData.likes})</span>
+              <span>{t("compare.social")} ({socialData.likes})</span>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
@@ -446,7 +448,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <UserPlus className="h-4 w-4" />
-              <span>Hợp tác</span>
+              <span>{t("compare.collaborate")}</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -516,7 +518,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Bell className="h-4 w-4" />
-              <span>Cảnh báo giá</span>
+              <span>{t("compare.priceAlert")}</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -593,7 +595,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Filter className="h-4 w-4" />
-              <span>Lọc</span>
+              <span>{t("compare.filter")}</span>
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
@@ -705,7 +707,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Save className="h-4 w-4" />
-              <span>Lưu</span>
+              <span>{t("compare.save")}</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -758,7 +760,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
-              <span>Lịch sử</span>
+              <span>{t("compare.history")}</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -812,7 +814,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <Share2 className="h-4 w-4" />
-              <span>Chia sẻ</span>
+              <span>{t("compare.share")}</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -870,7 +872,7 @@ export default function ComparePage() {
           <DialogTrigger asChild>
             <Button variant="outline" className="flex items-center gap-2">
               <FileDown className="h-4 w-4" />
-              <span>Xuất</span>
+              <span>{t("compare.export")}</span>
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -919,7 +921,7 @@ export default function ComparePage() {
           }}
         >
           <Trash2 className="h-4 w-4" />
-          <span>Xóa danh sách so sánh</span>
+          <span>{t("compare.clearCompare")}</span>
         </Button>
       </div>
 
@@ -990,12 +992,12 @@ export default function ComparePage() {
                           disabled={!item.inStock}
                         >
                           <ShoppingCart className="h-4 w-4 mr-2" />
-                          {item.inStock ? "Thêm vào giỏ hàng" : "Hết hàng"}
+                          {item.inStock ? t("compare.addToCart") : "Hết hàng"}
                         </Button>
                         <Button variant="outline" asChild className="w-full">
                           <Link href={`/store/products/${item.id}`}>
                             <ArrowRight className="h-4 w-4 mr-2" />
-                            Xem chi tiết
+                            {t("compare.viewDetails")}
                           </Link>
                         </Button>
                       </div>
