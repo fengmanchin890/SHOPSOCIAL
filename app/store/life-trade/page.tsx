@@ -21,6 +21,7 @@ import { CommunityForum } from "@/components/store/CommunityForum"
 import { EventRegistrationButton } from "@/components/store/EventRegistrationButton"
 import { ViewAllEventsButton } from "@/components/store/ViewAllEventsButton"
 import { CommentReplyButton } from "@/components/store/CommentReplyButton"
+import { toast } from "@/hooks/use-toast"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -202,6 +203,11 @@ export default function LifeTradePage() {
 
   const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
     if (!isPremiumMember) {
+      toast({
+        title: "Cần nâng cấp thành viên",
+        description: "Vui lòng nâng cấp thành viên để sử dụng tính năng này",
+        variant: "destructive",
+      })
       return
     }
     setAddActivityType(type)
@@ -215,6 +221,11 @@ export default function LifeTradePage() {
       [addActivityType]: [...prev[addActivityType], newActivity]
     }))
     setShowAddActivity(false)
+    
+    toast({
+      title: "Thêm hoạt động thành công",
+      description: `Hoạt động "${newActivity.title}" đã được thêm thành công`,
+    })
   }
 
   const handleViewMore = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
@@ -483,12 +494,10 @@ export default function LifeTradePage() {
         <TabsContent value="food" className="space-y-6">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">{t("food.title")}</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("food")}>
-                <Plus className="h-4 w-4 mr-2" />
-                {t("food.addExperience")}
-              </Button>
-            )}
+            <Button onClick={() => handleAddActivity("food")}>
+              <Plus className="h-4 w-4 mr-2" />
+              {t("food.addExperience")}
+            </Button>
           </div>
           
           <Card className="bg-gradient-to-r from-orange-50 to-amber-50 border-orange-100">
@@ -586,231 +595,13 @@ export default function LifeTradePage() {
           </div>
         </TabsContent>
 
-        <TabsContent value="accommodation" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">{t("accommodation.title")}</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("accommodation")}>
-                <Plus className="h-4 w-4 mr-2" />
-                {t("accommodation.addListing")}
-              </Button>
-            )}
-          </div>
-          
-          <Card className="bg-gradient-to-r from-blue-50 to-sky-50 border-blue-100">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3">
-                  <h3 className="text-xl font-semibold mb-4 text-blue-800">Mạng lưới nhà ở được xác minh</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <Star className="h-5 w-5 text-blue-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Hệ thống điểm tin cậy</p>
-                        <p className="text-sm text-gray-600">Dựa trên đánh giá cộng đồng, thời gian phản hồi và trạng thái xác minh</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <Home className="h-5 w-5 text-blue-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Tour phòng ảo</p>
-                        <p className="text-sm text-gray-600">Hình ảnh/video 360° với bình luận bằng tiếng Việt</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <FileText className="h-5 w-5 text-blue-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Mẫu hợp đồng</p>
-                        <p className="text-sm text-gray-600">Hợp đồng thuê nhà được dịch sẵn sang tiếng Việt với giải thích thuật ngữ pháp lý</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Tìm+bạn+cùng+phòng" 
-                        alt="Tìm bạn cùng phòng"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Thuật toán ghép bạn cùng phòng</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Tương thích lối sống</li>
-                        <li>• Sở thích ngôn ngữ</li>
-                        <li>• Xác minh an toàn</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Quan+hệ+chủ+nhà" 
-                        alt="Quan hệ chủ nhà"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Quan hệ chủ nhà</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Hướng dẫn định hướng văn hóa</li>
-                        <li>• Dịch vụ phiên dịch</li>
-                        <li>• Giải quyết xung đột</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.accommodation.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="accommodation"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("accommodation")}>
-              {t("button.viewMore")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="travel" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">{t("travel.title")}</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("travel")}>
-                <Plus className="h-4 w-4 mr-2" />
-                {t("travel.addActivity")}
-              </Button>
-            )}
-          </div>
-          
-          <Card className="bg-gradient-to-r from-purple-50 to-indigo-50 border-purple-100">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3">
-                  <h3 className="text-xl font-semibold mb-4 text-purple-800">Ghép cặp bạn đồng hành thông minh</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <Star className="h-5 w-5 text-purple-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Ghép cặp theo sở thích</p>
-                        <p className="text-sm text-gray-600">Ghép theo sở thích, phong cách du lịch, phạm vi ngân sách</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <div className="h-5 w-5 text-purple-600 mt-0.5 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-medium">Xếp hạng an toàn</p>
-                        <p className="text-sm text-gray-600">Mức xác minh người dùng, lịch sử chuyến đi, xác nhận cộng đồng</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <Users2 className="h-5 w-5 text-purple-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Tùy chọn kích thước nhóm</p>
-                        <p className="text-sm text-gray-600">Bạn đồng hành cá nhân, nhóm nhỏ (3-5), chuyến đi cộng đồng lớn hơn (10+)</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Sự+kiện+cộng+đồng" 
-                        alt="Sự kiện cộng đồng"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Nền tảng sự kiện cộng đồng</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Lịch gặp mặt thường xuyên</li>
-                        <li>• Sự kiện do người dùng tạo</li>
-                        <li>• Đặt chỗ với đặt cọc</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Trải+nghiệm+văn+hóa" 
-                        alt="Trải nghiệm văn hóa"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Gói trải nghiệm văn hóa</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Tham gia lễ hội địa phương</li>
-                        <li>• Hội thảo chia sẻ kỹ năng</li>
-                        <li>• Danh mục phiêu lưu</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.travel.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="travel"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("travel")}>
-              {t("button.viewMore")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
         <TabsContent value="language" className="space-y-6">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">{t("language.title")}</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("language")}>
-                <Plus className="h-4 w-4 mr-2" />
-                {t("language.addClass")}
-              </Button>
-            )}
+            <Button onClick={() => handleAddActivity("language")}>
+              <Plus className="h-4 w-4 mr-2" />
+              {t("language.addClass")}
+            </Button>
           </div>
           
           <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-100">
@@ -902,123 +693,6 @@ export default function LifeTradePage() {
 
           <div className="flex justify-center mt-4">
             <Button variant="outline" onClick={() => handleViewMore("language")}>
-              {t("button.viewMore")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="culture" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">{t("culture.title")}</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("culture")}>
-                <Plus className="h-4 w-4 mr-2" />
-                {t("culture.addResource")}
-              </Button>
-            )}
-          </div>
-          
-          <Card className="bg-gradient-to-r from-red-50 to-rose-50 border-red-100">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3">
-                  <h3 className="text-xl font-semibold mb-4 text-red-800">Trung tâm tài nguyên số</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <Book className="h-5 w-5 text-red-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Thư viện nội dung tuyển chọn</p>
-                        <p className="text-sm text-gray-600">Hướng dẫn chính phủ, nghi thức văn hóa, liên hệ khẩn cấp</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <div className="h-5 w-5 text-red-600 mt-0.5 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-medium">Học tập đa định dạng</p>
-                        <p className="text-sm text-gray-600">Video với phụ đề kép, đồ họa tương tác, podcast</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <div className="h-5 w-5 text-red-600 mt-0.5 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                          <polyline points="7 10 12 15 17 10"></polyline>
-                          <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-medium">Khả năng truy cập ngoại tuyến</p>
-                        <p className="text-sm text-gray-600">Nội dung có thể tải xuống cho khu vực có kết nối internet kém</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Hỗ+trợ+hòa+nhập" 
-                        alt="Hỗ trợ hòa nhập"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Dịch vụ hỗ trợ hòa nhập</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Hỗ trợ giấy tờ</li>
-                        <li>• Kết nối chuyên nghiệp</li>
-                        <li>• Tài nguyên sức khỏe tâm thần</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Chương+trình+liên+văn+hóa" 
-                        alt="Chương trình liên văn hóa"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Chương trình liên văn hóa</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Chương trình đại sứ</li>
-                        <li>• Lễ hội giao lưu văn hóa</li>
-                        <li>• Chương trình thanh thiếu niên</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.culture.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="culture"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("culture")}>
               {t("button.viewMore")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

@@ -3,9 +3,9 @@
 import { Label } from "@/components/ui/label"
 
 import { useState } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import Image from "next/image"
-import { Star, ShoppingCart, Heart, Share2, Minus, Plus, Truck, Shield, RotateCcw, Scale } from "lucide-react"
+import { Star, ShoppingCart, Heart, Scale, Minus, Plus, Truck, Shield, RotateCcw, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -16,9 +16,11 @@ import { useCart } from "@/components/store/CartProvider"
 import { useWishlist } from "@/components/store/WishlistProvider"
 import { useCompare } from "@/components/store/CompareProvider"
 import { ProductCard } from "@/components/store/ProductCard"
+import { toast } from "@/hooks/use-toast"
 
 export default function ProductDetailPage() {
   const params = useParams()
+  const router = useRouter()
   const { addItem } = useCart()
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist()
   const { addItem: addToCompare, removeItem: removeFromCompare, isInCompare, canAddMore } = useCompare()
@@ -35,6 +37,9 @@ export default function ProductDetailPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Sản phẩm không tồn tại</h1>
           <p className="text-gray-600">Không tìm thấy sản phẩm bạn muốn xem</p>
+          <Button className="mt-4" onClick={() => router.push("/store/products")}>
+            Quay lại danh sách sản phẩm
+          </Button>
         </div>
       </div>
     )
@@ -52,11 +57,20 @@ export default function ProductDetailPage() {
       color: selectedColor,
       quantity,
     })
+    
+    toast({
+      title: "Đã thêm vào giỏ hàng",
+      description: `Sản phẩm "${product.name}" đã được thêm vào giỏ hàng`,
+    })
   }
 
   const handleToggleWishlist = () => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id)
+      toast({
+        title: "Đã xóa khỏi danh sách yêu thích",
+        description: `Sản phẩm "${product.name}" đã được xóa khỏi danh sách yêu thích`,
+      })
     } else {
       addToWishlist({
         id: product.id,
@@ -66,12 +80,20 @@ export default function ProductDetailPage() {
         originalPrice: product.originalPrice,
         category: product.category,
       })
+      toast({
+        title: "Đã thêm vào danh sách yêu thích",
+        description: `Sản phẩm "${product.name}" đã được thêm vào danh sách yêu thích`,
+      })
     }
   }
 
   const handleToggleCompare = () => {
     if (isInCompare(product.id)) {
       removeFromCompare(product.id)
+      toast({
+        title: "Đã xóa khỏi danh sách so sánh",
+        description: `Sản phẩm "${product.name}" đã được xóa khỏi danh sách so sánh`,
+      })
     } else if (canAddMore) {
       addToCompare({
         id: product.id,
@@ -87,7 +109,31 @@ export default function ProductDetailPage() {
         colors: product.colors,
         inStock: product.inStock,
       })
+      toast({
+        title: "Đã thêm vào danh sách so sánh",
+        description: `Sản phẩm "${product.name}" đã được thêm vào danh sách so sánh`,
+      })
+    } else {
+      toast({
+        title: "Danh sách so sánh đã đầy",
+        description: "Bạn chỉ có thể so sánh tối đa 4 sản phẩm cùng lúc",
+        variant: "destructive",
+      })
     }
+  }
+
+  const handleBuyNow = () => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      size: selectedSize,
+      color: selectedColor,
+      quantity,
+    })
+    
+    router.push("/store/checkout")
   }
 
   const inWishlist = isInWishlist(product.id)
@@ -246,7 +292,7 @@ export default function ProductDetailPage() {
             <div className="flex space-x-4">
               <Button size="lg" className="flex-1" onClick={handleAddToCart} disabled={!product.inStock}>
                 <ShoppingCart className="h-5 w-5 mr-2" />
-                {product.inStock ? "Thêm vào giỏ hàng" : "Hết hàng"}
+                Thêm vào giỏ hàng
               </Button>
               <Button
                 variant="outline"
@@ -269,6 +315,10 @@ export default function ProductDetailPage() {
                 <Share2 className="h-5 w-5" />
               </Button>
             </div>
+            
+            <Button size="lg" className="w-full bg-green-600 hover:bg-green-700" onClick={handleBuyNow} disabled={!product.inStock}>
+              Mua ngay
+            </Button>
 
             {/* Action Status */}
             <div className="text-sm space-y-1">
@@ -349,11 +399,16 @@ export default function ProductDetailPage() {
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Sản phẩm liên quan</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Khám phá thêm ưu đãi</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button variant="outline" size="lg" onClick={() => router.push("/store/products")}>
+              Xem thêm sản phẩm
+            </Button>
           </div>
         </div>
       )}

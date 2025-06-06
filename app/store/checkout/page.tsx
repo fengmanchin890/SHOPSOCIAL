@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Separator } from "@/components/ui/separator"
 import { useCart } from "@/components/store/CartProvider"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { toast } from "@/hooks/use-toast"
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -59,14 +60,22 @@ export default function CheckoutPage() {
 
     // Validate form based on payment method
     if (formData.paymentMethod === "cod" && !formData.convenienceStore) {
-      alert("Vui lòng chọn cửa hàng tiện lợi")
+      toast({
+        title: "Vui lòng chọn cửa hàng tiện lợi",
+        description: "Bạn cần chọn cửa hàng tiện lợi để nhận hàng",
+        variant: "destructive",
+      })
       setIsSubmitting(false)
       return
     }
 
     if (formData.paymentMethod === "credit") {
       if (!formData.cardNumber || !formData.cardName || !formData.cardExpiry || !formData.cardCvc) {
-        alert("Vui lòng điền đầy đủ thông tin thẻ tín dụng")
+        toast({
+          title: "Vui lòng điền đầy đủ thông tin thẻ tín dụng",
+          description: "Bạn cần điền đầy đủ thông tin thẻ tín dụng để thanh toán",
+          variant: "destructive",
+        })
         setIsSubmitting(false)
         return
       }
@@ -77,6 +86,10 @@ export default function CheckoutPage() {
 
     // Clear cart and redirect
     clearCart()
+    toast({
+      title: "Đặt hàng thành công",
+      description: "Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được xác nhận.",
+    })
     router.push("/store/user/profile?tab=orders")
     setIsSubmitting(false)
   }
