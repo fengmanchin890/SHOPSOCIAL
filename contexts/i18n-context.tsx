@@ -909,9 +909,15 @@ initializeI18n()
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState('en') // Start with fallback language
+  const [hasMounted, setHasMounted] = useState(false)
   
   // Define the translation function
   const { t } = useTranslation()
+  
+  // Set mounted state after hydration
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
   
   // Define changeLanguage callback
   const changeLanguage = useMemo(() => {
@@ -928,6 +934,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   // Listen for language changes and detect language on client side only
   useEffect(() => {
+    if (!hasMounted) return;
+    
     const handleLanguageChanged = () => {
       setLanguage(i18n.language);
     };
@@ -941,7 +949,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return () => {
       i18n.off('languageChanged', handleLanguageChanged);
     };
-  }, []);
+  }, [hasMounted]);
 
   // Create context value with useMemo to prevent unnecessary re-renders
   const contextValue = useMemo(() => ({

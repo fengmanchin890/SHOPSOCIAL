@@ -94,6 +94,7 @@ export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState(defaultTab)
   const { t } = useI18n()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [hasMounted, setHasMounted] = useState(false)
 
   // Profile editing state
   const [isEditing, setIsEditing] = useState(false)
@@ -133,15 +134,27 @@ export default function ProfilePage() {
     shareWithPartners: false,
   })
 
+  // Prevent hydration mismatch by only rendering after client mount
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
   // Check login status
   useEffect(() => {
+    if (!hasMounted) return
+
     const authStatus = localStorage.getItem("lifeTradeAuth")
     if (authStatus === "authenticated") {
       setIsLoggedIn(true)
     } else {
       router.push("/store/life-trade/auth")
     }
-  }, [router])
+  }, [router, hasMounted])
+
+  // Don't render anything until component has mounted on client
+  if (!hasMounted) {
+    return null
+  }
 
   const handleSaveProfile = () => {
     // Mô phỏng lưu thông tin người dùng
