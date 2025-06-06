@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -26,6 +27,7 @@ export default function AuthPage() {
   const [isVerifying, setIsVerifying] = useState(false)
   const [isSendingOtp, setIsSendingOtp] = useState(false)
   const [userType, setUserType] = useState<"student" | "married" | "worker">("student")
+  const [agreeTerms, setAgreeTerms] = useState(false)
   
   // Registration form
   const [registerForm, setRegisterForm] = useState({

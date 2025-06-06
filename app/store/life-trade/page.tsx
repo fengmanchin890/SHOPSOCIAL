@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { MembershipStatus } from "@/components/store/MembershipStatus"
 import { AddActivityForm } from "@/components/store/AddActivityForm"
 import { useMembership } from "@/components/store/MembershipProvider"
-import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, Clock, Target, Shield, Video, Download } from "lucide-react"
+import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Clock, Target } from "lucide-react"
 import { useI18n } from "@/contexts/i18n-context"
 import { ActivityCard } from "@/components/store/ActivityCard"
 import { AddNewActivityDialog } from "@/components/store/AddNewActivityDialog"
@@ -605,7 +605,7 @@ export default function LifeTradePage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Book className="h-5 w-5 text-blue-600 mt-0.5" />
+                      <FileText className="h-5 w-5 text-blue-600 mt-0.5" />
                       <div>
                         <p className="font-medium">Mẫu hợp đồng</p>
                         <p className="text-sm text-gray-600">Hợp đồng thuê nhà được dịch sẵn sang tiếng Việt với giải thích thuật ngữ pháp lý</p>
@@ -704,7 +704,11 @@ export default function LifeTradePage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Shield className="h-5 w-5 text-purple-600 mt-0.5" />
+                      <div className="h-5 w-5 text-purple-600 mt-0.5 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                      </div>
                       <div>
                         <p className="font-medium">Xếp hạng an toàn</p>
                         <p className="text-sm text-gray-600">Mức xác minh người dùng, lịch sử chuyến đi, xác nhận cộng đồng</p>
@@ -916,14 +920,25 @@ export default function LifeTradePage() {
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Video className="h-5 w-5 text-red-600 mt-0.5" />
+                      <div className="h-5 w-5 text-red-600 mt-0.5 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                        </svg>
+                      </div>
                       <div>
                         <p className="font-medium">Học tập đa định dạng</p>
                         <p className="text-sm text-gray-600">Video với phụ đề kép, đồ họa tương tác, podcast</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Download className="h-5 w-5 text-red-600 mt-0.5" />
+                      <div className="h-5 w-5 text-red-600 mt-0.5 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                          <polyline points="7 10 12 15 17 10"></polyline>
+                          <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                      </div>
                       <div>
                         <p className="font-medium">Khả năng truy cập ngoại tuyến</p>
                         <p className="text-sm text-gray-600">Nội dung có thể tải xuống cho khu vực có kết nối internet kém</p>
