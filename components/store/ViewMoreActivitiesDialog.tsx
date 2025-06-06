@@ -19,7 +19,7 @@ interface ViewMoreActivitiesDialogProps {
   onOpenChange: (open: boolean) => void
   title: string
   activities: any[]
-  type: "food" | "accommodation" | "travel" | "language" | "culture" | "legal" | "healthcare" | "financial" | "transportation" | "daily"
+  type: "food" | "accommodation" | "travel" | "language" | "culture"
 }
 
 export function ViewMoreActivitiesDialog({

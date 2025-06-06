@@ -20,7 +20,7 @@ import { useI18n } from "@/contexts/i18n-context"
 interface AddNewActivityDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  activityType: "food" | "accommodation" | "travel" | "language" | "culture" | "legal" | "healthcare" | "financial" | "transportation" | "daily"
+  activityType: "food" | "accommodation" | "travel" | "language" | "culture"
   onSuccess: (newActivity: any) => void
 }
 
@@ -98,58 +98,6 @@ export function AddNewActivityDialog({
           uploadImage: "Tải lên hình ảnh",
           uploadImageDesc: "Hỗ trợ định dạng JPG, PNG, kích thước đề xuất 1200x800 pixel",
         }
-      case "th":
-        return {
-          title: "ชื่อ-นามสกุล",
-          description: "รายละเอียด",
-          time: "เวลา",
-          location: "สถานที่",
-          image: "รูปภาพ",
-          contactEmail: "อีเมลติดต่อ",
-          contactPhone: "เบอร์โทรศัพท์ติดต่อ",
-          price: "ราคา",
-          capacity: "ความจุ",
-          titlePlaceholder: "กรุณากรอกชื่อกิจกรรม",
-          descriptionPlaceholder: "กรุณากรอกรายละเอียดกิจกรรม",
-          timePlaceholder: "ตัวอย่าง: วันเสาร์, 14:00",
-          locationPlaceholder: "ตัวอย่าง: เขต 1, โฮจิมินห์",
-          contactEmailPlaceholder: "กรุณากรอกอีเมลติดต่อ",
-          contactPhonePlaceholder: "กรุณากรอกเบอร์โทรศัพท์ติดต่อ",
-          pricePlaceholder: "ตัวอย่าง: 200,000 VND",
-          capacityPlaceholder: "ตัวอย่าง: 10 คน",
-          cancel: "ยกเลิก",
-          add: "เพิ่ม",
-          required: "จำเป็น",
-          optional: "ไม่จำเป็น",
-          uploadImage: "อัปโหลดรูปภาพ",
-          uploadImageDesc: "รองรับรูปแบบ JPG, PNG ขนาดที่แนะนำ 1200x800 พิกเซล",
-        }
-      case "hi":
-        return {
-          title: "शीर्षक",
-          description: "विवरण",
-          time: "समय",
-          location: "स्थान",
-          image: "छवि",
-          contactEmail: "संपर्क ईमेल",
-          contactPhone: "संपर्क फोन",
-          price: "मूल्य",
-          capacity: "क्षमता",
-          titlePlaceholder: "गतिविधि का शीर्षक दर्ज करें",
-          descriptionPlaceholder: "गतिविधि का विस्तृत विवरण दर्ज करें",
-          timePlaceholder: "उदाहरण: शनिवार, 14:00",
-          locationPlaceholder: "उदाहरण: जिला 1, हो ची मिन्ह सिटी",
-          contactEmailPlaceholder: "संपर्क ईमेल दर्ज करें",
-          contactPhonePlaceholder: "संपर्क फोन नंबर दर्ज करें",
-          pricePlaceholder: "उदाहरण: 200,000 VND",
-          capacityPlaceholder: "उदाहरण: 10 लोग",
-          cancel: "रद्द करें",
-          add: "जोड़ें",
-          required: "आवश्यक",
-          optional: "वैकल्पिक",
-          uploadImage: "छवि अपलोड करें",
-          uploadImageDesc: "JPG, PNG प्रारूप समर्थित, अनुशंसित आकार 1200x800 पिक्सेल",
-        }
       default:
         return {
           title: "Title",
@@ -193,16 +141,6 @@ export function AddNewActivityDialog({
         return language === "vi" ? "Thêm lớp học ngôn ngữ" : language === "zh-TW" ? "添加語言課程" : "Add Language Class"
       case "culture":
         return language === "vi" ? "Thêm tài nguyên văn hóa" : language === "zh-TW" ? "添加文化資源" : "Add Cultural Resource"
-      case "legal":
-        return language === "vi" ? "Thêm dịch vụ pháp lý" : language === "zh-TW" ? "添加法律服務" : "Add Legal Service"
-      case "healthcare":
-        return language === "vi" ? "Thêm dịch vụ y tế" : language === "zh-TW" ? "添加醫療服務" : "Add Healthcare Service"
-      case "financial":
-        return language === "vi" ? "Thêm dịch vụ tài chính" : language === "zh-TW" ? "添加金融服務" : "Add Financial Service"
-      case "transportation":
-        return language === "vi" ? "Thêm dịch vụ giao thông" : language === "zh-TW" ? "添加交通服務" : "Add Transportation Service"
-      case "daily":
-        return language === "vi" ? "Thêm dịch vụ đời sống" : language === "zh-TW" ? "添加日常生活服務" : "Add Daily Life Service"
       default:
         return language === "vi" ? "Thêm hoạt động" : language === "zh-TW" ? "添加活動" : "Add Activity"
     }

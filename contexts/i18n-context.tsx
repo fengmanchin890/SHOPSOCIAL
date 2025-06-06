@@ -45,8 +45,6 @@ const resources = {
       "targetUsers.students.desc": "不熟悉語言，想交朋友，想體驗當地文化和美食",
       "targetUsers.married": "國際婚姻和定居者",
       "targetUsers.married.desc": "想融入當地生活，參與社區活動",
-      "targetUsers.workers": "外籍工作者",
-      "targetUsers.workers.desc": "專業人士、藍領工人和數位遊牧民族",
       
       // Features
       "features.title": "主要功能",
@@ -212,8 +210,6 @@ const resources = {
       "targetUsers.students.desc": "Chưa quen ngôn ngữ, muốn kết bạn, muốn trải nghiệm văn hóa và ẩm thực địa phương",
       "targetUsers.married": "Người nước ngoài kết hôn và định cư",
       "targetUsers.married.desc": "Muốn hòa nhập cuộc sống địa phương, tham gia hoạt động cộng đồng",
-      "targetUsers.workers": "Người lao động nước ngoài",
-      "targetUsers.workers.desc": "Chuyên gia, lao động phổ thông và người làm việc từ xa",
       
       // Features
       "features.title": "Các tính năng chính",
@@ -379,8 +375,6 @@ const resources = {
       "targetUsers.students.desc": "ไม่คุ้นเคยกับภาษา ต้องการหาเพื่อน ต้องการสัมผัสวัฒนธรรมและอาหารท้องถิ่น",
       "targetUsers.married": "ชาวต่างชาติที่แต่งงานและตั้งถิ่นฐาน",
       "targetUsers.married.desc": "ต้องการปรับตัวเข้ากับชีวิตท้องถิ่น เข้าร่วมกิจกรรมชุมชน",
-      "targetUsers.workers": "แรงงานต่างชาติ",
-      "targetUsers.workers.desc": "ผู้เชี่ยวชาญ แรงงานทั่วไป และนักท่องเที่ยวดิจิทัล",
       
       // Features
       "features.title": "คุณสมบัติหลัก",
@@ -546,8 +540,6 @@ const resources = {
       "targetUsers.students.desc": "भाषा से अपरिचित, दोस्त बनाना चाहते हैं, स्थानीय संस्कृति और भोजन का अनुभव करना चाहते हैं",
       "targetUsers.married": "विदेशी विवाहित और बसे हुए",
       "targetUsers.married.desc": "स्थानीय जीवन में घुलना-मिलना चाहते हैं, सामुदायिक गतिविधियों में भाग लेना चाहते हैं",
-      "targetUsers.workers": "विदेशी कर्मचारी",
-      "targetUsers.workers.desc": "पेशेवर, नीले कॉलर कर्मचारी और डिजिटल नोमैड्स",
       
       // Features
       "features.title": "मुख्य विशेषताएँ",
@@ -713,8 +705,6 @@ const resources = {
       "targetUsers.students.desc": "Unfamiliar with language, want to make friends, want to experience local culture and cuisine",
       "targetUsers.married": "Foreigners married and settled",
       "targetUsers.married.desc": "Want to integrate into local life, participate in community activities",
-      "targetUsers.workers": "Foreign Workers",
-      "targetUsers.workers.desc": "Professionals, blue-collar workers, and digital nomads",
       
       // Features
       "features.title": "Main Features",

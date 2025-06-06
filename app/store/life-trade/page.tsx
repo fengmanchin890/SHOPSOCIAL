@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MembershipStatus } from "@/components/store/MembershipStatus"
 import { AddActivityForm } from "@/components/store/AddActivityForm"
@@ -210,41 +210,17 @@ export default function LifeTradePage() {
   const getViewMoreTitle = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
     switch (type) {
       case "food":
-        return language === "vi" 
-          ? "Tất cả trải nghiệm ẩm thực" 
-          : language === "zh-TW" 
-            ? "所有美食體驗" 
-            : "All Food Experiences"
+        return language === "vi" ? "Tất cả trải nghiệm ẩm thực" : language === "zh-TW" ? "所有美食體驗" : "All Food Experiences"
       case "accommodation":
-        return language === "vi" 
-          ? "Tất cả chỗ ở" 
-          : language === "zh-TW" 
-            ? "所有住宿" 
-            : "All Accommodations"
+        return language === "vi" ? "Tất cả chỗ ở" : language === "zh-TW" ? "所有住宿" : "All Accommodations"
       case "travel":
-        return language === "vi" 
-          ? "Tất cả hoạt động cùng đi" 
-          : language === "zh-TW" 
-            ? "所有一起探索活動" 
-            : "All Travel Activities"
+        return language === "vi" ? "Tất cả hoạt động cùng đi" : language === "zh-TW" ? "所有一起探索活動" : "All Travel Activities"
       case "language":
-        return language === "vi" 
-          ? "Tất cả lớp học ngôn ngữ" 
-          : language === "zh-TW" 
-            ? "所有語言課程" 
-            : "All Language Classes"
+        return language === "vi" ? "Tất cả lớp học ngôn ngữ" : language === "zh-TW" ? "所有語言課程" : "All Language Classes"
       case "culture":
-        return language === "vi" 
-          ? "Tất cả tài nguyên văn hóa" 
-          : language === "zh-TW" 
-            ? "所有文化資源" 
-            : "All Cultural Resources"
+        return language === "vi" ? "Tất cả tài nguyên văn hóa" : language === "zh-TW" ? "所有文化資源" : "All Cultural Resources"
       default:
-        return language === "vi" 
-          ? "Tất cả hoạt động" 
-          : language === "zh-TW" 
-            ? "所有活動" 
-            : "All Activities"
+        return language === "vi" ? "Tất cả hoạt động" : language === "zh-TW" ? "所有活動" : "All Activities"
     }
   }
 
@@ -308,6 +284,7 @@ export default function LifeTradePage() {
               <Card>
                 <CardHeader>
                   <CardTitle>{t("features.title")}</CardTitle>
+                  <CardDescription>{t("platform.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
