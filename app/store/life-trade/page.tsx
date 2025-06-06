@@ -12,6 +12,11 @@ import { AddActivityForm } from "@/components/store/AddActivityForm"
 import { useMembership } from "@/components/store/MembershipProvider"
 import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Video, Download, Shield, Clock, Target } from "lucide-react"
 import { useI18n } from "@/contexts/i18n-context"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/hooks/use-toast"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -21,6 +26,18 @@ export default function LifeTradePage() {
   const [showAddActivity, setShowAddActivity] = useState(false)
   const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "courses" | "cultural">("food")
   const { t } = useI18n()
+  
+  // Registration dialog states
+  const [showRegistrationDialog, setShowRegistrationDialog] = useState(false)
+  const [registrationType, setRegistrationType] = useState<"food" | "accommodation" | "travel" | "language" | "cultural">("food")
+  const [registrationTitle, setRegistrationTitle] = useState("")
+  const [registrationForm, setRegistrationForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    notes: ""
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Kiểm tra trạng thái đăng nhập khi trang được tải
   useEffect(() => {
@@ -44,6 +61,44 @@ export default function LifeTradePage() {
   const handleAddActivitySuccess = () => {
     setShowAddActivity(false)
     // Hiển thị thông báo thành công hoặc làm mới dữ liệu
+  }
+  
+  const handleRegister = (type: "food" | "accommodation" | "travel" | "language" | "cultural", title: string) => {
+    setRegistrationType(type)
+    setRegistrationTitle(title)
+    setShowRegistrationDialog(true)
+  }
+  
+  const handleSubmitRegistration = () => {
+    if (!registrationForm.name || !registrationForm.email || !registrationForm.phone) {
+      toast({
+        title: "Vui lòng điền đầy đủ thông tin",
+        description: "Tên, email và số điện thoại là bắt buộc",
+        variant: "destructive"
+      })
+      return
+    }
+    
+    setIsSubmitting(true)
+    
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setShowRegistrationDialog(false)
+      
+      // Reset form
+      setRegistrationForm({
+        name: "",
+        email: "",
+        phone: "",
+        notes: ""
+      })
+      
+      toast({
+        title: "Đăng ký thành công!",
+        description: `Bạn đã đăng ký thành công cho "${registrationTitle}". Chúng tôi sẽ liên hệ với bạn sớm.`,
+      })
+    }, 1500)
   }
 
   if (!isLoggedIn) {
@@ -319,7 +374,9 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 14:00</p>
                     <p>Quận 1, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.register")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("food", "Lớp học nấu ăn món Việt")}>
+                    {t("button.register")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -341,7 +398,9 @@ export default function LifeTradePage() {
                     <p>Chủ Nhật, 18:00</p>
                     <p>Quận 4, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.register")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("food", "Tour ẩm thực đường phố")}>
+                    {t("button.register")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -363,7 +422,9 @@ export default function LifeTradePage() {
                     <p>Thứ Sáu, 19:00</p>
                     <p>Quận 7, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.register")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("food", "Bữa tối gia đình Việt Nam")}>
+                    {t("button.register")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -479,7 +540,9 @@ export default function LifeTradePage() {
                     <p>Quận 2, TP.HCM</p>
                     <p>Có sẵn: Ngay bây giờ</p>
                   </div>
-                  <Button size="sm">{t("button.contact")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("accommodation", "Phòng trọ trao đổi")}>
+                    {t("button.contact")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -501,7 +564,9 @@ export default function LifeTradePage() {
                     <p>Quận 7, TP.HCM</p>
                     <p>Có sẵn: Tháng sau</p>
                   </div>
-                  <Button size="sm">{t("button.contact")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("accommodation", "Căn hộ giảm giá cho sinh viên")}>
+                    {t("button.contact")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -523,7 +588,9 @@ export default function LifeTradePage() {
                     <p>Quận 3, TP.HCM</p>
                     <p>Có sẵn: Ngay bây giờ</p>
                   </div>
-                  <Button size="sm">{t("button.contact")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("accommodation", "Homestay với gia đình Việt")}>
+                    {t("button.contact")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -639,7 +706,9 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 09:00</p>
                     <p>Quận 1, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.join")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("travel", "Tour khám phá thành phố")}>
+                    {t("button.join")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -661,7 +730,9 @@ export default function LifeTradePage() {
                     <p>Chủ Nhật, 07:00</p>
                     <p>Vũng Tàu</p>
                   </div>
-                  <Button size="sm">{t("button.join")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("travel", "Dã ngoại cuối tuần")}>
+                    {t("button.join")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -683,7 +754,9 @@ export default function LifeTradePage() {
                     <p>Thứ Sáu, 19:00</p>
                     <p>Quận 5, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.join")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("travel", "Khám phá chợ đêm")}>
+                    {t("button.join")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -799,7 +872,9 @@ export default function LifeTradePage() {
                     <p>Thứ Ba & Thứ Năm, 18:00</p>
                     <p>Quận 1, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.register")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("language", "Lớp học tiếng Việt cơ bản")}>
+                    {t("button.register")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -821,7 +896,9 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 15:00</p>
                     <p>Quận 3, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.join")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("language", "Cafe trao đổi ngôn ngữ")}>
+                    {t("button.join")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -843,7 +920,9 @@ export default function LifeTradePage() {
                     <p>Thứ Tư & Thứ Sáu, 19:00</p>
                     <p>Quận 7, TP.HCM</p>
                   </div>
-                  <Button size="sm">{t("button.register")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("language", "Lớp học tiếng Hàn")}>
+                    {t("button.register")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -959,7 +1038,9 @@ export default function LifeTradePage() {
                     <p>Khóa học trực tuyến</p>
                     <p>5 mô-đun, tự học</p>
                   </div>
-                  <Button size="sm">{t("button.viewMore")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("cultural", "Hướng dẫn văn hóa Việt Nam")}>
+                    {t("button.viewMore")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -981,7 +1062,9 @@ export default function LifeTradePage() {
                     <p>Thứ Bảy, 10:00</p>
                     <p>Trực tuyến qua Zoom</p>
                   </div>
-                  <Button size="sm">{t("button.register")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("cultural", "Hội thảo hỗ trợ pháp lý")}>
+                    {t("button.register")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -1003,7 +1086,9 @@ export default function LifeTradePage() {
                     <p>Chủ Nhật, 12:00-20:00</p>
                     <p>Công viên Lê Văn Tám</p>
                   </div>
-                  <Button size="sm">{t("button.join")}</Button>
+                  <Button size="sm" onClick={() => handleRegister("cultural", "Lễ hội giao lưu văn hóa")}>
+                    {t("button.join")}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -1017,6 +1102,62 @@ export default function LifeTradePage() {
           </div>
         </TabsContent>
       </Tabs>
+      
+      {/* Registration Dialog */}
+      <Dialog open={showRegistrationDialog} onOpenChange={setShowRegistrationDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Đăng ký tham gia: {registrationTitle}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Họ và tên *</Label>
+              <Input 
+                id="name" 
+                value={registrationForm.name}
+                onChange={(e) => setRegistrationForm({...registrationForm, name: e.target.value})}
+                placeholder="Nhập họ và tên của bạn" 
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email *</Label>
+              <Input 
+                id="email" 
+                type="email"
+                value={registrationForm.email}
+                onChange={(e) => setRegistrationForm({...registrationForm, email: e.target.value})}
+                placeholder="Nhập địa chỉ email của bạn" 
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Số điện thoại *</Label>
+              <Input 
+                id="phone" 
+                value={registrationForm.phone}
+                onChange={(e) => setRegistrationForm({...registrationForm, phone: e.target.value})}
+                placeholder="Nhập số điện thoại của bạn" 
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="notes">Ghi chú (tùy chọn)</Label>
+              <Textarea 
+                id="notes" 
+                value={registrationForm.notes}
+                onChange={(e) => setRegistrationForm({...registrationForm, notes: e.target.value})}
+                placeholder="Nhập thông tin bổ sung hoặc yêu cầu đặc biệt" 
+              />
+            </div>
+          </div>
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setShowRegistrationDialog(false)}>
+              Hủy
+            </Button>
+            <Button onClick={handleSubmitRegistration} disabled={isSubmitting}>
+              {isSubmitting ? "Đang xử lý..." : "Đăng ký"}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
