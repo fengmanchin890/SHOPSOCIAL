@@ -858,33 +858,10 @@ interface I18nContextType {
   changeLanguage: (lang: string) => void
   t: (key: string) => string
   languages: typeof languages
+  isInitialized: boolean
 }
 
 const I18nContext = createContext<I18nContextType | null>(null)
-
-// Initialize i18next only once
-let isInitialized = false
-
-const initializeI18n = () => {
-  if (isInitialized) return
-  
-  // Initialize without language detector to prevent hydration mismatch
-  i18n
-    .use(initReactI18next)
-    .init({
-      resources,
-      fallbackLng: "en",
-      lng: "en", // Always start with English for consistent SSR/client rendering
-      interpolation: {
-        escapeValue: false,
-      },
-    })
-  
-  isInitialized = true
-}
-
-// Initialize i18n
-initializeI18n()
 
 // Helper function to detect user's preferred language
 const detectUserLanguage = (): string => {
@@ -906,15 +883,46 @@ const detectUserLanguage = (): string => {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState('en') // Always start with English
+  const [language, setLanguage] = useState('en')
+  const [isInitialized, setIsInitialized] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)
   
-  // Define the translation function
+  // Define the translation function - use a fallback when not initialized
   const { t } = useTranslation()
+  
+  // Initialize i18next only on client side
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !isInitialized) {
+      // Initialize i18next
+      i18n
+        .use(initReactI18next)
+        .init({
+          resources,
+          fallbackLng: "en",
+          lng: "en", // Always start with English for consistent SSR/client rendering
+          interpolation: {
+            escapeValue: false,
+          },
+        })
+        .then(() => {
+          setIsInitialized(true)
+          setIsHydrated(true)
+          
+          // Detect and set user's preferred language after initialization
+          const preferredLanguage = detectUserLanguage()
+          if (preferredLanguage !== 'en') {
+            i18n.changeLanguage(preferredLanguage)
+            setLanguage(preferredLanguage)
+          }
+        })
+    }
+  }, [isInitialized])
   
   // Define changeLanguage callback
   const changeLanguage = useMemo(() => {
     return (lang: string) => {
+      if (!isInitialized) return
+      
       i18n.changeLanguage(lang);
       setLanguage(lang);
       
@@ -924,23 +932,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
         document.documentElement.lang = lang;
       }
     };
-  }, []);
-
-  // Handle client-side hydration and language detection
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !isHydrated) {
-      setIsHydrated(true)
-      
-      // Detect and set user's preferred language after hydration
-      const preferredLanguage = detectUserLanguage()
-      if (preferredLanguage !== 'en') {
-        changeLanguage(preferredLanguage)
-      }
-    }
-  }, [changeLanguage, isHydrated])
+  }, [isInitialized]);
 
   // Listen for language changes
   useEffect(() => {
+    if (!isInitialized) return
+    
     const handleLanguageChanged = (lng: string) => {
       setLanguage(lng);
     };
@@ -949,15 +946,16 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return () => {
       i18n.off('languageChanged', handleLanguageChanged);
     };
-  }, []);
+  }, [isInitialized]);
 
   // Create context value with useMemo to prevent unnecessary re-renders
   const contextValue = useMemo(() => ({
     language,
     changeLanguage,
-    t,
-    languages
-  }), [language, changeLanguage, t]);
+    t: isInitialized ? t : (key: string) => key, // Fallback function when not initialized
+    languages,
+    isInitialized
+  }), [language, changeLanguage, t, isInitialized]);
 
   return (
     <I18nContext.Provider value={contextValue}>
