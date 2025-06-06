@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { useSearchParams } from "next/navigation"
+import { useState, useEffect } from "react"
+import { useSearchParams, useRouter } from "next/navigation"
 import {
   User,
   Package,
@@ -40,6 +40,7 @@ import { Switch } from "@/components/ui/switch"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
 import { useI18n } from "@/contexts/i18n-context"
+import { toast } from "@/hooks/use-toast"
 
 // Mock user data
 const mockUser = {
@@ -87,10 +88,12 @@ const statusMap = {
 }
 
 export default function ProfilePage() {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const defaultTab = searchParams.get("tab") || "profile"
   const [activeTab, setActiveTab] = useState(defaultTab)
   const { t } = useI18n()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // Profile editing state
   const [isEditing, setIsEditing] = useState(false)
@@ -103,6 +106,7 @@ export default function ProfilePage() {
   const [showLanguageDialog, setShowLanguageDialog] = useState(false)
   const [showContactDialog, setShowContactDialog] = useState(false)
   const [showFAQDialog, setShowFAQDialog] = useState(false)
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false)
 
   // Form states
   const [currentPassword, setCurrentPassword] = useState("")
@@ -129,9 +133,22 @@ export default function ProfilePage() {
     shareWithPartners: false,
   })
 
+  // Check login status
+  useEffect(() => {
+    const authStatus = localStorage.getItem("lifeTradeAuth")
+    if (authStatus === "authenticated") {
+      setIsLoggedIn(true)
+    } else {
+      router.push("/store/life-trade/auth")
+    }
+  }, [router])
+
   const handleSaveProfile = () => {
     // Mô phỏng lưu thông tin người dùng
-    alert("Thông tin cá nhân đã được cập nhật!")
+    toast({
+      title: "Thông tin cá nhân đã được cập nhật!",
+      description: "Thông tin của bạn đã được lưu thành công.",
+    })
     setIsEditing(false)
   }
 
@@ -142,14 +159,25 @@ export default function ProfilePage() {
 
   const handleChangePassword = () => {
     if (newPassword !== confirmPassword) {
-      alert("Mật khẩu mới và xác nhận mật khẩu không khớp!")
+      toast({
+        title: "Mật khẩu mới và xác nhận mật khẩu không khớp!",
+        description: "Vui lòng kiểm tra lại mật khẩu mới và xác nhận mật khẩu.",
+        variant: "destructive",
+      })
       return
     }
     if (newPassword.length < 6) {
-      alert("Mật khẩu phải có ít nhất 6 ký tự!")
+      toast({
+        title: "Mật khẩu phải có ít nhất 6 ký tự!",
+        description: "Vui lòng chọn mật khẩu dài hơn để đảm bảo an toàn.",
+        variant: "destructive",
+      })
       return
     }
-    alert("Mật khẩu đã được cập nhật thành công!")
+    toast({
+      title: "Mật khẩu đã được cập nhật thành công!",
+      description: "Mật khẩu mới của bạn đã được thiết lập.",
+    })
     setShowPasswordDialog(false)
     setCurrentPassword("")
     setNewPassword("")
@@ -157,25 +185,35 @@ export default function ProfilePage() {
   }
 
   const handleSaveNotifications = () => {
-    alert("Cài đặt thông báo đã được lưu!")
+    toast({
+      title: "Cài đặt thông báo đã được lưu!",
+      description: "Tùy chọn thông báo của bạn đã được cập nhật.",
+    })
     setShowNotificationDialog(false)
   }
 
   const handleSavePrivacy = () => {
-    alert("Cài đặt quyền riêng tư đã được lưu!")
+    toast({
+      title: "Cài đặt quyền riêng tư đã được lưu!",
+      description: "Tùy chọn quyền riêng tư của bạn đã được cập nhật.",
+    })
     setShowPrivacyDialog(false)
   }
 
   const handleSaveLanguage = () => {
-    alert(
-      `Ngôn ngữ đã được chuyển sang ${selectedLanguage === "vi-VN" ? "Tiếng Việt" : selectedLanguage === "zh-CN" ? "Tiếng Trung Giản thể" : "Tiếng Anh"}!`,
-    )
+    toast({
+      title: "Ngôn ngữ đã được thay đổi!",
+      description: `Ngôn ngữ đã được chuyển sang ${selectedLanguage === "vi-VN" ? "Tiếng Việt" : selectedLanguage === "zh-CN" ? "Tiếng Trung Giản thể" : "Tiếng Anh"}!`,
+    })
     setShowLanguageDialog(false)
   }
 
   const handleContactSupport = () => {
     if (customerMessage.trim()) {
-      alert(`Tin nhắn hỗ trợ đã được gửi!\nNội dung: ${customerMessage}\nBộ phận hỗ trợ sẽ phản hồi trong vòng 24 giờ.`)
+      toast({
+        title: "Đã gửi tin nhắn hỗ trợ!",
+        description: `Tin nhắn của bạn đã được gửi. Bộ phận hỗ trợ sẽ phản hồi trong vòng 24 giờ.`,
+      })
       setShowContactDialog(false)
       setCustomerMessage("")
     }
@@ -201,7 +239,28 @@ export default function ProfilePage() {
     document.body.removeChild(link)
     URL.revokeObjectURL(url)
 
-    alert("Dữ liệu cá nhân đã được tải về thiết bị của bạn!")
+    toast({
+      title: "Dữ liệu cá nhân đã được tải về!",
+      description: "Tệp dữ liệu cá nhân đã được tải về thiết bị của bạn.",
+    })
+  }
+
+  const handleLogout = () => {
+    // Clear authentication data
+    localStorage.removeItem("lifeTradeAuth")
+    localStorage.removeItem("lifeTradeUserType")
+    
+    toast({
+      title: "Đăng xuất thành công",
+      description: "Bạn đã đăng xuất khỏi tài khoản.",
+    })
+    
+    // Redirect to login page
+    router.push("/store/life-trade/auth")
+  }
+
+  if (!isLoggedIn) {
+    return null // Will redirect to login page
   }
 
   return (
@@ -720,10 +779,32 @@ export default function ProfilePage() {
                 </Dialog>
 
                 <Separator />
-                <Button variant="destructive" className="w-full justify-start">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Đăng xuất
-                </Button>
+                
+                {/* Logout Dialog */}
+                <Dialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+                  <DialogTrigger asChild>
+                    <Button variant="destructive" className="w-full justify-start">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Đăng xuất
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Xác nhận đăng xuất</DialogTitle>
+                      <DialogDescription>
+                        Bạn có chắc chắn muốn đăng xuất khỏi tài khoản?
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className="mt-4">
+                      <Button variant="outline" onClick={() => setShowLogoutDialog(false)}>
+                        Hủy
+                      </Button>
+                      <Button variant="destructive" onClick={handleLogout}>
+                        Đăng xuất
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </CardContent>
             </Card>
           </div>
