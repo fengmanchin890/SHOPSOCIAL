@@ -7,7 +7,7 @@ import LanguageDetector from "i18next-browser-languagedetector"
 
 // Define available languages
 export const languages = [
-  { code: "zh-TW", name: "繁體中文", nativeName: "繁體中文", flag: "🇹🇼" },
+  { code: "zh-TW", name: "Traditional Chinese", nativeName: "繁體中文", flag: "🇹🇼" },
   { code: "vi", name: "Vietnamese", nativeName: "Tiếng Việt", flag: "🇻🇳" },
   { code: "th", name: "Thai", nativeName: "ภาษาไทย", flag: "🇹🇭" },
   { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳" },
