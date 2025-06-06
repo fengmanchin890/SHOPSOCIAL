@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from "react"
 import i18n from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
+import LanguageDetector from "i18next-browser-languagedetector"
 
 // Define available languages
 export const languages = [
@@ -858,104 +859,97 @@ interface I18nContextType {
   changeLanguage: (lang: string) => void
   t: (key: string) => string
   languages: typeof languages
-  isInitialized: boolean
 }
 
 const I18nContext = createContext<I18nContextType | null>(null)
 
-// Helper function to detect user's preferred language
-const detectUserLanguage = (): string => {
-  if (typeof window === 'undefined') return 'en'
+// Initialize i18next only once with proper environment detection
+let isInitialized = false
+
+const initializeI18n = () => {
+  if (isInitialized) return
   
-  // Check localStorage first
-  const savedLanguage = localStorage.getItem('i18nextLng')
-  if (savedLanguage && languages.some(lang => lang.code === savedLanguage)) {
-    return savedLanguage
+  const isClient = typeof window !== 'undefined'
+  
+  if (isClient) {
+    // Client-side initialization with language detector
+    i18n
+      .use(LanguageDetector)
+      .use(initReactI18next)
+      .init({
+        resources,
+        fallbackLng: "en",
+        interpolation: {
+          escapeValue: false,
+        },
+        detection: {
+          order: ['localStorage', 'navigator'],
+          caches: ['localStorage'],
+        },
+      })
+  } else {
+    // Server-side initialization without language detector
+    i18n
+      .use(initReactI18next)
+      .init({
+        resources,
+        fallbackLng: "en",
+        lng: "en", // Set default language for SSR
+        interpolation: {
+          escapeValue: false,
+        },
+      })
   }
   
-  // Check browser language
-  const browserLanguage = navigator.language
-  const supportedLanguage = languages.find(lang => 
-    browserLanguage.startsWith(lang.code) || browserLanguage === lang.code
-  )
-  
-  return supportedLanguage?.code || 'en'
+  isInitialized = true
 }
 
+// Initialize i18n
+initializeI18n()
+
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState('en')
-  const [isInitialized, setIsInitialized] = useState(false)
-  const [isHydrated, setIsHydrated] = useState(false)
+  const [language, setLanguage] = useState('en') // Start with fallback language
   
-  // Define the translation function - use a fallback when not initialized
+  // Define the translation function
   const { t } = useTranslation()
-  
-  // Initialize i18next only on client side
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !isInitialized) {
-      // Initialize i18next
-      i18n
-        .use(initReactI18next)
-        .init({
-          resources,
-          fallbackLng: "en",
-          lng: "en", // Always start with English for consistent SSR/client rendering
-          interpolation: {
-            escapeValue: false,
-          },
-        })
-        .then(() => {
-          setIsInitialized(true)
-          setIsHydrated(true)
-          
-          // Detect and set user's preferred language after initialization
-          const preferredLanguage = detectUserLanguage()
-          if (preferredLanguage !== 'en') {
-            i18n.changeLanguage(preferredLanguage)
-            setLanguage(preferredLanguage)
-          }
-        })
-    }
-  }, [isInitialized])
   
   // Define changeLanguage callback
   const changeLanguage = useMemo(() => {
     return (lang: string) => {
-      if (!isInitialized) return
-      
       i18n.changeLanguage(lang);
       setLanguage(lang);
       
-      // Save to localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('i18nextLng', lang)
+      // Set HTML lang attribute and direction
+      if (typeof document !== 'undefined') {
         document.documentElement.lang = lang;
       }
     };
-  }, [isInitialized]);
+  }, []);
 
-  // Listen for language changes
+  // Listen for language changes and detect language on client side only
   useEffect(() => {
-    if (!isInitialized) return
-    
-    const handleLanguageChanged = (lng: string) => {
-      setLanguage(lng);
+    const handleLanguageChanged = () => {
+      setLanguage(i18n.language);
     };
+
+    // Set initial language from i18n after hydration
+    if (typeof window !== 'undefined') {
+      setLanguage(i18n.language);
+    }
 
     i18n.on('languageChanged', handleLanguageChanged);
     return () => {
       i18n.off('languageChanged', handleLanguageChanged);
     };
-  }, [isInitialized]);
+  }, []);
 
   // Create context value with useMemo to prevent unnecessary re-renders
   const contextValue = useMemo(() => ({
     language,
     changeLanguage,
-    t: isInitialized ? t : (key: string) => key, // Fallback function when not initialized
-    languages,
-    isInitialized
-  }), [language, changeLanguage, t, isInitialized]);
+    t,
+    languages
+  }), [language, changeLanguage, t]);
 
   return (
     <I18nContext.Provider value={contextValue}>
