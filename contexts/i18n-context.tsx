@@ -1,16 +1,17 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from "react"
 import i18n from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
+import LanguageDetector from "i18next-browser-languagedetector"
 
 // Define available languages
 export const languages = [
-  { code: "zh-TW", name: "Traditional Chinese", nativeName: "繁體中文", flag: "🇹🇼" },
-  { code: "vi", name: "Vietnamese", nativeName: "Tiếng Việt", flag: "🇻🇳" },
-  { code: "th", name: "Thai", nativeName: "ภาษาไทย", flag: "🇹🇭" },
-  { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳" },
-  { code: "en", name: "English", nativeName: "English", flag: "🇺🇸" },
+  { code: "zh-TW", name: "Traditional Chinese", nativeName: "繁體中文", flag: "🇹🇼", rtl: false },
+  { code: "vi", name: "Vietnamese", nativeName: "Tiếng Việt", flag: "🇻🇳", rtl: false },
+  { code: "th", name: "Thai", nativeName: "ภาษาไทย", flag: "🇹🇭", rtl: false },
+  { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳", rtl: false },
+  { code: "en", name: "English", nativeName: "English", flag: "🇺🇸", rtl: false },
 ]
 
 // Define translations
@@ -848,93 +849,70 @@ interface I18nContextType {
   changeLanguage: (lang: string) => void
   t: (key: string) => string
   languages: typeof languages
-  isInitialized: boolean
 }
 
 const I18nContext = createContext<I18nContextType | null>(null)
 
+// Initialize i18next
+if (typeof window !== 'undefined') {
+  i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: "en",
+      interpolation: {
+        escapeValue: false,
+      },
+      detection: {
+        order: ['localStorage', 'navigator'],
+        caches: ['localStorage'],
+      },
+    });
+}
+
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState("en")
-  const [isInitialized, setIsInitialized] = useState(false)
+  const [language, setLanguage] = useState(i18n.language || 'en')
+  
+  // Define all hooks at the top level
   const { t } = useTranslation()
-
-  // Initialize i18n only on client side
-  useEffect(() => {
-    const initializeI18n = async () => {
-      if (typeof window !== 'undefined' && !i18n.isInitialized) {
-        try {
-          // Dynamically import browser-specific language detector
-          const LanguageDetector = (await import('i18next-browser-languagedetector')).default
-          
-          await i18n
-            .use(LanguageDetector)
-            .use(initReactI18next)
-            .init({
-              resources,
-              fallbackLng: "en",
-              interpolation: {
-                escapeValue: false,
-              },
-              detection: {
-                order: ['localStorage', 'navigator'],
-                caches: ['localStorage'],
-              },
-            })
-
-          setLanguage(i18n.language)
-          setIsInitialized(true)
-        } catch (error) {
-          console.error('Failed to initialize i18n:', error)
-          // Fallback initialization without language detector
-          await i18n
-            .use(initReactI18next)
-            .init({
-              resources,
-              lng: "en",
-              fallbackLng: "en",
-              interpolation: {
-                escapeValue: false,
-              },
-            })
-          setIsInitialized(true)
-        }
-      }
+  
+  // Define callbacks with useMemo/useCallback to maintain hook order
+  const changeLanguage = useCallback((lang: string) => {
+    i18n.changeLanguage(lang);
+    setLanguage(lang);
+    
+    // Set HTML lang attribute and direction
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = lang;
     }
-
-    initializeI18n()
-  }, [])
-
-  const changeLanguage = (lang: string) => {
-    if (i18n.isInitialized) {
-      i18n.changeLanguage(lang)
-      setLanguage(lang)
-      
-      // Set HTML lang attribute
-      if (typeof document !== 'undefined') {
-        document.documentElement.lang = lang
-      }
-    }
-  }
+  }, []);
 
   // Listen for language changes
   useEffect(() => {
-    if (!i18n.isInitialized) return
-
     const handleLanguageChanged = () => {
-      setLanguage(i18n.language)
-    }
+      setLanguage(i18n.language);
+    };
 
-    i18n.on('languageChanged', handleLanguageChanged)
+    i18n.on('languageChanged', handleLanguageChanged);
     return () => {
-      i18n.off('languageChanged', handleLanguageChanged)
-    }
-  }, [isInitialized])
+      i18n.off('languageChanged', handleLanguageChanged);
+    };
+  }, []);
+
+  // Create context value with useMemo to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({
+    language,
+    changeLanguage,
+    t,
+    languages
+  }), [language, changeLanguage, t]);
 
   return (
-    <I18nContext.Provider value={{ language, changeLanguage, t, languages, isInitialized }}>
+    <I18nContext.Provider value={contextValue}>
       {children}
     </I18nContext.Provider>
-  )
+  );
 }
 
 export function useI18n() {
