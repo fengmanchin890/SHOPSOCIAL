@@ -5,6 +5,6 @@ const AuthPageContent = dynamic(() => import('@/components/AuthPageContent'), {
   loading: () => <div>Loading...</div>
 })
 
-export default function AuthPage() {
-  return <AuthPageContent />
+export default function AuthPage({ searchParams }: { searchParams: Record<string, string> }) {
+  return <AuthPageContent searchParams={searchParams} />
 }

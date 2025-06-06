@@ -16,7 +16,11 @@ import { MembershipUpgradeDialog } from "@/components/store/MembershipUpgradeDia
 import { TargetAudienceSelector } from "@/components/store/TargetAudienceSelector"
 import { useI18n } from "@/contexts/i18n-context"
 
-export default function AuthPageContent() {
+type Props = {
+  searchParams: Record<string, string>
+}
+
+export default function AuthPageContent({ searchParams }: Props) {
   const router = useRouter()
   const { upgradeMembership } = useMembership()
   const { t, language } = useI18n()
@@ -310,6 +314,9 @@ export default function AuthPageContent() {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{localizedText.title}</h1>
           <p className="text-gray-600">{localizedText.description}</p>
+          {searchParams.token && (
+            <p className="text-sm text-blue-600 mt-2">Token: {searchParams.token}</p>
+          )}
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
