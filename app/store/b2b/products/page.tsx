@@ -11,10 +11,10 @@ import { ProductCard } from "@/components/product-card"
 import { DashboardHeader } from "@/components/dashboard-header"
 import { DashboardNav } from "@/components/dashboard-nav"
 import { Badge } from "@/components/ui/badge"
-import { useLanguage } from "@/contexts/language-context"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function ProductsPage() {
-  const { t } = useLanguage()
+  const { t } = useI18n()
   const [searchTerm, setSearchTerm] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("all")
   const [supplierFilter, setSupplierFilter] = useState("all")
