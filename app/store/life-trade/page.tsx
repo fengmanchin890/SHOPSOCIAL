@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MembershipStatus } from "@/components/store/MembershipStatus"
 import { AddActivityForm } from "@/components/store/AddActivityForm"
 import { useMembership } from "@/components/store/MembershipProvider"
-import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Video, Download, Shield, Clock, Target, Calendar } from "lucide-react"
+import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Video, Download, Shield, Clock, Target } from "lucide-react"
 import { useI18n } from "@/contexts/i18n-context"
 import { ActivityCard } from "@/components/store/ActivityCard"
 import { AddNewActivityDialog } from "@/components/store/AddNewActivityDialog"
@@ -22,9 +22,9 @@ export default function LifeTradePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [activeTab, setActiveTab] = useState("overview")
   const [showAddActivity, setShowAddActivity] = useState(false)
-  const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "culture" | "legal" | "healthcare" | "financial" | "transportation" | "daily">("food")
-  const { t, language, changeLanguage } = useI18n()
-  const [viewMoreType, setViewMoreType] = useState<"food" | "accommodation" | "travel" | "language" | "culture" | "legal" | "healthcare" | "financial" | "transportation" | "daily" | null>(null)
+  const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "culture">("food")
+  const { t, language } = useI18n()
+  const [viewMoreType, setViewMoreType] = useState<"food" | "accommodation" | "travel" | "language" | "culture" | null>(null)
 
   // State for storing activities
   const [activities, setActivities] = useState({
@@ -172,151 +172,6 @@ export default function LifeTradePage() {
         location: "Công viên Lê Văn Tám",
         type: "culture" as const
       }
-    ],
-    legal: [
-      {
-        id: "legal-1",
-        title: "Tư vấn visa và giấy phép lao động",
-        description: "Hỗ trợ thủ tục visa, gia hạn và đổi loại visa, giấy phép lao động",
-        image: "/placeholder.svg?height=400&width=400&text=Tư+vấn+visa",
-        time: "Thứ Hai - Thứ Sáu, 9:00-17:00",
-        location: "Quận 1, TP.HCM",
-        type: "legal" as const
-      },
-      {
-        id: "legal-2",
-        title: "Dịch vụ công chứng đa ngôn ngữ",
-        description: "Dịch và công chứng tài liệu sang nhiều ngôn ngữ khác nhau",
-        image: "/placeholder.svg?height=400&width=400&text=Công+chứng",
-        time: "Thứ Hai - Thứ Bảy, 8:00-17:00",
-        location: "Quận 3, TP.HCM",
-        type: "legal" as const
-      },
-      {
-        id: "legal-3",
-        title: "Tư vấn hôn nhân quốc tế",
-        description: "Hỗ trợ pháp lý cho các cặp đôi hôn nhân quốc tế",
-        image: "/placeholder.svg?height=400&width=400&text=Hôn+nhân+quốc+tế",
-        time: "Thứ Ba & Thứ Năm, 14:00-17:00",
-        location: "Quận 2, TP.HCM",
-        type: "legal" as const
-      }
-    ],
-    healthcare: [
-      {
-        id: "health-1",
-        title: "Bác sĩ nói tiếng Anh",
-        description: "Danh sách bác sĩ có thể giao tiếp bằng tiếng Anh tại các bệnh viện",
-        image: "/placeholder.svg?height=400&width=400&text=Bác+sĩ+tiếng+Anh",
-        time: "Cập nhật hàng tháng",
-        location: "Toàn TP.HCM",
-        type: "healthcare" as const
-      },
-      {
-        id: "health-2",
-        title: "Hướng dẫn bảo hiểm y tế",
-        description: "Thông tin về đăng ký và sử dụng bảo hiểm y tế cho người nước ngoài",
-        image: "/placeholder.svg?height=400&width=400&text=Bảo+hiểm+y+tế",
-        time: "Hội thảo: Thứ Bảy, 10:00",
-        location: "Trực tuyến",
-        type: "healthcare" as const
-      },
-      {
-        id: "health-3",
-        title: "Dịch vụ phiên dịch y tế",
-        description: "Phiên dịch viên đồng hành cùng bạn trong các cuộc hẹn y tế",
-        image: "/placeholder.svg?height=400&width=400&text=Phiên+dịch+y+tế",
-        time: "Theo lịch hẹn",
-        location: "Các bệnh viện tại TP.HCM",
-        type: "healthcare" as const
-      }
-    ],
-    financial: [
-      {
-        id: "finance-1",
-        title: "Mở tài khoản ngân hàng cho người nước ngoài",
-        description: "Hướng dẫn thủ tục và hỗ trợ mở tài khoản tại các ngân hàng địa phương",
-        image: "/placeholder.svg?height=400&width=400&text=Tài+khoản+ngân+hàng",
-        time: "Thứ Hai - Thứ Sáu, 9:00-16:00",
-        location: "Các chi nhánh ngân hàng",
-        type: "financial" as const
-      },
-      {
-        id: "finance-2",
-        title: "Tư vấn chuyển tiền quốc tế",
-        description: "So sánh các dịch vụ chuyển tiền và tư vấn phương thức tối ưu",
-        image: "/placeholder.svg?height=400&width=400&text=Chuyển+tiền+quốc+tế",
-        time: "Thứ Ba & Thứ Năm, 10:00-15:00",
-        location: "Quận 1, TP.HCM",
-        type: "financial" as const
-      },
-      {
-        id: "finance-3",
-        title: "Hỗ trợ khai thuế cho người nước ngoài",
-        description: "Hướng dẫn khai báo và nộp thuế thu nhập cá nhân tại Việt Nam",
-        image: "/placeholder.svg?height=400&width=400&text=Khai+thuế",
-        time: "Mùa khai thuế (Q1 hàng năm)",
-        location: "Trực tuyến và trực tiếp",
-        type: "financial" as const
-      }
-    ],
-    transportation: [
-      {
-        id: "transport-1",
-        title: "Hướng dẫn đổi bằng lái xe quốc tế",
-        description: "Thủ tục và hỗ trợ đổi bằng lái xe quốc tế sang bằng Việt Nam",
-        image: "/placeholder.svg?height=400&width=400&text=Bằng+lái+xe",
-        time: "Thứ Hai - Thứ Sáu, 8:00-11:00",
-        location: "Sở GTVT TP.HCM",
-        type: "transportation" as const
-      },
-      {
-        id: "transport-2",
-        title: "Thuê xe máy dài hạn",
-        description: "Dịch vụ cho thuê xe máy dài hạn với giá ưu đãi cho người nước ngoài",
-        image: "/placeholder.svg?height=400&width=400&text=Thuê+xe+máy",
-        time: "Hàng ngày, 8:00-18:00",
-        location: "Quận 1 & Quận 3, TP.HCM",
-        type: "transportation" as const
-      },
-      {
-        id: "transport-3",
-        title: "Hướng dẫn sử dụng giao thông công cộng",
-        description: "Thông tin về hệ thống xe buýt, tàu điện và các phương tiện công cộng",
-        image: "/placeholder.svg?height=400&width=400&text=Giao+thông+công+cộng",
-        time: "Tour hướng dẫn: Thứ Bảy, 9:00",
-        location: "Bến xe Miền Đông",
-        type: "transportation" as const
-      }
-    ],
-    daily: [
-      {
-        id: "daily-1",
-        title: "Siêu thị sản phẩm quốc tế",
-        description: "Danh sách các siêu thị có sản phẩm nhập khẩu và thực phẩm quốc tế",
-        image: "/placeholder.svg?height=400&width=400&text=Siêu+thị+quốc+tế",
-        time: "Cập nhật hàng tháng",
-        location: "Toàn TP.HCM",
-        type: "daily" as const
-      },
-      {
-        id: "daily-2",
-        title: "Dịch vụ sửa chữa nhà cửa",
-        description: "Thợ sửa chữa có thể giao tiếp bằng tiếng Anh cho các vấn đề nhà cửa",
-        image: "/placeholder.svg?height=400&width=400&text=Sửa+chữa+nhà",
-        time: "Theo lịch hẹn",
-        location: "Toàn TP.HCM",
-        type: "daily" as const
-      },
-      {
-        id: "daily-3",
-        title: "Salon tóc đa ngôn ngữ",
-        description: "Các salon tóc có nhân viên nói được tiếng Anh và các ngôn ngữ khác",
-        image: "/placeholder.svg?height=400&width=400&text=Salon+tóc",
-        time: "Theo lịch hẹn",
-        location: "Quận 1, 2, 7, TP.HCM",
-        type: "daily" as const
-      }
     ]
   })
 
@@ -331,7 +186,7 @@ export default function LifeTradePage() {
     }
   }, [router])
 
-  const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "culture" | "legal" | "healthcare" | "financial" | "transportation" | "daily") => {
+  const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
     if (!isPremiumMember) {
       return
     }
@@ -348,85 +203,49 @@ export default function LifeTradePage() {
     setShowAddActivity(false)
   }
 
-  const handleViewMore = (type: "food" | "accommodation" | "travel" | "language" | "culture" | "legal" | "healthcare" | "financial" | "transportation" | "daily") => {
+  const handleViewMore = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
     setViewMoreType(type)
   }
 
-  const getViewMoreTitle = (type: "food" | "accommodation" | "travel" | "language" | "culture" | "legal" | "healthcare" | "financial" | "transportation" | "daily") => {
+  const getViewMoreTitle = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
     switch (type) {
       case "food":
-        return language === "vi" ? "Tất cả trải nghiệm ẩm thực" : language === "zh-TW" ? "所有美食體驗" : "All Food Experiences"
+        return language === "vi" 
+          ? "Tất cả trải nghiệm ẩm thực" 
+          : language === "zh-TW" 
+            ? "所有美食體驗" 
+            : "All Food Experiences"
       case "accommodation":
-        return language === "vi" ? "Tất cả chỗ ở" : language === "zh-TW" ? "所有住宿" : "All Accommodations"
+        return language === "vi" 
+          ? "Tất cả chỗ ở" 
+          : language === "zh-TW" 
+            ? "所有住宿" 
+            : "All Accommodations"
       case "travel":
-        return language === "vi" ? "Tất cả hoạt động cùng đi" : language === "zh-TW" ? "所有一起探索活動" : "All Travel Activities"
+        return language === "vi" 
+          ? "Tất cả hoạt động cùng đi" 
+          : language === "zh-TW" 
+            ? "所有一起探索活動" 
+            : "All Travel Activities"
       case "language":
-        return language === "vi" ? "Tất cả lớp học ngôn ngữ" : language === "zh-TW" ? "所有語言課程" : "All Language Classes"
+        return language === "vi" 
+          ? "Tất cả lớp học ngôn ngữ" 
+          : language === "zh-TW" 
+            ? "所有語言課程" 
+            : "All Language Classes"
       case "culture":
-        return language === "vi" ? "Tất cả tài nguyên văn hóa" : language === "zh-TW" ? "所有文化資源" : "All Cultural Resources"
-      case "legal":
-        return language === "vi" ? "Tất cả dịch vụ pháp lý" : language === "zh-TW" ? "所有法律服務" : "All Legal Services"
-      case "healthcare":
-        return language === "vi" ? "Tất cả dịch vụ y tế" : language === "zh-TW" ? "所有醫療服務" : "All Healthcare Services"
-      case "financial":
-        return language === "vi" ? "Tất cả dịch vụ tài chính" : language === "zh-TW" ? "所有金融服務" : "All Financial Services"
-      case "transportation":
-        return language === "vi" ? "Tất cả dịch vụ giao thông" : language === "zh-TW" ? "所有交通服務" : "All Transportation Services"
-      case "daily":
-        return language === "vi" ? "Tất cả dịch vụ đời sống" : language === "zh-TW" ? "所有日常生活服務" : "All Daily Life Services"
+        return language === "vi" 
+          ? "Tất cả tài nguyên văn hóa" 
+          : language === "zh-TW" 
+            ? "所有文化資源" 
+            : "All Cultural Resources"
       default:
-        return language === "vi" ? "Tất cả hoạt động" : language === "zh-TW" ? "所有活動" : "All Activities"
+        return language === "vi" 
+          ? "Tất cả hoạt động" 
+          : language === "zh-TW" 
+            ? "所有活動" 
+            : "All Activities"
     }
-  }
-
-  // Language switcher component
-  const LanguageSwitcher = () => {
-    return (
-      <div className="flex justify-center mb-6">
-        <div className="bg-white rounded-lg shadow-sm p-2 flex space-x-2">
-          <Button 
-            variant={language === "vi" ? "default" : "outline"} 
-            size="sm" 
-            onClick={() => changeLanguage("vi")}
-            className="flex items-center gap-1"
-          >
-            🇻🇳 Tiếng Việt
-          </Button>
-          <Button 
-            variant={language === "zh-TW" ? "default" : "outline"} 
-            size="sm" 
-            onClick={() => changeLanguage("zh-TW")}
-            className="flex items-center gap-1"
-          >
-            🇹🇼 繁體中文
-          </Button>
-          <Button 
-            variant={language === "en" ? "default" : "outline"} 
-            size="sm" 
-            onClick={() => changeLanguage("en")}
-            className="flex items-center gap-1"
-          >
-            🇺🇸 English
-          </Button>
-          <Button 
-            variant={language === "th" ? "default" : "outline"} 
-            size="sm" 
-            onClick={() => changeLanguage("th")}
-            className="flex items-center gap-1"
-          >
-            🇹🇭 ภาษาไทย
-          </Button>
-          <Button 
-            variant={language === "hi" ? "default" : "outline"} 
-            size="sm" 
-            onClick={() => changeLanguage("hi")}
-            className="flex items-center gap-1"
-          >
-            🇮🇳 हिन्दी
-          </Button>
-        </div>
-      </div>
-    )
   }
 
   if (!isLoggedIn) {
@@ -445,22 +264,14 @@ export default function LifeTradePage() {
         <MembershipStatus />
       </div>
 
-      {/* Language Switcher */}
-      <LanguageSwitcher />
-
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-        <TabsList className="grid grid-cols-2 md:grid-cols-11 gap-2">
+        <TabsList className="grid grid-cols-2 md:grid-cols-6 gap-2">
           <TabsTrigger value="overview">{t("lifeTrade.overview")}</TabsTrigger>
           <TabsTrigger value="food">{t("lifeTrade.food")}</TabsTrigger>
           <TabsTrigger value="accommodation">{t("lifeTrade.accommodation")}</TabsTrigger>
           <TabsTrigger value="travel">{t("lifeTrade.travel")}</TabsTrigger>
           <TabsTrigger value="language">{t("lifeTrade.language")}</TabsTrigger>
           <TabsTrigger value="culture">{t("lifeTrade.culture")}</TabsTrigger>
-          <TabsTrigger value="legal">Pháp lý</TabsTrigger>
-          <TabsTrigger value="healthcare">Y tế</TabsTrigger>
-          <TabsTrigger value="financial">Tài chính</TabsTrigger>
-          <TabsTrigger value="transportation">Giao thông</TabsTrigger>
-          <TabsTrigger value="daily">Đời sống</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -497,7 +308,6 @@ export default function LifeTradePage() {
               <Card>
                 <CardHeader>
                   <CardTitle>{t("features.title")}</CardTitle>
-                  <CardDescription>{t("platform.description")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1118,249 +928,6 @@ export default function LifeTradePage() {
           <div className="flex justify-center mt-4">
             <Button variant="outline" onClick={() => handleViewMore("culture")}>
               {t("button.viewMore")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
-        {/* Legal Services Tab */}
-        <TabsContent value="legal" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">Dịch vụ pháp lý</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("legal")}>
-                <Plus className="h-4 w-4 mr-2" />
-                Thêm dịch vụ pháp lý
-              </Button>
-            )}
-          </div>
-          
-          <Card className="bg-gradient-to-r from-indigo-50 to-blue-50 border-indigo-100">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="md:w-1/3">
-                  <h3 className="text-xl font-semibold mb-4 text-indigo-800">Hỗ trợ pháp lý toàn diện</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <FileText className="h-5 w-5 text-indigo-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Tư vấn visa và giấy tờ</p>
-                        <p className="text-sm text-gray-600">Hỗ trợ thủ tục visa, gia hạn và đổi loại visa, giấy phép lao động</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <Shield className="h-5 w-5 text-indigo-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Bảo vệ quyền lợi</p>
-                        <p className="text-sm text-gray-600">Tư vấn pháp lý về quyền và nghĩa vụ của người nước ngoài tại Việt Nam</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <Calendar className="h-5 w-5 text-indigo-600 mt-0.5" />
-                      <div>
-                        <p className="font-medium">Lịch hẹn ưu tiên</p>
-                        <p className="text-sm text-gray-600">Đặt lịch hẹn ưu tiên với các cơ quan chức năng và luật sư</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Dịch+vụ+công+chứng" 
-                        alt="Dịch vụ công chứng"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Dịch vụ công chứng đa ngôn ngữ</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Dịch và công chứng tài liệu</li>
-                        <li>• Hỗ trợ nhiều ngôn ngữ</li>
-                        <li>• Dịch vụ nhanh chóng</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="overflow-hidden">
-                    <div className="aspect-video bg-gray-100 relative">
-                      <Image 
-                        src="/placeholder.svg?height=200&width=400&text=Tư+vấn+hôn+nhân" 
-                        alt="Tư vấn hôn nhân"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold mb-2">Tư vấn hôn nhân quốc tế</h4>
-                      <ul className="text-sm space-y-1 text-gray-600">
-                        <li>• Thủ tục đăng ký kết hôn</li>
-                        <li>• Quyền lợi pháp lý</li>
-                        <li>• Tư vấn di trú gia đình</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.legal.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="legal"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("legal")}>
-              Xem thêm
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
-        {/* Healthcare Tab */}
-        <TabsContent value="healthcare" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">Dịch vụ y tế</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("healthcare")}>
-                <Plus className="h-4 w-4 mr-2" />
-                Thêm dịch vụ y tế
-              </Button>
-            )}
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.healthcare.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="healthcare"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("healthcare")}>
-              Xem thêm
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
-        {/* Financial Services Tab */}
-        <TabsContent value="financial" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">Dịch vụ tài chính</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("financial")}>
-                <Plus className="h-4 w-4 mr-2" />
-                Thêm dịch vụ tài chính
-              </Button>
-            )}
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.financial.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="financial"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("financial")}>
-              Xem thêm
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
-        {/* Transportation Tab */}
-        <TabsContent value="transportation" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">Dịch vụ giao thông</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("transportation")}>
-                <Plus className="h-4 w-4 mr-2" />
-                Thêm dịch vụ giao thông
-              </Button>
-            )}
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.transportation.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="transportation"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("transportation")}>
-              Xem thêm
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </div>
-        </TabsContent>
-
-        {/* Daily Life Services Tab */}
-        <TabsContent value="daily" className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">Dịch vụ đời sống hàng ngày</h2>
-            {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("daily")}>
-                <Plus className="h-4 w-4 mr-2" />
-                Thêm dịch vụ đời sống
-              </Button>
-            )}
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {activities.daily.map((activity) => (
-              <ActivityCard
-                key={activity.id}
-                title={activity.title}
-                description={activity.description}
-                image={activity.image}
-                time={activity.time}
-                location={activity.location}
-                type="daily"
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-4">
-            <Button variant="outline" onClick={() => handleViewMore("daily")}>
-              Xem thêm
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
