@@ -11,7 +11,6 @@ import type { Product } from "@/lib/mock-data"
 import { useCart } from "./CartProvider"
 import { useWishlist } from "./WishlistProvider"
 import { useCompare } from "./CompareProvider"
-import { toast } from "@/hooks/use-toast"
 
 interface ProductCardProps {
   product: Product
@@ -30,12 +29,6 @@ export function ProductCard({ product }: ProductCardProps) {
       name: product.name,
       price: product.price,
       image: product.image,
-      quantity: 1
-    })
-    
-    toast({
-      title: "Đã thêm vào giỏ hàng",
-      description: `Sản phẩm "${product.name}" đã được thêm vào giỏ hàng`,
     })
   }
 
@@ -45,10 +38,6 @@ export function ProductCard({ product }: ProductCardProps) {
 
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id)
-      toast({
-        title: "Đã xóa khỏi danh sách yêu thích",
-        description: `Sản phẩm "${product.name}" đã được xóa khỏi danh sách yêu thích`,
-      })
     } else {
       addToWishlist({
         id: product.id,
@@ -58,10 +47,6 @@ export function ProductCard({ product }: ProductCardProps) {
         originalPrice: product.originalPrice,
         category: product.category,
       })
-      toast({
-        title: "Đã thêm vào danh sách yêu thích",
-        description: `Sản phẩm "${product.name}" đã được thêm vào danh sách yêu thích`,
-      })
     }
   }
 
@@ -69,42 +54,22 @@ export function ProductCard({ product }: ProductCardProps) {
     e.preventDefault()
     e.stopPropagation()
 
-    if (isInCompare(product.id)) {
-      toast({
-        title: "Sản phẩm đã có trong danh sách so sánh",
-        description: "Sản phẩm này đã được thêm vào danh sách so sánh trước đó",
+    if (!isInCompare(product.id) && canAddMore) {
+      addToCompare({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        originalPrice: product.originalPrice,
+        image: product.image,
+        category: product.category,
+        rating: product.rating,
+        reviewCount: product.reviewCount,
+        features: product.features,
+        sizes: product.sizes,
+        colors: product.colors,
+        inStock: product.inStock,
       })
-      return
     }
-    
-    if (!canAddMore) {
-      toast({
-        title: "Danh sách so sánh đã đầy",
-        description: "Bạn chỉ có thể so sánh tối đa 4 sản phẩm cùng lúc",
-        variant: "destructive",
-      })
-      return
-    }
-    
-    addToCompare({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      originalPrice: product.originalPrice,
-      image: product.image,
-      category: product.category,
-      rating: product.rating,
-      reviewCount: product.reviewCount,
-      features: product.features,
-      sizes: product.sizes,
-      colors: product.colors,
-      inStock: product.inStock,
-    })
-    
-    toast({
-      title: "Đã thêm vào danh sách so sánh",
-      description: `Sản phẩm "${product.name}" đã được thêm vào danh sách so sánh`,
-    })
   }
 
   const inWishlist = isInWishlist(product.id)

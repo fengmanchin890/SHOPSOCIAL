@@ -11,7 +11,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useB2B } from "@/components/store/B2BProvider"
-import { toast } from "@/hooks/use-toast"
 
 export default function QuotesPage() {
   const { quotes, products, users, createQuote, updateQuote, sendQuote } = useB2B()
@@ -85,11 +84,6 @@ export default function QuotesPage() {
       validUntil: "",
       notes: "",
     })
-    
-    toast({
-      title: "Báo giá đã được tạo",
-      description: "Báo giá mới đã được tạo thành công",
-    })
   }
 
   const handleMarginChange = (margin: number) => {
@@ -101,52 +95,35 @@ export default function QuotesPage() {
     const margin = calculateMargin(newQuote.costPrice, sellingPrice)
     setNewQuote((prev) => ({ ...prev, sellingPrice, margin }))
   }
-  
-  const handleSendQuote = (quoteId: string, customerId: string) => {
-    if (!customerId) {
-      toast({
-        title: "Không thể gửi báo giá",
-        description: "Vui lòng chọn khách hàng trước khi gửi báo giá",
-        variant: "destructive",
-      })
-      return
-    }
-    
-    sendQuote(quoteId, customerId)
-    toast({
-      title: "Đã gửi báo giá",
-      description: "Báo giá đã được gửi thành công đến khách hàng",
-    })
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Quản lý báo giá</h1>
-          <p className="text-gray-600 mt-2">Quản lý tất cả yêu cầu báo giá và phản hồi</p>
+          <h1 className="text-3xl font-bold text-gray-900">報價管理</h1>
+          <p className="text-gray-600 mt-2">管理所有報價請求和回覆</p>
         </div>
         <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
           <DialogTrigger asChild>
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Tạo báo giá mới
+              新建報價
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Tạo báo giá mới</DialogTitle>
+              <DialogTitle>創建新報價</DialogTitle>
             </DialogHeader>
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="product">Sản phẩm</Label>
+                  <Label htmlFor="product">產品</Label>
                   <Select
                     value={newQuote.productId}
                     onValueChange={(value) => setNewQuote((prev) => ({ ...prev, productId: value }))}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Chọn sản phẩm" />
+                      <SelectValue placeholder="選擇產品" />
                     </SelectTrigger>
                     <SelectContent>
                       {products.map((product) => (
@@ -158,13 +135,13 @@ export default function QuotesPage() {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="supplier">Nhà cung cấp</Label>
+                  <Label htmlFor="supplier">供應商</Label>
                   <Select
                     value={newQuote.supplierId}
                     onValueChange={(value) => setNewQuote((prev) => ({ ...prev, supplierId: value }))}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Chọn nhà cung cấp" />
+                      <SelectValue placeholder="選擇供應商" />
                     </SelectTrigger>
                     <SelectContent>
                       {suppliers.map((supplier) => (
@@ -179,13 +156,13 @@ export default function QuotesPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="customer">Khách hàng</Label>
+                  <Label htmlFor="customer">客戶</Label>
                   <Select
                     value={newQuote.customerId}
                     onValueChange={(value) => setNewQuote((prev) => ({ ...prev, customerId: value }))}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Chọn khách hàng" />
+                      <SelectValue placeholder="選擇客戶" />
                     </SelectTrigger>
                     <SelectContent>
                       {customers.map((customer) => (
@@ -197,7 +174,7 @@ export default function QuotesPage() {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="quantity">Số lượng</Label>
+                  <Label htmlFor="quantity">數量</Label>
                   <Input
                     id="quantity"
                     type="number"
@@ -209,7 +186,7 @@ export default function QuotesPage() {
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <Label htmlFor="costPrice">Giá nhập (USD)</Label>
+                  <Label htmlFor="costPrice">成本價 (USD)</Label>
                   <Input
                     id="costPrice"
                     type="number"
@@ -219,7 +196,7 @@ export default function QuotesPage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="margin">Tỷ suất lợi nhuận (%)</Label>
+                  <Label htmlFor="margin">利潤率 (%)</Label>
                   <Input
                     id="margin"
                     type="number"
@@ -229,7 +206,7 @@ export default function QuotesPage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="sellingPrice">Giá bán (USD)</Label>
+                  <Label htmlFor="sellingPrice">售價 (USD)</Label>
                   <Input
                     id="sellingPrice"
                     type="number"
@@ -242,7 +219,7 @@ export default function QuotesPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="terms">Điều khoản thương mại</Label>
+                  <Label htmlFor="terms">貿易條款</Label>
                   <Select
                     value={newQuote.terms}
                     onValueChange={(value: any) => setNewQuote((prev) => ({ ...prev, terms: value }))}
@@ -251,15 +228,15 @@ export default function QuotesPage() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="EXW">EXW (Giao tại xưởng)</SelectItem>
-                      <SelectItem value="FOB">FOB (Giao tại cảng đi)</SelectItem>
-                      <SelectItem value="CIF">CIF (Giá CIF)</SelectItem>
-                      <SelectItem value="DDP">DDP (Giao hàng đã nộp thuế)</SelectItem>
+                      <SelectItem value="EXW">EXW (工廠交貨)</SelectItem>
+                      <SelectItem value="FOB">FOB (離岸價)</SelectItem>
+                      <SelectItem value="CIF">CIF (到岸價)</SelectItem>
+                      <SelectItem value="DDP">DDP (完稅後交貨)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="validUntil">Có hiệu lực đến</Label>
+                  <Label htmlFor="validUntil">有效期至</Label>
                   <Input
                     id="validUntil"
                     type="date"
@@ -270,12 +247,12 @@ export default function QuotesPage() {
               </div>
 
               <div>
-                <Label htmlFor="notes">Ghi chú</Label>
+                <Label htmlFor="notes">備註</Label>
                 <Textarea
                   id="notes"
                   value={newQuote.notes}
                   onChange={(e) => setNewQuote((prev) => ({ ...prev, notes: e.target.value }))}
-                  placeholder="Nhập ghi chú báo giá..."
+                  placeholder="輸入報價備註..."
                 />
               </div>
 
@@ -284,19 +261,19 @@ export default function QuotesPage() {
                   <CardContent className="p-4">
                     <div className="flex items-center space-x-2 mb-2">
                       <Calculator className="h-4 w-4 text-blue-600" />
-                      <span className="font-medium text-blue-900">Tính toán lợi nhuận</span>
+                      <span className="font-medium text-blue-900">利潤計算</span>
                     </div>
                     <div className="grid grid-cols-3 gap-4 text-sm">
                       <div>
-                        <span className="text-blue-700">Tổng giá nhập:</span>
+                        <span className="text-blue-700">總成本:</span>
                         <p className="font-medium">${(newQuote.costPrice * newQuote.quantity).toLocaleString()}</p>
                       </div>
                       <div>
-                        <span className="text-blue-700">Tổng giá bán:</span>
+                        <span className="text-blue-700">總售價:</span>
                         <p className="font-medium">${(newQuote.sellingPrice * newQuote.quantity).toLocaleString()}</p>
                       </div>
                       <div>
-                        <span className="text-blue-700">Tổng lợi nhuận:</span>
+                        <span className="text-blue-700">總利潤:</span>
                         <p className="font-medium text-green-600">
                           ${((newQuote.sellingPrice - newQuote.costPrice) * newQuote.quantity).toLocaleString()}
                         </p>
@@ -308,9 +285,9 @@ export default function QuotesPage() {
 
               <div className="flex justify-end space-x-2">
                 <Button variant="outline" onClick={() => setShowCreateDialog(false)}>
-                  Hủy
+                  取消
                 </Button>
-                <Button onClick={handleCreateQuote}>Tạo báo giá</Button>
+                <Button onClick={handleCreateQuote}>創建報價</Button>
               </div>
             </div>
           </DialogContent>
@@ -322,7 +299,7 @@ export default function QuotesPage() {
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
-            placeholder="Tìm kiếm sản phẩm, nhà cung cấp hoặc khách hàng..."
+            placeholder="搜尋產品、供應商或客戶..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -333,21 +310,21 @@ export default function QuotesPage() {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Tất cả trạng thái</SelectItem>
-            <SelectItem value="draft">Bản nháp</SelectItem>
-            <SelectItem value="sent">Đã gửi</SelectItem>
-            <SelectItem value="accepted">Đã chấp nhận</SelectItem>
-            <SelectItem value="rejected">Đã từ chối</SelectItem>
-            <SelectItem value="expired">Đã hết hạn</SelectItem>
+            <SelectItem value="all">所有狀態</SelectItem>
+            <SelectItem value="draft">草稿</SelectItem>
+            <SelectItem value="sent">已發送</SelectItem>
+            <SelectItem value="accepted">已接受</SelectItem>
+            <SelectItem value="rejected">已拒絕</SelectItem>
+            <SelectItem value="expired">已過期</SelectItem>
           </SelectContent>
         </Select>
         <Button variant="outline">
           <Filter className="h-4 w-4 mr-2" />
-          Lọc
+          篩選
         </Button>
         <Button variant="outline">
           <Download className="h-4 w-4 mr-2" />
-          Xuất
+          匯出
         </Button>
       </div>
 
@@ -369,11 +346,11 @@ export default function QuotesPage() {
                   <div>
                     <h3 className="text-lg font-semibold">{product?.name}</h3>
                     <p className="text-sm text-gray-600">
-                      Báo giá #{quote.id.slice(-6)} • Ngày tạo: {new Date(quote.createdAt).toLocaleDateString()}
+                      報價 #{quote.id.slice(-6)} • 創建於 {new Date(quote.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    {isExpiringSoon && quote.status === "sent" && <Badge variant="destructive">Sắp hết hạn</Badge>}
+                    {isExpiringSoon && quote.status === "sent" && <Badge variant="destructive">即將過期</Badge>}
                     <Badge
                       variant={
                         quote.status === "sent"
@@ -386,58 +363,58 @@ export default function QuotesPage() {
                       }
                     >
                       {quote.status === "sent"
-                        ? "Đã gửi"
+                        ? "已發送"
                         : quote.status === "accepted"
-                          ? "Đã chấp nhận"
+                          ? "已接受"
                           : quote.status === "draft"
-                            ? "Bản nháp"
+                            ? "草稿"
                             : quote.status === "rejected"
-                              ? "Đã từ chối"
-                              : "Đã hết hạn"}
+                              ? "已拒絕"
+                              : "已過期"}
                     </Badge>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div>
-                    <span className="text-sm text-gray-500">Nhà cung cấp</span>
+                    <span className="text-sm text-gray-500">供應商</span>
                     <p className="font-medium">{supplier?.company}</p>
                     <p className="text-xs text-gray-500">{supplier?.country}</p>
                   </div>
                   <div>
-                    <span className="text-sm text-gray-500">Khách hàng</span>
-                    <p className="font-medium">{customer?.company || "Chưa phân bổ"}</p>
+                    <span className="text-sm text-gray-500">客戶</span>
+                    <p className="font-medium">{customer?.company || "待分配"}</p>
                     <p className="text-xs text-gray-500">{customer?.country}</p>
                   </div>
                   <div>
-                    <span className="text-sm text-gray-500">Số lượng</span>
-                    <p className="font-medium">{quote.quantity.toLocaleString()} sản phẩm</p>
-                    <p className="text-xs text-gray-500">Điều khoản: {quote.terms}</p>
+                    <span className="text-sm text-gray-500">數量</span>
+                    <p className="font-medium">{quote.quantity.toLocaleString()} 件</p>
+                    <p className="text-xs text-gray-500">{quote.terms} 條款</p>
                   </div>
                   <div>
-                    <span className="text-sm text-gray-500">Hiệu lực đến</span>
+                    <span className="text-sm text-gray-500">有效期</span>
                     <p className="font-medium">{new Date(quote.validUntil).toLocaleDateString()}</p>
                     <p className={`text-xs ${isExpiringSoon ? "text-red-500" : "text-gray-500"}`}>
-                      {isExpiringSoon ? "Sắp hết hạn" : "Còn hiệu lực"}
+                      {isExpiringSoon ? "即將過期" : "有效"}
                     </p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <span className="text-sm text-gray-500">Giá nhập</span>
+                    <span className="text-sm text-gray-500">成本價</span>
                     <p className="font-medium">${quote.costPrice}</p>
                   </div>
                   <div>
-                    <span className="text-sm text-gray-500">Giá bán</span>
-                    <p className="font-medium">${quote.sellingPrice || "Chưa thiết lập"}</p>
+                    <span className="text-sm text-gray-500">售價</span>
+                    <p className="font-medium">${quote.sellingPrice || "待設定"}</p>
                   </div>
                   <div>
-                    <span className="text-sm text-gray-500">Tỷ suất lợi nhuận</span>
+                    <span className="text-sm text-gray-500">利潤率</span>
                     <p className="font-medium text-green-600">{quote.margin?.toFixed(1) || 0}%</p>
                   </div>
                   <div>
-                    <span className="text-sm text-gray-500">Tổng lợi nhuận</span>
+                    <span className="text-sm text-gray-500">總利潤</span>
                     <p className="font-medium text-green-600">
                       $
                       {quote.sellingPrice
@@ -455,7 +432,7 @@ export default function QuotesPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-gray-500">
-                    Tổng giá trị:{" "}
+                    總金額:{" "}
                     <span className="font-medium text-gray-900">
                       $
                       {quote.sellingPrice
@@ -467,12 +444,12 @@ export default function QuotesPage() {
                   <div className="flex space-x-2">
                     <Button size="sm" variant="outline">
                       <Edit className="h-4 w-4 mr-1" />
-                      Chỉnh sửa
+                      編輯
                     </Button>
                     {quote.status === "draft" && (
-                      <Button size="sm" onClick={() => handleSendQuote(quote.id, quote.customerId || "")}>
+                      <Button size="sm" onClick={() => sendQuote(quote.id, quote.customerId || "")}>
                         <Send className="h-4 w-4 mr-1" />
-                        Gửi
+                        發送
                       </Button>
                     )}
                     <Button size="sm" variant="outline">
@@ -496,11 +473,11 @@ export default function QuotesPage() {
             <div className="text-gray-400 mb-4">
               <FileText className="h-12 w-12 mx-auto" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Chưa có báo giá</h3>
-            <p className="text-gray-600 mb-4">Bạn chưa tạo báo giá nào, nhấn nút ở trên để bắt đầu</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">暫無報價</h3>
+            <p className="text-gray-600 mb-4">還沒有創建任何報價，點擊上方按鈕開始創建</p>
             <Button onClick={() => setShowCreateDialog(true)}>
               <Plus className="h-4 w-4 mr-2" />
-              Tạo báo giá đầu tiên
+              創建第一個報價
             </Button>
           </CardContent>
         </Card>

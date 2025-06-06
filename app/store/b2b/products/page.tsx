@@ -12,7 +12,6 @@ import { DashboardHeader } from "@/components/dashboard-header"
 import { DashboardNav } from "@/components/dashboard-nav"
 import { Badge } from "@/components/ui/badge"
 import { useLanguage } from "@/contexts/language-context"
-import { toast } from "@/hooks/use-toast"
 
 export default function ProductsPage() {
   const { t } = useLanguage()
@@ -42,129 +41,115 @@ export default function ProductsPage() {
   const [products, setProducts] = useState([
     {
       id: 1,
-      name: "Tai nghe Bluetooth không dây",
+      name: "Wireless Bluetooth Earbuds",
       price: 59.99,
       currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Tai+nghe",
+      image: "/placeholder.svg?height=200&width=200&text=Earbuds",
       supplier: "TechGadgets Co.",
       stock: 120,
       rating: 4.5,
-      category: "Điện tử",
+      category: "Electronics",
       status: "active",
       sku: "WBE-001",
-      description: "Tai nghe không dây chất lượng cao với khả năng khử tiếng ồn và thời lượng pin dài.",
+      description: "High-quality wireless earbuds with noise cancellation and long battery life.",
     },
     {
       id: 2,
-      name: "Đồng hồ thông minh Series 5",
+      name: "Smart Watch Series 5",
       price: 199.99,
       currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Đồng+hồ",
+      image: "/placeholder.svg?height=200&width=200&text=Smart+Watch",
       supplier: "WearableTech Inc.",
       stock: 45,
       rating: 4.8,
-      category: "Điện tử",
+      category: "Electronics",
       status: "active",
       sku: "SW-005",
-      description: "Đồng hồ thông minh cao cấp với tính năng theo dõi sức khỏe và GPS.",
+      description: "Advanced smartwatch with health monitoring and GPS features.",
     },
     {
       id: 3,
-      name: "Giá đỡ laptop có thể điều chỉnh",
+      name: "Laptop Stand Adjustable",
       price: 29.99,
       currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Giá+đỡ",
+      image: "/placeholder.svg?height=200&width=200&text=Laptop+Stand",
       supplier: "HomeOffice Supplies",
       stock: 230,
       rating: 4.3,
-      category: "Văn phòng",
+      category: "Office",
       status: "active",
       sku: "LS-003",
-      description: "Giá đỡ laptop tiện dụng với khả năng điều chỉnh chiều cao và góc nghiêng.",
+      description: "Ergonomic laptop stand with adjustable height and angle.",
     },
     {
       id: 4,
-      name: "Đế sạc không dây",
+      name: "Wireless Charging Pad",
       price: 24.99,
       currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Đế+sạc",
+      image: "/placeholder.svg?height=200&width=200&text=Charging+Pad",
       supplier: "PowerUp Electronics",
       stock: 180,
       rating: 4.2,
-      category: "Điện tử",
+      category: "Electronics",
       status: "active",
       sku: "WCP-002",
-      description: "Đế sạc không dây nhanh tương thích với tất cả thiết bị hỗ trợ Qi.",
+      description: "Fast wireless charging pad compatible with all Qi-enabled devices.",
     },
     {
       id: 5,
-      name: "Loa Bluetooth chống nước",
+      name: "Bluetooth Speaker Waterproof",
       price: 79.99,
       currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Loa",
+      image: "/placeholder.svg?height=200&width=200&text=Speaker",
       supplier: "AudioMax Ltd.",
       stock: 65,
       rating: 4.6,
-      category: "Điện tử",
+      category: "Electronics",
       status: "active",
       sku: "BS-004",
-      description: "Loa Bluetooth di động chống nước với thời lượng pin 20 giờ.",
+      description: "Portable waterproof Bluetooth speaker with 20-hour battery life.",
     },
     {
       id: 6,
-      name: "Ghế văn phòng công thái học",
+      name: "Ergonomic Office Chair",
       price: 249.99,
       currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Ghế",
+      image: "/placeholder.svg?height=200&width=200&text=Office+Chair",
       supplier: "ComfortSeating Co.",
       stock: 28,
       rating: 4.7,
-      category: "Văn phòng",
+      category: "Office",
       status: "low_stock",
       sku: "EOC-006",
-      description: "Ghế văn phòng cao cấp với hỗ trợ lưng và các tính năng điều chỉnh.",
+      description: "Premium ergonomic office chair with lumbar support and adjustable features.",
     },
     {
       id: 7,
-      name: "Webcam 4K kèm microphone",
+      name: "4K Webcam with Microphone",
       price: 89.99,
       currency: "USD",
       image: "/placeholder.svg?height=200&width=200&text=Webcam",
       supplier: "VideoTech Solutions",
       stock: 92,
       rating: 4.4,
-      category: "Điện tử",
+      category: "Electronics",
       status: "active",
       sku: "WC-007",
-      description: "Webcam độ phân giải cao 4K với microphone khử tiếng ồn.",
+      description: "High-definition 4K webcam with noise-cancelling microphone.",
     },
     {
       id: 8,
-      name: "Bàn phím cơ RGB",
+      name: "Mechanical Keyboard RGB",
       price: 129.99,
       currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Bàn+phím",
+      image: "/placeholder.svg?height=200&width=200&text=Keyboard",
       supplier: "GamerGear Inc.",
       stock: 54,
       rating: 4.9,
-      category: "Điện tử",
+      category: "Electronics",
       status: "active",
       sku: "MK-008",
-      description: "Bàn phím cơ gaming với đèn RGB tùy chỉnh và các phím có thể lập trình.",
-    },
-    {
-      id: 9,
-      name: "Khóa học tiếng Việt cơ bản",
-      price: 99.99,
-      currency: "USD",
-      image: "/placeholder.svg?height=200&width=200&text=Khóa+học",
-      supplier: "VietLanguage Center",
-      stock: 999,
-      rating: 4.8,
-      category: "Giáo dục",
-      status: "active",
-      sku: "VL-001",
-      description: "Khóa học tiếng Việt cơ bản dành cho người nước ngoài, bao gồm 40 giờ học trực tuyến.",
+      description: "Mechanical gaming keyboard with customizable RGB lighting and programmable keys.",
     },
   ])
 
@@ -174,7 +159,7 @@ export default function ProductsPage() {
       product.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.supplier.toLowerCase().includes(searchTerm.toLowerCase())
 
-    const matchesCategory = categoryFilter === "all" || product.category.toLowerCase() === categoryFilter.toLowerCase()
+    const matchesCategory = categoryFilter === "all" || product.category.toLowerCase() === categoryFilter
     const matchesSupplier =
       supplierFilter === "all" || product.supplier.toLowerCase().includes(supplierFilter.toLowerCase())
     const matchesStatus = statusFilter === "all" || product.status === statusFilter
@@ -228,10 +213,6 @@ export default function ProductsPage() {
       setProducts(products.filter((p) => p.id !== selectedProduct.id))
       setShowDeleteDialog(false)
       setSelectedProduct(null)
-      toast({
-        title: "Đã xóa sản phẩm",
-        description: `Sản phẩm "${selectedProduct.name}" đã được xóa thành công`,
-      })
     }
   }
 
@@ -255,10 +236,6 @@ export default function ProductsPage() {
       )
       setShowEditDialog(false)
       setSelectedProduct(null)
-      toast({
-        title: "Đã cập nhật sản phẩm",
-        description: `Sản phẩm "${editFormData.name}" đã được cập nhật thành công`,
-      })
     }
   }
 
@@ -274,7 +251,7 @@ export default function ProductsPage() {
             <h1 className="text-3xl font-bold">{t("products")}</h1>
             <Link href="/store/b2b/products/add">
               <Button>
-                <Plus className="mr-2 h-4 w-4" /> Thêm sản phẩm mới
+                <Plus className="mr-2 h-4 w-4" /> {t("add")} {t("products")}
               </Button>
             </Link>
           </div>
@@ -287,7 +264,7 @@ export default function ProductsPage() {
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="search"
-                      placeholder="Tìm sản phẩm..."
+                      placeholder={`${t("search")} ${t("products")}...`}
                       className="pl-8"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
@@ -296,26 +273,26 @@ export default function ProductsPage() {
                 </div>
                 <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Danh mục" />
+                    <SelectValue placeholder="Category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Tất cả danh mục</SelectItem>
-                    <SelectItem value="điện tử">Điện tử</SelectItem>
-                    <SelectItem value="văn phòng">Văn phòng</SelectItem>
-                    <SelectItem value="giáo dục">Giáo dục</SelectItem>
-                    <SelectItem value="dịch vụ">Dịch vụ</SelectItem>
+                    <SelectItem value="all">All Categories</SelectItem>
+                    <SelectItem value="electronics">Electronics</SelectItem>
+                    <SelectItem value="office">Office</SelectItem>
+                    <SelectItem value="home">Home & Kitchen</SelectItem>
+                    <SelectItem value="beauty">Beauty & Personal Care</SelectItem>
                   </SelectContent>
                 </Select>
                 <Select value={supplierFilter} onValueChange={setSupplierFilter}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Nhà cung cấp" />
+                    <SelectValue placeholder="Supplier" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Tất cả nhà cung cấp</SelectItem>
+                    <SelectItem value="all">All Suppliers</SelectItem>
                     <SelectItem value="techgadgets">TechGadgets Co.</SelectItem>
                     <SelectItem value="wearabletech">WearableTech Inc.</SelectItem>
                     <SelectItem value="homeoffice">HomeOffice Supplies</SelectItem>
-                    <SelectItem value="vietlanguage">VietLanguage Center</SelectItem>
+                    <SelectItem value="powerup">PowerUp Electronics</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -324,17 +301,17 @@ export default function ProductsPage() {
                 <div className="flex items-center space-x-2">
                   <Button variant="outline" size="sm">
                     <Filter className="mr-2 h-4 w-4" />
-                    Lọc thêm
+                    More Filters
                   </Button>
                   <Select value={statusFilter} onValueChange={setStatusFilter}>
                     <SelectTrigger className="w-[140px]">
-                      <SelectValue placeholder="Trạng thái" />
+                      <SelectValue placeholder={t("status")} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">Tất cả trạng thái</SelectItem>
-                      <SelectItem value="active">Đang bán</SelectItem>
-                      <SelectItem value="low_stock">Sắp hết hàng</SelectItem>
-                      <SelectItem value="out_of_stock">Hết hàng</SelectItem>
+                      <SelectItem value="all">All Status</SelectItem>
+                      <SelectItem value="active">{t("active")}</SelectItem>
+                      <SelectItem value="low_stock">Low Stock</SelectItem>
+                      <SelectItem value="out_of_stock">Out of Stock</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -357,15 +334,15 @@ export default function ProductsPage() {
                   </Button>
                   <Select value={sortBy} onValueChange={setSortBy}>
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Sắp xếp theo" />
+                      <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="newest">Mới nhất</SelectItem>
-                      <SelectItem value="price-low">Giá: Thấp đến cao</SelectItem>
-                      <SelectItem value="price-high">Giá: Cao đến thấp</SelectItem>
-                      <SelectItem value="name">Tên A-Z</SelectItem>
-                      <SelectItem value="stock">Tồn kho</SelectItem>
-                      <SelectItem value="rating">Đánh giá cao nhất</SelectItem>
+                      <SelectItem value="newest">Newest First</SelectItem>
+                      <SelectItem value="price-low">Price: Low to High</SelectItem>
+                      <SelectItem value="price-high">Price: High to Low</SelectItem>
+                      <SelectItem value="name">Name A-Z</SelectItem>
+                      <SelectItem value="stock">Stock Level</SelectItem>
+                      <SelectItem value="rating">Highest Rating</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -392,13 +369,13 @@ export default function ProductsPage() {
                   <table className="w-full">
                     <thead>
                       <tr className="border-b">
-                        <th className="text-left py-3 px-4 font-medium">Sản phẩm</th>
-                        <th className="text-left py-3 px-4 font-medium">Mã SKU</th>
-                        <th className="text-left py-3 px-4 font-medium">Giá</th>
-                        <th className="text-left py-3 px-4 font-medium">Tồn kho</th>
-                        <th className="text-left py-3 px-4 font-medium">Nhà cung cấp</th>
-                        <th className="text-left py-3 px-4 font-medium">Trạng thái</th>
-                        <th className="text-left py-3 px-4 font-medium">Thao tác</th>
+                        <th className="text-left py-3 px-4 font-medium">Product</th>
+                        <th className="text-left py-3 px-4 font-medium">SKU</th>
+                        <th className="text-left py-3 px-4 font-medium">Price</th>
+                        <th className="text-left py-3 px-4 font-medium">Stock</th>
+                        <th className="text-left py-3 px-4 font-medium">Supplier</th>
+                        <th className="text-left py-3 px-4 font-medium">{t("status")}</th>
+                        <th className="text-left py-3 px-4 font-medium">{t("actions")}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -425,8 +402,7 @@ export default function ProductsPage() {
                           <td className="py-3 px-4 text-sm">{product.supplier}</td>
                           <td className="py-3 px-4">
                             <Badge variant={product.status === "active" ? "default" : "secondary"}>
-                              {product.status === "active" ? "Đang bán" : 
-                               product.status === "low_stock" ? "Sắp hết hàng" : "Hết hàng"}
+                              {product.status.replace("_", " ")}
                             </Badge>
                           </td>
                           <td className="py-3 px-4">
@@ -454,7 +430,7 @@ export default function ProductsPage() {
           {sortedProducts.length === 0 && (
             <Card>
               <CardContent className="p-8 text-center">
-                <div className="text-muted-foreground">Không tìm thấy sản phẩm phù hợp với tiêu chí.</div>
+                <div className="text-muted-foreground">No products found matching your criteria.</div>
               </CardContent>
             </Card>
           )}
@@ -462,7 +438,7 @@ export default function ProductsPage() {
           <div className="mt-8 flex items-center justify-center">
             <div className="flex items-center space-x-2">
               <Button variant="outline" size="sm" disabled>
-                Trước
+                Previous
               </Button>
               <Button variant="outline" size="sm" className="bg-primary text-primary-foreground">
                 1
@@ -474,7 +450,7 @@ export default function ProductsPage() {
                 3
               </Button>
               <Button variant="outline" size="sm">
-                Sau
+                Next
               </Button>
             </div>
           </div>
@@ -486,7 +462,7 @@ export default function ProductsPage() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold">Xem chi tiết sản phẩm</h3>
+              <h3 className="text-lg font-bold">{t("view")} Product</h3>
               <Button variant="ghost" size="sm" onClick={() => setShowViewDialog(false)}>
                 <X className="h-4 w-4" />
               </Button>
@@ -501,38 +477,37 @@ export default function ProductsPage() {
               </div>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Tên sản phẩm</label>
+                  <label className="block text-sm font-medium mb-1">Product Name</label>
                   <p className="text-lg font-semibold">{selectedProduct.name}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Mã SKU</label>
+                  <label className="block text-sm font-medium mb-1">SKU</label>
                   <p className="font-mono">{selectedProduct.sku}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Giá</label>
+                  <label className="block text-sm font-medium mb-1">Price</label>
                   <p className="text-xl font-bold">${selectedProduct.price}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Tồn kho</label>
-                  <p>{selectedProduct.stock} sản phẩm</p>
+                  <label className="block text-sm font-medium mb-1">Stock</label>
+                  <p>{selectedProduct.stock} units</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Danh mục</label>
+                  <label className="block text-sm font-medium mb-1">Category</label>
                   <p>{selectedProduct.category}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Nhà cung cấp</label>
+                  <label className="block text-sm font-medium mb-1">Supplier</label>
                   <p>{selectedProduct.supplier}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Trạng thái</label>
+                  <label className="block text-sm font-medium mb-1">Status</label>
                   <Badge variant={selectedProduct.status === "active" ? "default" : "secondary"}>
-                    {selectedProduct.status === "active" ? "Đang bán" : 
-                     selectedProduct.status === "low_stock" ? "Sắp hết hàng" : "Hết hàng"}
+                    {selectedProduct.status.replace("_", " ")}
                   </Badge>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Mô tả</label>
+                  <label className="block text-sm font-medium mb-1">Description</label>
                   <p className="text-sm text-muted-foreground">{selectedProduct.description}</p>
                 </div>
               </div>
@@ -546,14 +521,14 @@ export default function ProductsPage() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold">Chỉnh sửa sản phẩm</h3>
+              <h3 className="text-lg font-bold">{t("edit")} Product</h3>
               <Button variant="ghost" size="sm" onClick={() => setShowEditDialog(false)}>
                 <X className="h-4 w-4" />
               </Button>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Tên sản phẩm</label>
+                <label className="block text-sm font-medium mb-1">Product Name</label>
                 <Input
                   value={editFormData.name}
                   onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
@@ -561,7 +536,7 @@ export default function ProductsPage() {
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Giá</label>
+                  <label className="block text-sm font-medium mb-1">Price</label>
                   <Input
                     type="number"
                     value={editFormData.price}
@@ -569,7 +544,7 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Tồn kho</label>
+                  <label className="block text-sm font-medium mb-1">Stock</label>
                   <Input
                     type="number"
                     value={editFormData.stock}
@@ -578,7 +553,7 @@ export default function ProductsPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Danh mục</label>
+                <label className="block text-sm font-medium mb-1">Category</label>
                 <Select
                   value={editFormData.category}
                   onValueChange={(value) => setEditFormData({ ...editFormData, category: value })}
@@ -587,22 +562,22 @@ export default function ProductsPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Điện tử">Điện tử</SelectItem>
-                    <SelectItem value="Văn phòng">Văn phòng</SelectItem>
-                    <SelectItem value="Giáo dục">Giáo dục</SelectItem>
-                    <SelectItem value="Dịch vụ">Dịch vụ</SelectItem>
+                    <SelectItem value="Electronics">Electronics</SelectItem>
+                    <SelectItem value="Office">Office</SelectItem>
+                    <SelectItem value="Home">Home & Kitchen</SelectItem>
+                    <SelectItem value="Beauty">Beauty</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Nhà cung cấp</label>
+                <label className="block text-sm font-medium mb-1">Supplier</label>
                 <Input
                   value={editFormData.supplier}
                   onChange={(e) => setEditFormData({ ...editFormData, supplier: e.target.value })}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Trạng thái</label>
+                <label className="block text-sm font-medium mb-1">Status</label>
                 <Select
                   value={editFormData.status}
                   onValueChange={(value) => setEditFormData({ ...editFormData, status: value })}
@@ -611,14 +586,14 @@ export default function ProductsPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="active">Đang bán</SelectItem>
-                    <SelectItem value="low_stock">Sắp hết hàng</SelectItem>
-                    <SelectItem value="out_of_stock">Hết hàng</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="low_stock">Low Stock</SelectItem>
+                    <SelectItem value="out_of_stock">Out of Stock</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Mô tả</label>
+                <label className="block text-sm font-medium mb-1">Description</label>
                 <textarea
                   className="w-full p-2 border rounded-md h-24"
                   value={editFormData.description}
@@ -627,9 +602,9 @@ export default function ProductsPage() {
               </div>
               <div className="flex justify-end space-x-2">
                 <Button variant="outline" onClick={() => setShowEditDialog(false)}>
-                  Hủy
+                  {t("cancel")}
                 </Button>
-                <Button onClick={saveEdit}>Lưu thay đổi</Button>
+                <Button onClick={saveEdit}>{t("save")} Changes</Button>
               </div>
             </div>
           </div>
@@ -640,16 +615,16 @@ export default function ProductsPage() {
       {showDeleteDialog && selectedProduct && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-bold mb-4">Xóa sản phẩm</h3>
+            <h3 className="text-lg font-bold mb-4">{t("delete")} Product</h3>
             <p className="text-sm text-muted-foreground mb-6">
-              Bạn có chắc chắn muốn xóa sản phẩm "{selectedProduct.name}"? Hành động này không thể hoàn tác.
+              Are you sure you want to delete "{selectedProduct.name}"? This action cannot be undone.
             </p>
             <div className="flex justify-end space-x-2">
               <Button variant="outline" onClick={() => setShowDeleteDialog(false)}>
-                Hủy
+                {t("cancel")}
               </Button>
               <Button variant="destructive" onClick={confirmDelete}>
-                Xóa
+                {t("delete")}
               </Button>
             </div>
           </div>

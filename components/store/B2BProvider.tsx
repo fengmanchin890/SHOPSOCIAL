@@ -7,7 +7,7 @@ interface User {
   id: string
   name: string
   email: string
-  role: "supplier" | "middleman" | "customer" | "worker" | "student"
+  role: "supplier" | "middleman" | "customer"
   company: string
   country: string
   verified: boolean
@@ -204,24 +204,6 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
       country: "Germany",
       verified: true,
     },
-    {
-      id: "user-worker-1",
-      name: "Nguyễn Văn A",
-      email: "worker1@example.com",
-      role: "worker",
-      company: "Công ty TNHH ABC",
-      country: "Vietnam",
-      verified: true,
-    },
-    {
-      id: "user-student-1",
-      name: "Trần Thị B",
-      email: "student1@example.com",
-      role: "student",
-      company: "Đại học XYZ",
-      country: "Vietnam",
-      verified: true,
-    },
   ])
 
   const [products, setProducts] = useState<Product[]>([
@@ -256,22 +238,6 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
       moq: 50,
       leadTime: 20,
       supplierId: "user-supplier-2",
-    },
-    {
-      id: "prod-3",
-      name: "Khóa học tiếng Việt cơ bản",
-      category: "Education",
-      description: "Khóa học tiếng Việt dành cho người nước ngoài",
-      image: "/placeholder.svg?height=300&width=300",
-      specifications: {
-        "Thời lượng": "40 giờ",
-        "Cấp độ": "Cơ bản",
-        "Hình thức": "Trực tuyến",
-        "Chứng chỉ": "Có",
-      },
-      moq: 1,
-      leadTime: 1,
-      supplierId: "user-supplier-1",
     },
   ])
 
@@ -333,14 +299,14 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
         {
           id: "event-1",
           type: "created",
-          description: "Đơn hàng được tạo từ báo giá đã chấp nhận",
+          description: "Order created from accepted quote",
           timestamp: Date.now() - 3 * 24 * 60 * 60 * 1000,
           userId: "user-customer-1",
         },
         {
           id: "event-2",
           type: "payment_received",
-          description: "Đã nhận thanh toán từ khách hàng",
+          description: "Payment received from customer",
           timestamp: Date.now() - 2 * 24 * 60 * 60 * 1000,
           userId: "user-middleman-1",
         },
@@ -443,7 +409,7 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
         {
           id: `event-${Date.now()}`,
           type: "created",
-          description: "Đơn hàng được tạo từ báo giá đã chấp nhận",
+          description: "Order created from accepted quote",
           timestamp: Date.now(),
           userId: quote.customerId!,
         },
@@ -463,7 +429,7 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
         {
           id: `event-${Date.now()}`,
           type: "created",
-          description: "Đơn hàng được tạo",
+          description: "Order created",
           timestamp: Date.now(),
           userId: orderData.customerId,
         },
@@ -563,7 +529,7 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
         notifications.push({
           id: `notif-quote-${quote.id}`,
           type: "quote_expiring",
-          message: `Báo giá ${quote.id} sẽ hết hạn trong vòng 24 giờ`,
+          message: `Quote ${quote.id} expires in less than 24 hours`,
           timestamp: Date.now(),
           read: false,
         })
@@ -576,7 +542,7 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
         notifications.push({
           id: `notif-payment-${order.id}`,
           type: "payment_pending",
-          message: `Thanh toán đang chờ xử lý cho đơn hàng ${order.id}`,
+          message: `Payment pending for order ${order.id}`,
           timestamp: Date.now(),
           read: false,
         })
