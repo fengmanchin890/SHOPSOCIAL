@@ -15,8 +15,9 @@ import { useMembership } from "@/components/store/MembershipProvider"
 import { MembershipUpgradeDialog } from "@/components/store/MembershipUpgradeDialog"
 import { TargetAudienceSelector } from "@/components/store/TargetAudienceSelector"
 import { useI18n } from "@/contexts/i18n-context"
+import { ClientOnly } from "@/components/client-only"
 
-export default function AuthPage() {
+function AuthPageContent() {
   const router = useRouter()
   const { upgradeMembership } = useMembership()
   const { t, language } = useI18n()
@@ -509,5 +510,13 @@ export default function AuthPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AuthPage() {
+  return (
+    <ClientOnly>
+      <AuthPageContent />
+    </ClientOnly>
   )
 }
