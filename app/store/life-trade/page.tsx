@@ -12,18 +12,8 @@ import { AddActivityForm } from "@/components/store/AddActivityForm"
 import { useMembership } from "@/components/store/MembershipProvider"
 import { ChefHat, Home, Users2, GraduationCap, School, Plus, ArrowRight, MapPin, Book, Star, FileText, Video, Download, Shield, Clock, Target } from "lucide-react"
 import { useI18n } from "@/contexts/i18n-context"
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogFooter, 
-  DialogHeader, 
-  DialogTitle 
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/hooks/use-toast"
+import { ActivityCard } from "@/components/store/ActivityCard"
+import { AddNewActivityDialog } from "@/components/store/AddNewActivityDialog"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -31,19 +21,157 @@ export default function LifeTradePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [activeTab, setActiveTab] = useState("overview")
   const [showAddActivity, setShowAddActivity] = useState(false)
-  const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "courses" | "cultural">("food")
+  const [addActivityType, setAddActivityType] = useState<"food" | "accommodation" | "travel" | "language" | "culture">("food")
   const { t, language } = useI18n()
 
-  // Registration dialog state
-  const [registrationOpen, setRegistrationOpen] = useState(false)
-  const [registrationTitle, setRegistrationTitle] = useState("")
-  const [registrationForm, setRegistrationForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    notes: ""
+  // State for storing activities
+  const [activities, setActivities] = useState({
+    food: [
+      {
+        id: "food-1",
+        title: "Lớp học nấu ăn món Việt",
+        description: "Học cách nấu các món ăn truyền thống Việt Nam với đầu bếp chuyên nghiệp",
+        image: "/placeholder.svg?height=400&width=400&text=Ẩm+thực+Việt+Nam",
+        time: "Thứ Bảy, 14:00",
+        location: "Quận 1, TP.HCM",
+        type: "food" as const
+      },
+      {
+        id: "food-2",
+        title: "Tour ẩm thực đường phố",
+        description: "Khám phá các món ăn đường phố nổi tiếng với hướng dẫn viên địa phương",
+        image: "/placeholder.svg?height=400&width=400&text=Ẩm+thực+đường+phố",
+        time: "Chủ Nhật, 18:00",
+        location: "Quận 4, TP.HCM",
+        type: "food" as const
+      },
+      {
+        id: "food-3",
+        title: "Bữa tối gia đình Việt Nam",
+        description: "Trải nghiệm bữa tối ấm cúng cùng gia đình Việt Nam và tìm hiểu văn hóa địa phương",
+        image: "/placeholder.svg?height=400&width=400&text=Bữa+tối+gia+đình",
+        time: "Thứ Sáu, 19:00",
+        location: "Quận 7, TP.HCM",
+        type: "food" as const
+      }
+    ],
+    accommodation: [
+      {
+        id: "accom-1",
+        title: "Phòng trọ trao đổi",
+        description: "Trao đổi chỗ ở miễn phí với việc dạy tiếng Anh 2 buổi/tuần",
+        image: "/placeholder.svg?height=400&width=400&text=Phòng+trọ",
+        location: "Quận 2, TP.HCM",
+        time: "Có sẵn: Ngay bây giờ",
+        type: "accommodation" as const
+      },
+      {
+        id: "accom-2",
+        title: "Căn hộ giảm giá cho sinh viên",
+        description: "Giảm 30% tiền thuê cho sinh viên quốc tế có thể hỗ trợ việc nhà",
+        image: "/placeholder.svg?height=400&width=400&text=Căn+hộ",
+        location: "Quận 7, TP.HCM",
+        time: "Có sẵn: Tháng sau",
+        type: "accommodation" as const
+      },
+      {
+        id: "accom-3",
+        title: "Homestay với gia đình Việt",
+        description: "Ở cùng gia đình Việt Nam, trải nghiệm văn hóa và học tiếng Việt",
+        image: "/placeholder.svg?height=400&width=400&text=Homestay",
+        location: "Quận 3, TP.HCM",
+        time: "Có sẵn: Ngay bây giờ",
+        type: "accommodation" as const
+      }
+    ],
+    travel: [
+      {
+        id: "travel-1",
+        title: "Tour khám phá thành phố",
+        description: "Cùng khám phá những địa điểm nổi tiếng và ít người biết đến ở TP.HCM",
+        image: "/placeholder.svg?height=400&width=400&text=Tour+thành+phố",
+        time: "Thứ Bảy, 09:00",
+        location: "Quận 1, TP.HCM",
+        type: "travel" as const
+      },
+      {
+        id: "travel-2",
+        title: "Dã ngoại cuối tuần",
+        description: "Cùng nhau đi dã ngoại, giao lưu và kết bạn mới",
+        image: "/placeholder.svg?height=400&width=400&text=Dã+ngoại",
+        time: "Chủ Nhật, 07:00",
+        location: "Vũng Tàu",
+        type: "travel" as const
+      },
+      {
+        id: "travel-3",
+        title: "Khám phá chợ đêm",
+        description: "Cùng nhau khám phá chợ đêm sôi động và ẩm thực đường phố",
+        image: "/placeholder.svg?height=400&width=400&text=Chợ+đêm",
+        time: "Thứ Sáu, 19:00",
+        location: "Quận 5, TP.HCM",
+        type: "travel" as const
+      }
+    ],
+    language: [
+      {
+        id: "lang-1",
+        title: "Lớp học tiếng Việt cơ bản",
+        description: "Học tiếng Việt giao tiếp cơ bản cho người nước ngoài",
+        image: "/placeholder.svg?height=400&width=400&text=Tiếng+Việt",
+        time: "Thứ Ba & Thứ Năm, 18:00",
+        location: "Quận 1, TP.HCM",
+        type: "language" as const
+      },
+      {
+        id: "lang-2",
+        title: "Cafe trao đổi ngôn ngữ",
+        description: "Gặp gỡ và trao đổi tiếng Việt - tiếng Anh tại quán cafe",
+        image: "/placeholder.svg?height=400&width=400&text=Trao+đổi+ngôn+ngữ",
+        time: "Thứ Bảy, 15:00",
+        location: "Quận 3, TP.HCM",
+        type: "language" as const
+      },
+      {
+        id: "lang-3",
+        title: "Lớp học tiếng Hàn",
+        description: "Học tiếng Hàn giao tiếp với giáo viên người Hàn Quốc",
+        image: "/placeholder.svg?height=400&width=400&text=Tiếng+Hàn",
+        time: "Thứ Tư & Thứ Sáu, 19:00",
+        location: "Quận 7, TP.HCM",
+        type: "language" as const
+      }
+    ],
+    culture: [
+      {
+        id: "culture-1",
+        title: "Hướng dẫn văn hóa Việt Nam",
+        description: "Tìm hiểu về phong tục, tập quán và nghi thức xã hội của Việt Nam",
+        image: "/placeholder.svg?height=400&width=400&text=Hướng+dẫn+văn+hóa",
+        time: "Khóa học trực tuyến",
+        location: "5 mô-đun, tự học",
+        type: "culture" as const
+      },
+      {
+        id: "culture-2",
+        title: "Hội thảo hỗ trợ pháp lý",
+        description: "Tư vấn về thị thực, giấy phép lao động và quyền hợp pháp",
+        image: "/placeholder.svg?height=400&width=400&text=Hỗ+trợ+pháp+lý",
+        time: "Thứ Bảy, 10:00",
+        location: "Trực tuyến qua Zoom",
+        type: "culture" as const
+      },
+      {
+        id: "culture-3",
+        title: "Lễ hội giao lưu văn hóa",
+        description: "Tham gia lễ hội với âm nhạc, ẩm thực và nghệ thuật từ nhiều nền văn hóa",
+        image: "/placeholder.svg?height=400&width=400&text=Lễ+hội+văn+hóa",
+        time: "Chủ Nhật, 12:00-20:00",
+        location: "Công viên Lê Văn Tám",
+        type: "culture" as const
+      }
+    ]
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Kiểm tra trạng thái đăng nhập khi trang được tải
   useEffect(() => {
@@ -56,7 +184,7 @@ export default function LifeTradePage() {
     }
   }, [router])
 
-  const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "courses" | "cultural") => {
+  const handleAddActivity = (type: "food" | "accommodation" | "travel" | "language" | "culture") => {
     if (!isPremiumMember) {
       return
     }
@@ -64,64 +192,17 @@ export default function LifeTradePage() {
     setShowAddActivity(true)
   }
 
-  const handleAddActivitySuccess = () => {
+  const handleAddActivitySuccess = (newActivity: any) => {
+    // Add the new activity to the appropriate section
+    setActivities(prev => ({
+      ...prev,
+      [addActivityType]: [...prev[addActivityType], newActivity]
+    }))
     setShowAddActivity(false)
-    // Hiển thị thông báo thành công hoặc làm mới dữ liệu
-  }
-
-  const openRegistrationDialog = (title: string) => {
-    setRegistrationTitle(title)
-    setRegistrationOpen(true)
-    setRegistrationForm({
-      name: "",
-      email: "",
-      phone: "",
-      notes: ""
-    })
-  }
-
-  const handleRegistrationSubmit = () => {
-    // Validate form
-    if (!registrationForm.name || !registrationForm.email || !registrationForm.phone) {
-      toast({
-        title: "Vui lòng điền đầy đủ thông tin",
-        description: "Họ tên, email và số điện thoại là bắt buộc",
-        variant: "destructive"
-      })
-      return
-    }
-
-    setIsSubmitting(true)
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setRegistrationOpen(false)
-      
-      toast({
-        title: "Đăng ký thành công!",
-        description: `Bạn đã đăng ký thành công cho "${registrationTitle}". Chúng tôi sẽ liên hệ với bạn sớm.`,
-      })
-    }, 1500)
   }
 
   if (!isLoggedIn) {
     return null // Sẽ chuyển hướng đến trang đăng nhập
-  }
-
-  if (showAddActivity) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <Button variant="outline" onClick={() => setShowAddActivity(false)} className="mb-6">
-          ← {t("button.back")}
-        </Button>
-        <AddActivityForm 
-          moduleType={addActivityType} 
-          onSuccess={handleAddActivitySuccess} 
-          onCancel={() => setShowAddActivity(false)} 
-        />
-      </div>
-    )
   }
 
   return (
@@ -361,77 +442,17 @@ export default function LifeTradePage() {
           </Card>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Ẩm+thực+Việt+Nam" 
-                  alt="Ẩm thực Việt Nam"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Lớp học nấu ăn món Việt</h3>
-                <p className="text-gray-600 mb-4">Học cách nấu các món ăn truyền thống Việt Nam với đầu bếp chuyên nghiệp</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Bảy, 14:00</p>
-                    <p>Quận 1, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Lớp học nấu ăn món Việt")}>
-                    {t("button.register")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Ẩm+thực+đường+phố" 
-                  alt="Ẩm thực đường phố"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Tour ẩm thực đường phố</h3>
-                <p className="text-gray-600 mb-4">Khám phá các món ăn đường phố nổi tiếng với hướng dẫn viên địa phương</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Chủ Nhật, 18:00</p>
-                    <p>Quận 4, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Tour ẩm thực đường phố")}>
-                    {t("button.register")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Bữa+tối+gia+đình" 
-                  alt="Bữa tối gia đình"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Bữa tối gia đình Việt Nam</h3>
-                <p className="text-gray-600 mb-4">Trải nghiệm bữa tối ấm cúng cùng gia đình Việt Nam và tìm hiểu văn hóa địa phương</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Sáu, 19:00</p>
-                    <p>Quận 7, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Bữa tối gia đình Việt Nam")}>
-                    {t("button.register")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {activities.food.map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                title={activity.title}
+                description={activity.description}
+                image={activity.image}
+                time={activity.time}
+                location={activity.location}
+                type="food"
+              />
+            ))}
           </div>
 
           <div className="flex justify-center mt-4">
@@ -527,77 +548,17 @@ export default function LifeTradePage() {
           </Card>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Phòng+trọ" 
-                  alt="Phòng trọ"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Phòng trọ trao đổi</h3>
-                <p className="text-gray-600 mb-4">Trao đổi chỗ ở miễn phí với việc dạy tiếng Anh 2 buổi/tuần</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Quận 2, TP.HCM</p>
-                    <p>Có sẵn: Ngay bây giờ</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Phòng trọ trao đổi")}>
-                    {t("button.contact")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Căn+hộ" 
-                  alt="Căn hộ"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Căn hộ giảm giá cho sinh viên</h3>
-                <p className="text-gray-600 mb-4">Giảm 30% tiền thuê cho sinh viên quốc tế có thể hỗ trợ việc nhà</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Quận 7, TP.HCM</p>
-                    <p>Có sẵn: Tháng sau</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Căn hộ giảm giá cho sinh viên")}>
-                    {t("button.contact")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Homestay" 
-                  alt="Homestay"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Homestay với gia đình Việt</h3>
-                <p className="text-gray-600 mb-4">Ở cùng gia đình Việt Nam, trải nghiệm văn hóa và học tiếng Việt</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Quận 3, TP.HCM</p>
-                    <p>Có sẵn: Ngay bây giờ</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Homestay với gia đình Việt")}>
-                    {t("button.contact")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {activities.accommodation.map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                title={activity.title}
+                description={activity.description}
+                image={activity.image}
+                time={activity.time}
+                location={activity.location}
+                type="accommodation"
+              />
+            ))}
           </div>
 
           <div className="flex justify-center mt-4">
@@ -693,77 +654,17 @@ export default function LifeTradePage() {
           </Card>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Tour+thành+phố" 
-                  alt="Tour thành phố"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Tour khám phá thành phố</h3>
-                <p className="text-gray-600 mb-4">Cùng khám phá những địa điểm nổi tiếng và ít người biết đến ở TP.HCM</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Bảy, 09:00</p>
-                    <p>Quận 1, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Tour khám phá thành phố")}>
-                    {t("button.join")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Dã+ngoại" 
-                  alt="Dã ngoại"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Dã ngoại cuối tuần</h3>
-                <p className="text-gray-600 mb-4">Cùng nhau đi dã ngoại, giao lưu và kết bạn mới</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Chủ Nhật, 07:00</p>
-                    <p>Vũng Tàu</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Dã ngoại cuối tuần")}>
-                    {t("button.join")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Chợ+đêm" 
-                  alt="Chợ đêm"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Khám phá chợ đêm</h3>
-                <p className="text-gray-600 mb-4">Cùng nhau khám phá chợ đêm sôi động và ẩm thực đường phố</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Sáu, 19:00</p>
-                    <p>Quận 5, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Khám phá chợ đêm")}>
-                    {t("button.join")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {activities.travel.map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                title={activity.title}
+                description={activity.description}
+                image={activity.image}
+                time={activity.time}
+                location={activity.location}
+                type="travel"
+              />
+            ))}
           </div>
 
           <div className="flex justify-center mt-4">
@@ -859,77 +760,17 @@ export default function LifeTradePage() {
           </Card>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Tiếng+Việt" 
-                  alt="Tiếng Việt"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Lớp học tiếng Việt cơ bản</h3>
-                <p className="text-gray-600 mb-4">Học tiếng Việt giao tiếp cơ bản cho người nước ngoài</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Ba & Thứ Năm, 18:00</p>
-                    <p>Quận 1, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Lớp học tiếng Việt cơ bản")}>
-                    {t("button.register")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Trao+đổi+ngôn+ngữ" 
-                  alt="Trao đổi ngôn ngữ"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Cafe trao đổi ngôn ngữ</h3>
-                <p className="text-gray-600 mb-4">Gặp gỡ và trao đổi tiếng Việt - tiếng Anh tại quán cafe</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Bảy, 15:00</p>
-                    <p>Quận 3, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Cafe trao đổi ngôn ngữ")}>
-                    {t("button.join")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Tiếng+Hàn" 
-                  alt="Tiếng Hàn"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Lớp học tiếng Hàn</h3>
-                <p className="text-gray-600 mb-4">Học tiếng Hàn giao tiếp với giáo viên người Hàn Quốc</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Tư & Thứ Sáu, 19:00</p>
-                    <p>Quận 7, TP.HCM</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Lớp học tiếng Hàn")}>
-                    {t("button.register")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {activities.language.map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                title={activity.title}
+                description={activity.description}
+                image={activity.image}
+                time={activity.time}
+                location={activity.location}
+                type="language"
+              />
+            ))}
           </div>
 
           <div className="flex justify-center mt-4">
@@ -944,7 +785,7 @@ export default function LifeTradePage() {
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">{t("culture.title")}</h2>
             {isPremiumMember && (
-              <Button onClick={() => handleAddActivity("cultural")}>
+              <Button onClick={() => handleAddActivity("culture")}>
                 <Plus className="h-4 w-4 mr-2" />
                 {t("culture.addResource")}
               </Button>
@@ -1025,77 +866,17 @@ export default function LifeTradePage() {
           </Card>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Hướng+dẫn+văn+hóa" 
-                  alt="Hướng dẫn văn hóa"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Hướng dẫn văn hóa Việt Nam</h3>
-                <p className="text-gray-600 mb-4">Tìm hiểu về phong tục, tập quán và nghi thức xã hội của Việt Nam</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Khóa học trực tuyến</p>
-                    <p>5 mô-đun, tự học</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Hướng dẫn văn hóa Việt Nam")}>
-                    {t("button.viewMore")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Hỗ+trợ+pháp+lý" 
-                  alt="Hỗ trợ pháp lý"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Hội thảo hỗ trợ pháp lý</h3>
-                <p className="text-gray-600 mb-4">Tư vấn về thị thực, giấy phép lao động và quyền hợp pháp</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Thứ Bảy, 10:00</p>
-                    <p>Trực tuyến qua Zoom</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Hội thảo hỗ trợ pháp lý")}>
-                    {t("button.register")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-gray-100 relative">
-                <Image 
-                  src="/placeholder.svg?height=200&width=400&text=Lễ+hội+văn+hóa" 
-                  alt="Lễ hội văn hóa"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Lễ hội giao lưu văn hóa</h3>
-                <p className="text-gray-600 mb-4">Tham gia lễ hội với âm nhạc, ẩm thực và nghệ thuật từ nhiều nền văn hóa</p>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    <p>Chủ Nhật, 12:00-20:00</p>
-                    <p>Công viên Lê Văn Tám</p>
-                  </div>
-                  <Button size="sm" onClick={() => openRegistrationDialog("Lễ hội giao lưu văn hóa")}>
-                    {t("button.join")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            {activities.culture.map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                title={activity.title}
+                description={activity.description}
+                image={activity.image}
+                time={activity.time}
+                location={activity.location}
+                type="culture"
+              />
+            ))}
           </div>
 
           <div className="flex justify-center mt-4">
@@ -1107,79 +888,13 @@ export default function LifeTradePage() {
         </TabsContent>
       </Tabs>
 
-      {/* Registration Dialog */}
-      <Dialog open={registrationOpen} onOpenChange={setRegistrationOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>
-              {language === "vi" ? "Đăng ký tham gia: " : language === "zh-TW" ? "報名參加: " : "Register for: "}
-              {registrationTitle}
-            </DialogTitle>
-            <DialogDescription>
-              {language === "vi" 
-                ? "Vui lòng điền thông tin để đăng ký tham gia hoạt động này." 
-                : language === "zh-TW" 
-                  ? "請填寫您的資料以報名參加此活動。" 
-                  : "Please fill in your information to register for this activity."}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 py-2">
-            <div className="space-y-2">
-              <Label htmlFor="name">
-                {language === "vi" ? "Họ và tên" : language === "zh-TW" ? "姓名" : "Full Name"} *
-              </Label>
-              <Input 
-                id="name" 
-                placeholder={language === "vi" ? "Nhập họ và tên của bạn" : language === "zh-TW" ? "輸入您的姓名" : "Enter your full name"}
-                value={registrationForm.name}
-                onChange={(e) => setRegistrationForm({...registrationForm, name: e.target.value})}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
-              <Input 
-                id="email" 
-                type="email"
-                placeholder={language === "vi" ? "Nhập địa chỉ email của bạn" : language === "zh-TW" ? "輸入您的電子郵件" : "Enter your email address"}
-                value={registrationForm.email}
-                onChange={(e) => setRegistrationForm({...registrationForm, email: e.target.value})}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="phone">
-                {language === "vi" ? "Số điện thoại" : language === "zh-TW" ? "電話號碼" : "Phone Number"} *
-              </Label>
-              <Input 
-                id="phone" 
-                placeholder={language === "vi" ? "Nhập số điện thoại của bạn" : language === "zh-TW" ? "輸入您的電話號碼" : "Enter your phone number"}
-                value={registrationForm.phone}
-                onChange={(e) => setRegistrationForm({...registrationForm, phone: e.target.value})}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="notes">
-                {language === "vi" ? "Ghi chú (tùy chọn)" : language === "zh-TW" ? "備註（選填）" : "Notes (optional)"}
-              </Label>
-              <Textarea 
-                id="notes" 
-                placeholder={language === "vi" ? "Nhập thông tin bổ sung hoặc yêu cầu đặc biệt" : language === "zh-TW" ? "輸入補充資訊或特殊要求" : "Enter additional information or special requests"}
-                value={registrationForm.notes}
-                onChange={(e) => setRegistrationForm({...registrationForm, notes: e.target.value})}
-              />
-            </div>
-          </div>
-          <DialogFooter className="flex space-x-2 justify-end">
-            <Button variant="outline" onClick={() => setRegistrationOpen(false)}>
-              {language === "vi" ? "Hủy" : language === "zh-TW" ? "取消" : "Cancel"}
-            </Button>
-            <Button onClick={handleRegistrationSubmit} disabled={isSubmitting}>
-              {isSubmitting 
-                ? (language === "vi" ? "Đang xử lý..." : language === "zh-TW" ? "處理中..." : "Processing...") 
-                : (language === "vi" ? "Đăng ký" : language === "zh-TW" ? "報名" : "Register")}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* Add New Activity Dialog */}
+      <AddNewActivityDialog
+        open={showAddActivity}
+        onOpenChange={setShowAddActivity}
+        activityType={addActivityType}
+        onSuccess={handleAddActivitySuccess}
+      />
     </div>
   )
 }
