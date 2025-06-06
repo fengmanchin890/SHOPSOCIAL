@@ -12,6 +12,9 @@ export const languages = [
   { code: "th", name: "Thai", nativeName: "ภาษาไทย", flag: "🇹🇭", rtl: false },
   { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳", rtl: false },
   { code: "en", name: "English", nativeName: "English", flag: "🇺🇸", rtl: false },
+  { code: "ja", name: "Japanese", nativeName: "日本語", flag: "🇯🇵", rtl: false },
+  { code: "ko", name: "Korean", nativeName: "한국어", flag: "🇰🇷", rtl: false },
+  { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia", flag: "🇮🇩", rtl: false },
 ]
 
 // Define translations
@@ -45,6 +48,8 @@ const resources = {
       "targetUsers.students.desc": "不熟悉語言，想交朋友，想體驗當地文化和美食",
       "targetUsers.married": "國際婚姻和定居者",
       "targetUsers.married.desc": "想融入當地生活，參與社區活動",
+      "targetUsers.workers": "外籍工作者",
+      "targetUsers.workers.desc": "專業人士、藍領工人和數位遊牧民族",
       
       // Features
       "features.title": "主要功能",
@@ -58,6 +63,18 @@ const resources = {
       "features.language.desc": "學習和教授語言",
       "features.culture": "多元文化中心",
       "features.culture.desc": "融入資源",
+      "features.legal": "法律與文件",
+      "features.legal.desc": "簽證和許可證支持",
+      "features.healthcare": "醫療保健",
+      "features.healthcare.desc": "醫院和保險指南",
+      "features.financial": "金融服務",
+      "features.financial.desc": "銀行和匯款",
+      "features.transportation": "交通",
+      "features.transportation.desc": "公共交通和租車",
+      "features.daily": "日常生活",
+      "features.daily.desc": "購物和服務",
+      "features.community": "社區",
+      "features.community.desc": "社交網絡和活動",
       
       // Recent Activities
       "recentActivities.title": "最近活動",
@@ -210,6 +227,8 @@ const resources = {
       "targetUsers.students.desc": "Chưa quen ngôn ngữ, muốn kết bạn, muốn trải nghiệm văn hóa và ẩm thực địa phương",
       "targetUsers.married": "Người nước ngoài kết hôn và định cư",
       "targetUsers.married.desc": "Muốn hòa nhập cuộc sống địa phương, tham gia hoạt động cộng đồng",
+      "targetUsers.workers": "Người lao động nước ngoài",
+      "targetUsers.workers.desc": "Lao động chuyên nghiệp, lao động phổ thông và người làm việc tự do kỹ thuật số",
       
       // Features
       "features.title": "Các tính năng chính",
@@ -223,6 +242,18 @@ const resources = {
       "features.language.desc": "Học và dạy ngôn ngữ",
       "features.culture": "Trung tâm đa văn hóa",
       "features.culture.desc": "Tài nguyên hòa nhập",
+      "features.legal": "Pháp lý & Giấy tờ",
+      "features.legal.desc": "Hỗ trợ visa và giấy phép",
+      "features.healthcare": "Y tế",
+      "features.healthcare.desc": "Hướng dẫn bệnh viện và bảo hiểm",
+      "features.financial": "Dịch vụ tài chính",
+      "features.financial.desc": "Ngân hàng và chuyển tiền",
+      "features.transportation": "Giao thông",
+      "features.transportation.desc": "Phương tiện công cộng và thuê xe",
+      "features.daily": "Đời sống hàng ngày",
+      "features.daily.desc": "Mua sắm và dịch vụ",
+      "features.community": "Cộng đồng",
+      "features.community.desc": "Mạng lưới xã hội và sự kiện",
       
       // Recent Activities
       "recentActivities.title": "Hoạt động gần đây",
@@ -375,6 +406,8 @@ const resources = {
       "targetUsers.students.desc": "ไม่คุ้นเคยกับภาษา ต้องการหาเพื่อน ต้องการสัมผัสวัฒนธรรมและอาหารท้องถิ่น",
       "targetUsers.married": "ชาวต่างชาติที่แต่งงานและตั้งถิ่นฐาน",
       "targetUsers.married.desc": "ต้องการปรับตัวเข้ากับชีวิตท้องถิ่น เข้าร่วมกิจกรรมชุมชน",
+      "targetUsers.workers": "แรงงานต่างชาติ",
+      "targetUsers.workers.desc": "ผู้เชี่ยวชาญ แรงงานทั่วไป และนักท่องเที่ยวดิจิทัล",
       
       // Features
       "features.title": "คุณสมบัติหลัก",
@@ -388,6 +421,18 @@ const resources = {
       "features.language.desc": "เรียนและสอนภาษา",
       "features.culture": "ศูนย์หลากวัฒนธรรม",
       "features.culture.desc": "ทรัพยากรการปรับตัว",
+      "features.legal": "กฎหมายและเอกสาร",
+      "features.legal.desc": "สนับสนุนวีซ่าและใบอนุญาต",
+      "features.healthcare": "การดูแลสุขภาพ",
+      "features.healthcare.desc": "โรงพยาบาลและคู่มือประกัน",
+      "features.financial": "บริการทางการเงิน",
+      "features.financial.desc": "ธนาคารและการโอนเงิน",
+      "features.transportation": "การขนส่ง",
+      "features.transportation.desc": "ขนส่งสาธารณะและเช่ารถ",
+      "features.daily": "ชีวิตประจำวัน",
+      "features.daily.desc": "ช้อปปิ้งและบริการ",
+      "features.community": "ชุมชน",
+      "features.community.desc": "เครือข่ายสังคมและกิจกรรม",
       
       // Recent Activities
       "recentActivities.title": "กิจกรรมล่าสุด",
@@ -540,6 +585,8 @@ const resources = {
       "targetUsers.students.desc": "भाषा से अपरिचित, दोस्त बनाना चाहते हैं, स्थानीय संस्कृति और भोजन का अनुभव करना चाहते हैं",
       "targetUsers.married": "विदेशी विवाहित और बसे हुए",
       "targetUsers.married.desc": "स्थानीय जीवन में घुलना-मिलना चाहते हैं, सामुदायिक गतिविधियों में भाग लेना चाहते हैं",
+      "targetUsers.workers": "विदेशी कर्मचारी",
+      "targetUsers.workers.desc": "पेशेवर कर्मचारी, सामान्य श्रमिक और डिजिटल नोमैड",
       
       // Features
       "features.title": "मुख्य विशेषताएँ",
@@ -553,6 +600,18 @@ const resources = {
       "features.language.desc": "भाषा सीखें और सिखाएँ",
       "features.culture": "बहुसांस्कृतिक केंद्र",
       "features.culture.desc": "एकीकरण संसाधन",
+      "features.legal": "कानूनी और दस्तावेज़",
+      "features.legal.desc": "वीज़ा और परमिट सहायता",
+      "features.healthcare": "स्वास्थ्य देखभाल",
+      "features.healthcare.desc": "अस्पताल और बीमा गाइड",
+      "features.financial": "वित्तीय सेवाएँ",
+      "features.financial.desc": "बैंकिंग और धन हस्तांतरण",
+      "features.transportation": "परिवहन",
+      "features.transportation.desc": "सार्वजनिक परिवहन और कार रेंटल",
+      "features.daily": "दैनिक जीवन",
+      "features.daily.desc": "खरीदारी और सेवाएँ",
+      "features.community": "समुदाय",
+      "features.community.desc": "सोशल नेटवर्क और इवेंट्स",
       
       // Recent Activities
       "recentActivities.title": "हाल की गतिविधियाँ",
@@ -705,6 +764,8 @@ const resources = {
       "targetUsers.students.desc": "Unfamiliar with language, want to make friends, want to experience local culture and cuisine",
       "targetUsers.married": "Foreigners married and settled",
       "targetUsers.married.desc": "Want to integrate into local life, participate in community activities",
+      "targetUsers.workers": "Foreign Workers",
+      "targetUsers.workers.desc": "Professional workers, blue-collar workers, and digital nomads",
       
       // Features
       "features.title": "Main Features",
@@ -718,6 +779,18 @@ const resources = {
       "features.language.desc": "Learn and teach languages",
       "features.culture": "Multicultural Center",
       "features.culture.desc": "Integration resources",
+      "features.legal": "Legal & Documentation",
+      "features.legal.desc": "Visa and permit support",
+      "features.healthcare": "Healthcare",
+      "features.healthcare.desc": "Hospital and insurance guides",
+      "features.financial": "Financial Services",
+      "features.financial.desc": "Banking and money transfers",
+      "features.transportation": "Transportation",
+      "features.transportation.desc": "Public transit and car rentals",
+      "features.daily": "Daily Life",
+      "features.daily.desc": "Shopping and services",
+      "features.community": "Community",
+      "features.community.desc": "Social networks and events",
       
       // Recent Activities
       "recentActivities.title": "Recent Activities",
@@ -840,20 +913,547 @@ const resources = {
       "compare.addToCart": "Add to Cart",
       "compare.viewDetails": "View Details",
     }
+  },
+  ja: {
+    translation: {
+      // Common
+      "platform.name": "LiveTrade Connect",
+      "platform.description": "ワンストップ取引プラットフォーム",
+      "platform.slogan": "Eコマース、B2B取引、ライフスタイルサービスを繋ぐ",
+      
+      // Navigation
+      "nav.home": "ホーム",
+      "nav.products": "商品",
+      "nav.b2b": "B2Bプラットフォーム",
+      "nav.lifeServices": "ライフサービスプラットフォーム",
+      
+      // Life Trade Platform
+      "lifeTrade.title": "ライフサービスプラットフォーム",
+      "lifeTrade.description": "海外のベトナム人コミュニティとベトナムの外国人を繋ぐ",
+      "lifeTrade.overview": "概要",
+      "lifeTrade.food": "食事",
+      "lifeTrade.accommodation": "宿泊",
+      "lifeTrade.travel": "一緒に探検",
+      "lifeTrade.language": "言語",
+      "lifeTrade.culture": "多文化",
+      
+      // Target Users
+      "targetUsers.title": "ターゲットユーザーグループ",
+      "targetUsers.students": "留学生",
+      "targetUsers.students.desc": "言語に不慣れ、友達を作りたい、地元の文化や料理を体験したい",
+      "targetUsers.married": "結婚して定住した外国人",
+      "targetUsers.married.desc": "地元の生活に溶け込みたい、コミュニティ活動に参加したい",
+      "targetUsers.workers": "外国人労働者",
+      "targetUsers.workers.desc": "専門職、ブルーカラー労働者、デジタルノマド",
+      
+      // Features
+      "features.title": "主な機能",
+      "features.food": "食体験",
+      "features.food.desc": "地元料理を探索",
+      "features.accommodation": "住居交換",
+      "features.accommodation.desc": "宿泊施設を見つけるまたは交換",
+      "features.travel": "一緒に探検",
+      "features.travel.desc": "旅行仲間を見つける",
+      "features.language": "言語交換",
+      "features.language.desc": "言語を学び教える",
+      "features.culture": "多文化センター",
+      "features.culture.desc": "統合リソース",
+      "features.legal": "法律と書類",
+      "features.legal.desc": "ビザと許可証のサポート",
+      "features.healthcare": "ヘルスケア",
+      "features.healthcare.desc": "病院と保険ガイド",
+      "features.financial": "金融サービス",
+      "features.financial.desc": "銀行と送金",
+      "features.transportation": "交通",
+      "features.transportation.desc": "公共交通機関とレンタカー",
+      "features.daily": "日常生活",
+      "features.daily.desc": "ショッピングとサービス",
+      "features.community": "コミュニティ",
+      "features.community.desc": "ソーシャルネットワークとイベント",
+      
+      // Recent Activities
+      "recentActivities.title": "最近のアクティビティ",
+      "recentActivities.cookingClass": "ベトナム料理教室",
+      "recentActivities.cookingClass.desc": "フォーと伝統料理の作り方を学ぶ",
+      "recentActivities.languageExchange": "ベトナム語-英語交換",
+      "recentActivities.languageExchange.desc": "カフェでの週次ミーティング",
+      "recentActivities.marketTour": "ベンタイン市場ツアー",
+      "recentActivities.marketTour.desc": "伝統市場の食べ物と文化を探索",
+      
+      // Food Section
+      "food.title": "食の発見 (Eat & Meet)",
+      "food.addExperience": "体験を追加",
+      "food.smartDiscovery": "スマートフード発見システム",
+      "food.locationBased": "位置ベースのおすすめ",
+      "food.locationBased.desc": "5-10km圏内のベトナムレストランと地元料理を自動的に提案",
+      "food.tasteProfile": "味プロファイルマッチング",
+      "food.tasteProfile.desc": "味プロファイル（辛さレベル、甘さの好み、食事制限）を作成してパーソナライズされたおすすめを取得",
+      "food.homesickMode": "ホームシックモード",
+      "food.homesickMode.desc": "特定のベトナム地域料理（北部、中部、南部スタイル）に最も近い味の料理を見つける",
+      
+      // Accommodation Section
+      "accommodation.title": "住居交換 (Live & Help)",
+      "accommodation.addListing": "宿泊施設を追加",
+      
+      // Travel Section
+      "travel.title": "一緒に探検 (Explore Together)",
+      "travel.addActivity": "アクティビティを追加",
+      
+      // Language Section
+      "language.title": "言語交換 (Language Swap)",
+      "language.addClass": "クラスを追加",
+      
+      // Culture Section
+      "culture.title": "多文化センター (Multicultural Hub)",
+      "culture.addResource": "リソースを追加",
+      
+      // Buttons
+      "button.viewMore": "もっと見る",
+      "button.register": "登録",
+      "button.join": "参加",
+      "button.contact": "連絡",
+      "button.cancel": "キャンセル",
+      "button.save": "保存",
+      "button.back": "戻る",
+      "button.add": "追加",
+      "button.processing": "処理中...",
+      
+      // Search
+      "search.placeholder": "商品を検索...",
+      
+      // Products
+      "products": "商品",
+      "products.all": "すべての商品",
+      "products.featured": "おすすめ商品",
+      "products.popular": "人気商品",
+      "products.new": "新商品",
+      "products.sale": "セール商品",
+      
+      // User Profile
+      "profile.title": "メンバーセンター",
+      "profile.info": "個人情報",
+      "profile.orders": "注文履歴",
+      "profile.settings": "アカウント設定",
+      "profile.basicInfo": "基本情報",
+      "profile.name": "名前",
+      "profile.email": "メール",
+      "profile.phone": "電話番号",
+      "profile.address": "住所",
+      "profile.joinDate": "登録日",
+      "profile.edit": "編集",
+      "profile.save": "保存",
+      "profile.cancel": "キャンセル",
+      "profile.stats": "メンバー統計",
+      "profile.totalOrders": "総注文数",
+      "profile.totalSpent": "総支出",
+      
+      // Cart
+      "cart.title": "ショッピングカート",
+      "cart.empty": "カートは空です",
+      "cart.emptyMessage": "カートに商品がありません",
+      "cart.startShopping": "ショッピングを開始",
+      "cart.summary": "注文概要",
+      "cart.subtotal": "小計",
+      "cart.shipping": "配送料",
+      "cart.freeShipping": "無料",
+      "cart.total": "合計",
+      "cart.checkout": "チェックアウト",
+      "cart.continueShopping": "ショッピングを続ける",
+      "cart.clearCart": "カートを空にする",
+      "cart.shippingInfo": "• $1,000以上の注文で送料無料",
+      "cart.deliveryInfo": "• 2-3営業日以内にお届け",
+      "cart.returnInfo": "• 7日間の返品ポリシー（理由不要）",
+      
+      // Wishlist
+      "wishlist.title": "ウィッシュリスト",
+      "wishlist.empty": "ウィッシュリストは空です",
+      "wishlist.emptyMessage": "ウィッシュリストに商品がありません",
+      "wishlist.startShopping": "ショッピングを開始",
+      "wishlist.viewCompare": "比較を見る",
+      "wishlist.clearWishlist": "ウィッシュリストをクリア",
+      "wishlist.addToCart": "カートに追加",
+      "wishlist.addToCompare": "比較に追加",
+      
+      // Compare
+      "compare.title": "商品比較",
+      "compare.empty": "比較リストは空です",
+      "compare.emptyMessage": "ウィッシュリストまたは商品ページから商品を追加して比較",
+      "compare.viewProducts": "商品を見る",
+      "compare.viewWishlist": "ウィッシュリストを見る",
+      "compare.social": "ソーシャル",
+      "compare.collaborate": "コラボレーション",
+      "compare.priceAlert": "価格アラート",
+      "compare.filter": "フィルター",
+      "compare.save": "保存",
+      "compare.history": "履歴",
+      "compare.share": "共有",
+      "compare.export": "エクスポート",
+      "compare.clearCompare": "比較リストをクリア",
+      "compare.addToCart": "カートに追加",
+      "compare.viewDetails": "詳細を見る",
+    }
+  },
+  ko: {
+    translation: {
+      // Common
+      "platform.name": "LiveTrade Connect",
+      "platform.description": "원스톱 거래 플랫폼",
+      "platform.slogan": "전자상거래, B2B 거래 및 라이프스타일 서비스 연결",
+      
+      // Navigation
+      "nav.home": "홈",
+      "nav.products": "제품",
+      "nav.b2b": "B2B 플랫폼",
+      "nav.lifeServices": "라이프스타일 서비스 플랫폼",
+      
+      // Life Trade Platform
+      "lifeTrade.title": "라이프스타일 서비스 플랫폼",
+      "lifeTrade.description": "해외 베트남 커뮤니티와 베트남의 외국인 연결",
+      "lifeTrade.overview": "개요",
+      "lifeTrade.food": "음식",
+      "lifeTrade.accommodation": "숙박",
+      "lifeTrade.travel": "함께 탐험",
+      "lifeTrade.language": "언어",
+      "lifeTrade.culture": "다문화",
+      
+      // Target Users
+      "targetUsers.title": "대상 사용자 그룹",
+      "targetUsers.students": "유학생",
+      "targetUsers.students.desc": "언어에 익숙하지 않고, 친구를 사귀고 싶고, 현지 문화와 요리를 경험하고 싶은 사람",
+      "targetUsers.married": "결혼하고 정착한 외국인",
+      "targetUsers.married.desc": "현지 생활에 통합되고 커뮤니티 활동에 참여하고 싶은 사람",
+      "targetUsers.workers": "외국인 근로자",
+      "targetUsers.workers.desc": "전문직, 블루칼라 근로자, 디지털 노마드",
+      
+      // Features
+      "features.title": "주요 기능",
+      "features.food": "음식 경험",
+      "features.food.desc": "현지 요리 탐색",
+      "features.accommodation": "주택 교환",
+      "features.accommodation.desc": "숙소 찾기 또는 교환",
+      "features.travel": "함께 탐험",
+      "features.travel.desc": "여행 동반자 찾기",
+      "features.language": "언어 교환",
+      "features.language.desc": "언어 배우기 및 가르치기",
+      "features.culture": "다문화 센터",
+      "features.culture.desc": "통합 리소스",
+      "features.legal": "법률 및 문서",
+      "features.legal.desc": "비자 및 허가 지원",
+      "features.healthcare": "의료",
+      "features.healthcare.desc": "병원 및 보험 가이드",
+      "features.financial": "금융 서비스",
+      "features.financial.desc": "은행 및 송금",
+      "features.transportation": "교통",
+      "features.transportation.desc": "대중교통 및 렌터카",
+      "features.daily": "일상 생활",
+      "features.daily.desc": "쇼핑 및 서비스",
+      "features.community": "커뮤니티",
+      "features.community.desc": "소셜 네트워크 및 이벤트",
+      
+      // Recent Activities
+      "recentActivities.title": "최근 활동",
+      "recentActivities.cookingClass": "베트남 요리 수업",
+      "recentActivities.cookingClass.desc": "쌀국수와 전통 요리 만들기 배우기",
+      "recentActivities.languageExchange": "베트남어-영어 교환",
+      "recentActivities.languageExchange.desc": "카페에서 매주 만남",
+      "recentActivities.marketTour": "벤탄 시장 투어",
+      "recentActivities.marketTour.desc": "전통 시장의 음식과 문화 탐험",
+      
+      // Food Section
+      "food.title": "음식 발견 (Eat & Meet)",
+      "food.addExperience": "경험 추가",
+      "food.smartDiscovery": "스마트 음식 발견 시스템",
+      "food.locationBased": "위치 기반 추천",
+      "food.locationBased.desc": "5-10km 반경 내의 베트남 레스토랑과 현지 요리를 자동으로 제안",
+      "food.tasteProfile": "맛 프로필 매칭",
+      "food.tasteProfile.desc": "맛 프로필(매운 정도, 단맛 선호도, 식이 제한)을 만들어 개인화된 추천 받기",
+      "food.homesickMode": "향수병 모드",
+      "food.homesickMode.desc": "특정 베트남 지역 요리(북부, 중부, 남부 스타일)와 가장 비슷한 맛의 요리 찾기",
+      
+      // Accommodation Section
+      "accommodation.title": "주택 교환 (Live & Help)",
+      "accommodation.addListing": "숙소 추가",
+      
+      // Travel Section
+      "travel.title": "함께 탐험 (Explore Together)",
+      "travel.addActivity": "활동 추가",
+      
+      // Language Section
+      "language.title": "언어 교환 (Language Swap)",
+      "language.addClass": "수업 추가",
+      
+      // Culture Section
+      "culture.title": "다문화 센터 (Multicultural Hub)",
+      "culture.addResource": "리소스 추가",
+      
+      // Buttons
+      "button.viewMore": "더 보기",
+      "button.register": "등록",
+      "button.join": "참여",
+      "button.contact": "연락",
+      "button.cancel": "취소",
+      "button.save": "저장",
+      "button.back": "뒤로",
+      "button.add": "추가",
+      "button.processing": "처리 중...",
+      
+      // Search
+      "search.placeholder": "제품 검색...",
+      
+      // Products
+      "products": "제품",
+      "products.all": "모든 제품",
+      "products.featured": "추천 제품",
+      "products.popular": "인기 제품",
+      "products.new": "신제품",
+      "products.sale": "할인 제품",
+      
+      // User Profile
+      "profile.title": "회원 센터",
+      "profile.info": "개인 정보",
+      "profile.orders": "주문 내역",
+      "profile.settings": "계정 설정",
+      "profile.basicInfo": "기본 정보",
+      "profile.name": "이름",
+      "profile.email": "이메일",
+      "profile.phone": "전화번호",
+      "profile.address": "주소",
+      "profile.joinDate": "가입일",
+      "profile.edit": "편집",
+      "profile.save": "저장",
+      "profile.cancel": "취소",
+      "profile.stats": "회원 통계",
+      "profile.totalOrders": "총 주문",
+      "profile.totalSpent": "총 지출",
+      
+      // Cart
+      "cart.title": "장바구니",
+      "cart.empty": "장바구니가 비어있습니다",
+      "cart.emptyMessage": "장바구니에 상품이 없습니다",
+      "cart.startShopping": "쇼핑 시작",
+      "cart.summary": "주문 요약",
+      "cart.subtotal": "소계",
+      "cart.shipping": "배송",
+      "cart.freeShipping": "무료",
+      "cart.total": "합계",
+      "cart.checkout": "결제",
+      "cart.continueShopping": "쇼핑 계속",
+      "cart.clearCart": "장바구니 비우기",
+      "cart.shippingInfo": "• $1,000 이상 주문 시 무료 배송",
+      "cart.deliveryInfo": "• 2-3 영업일 내 배송 예정",
+      "cart.returnInfo": "• 7일 이내 무조건 반품 가능",
+      
+      // Wishlist
+      "wishlist.title": "위시리스트",
+      "wishlist.empty": "위시리스트가 비어있습니다",
+      "wishlist.emptyMessage": "위시리스트에 상품이 없습니다",
+      "wishlist.startShopping": "쇼핑 시작",
+      "wishlist.viewCompare": "비교 보기",
+      "wishlist.clearWishlist": "위시리스트 비우기",
+      "wishlist.addToCart": "장바구니에 추가",
+      "wishlist.addToCompare": "비교에 추가",
+      
+      // Compare
+      "compare.title": "제품 비교",
+      "compare.empty": "비교 목록이 비어있습니다",
+      "compare.emptyMessage": "위시리스트나 제품 페이지에서 제품을 추가하여 비교하세요",
+      "compare.viewProducts": "제품 보기",
+      "compare.viewWishlist": "위시리스트 보기",
+      "compare.social": "소셜",
+      "compare.collaborate": "협업",
+      "compare.priceAlert": "가격 알림",
+      "compare.filter": "필터",
+      "compare.save": "저장",
+      "compare.history": "기록",
+      "compare.share": "공유",
+      "compare.export": "내보내기",
+      "compare.clearCompare": "비교 목록 지우기",
+      "compare.addToCart": "장바구니에 추가",
+      "compare.viewDetails": "세부 정보 보기",
+    }
+  },
+  id: {
+    translation: {
+      // Common
+      "platform.name": "LiveTrade Connect",
+      "platform.description": "Platform perdagangan satu atap",
+      "platform.slogan": "Menghubungkan e-commerce, perdagangan B2B dan layanan gaya hidup",
+      
+      // Navigation
+      "nav.home": "Beranda",
+      "nav.products": "Produk",
+      "nav.b2b": "Platform B2B",
+      "nav.lifeServices": "Platform Layanan Kehidupan",
+      
+      // Life Trade Platform
+      "lifeTrade.title": "Platform Layanan Kehidupan",
+      "lifeTrade.description": "Menghubungkan komunitas Vietnam di luar negeri dan orang asing di Vietnam",
+      "lifeTrade.overview": "Ikhtisar",
+      "lifeTrade.food": "Makanan",
+      "lifeTrade.accommodation": "Akomodasi",
+      "lifeTrade.travel": "Jelajahi Bersama",
+      "lifeTrade.language": "Bahasa",
+      "lifeTrade.culture": "Multikultural",
+      
+      // Target Users
+      "targetUsers.title": "Kelompok Pengguna Target",
+      "targetUsers.students": "Mahasiswa Internasional",
+      "targetUsers.students.desc": "Tidak familiar dengan bahasa, ingin berteman, ingin mengalami budaya dan masakan lokal",
+      "targetUsers.married": "Orang asing yang menikah dan menetap",
+      "targetUsers.married.desc": "Ingin berintegrasi ke dalam kehidupan lokal, berpartisipasi dalam kegiatan komunitas",
+      "targetUsers.workers": "Pekerja Asing",
+      "targetUsers.workers.desc": "Pekerja profesional, pekerja kerah biru, dan digital nomad",
+      
+      // Features
+      "features.title": "Fitur Utama",
+      "features.food": "Pengalaman Makanan",
+      "features.food.desc": "Jelajahi masakan lokal",
+      "features.accommodation": "Pertukaran Perumahan",
+      "features.accommodation.desc": "Temukan atau tukar akomodasi",
+      "features.travel": "Jelajahi Bersama",
+      "features.travel.desc": "Temukan teman perjalanan",
+      "features.language": "Pertukaran Bahasa",
+      "features.language.desc": "Belajar dan mengajar bahasa",
+      "features.culture": "Pusat Multikultural",
+      "features.culture.desc": "Sumber daya integrasi",
+      "features.legal": "Hukum & Dokumentasi",
+      "features.legal.desc": "Dukungan visa dan izin",
+      "features.healthcare": "Kesehatan",
+      "features.healthcare.desc": "Panduan rumah sakit dan asuransi",
+      "features.financial": "Layanan Keuangan",
+      "features.financial.desc": "Perbankan dan transfer uang",
+      "features.transportation": "Transportasi",
+      "features.transportation.desc": "Transportasi umum dan rental mobil",
+      "features.daily": "Kehidupan Sehari-hari",
+      "features.daily.desc": "Belanja dan layanan",
+      "features.community": "Komunitas",
+      "features.community.desc": "Jaringan sosial dan acara",
+      
+      // Recent Activities
+      "recentActivities.title": "Aktivitas Terbaru",
+      "recentActivities.cookingClass": "Kelas Memasak Vietnam",
+      "recentActivities.cookingClass.desc": "Belajar membuat pho dan hidangan tradisional",
+      "recentActivities.languageExchange": "Pertukaran Vietnam-Inggris",
+      "recentActivities.languageExchange.desc": "Pertemuan mingguan di kedai kopi",
+      "recentActivities.marketTour": "Tur Pasar Ben Thanh",
+      "recentActivities.marketTour.desc": "Jelajahi makanan dan budaya pasar tradisional",
+      
+      // Food Section
+      "food.title": "Penemuan Makanan (Eat & Meet)",
+      "food.addExperience": "Tambah Pengalaman",
+      "food.smartDiscovery": "Sistem Penemuan Makanan Pintar",
+      "food.locationBased": "Rekomendasi berbasis lokasi",
+      "food.locationBased.desc": "Secara otomatis menyarankan restoran Vietnam dan hidangan lokal dalam radius 5-10km",
+      "food.tasteProfile": "Pencocokan profil rasa",
+      "food.tasteProfile.desc": "Buat profil rasa (tingkat pedas, preferensi manis, pembatasan makanan) untuk mendapatkan rekomendasi yang dipersonalisasi",
+      "food.homesickMode": "Mode Rindu Kampung",
+      "food.homesickMode.desc": "Temukan hidangan yang rasanya paling mirip dengan masakan regional Vietnam tertentu (gaya Utara, Tengah, Selatan)",
+      
+      // Accommodation Section
+      "accommodation.title": "Pertukaran Perumahan (Live & Help)",
+      "accommodation.addListing": "Tambah Akomodasi",
+      
+      // Travel Section
+      "travel.title": "Jelajahi Bersama (Explore Together)",
+      "travel.addActivity": "Tambah Aktivitas",
+      
+      // Language Section
+      "language.title": "Pertukaran Bahasa (Language Swap)",
+      "language.addClass": "Tambah Kelas",
+      
+      // Culture Section
+      "culture.title": "Pusat Multikultural (Multicultural Hub)",
+      "culture.addResource": "Tambah Sumber Daya",
+      
+      // Buttons
+      "button.viewMore": "Lihat Lebih Banyak",
+      "button.register": "Daftar",
+      "button.join": "Bergabung",
+      "button.contact": "Kontak",
+      "button.cancel": "Batal",
+      "button.save": "Simpan",
+      "button.back": "Kembali",
+      "button.add": "Tambah",
+      "button.processing": "Memproses...",
+      
+      // Search
+      "search.placeholder": "Cari produk...",
+      
+      // Products
+      "products": "Produk",
+      "products.all": "Semua Produk",
+      "products.featured": "Produk Unggulan",
+      "products.popular": "Produk Populer",
+      "products.new": "Produk Baru",
+      "products.sale": "Produk Diskon",
+      
+      // User Profile
+      "profile.title": "Pusat Anggota",
+      "profile.info": "Informasi Pribadi",
+      "profile.orders": "Riwayat Pesanan",
+      "profile.settings": "Pengaturan Akun",
+      "profile.basicInfo": "Informasi Dasar",
+      "profile.name": "Nama",
+      "profile.email": "Email",
+      "profile.phone": "Nomor Telepon",
+      "profile.address": "Alamat",
+      "profile.joinDate": "Tanggal Bergabung",
+      "profile.edit": "Edit",
+      "profile.save": "Simpan",
+      "profile.cancel": "Batal",
+      "profile.stats": "Statistik Anggota",
+      "profile.totalOrders": "Total Pesanan",
+      "profile.totalSpent": "Total Pengeluaran",
+      
+      // Cart
+      "cart.title": "Keranjang Belanja",
+      "cart.empty": "Keranjang Anda kosong",
+      "cart.emptyMessage": "Tidak ada barang di keranjang Anda",
+      "cart.startShopping": "Mulai Belanja",
+      "cart.summary": "Ringkasan Pesanan",
+      "cart.subtotal": "Subtotal",
+      "cart.shipping": "Pengiriman",
+      "cart.freeShipping": "Gratis",
+      "cart.total": "Total",
+      "cart.checkout": "Checkout",
+      "cart.continueShopping": "Lanjutkan Belanja",
+      "cart.clearCart": "Kosongkan Keranjang",
+      "cart.shippingInfo": "• Pengiriman gratis untuk pesanan di atas $1,000",
+      "cart.deliveryInfo": "• Perkiraan pengiriman dalam 2-3 hari kerja",
+      "cart.returnInfo": "• Kebijakan pengembalian 7 hari tanpa pertanyaan",
+      
+      // Wishlist
+      "wishlist.title": "Wishlist",
+      "wishlist.empty": "Wishlist Anda kosong",
+      "wishlist.emptyMessage": "Tidak ada barang di wishlist Anda",
+      "wishlist.startShopping": "Mulai Belanja",
+      "wishlist.viewCompare": "Lihat Perbandingan",
+      "wishlist.clearWishlist": "Kosongkan Wishlist",
+      "wishlist.addToCart": "Tambahkan ke Keranjang",
+      "wishlist.addToCompare": "Tambahkan ke Perbandingan",
+      
+      // Compare
+      "compare.title": "Bandingkan Produk",
+      "compare.empty": "Daftar perbandingan Anda kosong",
+      "compare.emptyMessage": "Tambahkan produk dari wishlist atau halaman produk untuk membandingkan",
+      "compare.viewProducts": "Lihat Produk",
+      "compare.viewWishlist": "Lihat Wishlist",
+      "compare.social": "Sosial",
+      "compare.collaborate": "Kolaborasi",
+      "compare.priceAlert": "Peringatan Harga",
+      "compare.filter": "Filter",
+      "compare.save": "Simpan",
+      "compare.history": "Riwayat",
+      "compare.share": "Bagikan",
+      "compare.export": "Ekspor",
+      "compare.clearCompare": "Kosongkan Daftar Perbandingan",
+      "compare.addToCart": "Tambahkan ke Keranjang",
+      "compare.viewDetails": "Lihat Detail",
+    }
   }
 }
 
-// Create context
-interface I18nContextType {
-  language: string
-  changeLanguage: (lang: string) => void
-  t: (key: string) => string
-  languages: typeof languages
-}
-
-const I18nContext = createContext<I18nContextType | null>(null)
-
-// Initialize i18next
+// Initialize i18next on the client-side only
 if (typeof window !== 'undefined') {
   i18n
     .use(LanguageDetector)
@@ -871,13 +1471,24 @@ if (typeof window !== 'undefined') {
     });
 }
 
+// Create context
+interface I18nContextType {
+  language: string
+  changeLanguage: (lang: string) => void
+  t: (key: string) => string
+  languages: typeof languages
+}
+
+const I18nContext = createContext<I18nContextType | null>(null)
+
 export function I18nProvider({ children }: { children: ReactNode }) {
+  // Define all state hooks at the top level
   const [language, setLanguage] = useState(i18n.language || 'en')
   
-  // Define all hooks at the top level
+  // Use the useTranslation hook
   const { t } = useTranslation()
   
-  // Define callbacks with useMemo/useCallback to maintain hook order
+  // Define changeLanguage with useCallback
   const changeLanguage = useCallback((lang: string) => {
     i18n.changeLanguage(lang);
     setLanguage(lang);
@@ -888,7 +1499,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Listen for language changes
+  // Listen for language changes with useEffect
   useEffect(() => {
     const handleLanguageChanged = () => {
       setLanguage(i18n.language);
@@ -900,7 +1511,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // Create context value with useMemo to prevent unnecessary re-renders
+  // Create context value with useMemo
   const contextValue = useMemo(() => ({
     language,
     changeLanguage,
