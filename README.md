@@ -9,11 +9,16 @@ LiveTrade Connect is a comprehensive platform that integrates e-commerce, B2B tr
 - **TypeScript** - Type-safe JavaScript for improved developer experience
 - **Tailwind CSS** - Utility-first CSS framework for rapid UI development
 - **shadcn/ui** - Reusable UI components built with Radix UI and Tailwind
-- **Lucide Icons** - Modern icon library for clean, consistent iconography
+- **i18next** - Internationalization framework for multilingual support
+- **React Context API** - For global state management across the application
 
 ### State Management
-- **React Context API** - For global state management across the application
-- **Custom Providers** - Specialized context providers for different features (Cart, Wishlist, etc.)
+- **Custom Providers** - Specialized context providers for different features:
+  - CartProvider - Shopping cart management
+  - WishlistProvider - Saved items management
+  - CompareProvider - Product comparison functionality
+  - MembershipProvider - User subscription management
+  - MultiLanguageProvider - Language and localization
 
 ### Data Visualization
 - **Recharts** - Composable charting library for analytics dashboards
@@ -22,14 +27,30 @@ LiveTrade Connect is a comprehensive platform that integrates e-commerce, B2B tr
 
 ### AI-Powered Features
 - **Personalized Recommendations** - AI-driven product suggestions based on user behavior
+  - Collaborative filtering for similar user preferences
+  - Content-based filtering for product similarity
+  - Hybrid recommendation algorithms
+  
 - **Voice Search & Commands** - Natural language processing for voice interactions
+  - Voice-to-text conversion
+  - Intent recognition for commands
+  - Multilingual voice support
+  
 - **Intelligent Price Alerts** - Smart monitoring of price changes with notifications
-- **Margin Calculator** - Automated profit margin calculation for B2B transactions
+  - Price trend analysis
+  - Personalized threshold recommendations
+  - Predictive price drop alerts
+  
+- **Smart Matching Systems** - AI-powered matching for various platform features:
+  - Language exchange partner matching
+  - Travel companion compatibility
+  - Accommodation preferences matching
 
 ### E-Commerce Innovations
 - **Product Comparison** - Advanced comparison tools with AI recommendations
 - **Multi-language Support** - Automatic translation and localization
 - **Multi-currency Support** - Currency conversion and regional pricing
+- **Social Features** - Collaborative shopping and social sharing
 
 ### B2B Trading Platform
 - **Quote Management** - Streamlined RFQ (Request for Quotation) process
@@ -37,29 +58,46 @@ LiveTrade Connect is a comprehensive platform that integrates e-commerce, B2B tr
 - **Document Generation** - Automated creation of trade documents
 - **Supplier Management** - Comprehensive supplier database and relationship tools
 
+### Life Services Platform
+- **Food Experience Module** - Discover local cuisine and cooking classes
+- **Accommodation Exchange** - Find and exchange housing options
+- **Travel Together** - Connect with travel companions
+- **Language Exchange** - Learn and teach languages
+- **Cultural Resources** - Integration assistance and cultural guidance
+
 ## Minimum Viable Product (MVP)
 
 For the initial MVP release, we're focusing on the following core components:
 
 ### E-Commerce MVP
-- Product browsing and search
-- Shopping cart functionality
+- Product browsing and search functionality
+- Shopping cart and checkout process
 - User account management
-- Order processing and tracking
 - Basic product comparison
+- Wishlist functionality
+- Multi-language support (Chinese, Vietnamese, English)
 
 ### B2B Platform MVP
 - Supplier and customer management
 - Quote creation and management
 - Order processing
 - Basic analytics dashboard
+- Document generation
+
+### Life Services Platform MVP
+- Activity listing and discovery
+- Registration system for activities
+- Basic user profiles
+- Language switching
+- Contact functionality
 
 ### Technical MVP Requirements
 - Responsive design for mobile and desktop
 - Core state management for cart, wishlist, and user preferences
-- Basic localization support
+- Basic localization support for key markets
 - Simplified checkout process
 - Essential B2B document generation
+- Activity registration forms
 
 ## Future Enhancements
 
@@ -71,6 +109,12 @@ Post-MVP, we plan to implement:
 - **Advanced Analytics** - Deep insights with machine learning
 - **Collaborative Shopping** - Real-time shared shopping experiences
 - **Mobile App** - Native mobile experience with offline capabilities
+- **Advanced AI Features**:
+  - Sentiment analysis for reviews
+  - Visual search capabilities
+  - Chatbot customer service
+  - Predictive inventory management
+  - Fraud detection systems
 
 ## Getting Started
 
