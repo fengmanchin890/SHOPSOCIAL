@@ -18,6 +18,9 @@ import { AddNewActivityDialog } from "@/components/store/AddNewActivityDialog"
 import { ViewMoreActivitiesDialog } from "@/components/store/ViewMoreActivitiesDialog"
 import { HelpDeskChat } from "@/components/store/HelpDeskChat"
 import { CommunityForum } from "@/components/store/CommunityForum"
+import { EventRegistrationButton } from "@/components/store/EventRegistrationButton"
+import { ViewAllEventsButton } from "@/components/store/ViewAllEventsButton"
+import { CommentReplyButton } from "@/components/store/CommentReplyButton"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -449,20 +452,16 @@ export default function LifeTradePage() {
                           <span>{activity.location}</span>
                         </div>
                       </div>
-                      <Button size="sm" variant="outline" className="flex-shrink-0">
-                        {language === "zh-TW" ? "報名" : 
-                         language === "vi" ? "Đăng ký" : 
-                         "Register"}
-                      </Button>
+                      <EventRegistrationButton 
+                        eventTitle={activity.title} 
+                        variant="outline" 
+                        size="sm"
+                      />
                     </div>
                   ))}
                 </div>
                 
-                <Button variant="outline" className="w-full">
-                  {language === "zh-TW" ? "查看所有活動" : 
-                   language === "vi" ? "Xem tất cả sự kiện" : 
-                   "View all events"}
-                </Button>
+                <ViewAllEventsButton className="w-full" />
               </CardContent>
             </Card>
           </div>

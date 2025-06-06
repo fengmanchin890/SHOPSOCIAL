@@ -5,6 +5,9 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ActivityRegistrationDialog } from "./ActivityRegistrationDialog"
 import { useI18n } from "@/contexts/i18n-context"
+import { EventRegistrationButton } from "./EventRegistrationButton"
+import { CommentReplyButton } from "./CommentReplyButton"
+import { Clock, MapPin } from "lucide-react"
 
 interface ActivityCardProps {
   title: string
@@ -16,7 +19,15 @@ interface ActivityCardProps {
   buttonText?: string
 }
 
-export function ActivityCard({ title, description, image, time, location, type, buttonText }: ActivityCardProps) {
+export function ActivityCard({ 
+  title, 
+  description, 
+  image, 
+  time, 
+  location, 
+  type, 
+  buttonText 
+}: ActivityCardProps) {
   const [showRegistration, setShowRegistration] = useState(false)
   const { t, language } = useI18n()
 
@@ -52,14 +63,23 @@ export function ActivityCard({ title, description, image, time, location, type, 
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
         <p className="text-gray-600 mb-4">{description}</p>
+        <div className="flex flex-col space-y-2 mb-4">
+          {time && (
+            <div className="flex items-center text-sm text-gray-500">
+              <Clock className="h-4 w-4 mr-2" />
+              <span>{time}</span>
+            </div>
+          )}
+          {location && (
+            <div className="flex items-center text-sm text-gray-500">
+              <MapPin className="h-4 w-4 mr-2" />
+              <span>{location}</span>
+            </div>
+          )}
+        </div>
         <div className="flex justify-between items-center">
-          <div className="text-sm text-gray-500">
-            {time && <p>{time}</p>}
-            {location && <p>{location}</p>}
-          </div>
-          <Button size="sm" onClick={() => setShowRegistration(true)}>
-            {getButtonText()}
-          </Button>
+          <EventRegistrationButton eventTitle={title} />
+          <CommentReplyButton postTitle={title} authorName="Admin" />
         </div>
       </div>
 
