@@ -41,51 +41,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Link from "next/link"
 import { useI18n } from "@/contexts/i18n-context"
 import { toast } from "@/hooks/use-toast"
-
-// Mock user data
-const mockUser = {
-  id: "1",
-  name: "Nguyễn Văn A",
-  email: "nguyen@example.com",
-  phone: "0912-345-678",
-  address: "123 Đường Nguyễn Huệ, Quận 1, TP.HCM",
-  joinDate: "2023-01-15",
-}
-
-// Mock orders data
-const mockOrders = [
-  {
-    id: "ORD-001",
-    date: "2024-01-15",
-    status: "delivered",
-    total: 3680,
-    items: [
-      { name: "Áo khoác jean cổ điển", quantity: 1, price: 2980 },
-      { name: "Áo thun cotton thoáng mát", quantity: 1, price: 680 },
-    ],
-  },
-  {
-    id: "ORD-002",
-    date: "2024-01-10",
-    status: "shipping",
-    total: 1680,
-    items: [{ name: "Đầm dài thanh lịch", quantity: 1, price: 1680 }],
-  },
-  {
-    id: "ORD-003",
-    date: "2024-01-05",
-    status: "processing",
-    total: 4500,
-    items: [{ name: "Túi xách da thật", quantity: 1, price: 4500 }],
-  },
-]
-
-const statusMap = {
-  processing: { label: "Đang xử lý", color: "bg-yellow-100 text-yellow-800" },
-  shipping: { label: "Đang giao hàng", color: "bg-blue-100 text-blue-800" },
-  delivered: { label: "Đã giao hàng", color: "bg-green-100 text-green-800" },
-  cancelled: { label: "Đã hủy", color: "bg-red-100 text-red-800" },
-}
+import { LogoutButton } from "@/components/store/LogoutButton"
 
 export default function ProfilePage() {
   const router = useRouter()
@@ -95,10 +51,16 @@ export default function ProfilePage() {
   const { t } = useI18n()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
+  const [userData, setUserData] = useState<any>(null)
 
   // Profile editing state
   const [isEditing, setIsEditing] = useState(false)
-  const [editedUser, setEditedUser] = useState(mockUser)
+  const [editedUser, setEditedUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+  })
 
   // Settings dialogs state
   const [showPasswordDialog, setShowPasswordDialog] = useState(false)
@@ -107,7 +69,6 @@ export default function ProfilePage() {
   const [showLanguageDialog, setShowLanguageDialog] = useState(false)
   const [showContactDialog, setShowContactDialog] = useState(false)
   const [showFAQDialog, setShowFAQDialog] = useState(false)
-  const [showLogoutDialog, setShowLogoutDialog] = useState(false)
 
   // Form states
   const [currentPassword, setCurrentPassword] = useState("")
@@ -139,15 +100,28 @@ export default function ProfilePage() {
     setHasMounted(true)
   }, [])
 
-  // Check login status
+  // Check login status and load user data
   useEffect(() => {
     if (!hasMounted) return
 
     const authStatus = localStorage.getItem("lifeTradeAuth")
     if (authStatus === "authenticated") {
       setIsLoggedIn(true)
+      
+      // Load user data
+      const userDataStr = localStorage.getItem("lifeTradeUser")
+      if (userDataStr) {
+        const parsedUserData = JSON.parse(userDataStr)
+        setUserData(parsedUserData)
+        setEditedUser({
+          name: parsedUserData.fullName || "",
+          email: parsedUserData.email || "",
+          phone: parsedUserData.phoneNumber || "",
+          address: parsedUserData.address || "",
+        })
+      }
     } else {
-      router.push("/store/life-trade/auth")
+      router.push("/store/login")
     }
   }, [router, hasMounted])
 
@@ -157,7 +131,20 @@ export default function ProfilePage() {
   }
 
   const handleSaveProfile = () => {
-    // Mô phỏng lưu thông tin người dùng
+    // Update user data in localStorage
+    if (userData) {
+      const updatedUserData = {
+        ...userData,
+        fullName: editedUser.name,
+        email: editedUser.email,
+        phoneNumber: editedUser.phone,
+        address: editedUser.address,
+      }
+      
+      localStorage.setItem("lifeTradeUser", JSON.stringify(updatedUserData))
+      setUserData(updatedUserData)
+    }
+    
     toast({
       title: "Thông tin cá nhân đã được cập nhật!",
       description: "Thông tin của bạn đã được lưu thành công.",
@@ -166,7 +153,14 @@ export default function ProfilePage() {
   }
 
   const handleCancelEdit = () => {
-    setEditedUser(mockUser)
+    if (userData) {
+      setEditedUser({
+        name: userData.fullName || "",
+        email: userData.email || "",
+        phone: userData.phoneNumber || "",
+        address: userData.address || "",
+      })
+    }
     setIsEditing(false)
   }
 
@@ -233,10 +227,16 @@ export default function ProfilePage() {
   }
 
   const handleDownloadData = () => {
-    // Mô phỏng tải dữ liệu cá nhân
+    // Create user data object for download
     const userData = {
-      profile: mockUser,
-      orders: mockOrders,
+      profile: {
+        name: editedUser.name,
+        email: editedUser.email,
+        phone: editedUser.phone,
+        address: editedUser.address,
+        joinDate: new Date().toISOString(),
+      },
+      orders: [],
       settings: { notifications, privacy },
       downloadDate: new Date().toISOString(),
     }
@@ -246,7 +246,7 @@ export default function ProfilePage() {
     const url = URL.createObjectURL(dataBlob)
     const link = document.createElement("a")
     link.href = url
-    link.download = `personal-data-${mockUser.id}.json`
+    link.download = `personal-data-${Date.now()}.json`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -258,21 +258,7 @@ export default function ProfilePage() {
     })
   }
 
-  const handleLogout = () => {
-    // Clear authentication data
-    localStorage.removeItem("lifeTradeAuth")
-    localStorage.removeItem("lifeTradeUserType")
-    
-    toast({
-      title: "Đăng xuất thành công",
-      description: "Bạn đã đăng xuất khỏi tài khoản.",
-    })
-    
-    // Redirect to login page
-    router.push("/store/life-trade/auth")
-  }
-
-  if (!isLoggedIn) {
+  if (!isLoggedIn || !userData) {
     return null // Will redirect to login page
   }
 
@@ -327,23 +313,23 @@ export default function ProfilePage() {
                   <>
                     <div>
                       <label className="text-sm font-medium text-gray-600">{t("profile.name")}</label>
-                      <p className="text-gray-900">{mockUser.name}</p>
+                      <p className="text-gray-900">{userData.fullName}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-600">{t("profile.email")}</label>
-                      <p className="text-gray-900">{mockUser.email}</p>
+                      <p className="text-gray-900">{userData.email || "-"}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-600">{t("profile.phone")}</label>
-                      <p className="text-gray-900">{mockUser.phone}</p>
+                      <p className="text-gray-900">{userData.phoneNumber}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-600">{t("profile.address")}</label>
-                      <p className="text-gray-900">{mockUser.address}</p>
+                      <p className="text-gray-900">{userData.address || "-"}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-600">{t("profile.joinDate")}</label>
-                      <p className="text-gray-900">{mockUser.joinDate}</p>
+                      <p className="text-gray-900">{new Date(userData.joinDate).toLocaleDateString()}</p>
                     </div>
                   </>
                 ) : (
@@ -393,13 +379,11 @@ export default function ProfilePage() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-4 bg-blue-50 rounded-lg">
-                    <p className="text-2xl font-bold text-blue-600">{mockOrders.length}</p>
+                    <p className="text-2xl font-bold text-blue-600">3</p>
                     <p className="text-sm text-gray-600">{t("profile.totalOrders")}</p>
                   </div>
                   <div className="text-center p-4 bg-green-50 rounded-lg">
-                    <p className="text-2xl font-bold text-green-600">
-                      ${mockOrders.reduce((sum, order) => sum + order.total, 0).toLocaleString()}
-                    </p>
+                    <p className="text-2xl font-bold text-green-600">$9,860</p>
                     <p className="text-sm text-gray-600">{t("profile.totalSpent")}</p>
                   </div>
                 </div>
@@ -419,45 +403,13 @@ export default function ProfilePage() {
               <CardTitle>{t("profile.orders")}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-6">
-                {mockOrders.map((order) => (
-                  <div key={order.id} className="border rounded-lg p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <h3 className="font-semibold text-gray-900">Đơn hàng #{order.id}</h3>
-                        <p className="text-sm text-gray-600">Ngày đặt: {order.date}</p>
-                      </div>
-                      <div className="text-right">
-                        <Badge className={statusMap[order.status as keyof typeof statusMap].color}>
-                          {statusMap[order.status as keyof typeof statusMap].label}
-                        </Badge>
-                        <p className="text-lg font-semibold text-gray-900 mt-1">${order.total.toLocaleString()}</p>
-                      </div>
-                    </div>
-
-                    <Separator className="my-4" />
-
-                    <div className="space-y-2">
-                      {order.items.map((item, index) => (
-                        <div key={index} className="flex justify-between text-sm">
-                          <span>
-                            {item.name} x {item.quantity}
-                          </span>
-                          <span>${item.price.toLocaleString()}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex justify-end mt-4">
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={`/store/user/orders/${order.id}`}>
-                          <Eye className="h-4 w-4 mr-2" />
-                          Xem chi tiết
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+              <div className="text-center py-8">
+                <Package className="h-16 w-16 mx-auto text-gray-300 mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Chưa có đơn hàng nào</h3>
+                <p className="text-gray-600 mb-4">Bạn chưa có đơn hàng nào trong lịch sử</p>
+                <Button asChild>
+                  <Link href="/store/products">Bắt đầu mua sắm</Link>
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -793,31 +745,8 @@ export default function ProfilePage() {
 
                 <Separator />
                 
-                {/* Logout Dialog */}
-                <Dialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
-                  <DialogTrigger asChild>
-                    <Button variant="destructive" className="w-full justify-start">
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Đăng xuất
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Xác nhận đăng xuất</DialogTitle>
-                      <DialogDescription>
-                        Bạn có chắc chắn muốn đăng xuất khỏi tài khoản?
-                      </DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter className="mt-4">
-                      <Button variant="outline" onClick={() => setShowLogoutDialog(false)}>
-                        Hủy
-                      </Button>
-                      <Button variant="destructive" onClick={handleLogout}>
-                        Đăng xuất
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
+                {/* Logout Button */}
+                <LogoutButton className="w-full justify-start" />
               </CardContent>
             </Card>
           </div>
