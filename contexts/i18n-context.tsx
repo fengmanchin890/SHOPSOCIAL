@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from "react"
+import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from "react"
 import i18n from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
 import LanguageDetector from "i18next-browser-languagedetector"
@@ -12,6 +12,9 @@ export const languages = [
   { code: "th", name: "Thai", nativeName: "ภาษาไทย", flag: "🇹🇭", rtl: false },
   { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳", rtl: false },
   { code: "en", name: "English", nativeName: "English", flag: "🇺🇸", rtl: false },
+  { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia", flag: "🇮🇩", rtl: false },
+  { code: "ja", name: "Japanese", nativeName: "日本語", flag: "🇯🇵", rtl: false },
+  { code: "ko", name: "Korean", nativeName: "한국어", flag: "🇰🇷", rtl: false },
 ]
 
 // Define translations
@@ -840,6 +843,171 @@ const resources = {
       "compare.addToCart": "Add to Cart",
       "compare.viewDetails": "View Details",
     }
+  },
+  id: {
+    translation: {
+      // Common
+      "platform.name": "LiveTrade Connect",
+      "platform.description": "Platform perdagangan terpadu",
+      "platform.slogan": "Menghubungkan e-commerce, perdagangan B2B, dan layanan gaya hidup",
+      
+      // Navigation
+      "nav.home": "Beranda",
+      "nav.products": "Produk",
+      "nav.b2b": "Platform B2B",
+      "nav.lifeServices": "Platform Layanan Kehidupan",
+      
+      // Life Trade Platform
+      "lifeTrade.title": "Platform Layanan Kehidupan",
+      "lifeTrade.description": "Menghubungkan komunitas Vietnam di luar negeri dan orang asing di Vietnam",
+      "lifeTrade.overview": "Ikhtisar",
+      "lifeTrade.food": "Makanan",
+      "lifeTrade.accommodation": "Akomodasi",
+      "lifeTrade.travel": "Jelajah Bersama",
+      "lifeTrade.language": "Bahasa",
+      "lifeTrade.culture": "Multikultural",
+      
+      // Target Users
+      "targetUsers.title": "Kelompok Pengguna Target",
+      "targetUsers.students": "Mahasiswa Internasional",
+      "targetUsers.students.desc": "Tidak familiar dengan bahasa, ingin berteman, ingin merasakan budaya dan masakan lokal",
+      "targetUsers.married": "Orang asing yang menikah dan menetap",
+      "targetUsers.married.desc": "Ingin berintegrasi ke dalam kehidupan lokal, berpartisipasi dalam kegiatan komunitas",
+      
+      // Features
+      "features.title": "Fitur Utama",
+      "features.food": "Pengalaman Kuliner",
+      "features.food.desc": "Jelajahi masakan lokal",
+      "features.accommodation": "Pertukaran Tempat Tinggal",
+      "features.accommodation.desc": "Temukan atau tukar tempat tinggal",
+      "features.travel": "Jelajah Bersama",
+      "features.travel.desc": "Temukan teman perjalanan",
+      "features.language": "Pertukaran Bahasa",
+      "features.language.desc": "Belajar dan mengajar bahasa",
+      "features.culture": "Pusat Multikultural",
+      "features.culture.desc": "Sumber daya integrasi",
+      
+      // Buttons
+      "button.viewMore": "Lihat Lebih Banyak",
+      "button.register": "Daftar",
+      "button.join": "Bergabung",
+      "button.contact": "Kontak",
+      "button.cancel": "Batal",
+      "button.save": "Simpan",
+      "button.back": "Kembali",
+      "button.add": "Tambah",
+      "button.processing": "Memproses...",
+    }
+  },
+  ja: {
+    translation: {
+      // Common
+      "platform.name": "LiveTrade Connect",
+      "platform.description": "ワンストップ取引プラットフォーム",
+      "platform.slogan": "Eコマース、B2B取引、ライフスタイルサービスを繋ぐ",
+      
+      // Navigation
+      "nav.home": "ホーム",
+      "nav.products": "製品",
+      "nav.b2b": "B2Bプラットフォーム",
+      "nav.lifeServices": "ライフサービスプラットフォーム",
+      
+      // Life Trade Platform
+      "lifeTrade.title": "ライフサービスプラットフォーム",
+      "lifeTrade.description": "海外のベトナム人コミュニティとベトナムの外国人を繋ぐ",
+      "lifeTrade.overview": "概要",
+      "lifeTrade.food": "食事",
+      "lifeTrade.accommodation": "宿泊",
+      "lifeTrade.travel": "一緒に探検",
+      "lifeTrade.language": "言語",
+      "lifeTrade.culture": "多文化",
+      
+      // Target Users
+      "targetUsers.title": "ターゲットユーザーグループ",
+      "targetUsers.students": "留学生",
+      "targetUsers.students.desc": "言語に不慣れ、友達を作りたい、地元の文化や料理を体験したい",
+      "targetUsers.married": "結婚して定住した外国人",
+      "targetUsers.married.desc": "地元の生活に溶け込みたい、コミュニティ活動に参加したい",
+      
+      // Features
+      "features.title": "主な機能",
+      "features.food": "食体験",
+      "features.food.desc": "地元料理を探索",
+      "features.accommodation": "住居交換",
+      "features.accommodation.desc": "宿泊先を見つけるか交換する",
+      "features.travel": "一緒に探検",
+      "features.travel.desc": "旅行仲間を見つける",
+      "features.language": "言語交換",
+      "features.language.desc": "言語を学び教える",
+      "features.culture": "多文化センター",
+      "features.culture.desc": "統合リソース",
+      
+      // Buttons
+      "button.viewMore": "もっと見る",
+      "button.register": "登録",
+      "button.join": "参加",
+      "button.contact": "連絡",
+      "button.cancel": "キャンセル",
+      "button.save": "保存",
+      "button.back": "戻る",
+      "button.add": "追加",
+      "button.processing": "処理中...",
+    }
+  },
+  ko: {
+    translation: {
+      // Common
+      "platform.name": "LiveTrade Connect",
+      "platform.description": "원스톱 거래 플랫폼",
+      "platform.slogan": "전자상거래, B2B 거래 및 라이프스타일 서비스 연결",
+      
+      // Navigation
+      "nav.home": "홈",
+      "nav.products": "제품",
+      "nav.b2b": "B2B 플랫폼",
+      "nav.lifeServices": "라이프 서비스 플랫폼",
+      
+      // Life Trade Platform
+      "lifeTrade.title": "라이프 서비스 플랫폼",
+      "lifeTrade.description": "해외 베트남 커뮤니티와 베트남의 외국인 연결",
+      "lifeTrade.overview": "개요",
+      "lifeTrade.food": "음식",
+      "lifeTrade.accommodation": "숙박",
+      "lifeTrade.travel": "함께 탐험",
+      "lifeTrade.language": "언어",
+      "lifeTrade.culture": "다문화",
+      
+      // Target Users
+      "targetUsers.title": "대상 사용자 그룹",
+      "targetUsers.students": "유학생",
+      "targetUsers.students.desc": "언어에 익숙하지 않고, 친구를 사귀고 싶고, 현지 문화와 요리를 경험하고 싶은 사람",
+      "targetUsers.married": "결혼하고 정착한 외국인",
+      "targetUsers.married.desc": "현지 생활에 통합되고 싶고, 커뮤니티 활동에 참여하고 싶은 사람",
+      
+      // Features
+      "features.title": "주요 기능",
+      "features.food": "음식 경험",
+      "features.food.desc": "현지 요리 탐색",
+      "features.accommodation": "주택 교환",
+      "features.accommodation.desc": "숙소 찾기 또는 교환",
+      "features.travel": "함께 탐험",
+      "features.travel.desc": "여행 동반자 찾기",
+      "features.language": "언어 교환",
+      "features.language.desc": "언어 배우기 및 가르치기",
+      "features.culture": "다문화 센터",
+      "features.culture.desc": "통합 자원",
+      
+      // Buttons
+      "button.viewMore": "더 보기",
+      "button.register": "등록",
+      "button.join": "참여",
+      "button.contact": "연락",
+      "button.cancel": "취소",
+      "button.save": "저장",
+      "button.back": "뒤로",
+      "button.add": "추가",
+      "button.processing": "처리 중...",
+    }
   }
 }
 
@@ -877,15 +1045,17 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   // Define all hooks at the top level
   const { t } = useTranslation()
   
-  // Define callbacks with useMemo/useCallback to maintain hook order
-  const changeLanguage = useCallback((lang: string) => {
-    i18n.changeLanguage(lang);
-    setLanguage(lang);
-    
-    // Set HTML lang attribute and direction
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = lang;
-    }
+  // Define callbacks with useMemo to maintain hook order
+  const changeLanguage = useMemo(() => {
+    return (lang: string) => {
+      i18n.changeLanguage(lang);
+      setLanguage(lang);
+      
+      // Set HTML lang attribute and direction
+      if (typeof document !== 'undefined') {
+        document.documentElement.lang = lang;
+      }
+    };
   }, []);
 
   // Listen for language changes
