@@ -863,30 +863,49 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | null>(null)
 
-// Initialize i18next unconditionally with fallback language
-i18n.use(initReactI18next).init({
-  resources,
-  fallbackLng: "en",
-  lng: "en", // Set default language for SSR
-  interpolation: {
-    escapeValue: false,
-  },
-});
+// Initialize i18next only once with proper environment detection
+let isInitialized = false
 
-// Only add language detector on client side
-if (typeof window !== 'undefined') {
-  i18n.use(LanguageDetector).init({
-    resources,
-    fallbackLng: "en",
-    interpolation: {
-      escapeValue: false,
-    },
-    detection: {
-      order: ['localStorage', 'navigator'],
-      caches: ['localStorage'],
-    },
-  });
+const initializeI18n = () => {
+  if (isInitialized) return
+  
+  const isClient = typeof window !== 'undefined'
+  
+  if (isClient) {
+    // Client-side initialization with language detector
+    i18n
+      .use(LanguageDetector)
+      .use(initReactI18next)
+      .init({
+        resources,
+        fallbackLng: "en",
+        interpolation: {
+          escapeValue: false,
+        },
+        detection: {
+          order: ['localStorage', 'navigator'],
+          caches: ['localStorage'],
+        },
+      })
+  } else {
+    // Server-side initialization without language detector
+    i18n
+      .use(initReactI18next)
+      .init({
+        resources,
+        fallbackLng: "en",
+        lng: "en", // Set default language for SSR
+        interpolation: {
+          escapeValue: false,
+        },
+      })
+  }
+  
+  isInitialized = true
 }
+
+// Initialize i18n
+initializeI18n()
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState('en') // Start with fallback language
