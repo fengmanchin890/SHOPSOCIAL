@@ -16,7 +16,7 @@ import { MembershipUpgradeDialog } from "@/components/store/MembershipUpgradeDia
 import { TargetAudienceSelector } from "@/components/store/TargetAudienceSelector"
 import { useI18n } from "@/contexts/i18n-context"
 
-export function AuthPageContent() {
+export default function AuthPageContent() {
   const router = useRouter()
   const { upgradeMembership } = useMembership()
   const { t, language } = useI18n()

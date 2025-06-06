@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const AuthPageContent = dynamic(() => import('@/components/AuthPageContent').then(mod => mod.AuthPageContent), {
+const AuthPageContent = dynamic(() => import('@/components/AuthPageContent'), {
   ssr: false,
   loading: () => <div>Loading...</div>
 })
