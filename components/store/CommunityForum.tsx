@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { MessageSquare, Heart, Reply, Flag, Search, Plus, Filter, Globe, Tag, ShoppingBag, Briefcase, Users, BookOpen, Eye } from "lucide-react"
 import { useI18n } from "@/contexts/i18n-context"
+import { CommentReplyButton } from "./CommentReplyButton"
 
 interface ForumPost {
   id: string
@@ -500,7 +501,7 @@ export function CommunityForum() {
                           </div>
                           <Badge className="flex items-center space-x-1">
                             {getCategoryIcon(post.category)}
-                            <span className="capitalize">{post.category}</span>
+                            <span className="capitalize ml-1">{post.category}</span>
                           </Badge>
                         </div>
                         
@@ -526,10 +527,12 @@ export function CommunityForum() {
                               <Heart className={`h-4 w-4 mr-1 ${post.isLiked ? 'fill-red-500' : ''}`} />
                               <span>{post.likes} {getLocalizedText("likes")}</span>
                             </Button>
-                            <Button variant="ghost" size="sm" className="flex items-center">
-                              <Reply className="h-4 w-4 mr-1" />
-                              <span>{post.replies} {getLocalizedText("replies")}</span>
-                            </Button>
+                            <CommentReplyButton 
+                              postTitle={post.title} 
+                              authorName={post.author.name} 
+                              variant="ghost" 
+                              size="sm"
+                            />
                             <div className="flex items-center text-sm text-gray-500">
                               <Eye className="h-4 w-4 mr-1" />
                               <span>{post.views} {getLocalizedText("views")}</span>
