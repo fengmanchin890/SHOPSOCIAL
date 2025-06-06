@@ -12,9 +12,6 @@ export const languages = [
   { code: "th", name: "Thai", nativeName: "ภาษาไทย", flag: "🇹🇭", rtl: false },
   { code: "hi", name: "Hindi", nativeName: "हिन्दी", flag: "🇮🇳", rtl: false },
   { code: "en", name: "English", nativeName: "English", flag: "🇺🇸", rtl: false },
-  { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia", flag: "🇮🇩", rtl: false },
-  { code: "ja", name: "Japanese", nativeName: "日本語", flag: "🇯🇵", rtl: false },
-  { code: "ko", name: "Korean", nativeName: "한국어", flag: "🇰🇷", rtl: false },
 ]
 
 // Define translations
@@ -34,7 +31,7 @@ const resources = {
       
       // Life Trade Platform
       "lifeTrade.title": "生活服務平台",
-      "lifeTrade.description": "連接在國外的越南人和在越南的外國人社區",
+      "lifeTrade.description": "連接在國外的台灣人和在台灣的外國人社區",
       "lifeTrade.overview": "概覽",
       "lifeTrade.food": "美食",
       "lifeTrade.accommodation": "住宿",
@@ -48,6 +45,8 @@ const resources = {
       "targetUsers.students.desc": "不熟悉語言，想交朋友，想體驗當地文化和美食",
       "targetUsers.married": "國際婚姻和定居者",
       "targetUsers.married.desc": "想融入當地生活，參與社區活動",
+      "targetUsers.workers": "外籍工作者",
+      "targetUsers.workers.desc": "專業人士、藍領工人和數位遊牧者",
       
       // Features
       "features.title": "主要功能",
@@ -64,11 +63,11 @@ const resources = {
       
       // Recent Activities
       "recentActivities.title": "最近活動",
-      "recentActivities.cookingClass": "越南料理烹飪課",
-      "recentActivities.cookingClass.desc": "學習製作河粉和傳統菜餚",
-      "recentActivities.languageExchange": "越南語-英語交流",
+      "recentActivities.cookingClass": "台灣料理烹飪課",
+      "recentActivities.cookingClass.desc": "學習製作牛肉麵和傳統菜餚",
+      "recentActivities.languageExchange": "中文-英語交流",
       "recentActivities.languageExchange.desc": "每週在咖啡廳見面",
-      "recentActivities.marketTour": "濱城市場探索之旅",
+      "recentActivities.marketTour": "夜市探索之旅",
       "recentActivities.marketTour.desc": "探索傳統市場的美食和文化",
       
       // Food Section
@@ -76,11 +75,11 @@ const resources = {
       "food.addExperience": "添加體驗",
       "food.smartDiscovery": "智能美食發現系統",
       "food.locationBased": "基於位置的推薦",
-      "food.locationBased.desc": "自動推薦5-10公里範圍內的越南餐廳和當地菜餚",
+      "food.locationBased.desc": "自動推薦5-10公里範圍內的台灣餐廳和當地菜餚",
       "food.tasteProfile": "口味檔案匹配",
       "food.tasteProfile.desc": "創建口味檔案（辣度、甜度偏好、飲食限制）獲取個性化推薦",
       "food.homesickMode": "思鄉模式",
-      "food.homesickMode.desc": "尋找最接近越南特定地區菜餚的美食（北部、中部、南部風格）",
+      "food.homesickMode.desc": "尋找最接近台灣特定地區菜餚的美食（北部、中部、南部風格）",
       
       // Accommodation Section
       "accommodation.title": "住宿交換 (Live & Help)",
@@ -213,6 +212,8 @@ const resources = {
       "targetUsers.students.desc": "Chưa quen ngôn ngữ, muốn kết bạn, muốn trải nghiệm văn hóa và ẩm thực địa phương",
       "targetUsers.married": "Người nước ngoài kết hôn và định cư",
       "targetUsers.married.desc": "Muốn hòa nhập cuộc sống địa phương, tham gia hoạt động cộng đồng",
+      "targetUsers.workers": "Người lao động nước ngoài",
+      "targetUsers.workers.desc": "Chuyên gia, lao động phổ thông và người làm việc từ xa",
       
       // Features
       "features.title": "Các tính năng chính",
@@ -364,7 +365,7 @@ const resources = {
       
       // Life Trade Platform
       "lifeTrade.title": "แพลตฟอร์มบริการไลฟ์สไตล์",
-      "lifeTrade.description": "เชื่อมต่อชุมชนชาวเวียดนามในต่างประเทศและชาวต่างชาติในเวียดนาม",
+      "lifeTrade.description": "เชื่อมต่อชุมชนชาวไทยในต่างประเทศและชาวต่างชาติในไทย",
       "lifeTrade.overview": "ภาพรวม",
       "lifeTrade.food": "อาหาร",
       "lifeTrade.accommodation": "ที่พัก",
@@ -378,6 +379,8 @@ const resources = {
       "targetUsers.students.desc": "ไม่คุ้นเคยกับภาษา ต้องการหาเพื่อน ต้องการสัมผัสวัฒนธรรมและอาหารท้องถิ่น",
       "targetUsers.married": "ชาวต่างชาติที่แต่งงานและตั้งถิ่นฐาน",
       "targetUsers.married.desc": "ต้องการปรับตัวเข้ากับชีวิตท้องถิ่น เข้าร่วมกิจกรรมชุมชน",
+      "targetUsers.workers": "แรงงานต่างชาติ",
+      "targetUsers.workers.desc": "ผู้เชี่ยวชาญ แรงงานทั่วไป และนักท่องเที่ยวดิจิทัล",
       
       // Features
       "features.title": "คุณสมบัติหลัก",
@@ -394,11 +397,11 @@ const resources = {
       
       // Recent Activities
       "recentActivities.title": "กิจกรรมล่าสุด",
-      "recentActivities.cookingClass": "คลาสทำอาหารเวียดนาม",
-      "recentActivities.cookingClass.desc": "เรียนรู้วิธีทำก๋วยเตี๋ยวและอาหารดั้งเดิม",
-      "recentActivities.languageExchange": "แลกเปลี่ยนภาษาเวียดนาม-อังกฤษ",
+      "recentActivities.cookingClass": "คลาสทำอาหารไทย",
+      "recentActivities.cookingClass.desc": "เรียนรู้วิธีทำต้มยำและอาหารดั้งเดิม",
+      "recentActivities.languageExchange": "แลกเปลี่ยนภาษาไทย-อังกฤษ",
       "recentActivities.languageExchange.desc": "พบปะกันทุกสัปดาห์ที่ร้านกาแฟ",
-      "recentActivities.marketTour": "ทัวร์ตลาดเบนถั่น",
+      "recentActivities.marketTour": "ทัวร์ตลาดจตุจักร",
       "recentActivities.marketTour.desc": "สำรวจอาหารและวัฒนธรรมของตลาดดั้งเดิม",
       
       // Food Section
@@ -406,11 +409,11 @@ const resources = {
       "food.addExperience": "เพิ่มประสบการณ์",
       "food.smartDiscovery": "ระบบค้นพบอาหารอัจฉริยะ",
       "food.locationBased": "คำแนะนำตามตำแหน่ง",
-      "food.locationBased.desc": "แนะนำร้านอาหารเวียดนามและอาหารท้องถิ่นในรัศมี 5-10 กม. โดยอัตโนมัติ",
+      "food.locationBased.desc": "แนะนำร้านอาหารไทยและอาหารท้องถิ่นในรัศมี 5-10 กม. โดยอัตโนมัติ",
       "food.tasteProfile": "โปรไฟล์รสชาติส่วนตัว",
       "food.tasteProfile.desc": "สร้างโปรไฟล์รสชาติ (ระดับความเผ็ด ความชอบความหวาน ข้อจำกัดด้านอาหาร) เพื่อรับคำแนะนำส่วนบุคคล",
       "food.homesickMode": "โหมดคิดถึงบ้าน",
-      "food.homesickMode.desc": "หาอาหารที่มีรสชาติใกล้เคียงกับอาหารเวียดนามเฉพาะภูมิภาค (สไตล์เหนือ กลาง ใต้)",
+      "food.homesickMode.desc": "หาอาหารที่มีรสชาติใกล้เคียงกับอาหารไทยเฉพาะภูมิภาค (เหนือ อีสาน กลาง ใต้)",
       
       // Accommodation Section
       "accommodation.title": "แลกเปลี่ยนที่พัก (Live & Help)",
@@ -529,7 +532,7 @@ const resources = {
       
       // Life Trade Platform
       "lifeTrade.title": "जीवनशैली व्यापार मंच",
-      "lifeTrade.description": "विदेश में वियतनामी समुदाय और वियतनाम में विदेशियों को जोड़ना",
+      "lifeTrade.description": "विदेश में भारतीय समुदाय और भारत में विदेशियों को जोड़ना",
       "lifeTrade.overview": "अवलोकन",
       "lifeTrade.food": "भोजन",
       "lifeTrade.accommodation": "आवास",
@@ -543,6 +546,8 @@ const resources = {
       "targetUsers.students.desc": "भाषा से अपरिचित, दोस्त बनाना चाहते हैं, स्थानीय संस्कृति और भोजन का अनुभव करना चाहते हैं",
       "targetUsers.married": "विदेशी विवाहित और बसे हुए",
       "targetUsers.married.desc": "स्थानीय जीवन में घुलना-मिलना चाहते हैं, सामुदायिक गतिविधियों में भाग लेना चाहते हैं",
+      "targetUsers.workers": "विदेशी कर्मचारी",
+      "targetUsers.workers.desc": "पेशेवर, सामान्य श्रमिक और डिजिटल नोमैड",
       
       // Features
       "features.title": "मुख्य विशेषताएँ",
@@ -559,11 +564,11 @@ const resources = {
       
       // Recent Activities
       "recentActivities.title": "हाल की गतिविधियाँ",
-      "recentActivities.cookingClass": "वियतनामी खाना पकाने की कक्षा",
-      "recentActivities.cookingClass.desc": "फो और पारंपरिक व्यंजन बनाना सीखें",
-      "recentActivities.languageExchange": "वियतनामी-अंग्रेजी विनिमय",
+      "recentActivities.cookingClass": "भारतीय खाना पकाने की कक्षा",
+      "recentActivities.cookingClass.desc": "बिरयानी और पारंपरिक व्यंजन बनाना सीखें",
+      "recentActivities.languageExchange": "हिंदी-अंग्रेजी विनिमय",
       "recentActivities.languageExchange.desc": "कॉफी शॉप में साप्ताहिक मुलाकात",
-      "recentActivities.marketTour": "बेन थान मार्केट टूर",
+      "recentActivities.marketTour": "चांदनी चौक मार्केट टूर",
       "recentActivities.marketTour.desc": "पारंपरिक बाजार के भोजन और संस्कृति की खोज",
       
       // Food Section
@@ -571,11 +576,11 @@ const resources = {
       "food.addExperience": "अनुभव जोड़ें",
       "food.smartDiscovery": "स्मार्ट फूड डिस्कवरी सिस्टम",
       "food.locationBased": "स्थान-आधारित सिफारिशें",
-      "food.locationBased.desc": "5-10 किमी के दायरे में वियतनामी रेस्तरां और स्थानीय व्यंजनों की स्वचालित सिफारिशें",
+      "food.locationBased.desc": "5-10 किमी के दायरे में भारतीय रेस्तरां और स्थानीय व्यंजनों की स्वचालित सिफारिशें",
       "food.tasteProfile": "स्वाद प्रोफाइल मिलान",
       "food.tasteProfile.desc": "व्यक्तिगत सिफारिशें प्राप्त करने के लिए स्वाद प्रोफाइल (मसालेदार स्तर, मिठास पसंद, आहार प्रतिबंध) बनाएँ",
       "food.homesickMode": "होमसिक मोड",
-      "food.homesickMode.desc": "विशिष्ट वियतनामी क्षेत्रीय व्यंजनों (उत्तरी, मध्य, दक्षिणी शैलियों) के सबसे करीबी स्वाद वाले व्यंजन खोजें",
+      "food.homesickMode.desc": "विशिष्ट भारतीय क्षेत्रीय व्यंजनों (उत्तरी, दक्षिणी, पूर्वी, पश्चिमी) के सबसे करीबी स्वाद वाले व्यंजन खोजें",
       
       // Accommodation Section
       "accommodation.title": "आवास विनिमय (Live & Help)",
@@ -694,7 +699,7 @@ const resources = {
       
       // Life Trade Platform
       "lifeTrade.title": "Life Services Platform",
-      "lifeTrade.description": "Connecting Vietnamese communities abroad and foreigners in Vietnam",
+      "lifeTrade.description": "Connecting international communities abroad and foreigners in the local country",
       "lifeTrade.overview": "Overview",
       "lifeTrade.food": "Food",
       "lifeTrade.accommodation": "Accommodation",
@@ -708,6 +713,8 @@ const resources = {
       "targetUsers.students.desc": "Unfamiliar with language, want to make friends, want to experience local culture and cuisine",
       "targetUsers.married": "Foreigners married and settled",
       "targetUsers.married.desc": "Want to integrate into local life, participate in community activities",
+      "targetUsers.workers": "Foreign Workers",
+      "targetUsers.workers.desc": "Professionals, blue-collar workers, and digital nomads",
       
       // Features
       "features.title": "Main Features",
@@ -724,11 +731,11 @@ const resources = {
       
       // Recent Activities
       "recentActivities.title": "Recent Activities",
-      "recentActivities.cookingClass": "Vietnamese Cooking Class",
-      "recentActivities.cookingClass.desc": "Learn to make pho and traditional dishes",
-      "recentActivities.languageExchange": "Vietnamese-English Exchange",
+      "recentActivities.cookingClass": "Local Cooking Class",
+      "recentActivities.cookingClass.desc": "Learn to make local dishes and traditional cuisine",
+      "recentActivities.languageExchange": "Language Exchange Meetup",
       "recentActivities.languageExchange.desc": "Weekly meetings at coffee shop",
-      "recentActivities.marketTour": "Ben Thanh Market Tour",
+      "recentActivities.marketTour": "Local Market Tour",
       "recentActivities.marketTour.desc": "Explore food and culture of traditional market",
       
       // Food Section
@@ -736,11 +743,11 @@ const resources = {
       "food.addExperience": "Add Experience",
       "food.smartDiscovery": "Smart Food Discovery System",
       "food.locationBased": "Location-based recommendations",
-      "food.locationBased.desc": "Automatically suggests Vietnamese restaurants and local dishes within 5-10km radius",
+      "food.locationBased.desc": "Automatically suggests local restaurants and dishes within 5-10km radius",
       "food.tasteProfile": "Taste profile matching",
       "food.tasteProfile.desc": "Create flavor profiles (spicy level, sweetness preference, dietary restrictions) to get personalized recommendations",
       "food.homesickMode": "Homesick Mode",
-      "food.homesickMode.desc": "Find dishes that taste closest to specific Vietnamese regional cuisines (Northern, Central, Southern styles)",
+      "food.homesickMode.desc": "Find dishes that taste closest to specific regional cuisines from your home country",
       
       // Accommodation Section
       "accommodation.title": "Housing Exchange (Live & Help)",
@@ -843,171 +850,6 @@ const resources = {
       "compare.addToCart": "Add to Cart",
       "compare.viewDetails": "View Details",
     }
-  },
-  id: {
-    translation: {
-      // Common
-      "platform.name": "LiveTrade Connect",
-      "platform.description": "Platform perdagangan terpadu",
-      "platform.slogan": "Menghubungkan e-commerce, perdagangan B2B, dan layanan gaya hidup",
-      
-      // Navigation
-      "nav.home": "Beranda",
-      "nav.products": "Produk",
-      "nav.b2b": "Platform B2B",
-      "nav.lifeServices": "Platform Layanan Kehidupan",
-      
-      // Life Trade Platform
-      "lifeTrade.title": "Platform Layanan Kehidupan",
-      "lifeTrade.description": "Menghubungkan komunitas Vietnam di luar negeri dan orang asing di Vietnam",
-      "lifeTrade.overview": "Ikhtisar",
-      "lifeTrade.food": "Makanan",
-      "lifeTrade.accommodation": "Akomodasi",
-      "lifeTrade.travel": "Jelajah Bersama",
-      "lifeTrade.language": "Bahasa",
-      "lifeTrade.culture": "Multikultural",
-      
-      // Target Users
-      "targetUsers.title": "Kelompok Pengguna Target",
-      "targetUsers.students": "Mahasiswa Internasional",
-      "targetUsers.students.desc": "Tidak familiar dengan bahasa, ingin berteman, ingin merasakan budaya dan masakan lokal",
-      "targetUsers.married": "Orang asing yang menikah dan menetap",
-      "targetUsers.married.desc": "Ingin berintegrasi ke dalam kehidupan lokal, berpartisipasi dalam kegiatan komunitas",
-      
-      // Features
-      "features.title": "Fitur Utama",
-      "features.food": "Pengalaman Kuliner",
-      "features.food.desc": "Jelajahi masakan lokal",
-      "features.accommodation": "Pertukaran Tempat Tinggal",
-      "features.accommodation.desc": "Temukan atau tukar tempat tinggal",
-      "features.travel": "Jelajah Bersama",
-      "features.travel.desc": "Temukan teman perjalanan",
-      "features.language": "Pertukaran Bahasa",
-      "features.language.desc": "Belajar dan mengajar bahasa",
-      "features.culture": "Pusat Multikultural",
-      "features.culture.desc": "Sumber daya integrasi",
-      
-      // Buttons
-      "button.viewMore": "Lihat Lebih Banyak",
-      "button.register": "Daftar",
-      "button.join": "Bergabung",
-      "button.contact": "Kontak",
-      "button.cancel": "Batal",
-      "button.save": "Simpan",
-      "button.back": "Kembali",
-      "button.add": "Tambah",
-      "button.processing": "Memproses...",
-    }
-  },
-  ja: {
-    translation: {
-      // Common
-      "platform.name": "LiveTrade Connect",
-      "platform.description": "ワンストップ取引プラットフォーム",
-      "platform.slogan": "Eコマース、B2B取引、ライフスタイルサービスを繋ぐ",
-      
-      // Navigation
-      "nav.home": "ホーム",
-      "nav.products": "製品",
-      "nav.b2b": "B2Bプラットフォーム",
-      "nav.lifeServices": "ライフサービスプラットフォーム",
-      
-      // Life Trade Platform
-      "lifeTrade.title": "ライフサービスプラットフォーム",
-      "lifeTrade.description": "海外のベトナム人コミュニティとベトナムの外国人を繋ぐ",
-      "lifeTrade.overview": "概要",
-      "lifeTrade.food": "食事",
-      "lifeTrade.accommodation": "宿泊",
-      "lifeTrade.travel": "一緒に探検",
-      "lifeTrade.language": "言語",
-      "lifeTrade.culture": "多文化",
-      
-      // Target Users
-      "targetUsers.title": "ターゲットユーザーグループ",
-      "targetUsers.students": "留学生",
-      "targetUsers.students.desc": "言語に不慣れ、友達を作りたい、地元の文化や料理を体験したい",
-      "targetUsers.married": "結婚して定住した外国人",
-      "targetUsers.married.desc": "地元の生活に溶け込みたい、コミュニティ活動に参加したい",
-      
-      // Features
-      "features.title": "主な機能",
-      "features.food": "食体験",
-      "features.food.desc": "地元料理を探索",
-      "features.accommodation": "住居交換",
-      "features.accommodation.desc": "宿泊先を見つけるか交換する",
-      "features.travel": "一緒に探検",
-      "features.travel.desc": "旅行仲間を見つける",
-      "features.language": "言語交換",
-      "features.language.desc": "言語を学び教える",
-      "features.culture": "多文化センター",
-      "features.culture.desc": "統合リソース",
-      
-      // Buttons
-      "button.viewMore": "もっと見る",
-      "button.register": "登録",
-      "button.join": "参加",
-      "button.contact": "連絡",
-      "button.cancel": "キャンセル",
-      "button.save": "保存",
-      "button.back": "戻る",
-      "button.add": "追加",
-      "button.processing": "処理中...",
-    }
-  },
-  ko: {
-    translation: {
-      // Common
-      "platform.name": "LiveTrade Connect",
-      "platform.description": "원스톱 거래 플랫폼",
-      "platform.slogan": "전자상거래, B2B 거래 및 라이프스타일 서비스 연결",
-      
-      // Navigation
-      "nav.home": "홈",
-      "nav.products": "제품",
-      "nav.b2b": "B2B 플랫폼",
-      "nav.lifeServices": "라이프 서비스 플랫폼",
-      
-      // Life Trade Platform
-      "lifeTrade.title": "라이프 서비스 플랫폼",
-      "lifeTrade.description": "해외 베트남 커뮤니티와 베트남의 외국인 연결",
-      "lifeTrade.overview": "개요",
-      "lifeTrade.food": "음식",
-      "lifeTrade.accommodation": "숙박",
-      "lifeTrade.travel": "함께 탐험",
-      "lifeTrade.language": "언어",
-      "lifeTrade.culture": "다문화",
-      
-      // Target Users
-      "targetUsers.title": "대상 사용자 그룹",
-      "targetUsers.students": "유학생",
-      "targetUsers.students.desc": "언어에 익숙하지 않고, 친구를 사귀고 싶고, 현지 문화와 요리를 경험하고 싶은 사람",
-      "targetUsers.married": "결혼하고 정착한 외국인",
-      "targetUsers.married.desc": "현지 생활에 통합되고 싶고, 커뮤니티 활동에 참여하고 싶은 사람",
-      
-      // Features
-      "features.title": "주요 기능",
-      "features.food": "음식 경험",
-      "features.food.desc": "현지 요리 탐색",
-      "features.accommodation": "주택 교환",
-      "features.accommodation.desc": "숙소 찾기 또는 교환",
-      "features.travel": "함께 탐험",
-      "features.travel.desc": "여행 동반자 찾기",
-      "features.language": "언어 교환",
-      "features.language.desc": "언어 배우기 및 가르치기",
-      "features.culture": "다문화 센터",
-      "features.culture.desc": "통합 자원",
-      
-      // Buttons
-      "button.viewMore": "더 보기",
-      "button.register": "등록",
-      "button.join": "참여",
-      "button.contact": "연락",
-      "button.cancel": "취소",
-      "button.save": "저장",
-      "button.back": "뒤로",
-      "button.add": "추가",
-      "button.processing": "처리 중...",
-    }
   }
 }
 
@@ -1042,10 +884,10 @@ if (typeof window !== 'undefined') {
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState(i18n.language || 'en')
   
-  // Define all hooks at the top level
+  // Define the translation function
   const { t } = useTranslation()
   
-  // Define callbacks with useMemo to maintain hook order
+  // Define changeLanguage callback
   const changeLanguage = useMemo(() => {
     return (lang: string) => {
       i18n.changeLanguage(lang);
