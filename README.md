@@ -150,15 +150,3 @@ Please read our contributing guidelines before submitting pull requests.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-
-請接續優化下列功能：
-- 1️⃣ 增加 Firebase / Supabase 手機驗證 API 整合
-- 2️⃣ 抽離 OTP、倒數計時為獨立 reusable component
-- 3️⃣ 加入 JWT / Token 驗證邏輯（非僅 localStorage）
-- 4️⃣ 支援登入狀態快取檢查，防止未登入者進入 `/profile`
-- 5️⃣ 擴充登入方式：Apple / Google 登入
-- 6️⃣ 使用 Zustand 或 Context 管理使用者狀態（替代單純 localStorage）
-
-檔案結構與 UI 已就緒，請專注於後端驗證與安全性優化。

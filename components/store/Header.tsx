@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Search, ShoppingCart, User, Menu, X, Heart, Scale, BarChart3, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -14,34 +14,16 @@ import { useAdvancedAnalytics } from "./AdvancedAnalyticsProvider"
 import { useMachineLearning } from "./MachineLearningProvider"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 import { useI18n } from "@/contexts/i18n-context"
-import { LogoutButton } from "./LogoutButton"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [hasMounted, setHasMounted] = useState(false)
   const { items } = useCart()
   const { items: wishlistItems } = useWishlist()
   const { items: compareItems } = useCompare()
   const { trackSearchQuery, trackUserAction } = useAdvancedAnalytics()
   const { recordAction } = useMachineLearning()
   const { t } = useI18n()
-
-  // Prevent hydration mismatch by only rendering after client mount
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
-
-  // Check login status
-  useEffect(() => {
-    if (!hasMounted) return
-    
-    const authStatus = localStorage.getItem("lifeTradeAuth")
-    if (authStatus === "authenticated") {
-      setIsLoggedIn(true)
-    }
-  }, [hasMounted])
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
   const totalWishlistItems = wishlistItems.length
@@ -55,8 +37,8 @@ export function Header() {
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
-      // Track search behavior
-      trackSearchQuery(searchQuery, 0) // Number of results will be updated on search page
+      // Theo dõi hành vi tìm kiếm
+      trackSearchQuery(searchQuery, 0) // Số lượng kết quả sẽ được cập nhật ở trang tìm kiếm
       recordAction({
         type: "search",
         searchQuery: searchQuery,
@@ -195,22 +177,12 @@ export function Header() {
               </Link>
             </Button>
 
-            {/* User / Login */}
-            {hasMounted && (
-              isLoggedIn ? (
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href="/store/user/profile" onClick={() => handleNavClick("profile")}>
-                    <User className="h-5 w-5" />
-                  </Link>
-                </Button>
-              ) : (
-                <Button variant="outline" size="sm" asChild>
-                  <Link href="/store/login">
-                    Đăng nhập
-                  </Link>
-                </Button>
-              )
-            )}
+            {/* User */}
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/store/user/profile" onClick={() => handleNavClick("profile")}>
+                <User className="h-5 w-5" />
+              </Link>
+            </Button>
 
             {/* Mobile Menu Toggle */}
             <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -274,30 +246,6 @@ export function Header() {
                   {category.name}
                 </Link>
               ))}
-              
-              {hasMounted && !isLoggedIn && (
-                <div className="pt-4 border-t">
-                  <Button asChild className="w-full">
-                    <Link href="/store/login">Đăng nhập</Link>
-                  </Button>
-                  <div className="mt-2">
-                    <Button variant="outline" asChild className="w-full">
-                      <Link href="/store/register">Đăng ký</Link>
-                    </Button>
-                  </div>
-                </div>
-              )}
-              
-              {hasMounted && isLoggedIn && (
-                <div className="pt-4 border-t">
-                  <Button asChild className="w-full">
-                    <Link href="/store/user/profile">Tài khoản của tôi</Link>
-                  </Button>
-                  <div className="mt-2">
-                    <LogoutButton variant="outline" className="w-full" />
-                  </div>
-                </div>
-              )}
             </nav>
           </div>
         </div>
