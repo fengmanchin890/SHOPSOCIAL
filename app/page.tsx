@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, ShoppingCart, Building2, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function HomePage() {
   return (

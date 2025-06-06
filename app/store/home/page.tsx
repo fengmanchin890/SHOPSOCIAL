@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Truck, Shield, Headphones, RotateCcw } from "lucide-react"
@@ -5,8 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ProductCard } from "@/components/store/ProductCard"
 import { mockProducts, categories, banners } from "@/lib/mock-data"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function HomePage() {
+  const { t } = useI18n()
   const featuredProducts = mockProducts.slice(0, 4)
   const popularProducts = mockProducts.filter((p) => p.tags.includes("Phổ biến")).slice(0, 4)
 
@@ -28,7 +32,7 @@ export default function HomePage() {
               <p className="text-lg md:text-xl mb-8">{banners[0].subtitle}</p>
               <Button size="lg" asChild>
                 <Link href={banners[0].link}>
-                  Mua ngay <ArrowRight className="ml-2 h-4 w-4" />
+                  {t("button.viewMore")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -40,8 +44,8 @@ export default function HomePage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Danh mục sản phẩm</h2>
-            <p className="text-gray-600">Khám phá các loại sản phẩm được chọn lọc kỹ lưỡng</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("products.all")}</h2>
+            <p className="text-gray-600">{t("products.featured")}</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -74,12 +78,12 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Sản phẩm nổi bật</h2>
-              <p className="text-gray-600">Những sản phẩm chất lượng được chọn lọc dành cho bạn</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("products.featured")}</h2>
+              <p className="text-gray-600">{t("products.popular")}</p>
             </div>
             <Button variant="outline" asChild>
               <Link href="/store/products">
-                Xem tất cả <ArrowRight className="ml-2 h-4 w-4" />
+                {t("button.viewMore")} <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -97,8 +101,8 @@ export default function HomePage() {
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Sản phẩm phổ biến</h2>
-              <p className="text-gray-600">Những sản phẩm được ưa chuộng nhất</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("products.popular")}</h2>
+              <p className="text-gray-600">{t("products.new")}</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -1,9 +1,14 @@
+"use client"
+
 import Image from "next/image"
 import { Mail, Phone, MapPin, Clock, Users, Award, Heart } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function AboutPage() {
+  const { t } = useI18n()
+  
   const teamMembers = [
     {
       name: "Giám đốc Trương",
@@ -48,7 +53,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Về chúng tôi</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">{t("about.title")}</h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
             Chúng tôi cam kết mang đến cho bạn những sản phẩm và dịch vụ chất lượng nhất, biến việc mua sắm thành niềm vui
           </p>
@@ -60,7 +65,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Câu chuyện của chúng tôi</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">{t("about.story")}</h2>
               <div className="space-y-4 text-gray-700">
                 <p>
                   ShopLogo được thành lập vào năm 2020, ban đầu chỉ là một cửa hàng trực tuyến nhỏ, bắt đầu hành trình với tâm niệm mang đến sản phẩm chất lượng cho khách hàng.
@@ -90,7 +95,7 @@ export default function AboutPage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Giá trị cốt lõi</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("about.values")}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Những giá trị cốt lõi này định hướng mọi quyết định của chúng tôi, đồng thời là nền tảng để xây dựng niềm tin với khách hàng
             </p>
@@ -116,7 +121,7 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Đội ngũ của chúng tôi</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("about.team")}</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Một nhóm chuyên gia đầy nhiệt huyết, cùng nhau nỗ lực mang đến trải nghiệm mua sắm tốt nhất</p>
           </div>
 
@@ -147,7 +152,7 @@ export default function AboutPage() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Liên hệ với chúng tôi</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("about.contact")}</h2>
             <p className="text-gray-600">Nếu có bất kỳ câu hỏi hoặc đề xuất nào, hãy liên hệ với chúng tôi bất cứ lúc nào</p>
           </div>
 

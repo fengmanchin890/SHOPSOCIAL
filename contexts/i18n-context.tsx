@@ -107,6 +107,24 @@ const resources = {
       "button.back": "返回",
       "button.add": "添加",
       "button.processing": "處理中...",
+      
+      // Search
+      "search.placeholder": "搜尋商品...",
+      
+      // Products
+      "products": "產品",
+      "products.all": "所有產品",
+      "products.featured": "精選產品",
+      "products.popular": "熱門產品",
+      "products.new": "新品",
+      "products.sale": "特價商品",
+      
+      // About
+      "about.title": "關於我們",
+      "about.story": "我們的故事",
+      "about.values": "核心價值",
+      "about.team": "團隊成員",
+      "about.contact": "聯繫我們",
     }
   },
   vi: {
@@ -200,6 +218,24 @@ const resources = {
       "button.back": "Quay lại",
       "button.add": "Thêm",
       "button.processing": "Đang xử lý...",
+      
+      // Search
+      "search.placeholder": "Tìm kiếm sản phẩm...",
+      
+      // Products
+      "products": "Sản phẩm",
+      "products.all": "Tất cả sản phẩm",
+      "products.featured": "Sản phẩm nổi bật",
+      "products.popular": "Sản phẩm phổ biến",
+      "products.new": "Sản phẩm mới",
+      "products.sale": "Sản phẩm giảm giá",
+      
+      // About
+      "about.title": "Về chúng tôi",
+      "about.story": "Câu chuyện của chúng tôi",
+      "about.values": "Giá trị cốt lõi",
+      "about.team": "Đội ngũ của chúng tôi",
+      "about.contact": "Liên hệ với chúng tôi",
     }
   },
   th: {
@@ -293,6 +329,24 @@ const resources = {
       "button.back": "กลับ",
       "button.add": "เพิ่ม",
       "button.processing": "กำลังประมวลผล...",
+      
+      // Search
+      "search.placeholder": "ค้นหาสินค้า...",
+      
+      // Products
+      "products": "สินค้า",
+      "products.all": "สินค้าทั้งหมด",
+      "products.featured": "สินค้าแนะนำ",
+      "products.popular": "สินค้ายอดนิยม",
+      "products.new": "สินค้าใหม่",
+      "products.sale": "สินค้าลดราคา",
+      
+      // About
+      "about.title": "เกี่ยวกับเรา",
+      "about.story": "เรื่องราวของเรา",
+      "about.values": "ค่านิยมหลัก",
+      "about.team": "ทีมงานของเรา",
+      "about.contact": "ติดต่อเรา",
     }
   },
   hi: {
@@ -386,6 +440,24 @@ const resources = {
       "button.back": "वापस",
       "button.add": "जोड़ें",
       "button.processing": "प्रोसेसिंग...",
+      
+      // Search
+      "search.placeholder": "उत्पाद खोजें...",
+      
+      // Products
+      "products": "उत्पाद",
+      "products.all": "सभी उत्पाद",
+      "products.featured": "विशेष उत्पाद",
+      "products.popular": "लोकप्रिय उत्पाद",
+      "products.new": "नए उत्पाद",
+      "products.sale": "बिक्री पर उत्पाद",
+      
+      // About
+      "about.title": "हमारे बारे में",
+      "about.story": "हमारी कहानी",
+      "about.values": "मुख्य मूल्य",
+      "about.team": "हमारी टीम",
+      "about.contact": "संपर्क करें",
     }
   },
   en: {
@@ -479,6 +551,24 @@ const resources = {
       "button.back": "Back",
       "button.add": "Add",
       "button.processing": "Processing...",
+      
+      // Search
+      "search.placeholder": "Search products...",
+      
+      // Products
+      "products": "Products",
+      "products.all": "All Products",
+      "products.featured": "Featured Products",
+      "products.popular": "Popular Products",
+      "products.new": "New Products",
+      "products.sale": "Sale Products",
+      
+      // About
+      "about.title": "About Us",
+      "about.story": "Our Story",
+      "about.values": "Core Values",
+      "about.team": "Our Team",
+      "about.contact": "Contact Us",
     }
   }
 }

@@ -11,8 +11,10 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ProductCard } from "@/components/store/ProductCard"
 import { mockProducts, categories } from "@/lib/mock-data"
+import { useI18n } from "@/contexts/i18n-context"
 
 export default function ProductsPage() {
+  const { t } = useI18n()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "")
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
@@ -87,8 +89,8 @@ export default function ProductsPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Tất cả sản phẩm</h1>
-        <p className="text-gray-600">Khám phá bộ sưu tập sản phẩm được chọn lọc kỹ lưỡng của chúng tôi</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">{t("products.all")}</h1>
+        <p className="text-gray-600">{t("products.featured")}</p>
       </div>
 
       {/* Search and Filters */}
@@ -98,7 +100,7 @@ export default function ProductsPage() {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="Tìm kiếm sản phẩm..."
+            placeholder={t("search.placeholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
