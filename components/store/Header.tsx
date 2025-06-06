@@ -32,8 +32,7 @@ export function Header() {
   const categories = [
     { name: t("nav.products"), href: "/store/products?category=men" },
     { name: t("nav.b2b"), href: "/store/b2b" },
-    { name: t("nav.lifeServices"), href: "/store/life-trade" },
-    { name: t("nav.features"), href: "/store/features" },
+    { name: t("nav.lifeServices"), href: "/store/life-trade" }
   ]
 
   const handleSearch = () => {
@@ -207,13 +206,6 @@ export function Header() {
               {category.name}
             </Link>
           ))}
-          <Link
-            href="/store/about"
-            className="text-gray-700 hover:text-gray-900"
-            onClick={() => handleNavClick("about")}
-          >
-            {t("nav.about")}
-          </Link>
         </nav>
       </div>
 
@@ -254,13 +246,6 @@ export function Header() {
                   {category.name}
                 </Link>
               ))}
-              <Link
-                href="/store/about"
-                className="py-2 text-gray-700"
-                onClick={() => handleNavClick("about")}
-              >
-                {t("nav.about")}
-              </Link>
             </nav>
           </div>
         </div>

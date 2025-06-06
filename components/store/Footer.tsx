@@ -37,11 +37,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/store/about" className="hover:text-white">
-                  {t("nav.about")}
-                </Link>
-              </li>
-              <li>
                 <Link href="/store/user/profile" className="hover:text-white">
                   {t("nav.lifeServices")}
                 </Link>

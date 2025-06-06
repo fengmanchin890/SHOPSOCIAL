@@ -102,28 +102,28 @@ export default function HomePage() {
               </CardFooter>
             </Card>
 
-            {/* Advanced Features Card */}
+            {/* Life Services Card */}
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-amber-500" />
-                  {t("nav.features")}
+                  {t("nav.lifeServices")}
                 </CardTitle>
-                <CardDescription>Tích hợp công nghệ và dịch vụ đổi mới</CardDescription>
+                <CardDescription>Kết nối cộng đồng người Việt tại nước ngoài và người nước ngoài tại Việt Nam</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm">
-                  <li>• Trải nghiệm thử đồ ảo AR/VR</li>
-                  <li>• Tích hợp thanh toán blockchain và NFT</li>
-                  <li>• Kết nối thiết bị IoT thông minh</li>
-                  <li>• Đề xuất cá nhân hóa bằng AI</li>
-                  <li>• Tìm kiếm và điều khiển bằng giọng nói</li>
+                  <li>• Trải nghiệm ẩm thực địa phương</li>
+                  <li>• Trao đổi nhà ở và tìm bạn cùng phòng</li>
+                  <li>• Kết nối cùng đi khám phá</li>
+                  <li>• Trao đổi ngôn ngữ và văn hóa</li>
+                  <li>• Tài nguyên hòa nhập đa văn hóa</li>
                 </ul>
               </CardContent>
               <CardFooter>
                 <Button asChild className="w-full">
-                  <Link href="/store/features">
-                    {t("nav.features")}
+                  <Link href="/store/life-trade">
+                    {t("nav.lifeServices")}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
