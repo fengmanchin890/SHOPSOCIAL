@@ -20,6 +20,7 @@ export default function AuthPage() {
   const router = useRouter()
   const { upgradeMembership } = useMembership()
   const { t, language } = useI18n()
+  const [hasMounted, setHasMounted] = useState(false)
   const [activeTab, setActiveTab] = useState("login")
   const [phoneNumber, setPhoneNumber] = useState("")
   const [otpSent, setOtpSent] = useState(false)
@@ -39,13 +40,25 @@ export default function AuthPage() {
     agreeTerms: false,
   })
 
+  // Prevent hydration mismatch by only rendering after client mount
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
   // Check if user is already logged in
   useEffect(() => {
+    if (!hasMounted) return
+    
     const authStatus = localStorage.getItem("lifeTradeAuth")
     if (authStatus === "authenticated") {
       router.push("/store/life-trade")
     }
-  }, [router])
+  }, [router, hasMounted])
+
+  // Don't render anything until component has mounted on client
+  if (!hasMounted) {
+    return null
+  }
 
   const getLocalizedText = () => {
     const texts = {
