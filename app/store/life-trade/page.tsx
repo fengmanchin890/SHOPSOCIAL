@@ -53,7 +53,7 @@ export default function LifeTradePage() {
   if (showAddActivity) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <Button variant="outline\" onClick={() => setShowAddActivity(false)} className="mb-6">
+        <Button variant="outline" onClick={() => setShowAddActivity(false)} className="mb-6">
           ← {t("button.back")}
         </Button>
         <AddActivityForm 
