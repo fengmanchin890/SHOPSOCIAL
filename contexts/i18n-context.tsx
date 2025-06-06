@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react"
 import i18n from "i18next"
 import { initReactI18next, useTranslation } from "react-i18next"
-import LanguageDetector from "i18next-browser-languagedetector"
 
 // Define available languages
 export const languages = [
@@ -843,48 +842,84 @@ const resources = {
   }
 }
 
-// Initialize i18next
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources,
-    fallbackLng: "en",
-    interpolation: {
-      escapeValue: false,
-    },
-    detection: {
-      order: ['localStorage', 'navigator'],
-      caches: ['localStorage'],
-    },
-  })
-
 // Create context
 interface I18nContextType {
   language: string
   changeLanguage: (lang: string) => void
   t: (key: string) => string
   languages: typeof languages
+  isInitialized: boolean
 }
 
 const I18nContext = createContext<I18nContextType | null>(null)
 
 export function I18nProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState("en")
+  const [isInitialized, setIsInitialized] = useState(false)
   const { t } = useTranslation()
-  const [language, setLanguage] = useState(i18n.language)
+
+  // Initialize i18n only on client side
+  useEffect(() => {
+    const initializeI18n = async () => {
+      if (typeof window !== 'undefined' && !i18n.isInitialized) {
+        try {
+          // Dynamically import browser-specific language detector
+          const LanguageDetector = (await import('i18next-browser-languagedetector')).default
+          
+          await i18n
+            .use(LanguageDetector)
+            .use(initReactI18next)
+            .init({
+              resources,
+              fallbackLng: "en",
+              interpolation: {
+                escapeValue: false,
+              },
+              detection: {
+                order: ['localStorage', 'navigator'],
+                caches: ['localStorage'],
+              },
+            })
+
+          setLanguage(i18n.language)
+          setIsInitialized(true)
+        } catch (error) {
+          console.error('Failed to initialize i18n:', error)
+          // Fallback initialization without language detector
+          await i18n
+            .use(initReactI18next)
+            .init({
+              resources,
+              lng: "en",
+              fallbackLng: "en",
+              interpolation: {
+                escapeValue: false,
+              },
+            })
+          setIsInitialized(true)
+        }
+      }
+    }
+
+    initializeI18n()
+  }, [])
 
   const changeLanguage = (lang: string) => {
-    i18n.changeLanguage(lang)
-    setLanguage(lang)
-    
-    // Set HTML lang attribute and direction
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = lang
+    if (i18n.isInitialized) {
+      i18n.changeLanguage(lang)
+      setLanguage(lang)
+      
+      // Set HTML lang attribute
+      if (typeof document !== 'undefined') {
+        document.documentElement.lang = lang
+      }
     }
   }
 
   // Listen for language changes
   useEffect(() => {
+    if (!i18n.isInitialized) return
+
     const handleLanguageChanged = () => {
       setLanguage(i18n.language)
     }
@@ -893,10 +928,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return () => {
       i18n.off('languageChanged', handleLanguageChanged)
     }
-  }, [])
+  }, [isInitialized])
 
   return (
-    <I18nContext.Provider value={{ language, changeLanguage, t, languages }}>
+    <I18nContext.Provider value={{ language, changeLanguage, t, languages, isInitialized }}>
       {children}
     </I18nContext.Provider>
   )
