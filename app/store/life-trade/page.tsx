@@ -16,6 +16,8 @@ import { useI18n } from "@/contexts/i18n-context"
 import { ActivityCard } from "@/components/store/ActivityCard"
 import { AddNewActivityDialog } from "@/components/store/AddNewActivityDialog"
 import { ViewMoreActivitiesDialog } from "@/components/store/ViewMoreActivitiesDialog"
+import { HelpDeskChat } from "@/components/store/HelpDeskChat"
+import { CommunityForum } from "@/components/store/CommunityForum"
 
 export default function LifeTradePage() {
   const router = useRouter()
@@ -176,13 +178,13 @@ export default function LifeTradePage() {
     ]
   })
 
-  // Kiểm tra trạng thái đăng nhập khi trang được tải
+  // Check login status when page loads
   useEffect(() => {
     const authStatus = localStorage.getItem("lifeTradeAuth")
     if (authStatus === "authenticated") {
       setIsLoggedIn(true)
     } else {
-      // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+      // Redirect to login page if not logged in
       router.push("/store/life-trade/auth")
     }
   }, [router])
@@ -250,7 +252,7 @@ export default function LifeTradePage() {
   }
 
   if (!isLoggedIn) {
-    return null // Sẽ chuyển hướng đến trang đăng nhập
+    return null // Will redirect to login page
   }
 
   return (
@@ -408,6 +410,61 @@ export default function LifeTradePage() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <CommunityForum />
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  {language === "zh-TW" ? "即將舉行的活動" : 
+                   language === "vi" ? "Sự kiện sắp diễn ra" : 
+                   "Upcoming Events"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-4">
+                  {activities.food.slice(0, 1).concat(
+                    activities.language.slice(0, 1),
+                    activities.culture.slice(0, 1)
+                  ).map(activity => (
+                    <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg border hover:bg-gray-50 transition-colors">
+                      <div className="w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
+                        <Image 
+                          src={activity.image} 
+                          alt={activity.title}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-sm">{activity.title}</h4>
+                        <p className="text-xs text-gray-600 line-clamp-2">{activity.description}</p>
+                        <div className="flex items-center mt-1 text-xs text-gray-500">
+                          <Clock className="h-3 w-3 mr-1" />
+                          <span className="mr-3">{activity.time}</span>
+                          <MapPin className="h-3 w-3 mr-1" />
+                          <span>{activity.location}</span>
+                        </div>
+                      </div>
+                      <Button size="sm" variant="outline" className="flex-shrink-0">
+                        {language === "zh-TW" ? "報名" : 
+                         language === "vi" ? "Đăng ký" : 
+                         "Register"}
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+                
+                <Button variant="outline" className="w-full">
+                  {language === "zh-TW" ? "查看所有活動" : 
+                   language === "vi" ? "Xem tất cả sự kiện" : 
+                   "View all events"}
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
 
@@ -960,6 +1017,9 @@ export default function LifeTradePage() {
           type={viewMoreType}
         />
       )}
+      
+      {/* Help Desk Chat */}
+      <HelpDeskChat />
     </div>
   )
 }
