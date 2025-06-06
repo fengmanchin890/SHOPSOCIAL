@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { MessageSquare, Heart, Reply, Flag, Search, Plus, Filter, Globe, Tag, ShoppingBag, Briefcase, Users, BookOpen } from "lucide-react"
+import { MessageSquare, Heart, Reply, Flag, Search, Plus, Filter, Globe, Tag, ShoppingBag, Briefcase, Users, BookOpen, Eye } from "lucide-react"
 import { useI18n } from "@/contexts/i18n-context"
 
 interface ForumPost {
