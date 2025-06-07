@@ -149,3 +149,5 @@ We welcome contributions to improve the B2B platform. Please follow our contribu
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+b2b平台:b2badmin
