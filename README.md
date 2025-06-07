@@ -1,151 +1,124 @@
-# LiveTrade Connect
+# LiveTrade Connect - B2B Platform
 
-LiveTrade Connect is a comprehensive platform that integrates e-commerce, B2B trading, and lifestyle services into a single, unified experience. The platform leverages cutting-edge technologies and AI to provide a seamless user experience across different business models.
+LiveTrade Connect is a comprehensive trading platform that integrates e-commerce, B2B trading, and lifestyle services into a single, unified experience. This README focuses on the B2B platform component, which provides powerful tools for businesses to manage their trading operations.
 
-## Core Technologies
+## B2B Platform Overview
 
-### Frontend
-- **Next.js 15** - React framework with server-side rendering and routing
-- **TypeScript** - Type-safe JavaScript for improved developer experience
-- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
-- **shadcn/ui** - Reusable UI components built with Radix UI and Tailwind
-- **i18next** - Internationalization framework for multilingual support
-- **React Context API** - For global state management across the application
+The B2B platform is designed to streamline business-to-business transactions with a comprehensive suite of tools for managing products, quotes, orders, clients, and analytics. The platform supports multiple languages and provides a robust foundation for international trade.
 
-### State Management
-- **Custom Providers** - Specialized context providers for different features:
-  - CartProvider - Shopping cart management
-  - WishlistProvider - Saved items management
-  - CompareProvider - Product comparison functionality
-  - MembershipProvider - User subscription management
-  - MultiLanguageProvider - Language and localization
+### Key Features
 
-### Data Visualization
-- **Recharts** - Composable charting library for analytics dashboards
+#### Dashboard & Analytics
+- **Executive Dashboard**: Real-time KPIs and business metrics
+- **Sales Analytics**: Revenue tracking, quote conversion rates, and sales trends
+- **Supplier Performance**: Quality, delivery, and communication metrics
+- **Customer Analysis**: Lifetime value, geographic distribution, and engagement
+- **Product Analytics**: Profitability analysis and performance metrics
 
-## AI and Advanced Features
+#### Client Relationship Management
+- **Customer Management**: Comprehensive customer database with activity tracking
+- **Supplier Management**: Supplier performance monitoring and evaluation
+- **Communication Tools**: Integrated messaging and contact management
+- **Client Profiles**: Detailed business profiles and transaction history
 
-### AI-Powered Features
-- **Personalized Recommendations** - AI-driven product suggestions based on user behavior
-  - Collaborative filtering for similar user preferences
-  - Content-based filtering for product similarity
-  - Hybrid recommendation algorithms
-  
-- **Voice Search & Commands** - Natural language processing for voice interactions
-  - Voice-to-text conversion
-  - Intent recognition for commands
-  - Multilingual voice support
-  
-- **Intelligent Price Alerts** - Smart monitoring of price changes with notifications
-  - Price trend analysis
-  - Personalized threshold recommendations
-  - Predictive price drop alerts
-  
-- **Smart Matching Systems** - AI-powered matching for various platform features:
-  - Language exchange partner matching
-  - Travel companion compatibility
-  - Accommodation preferences matching
+#### Quote & Order Management
+- **RFQ System**: Create and manage requests for quotation
+- **Quote Management**: Generate, send, and track quotes
+- **Order Processing**: Convert quotes to orders and track fulfillment
+- **Document Generation**: Create professional business documents
 
-### E-Commerce Innovations
-- **Product Comparison** - Advanced comparison tools with AI recommendations
-- **Multi-language Support** - Automatic translation and localization
-- **Multi-currency Support** - Currency conversion and regional pricing
-- **Social Features** - Collaborative shopping and social sharing
+#### Financial Management
+- **Payment Tracking**: Monitor incoming and outgoing payments
+- **Transaction History**: Complete record of financial transactions
+- **Profit Analysis**: Margin calculations and profitability metrics
+- **Currency Support**: Multi-currency transactions and conversions
 
-### B2B Trading Platform
-- **Quote Management** - Streamlined RFQ (Request for Quotation) process
-- **Order Tracking** - End-to-end visibility of the order lifecycle
-- **Document Generation** - Automated creation of trade documents
-- **Supplier Management** - Comprehensive supplier database and relationship tools
+#### Team & Security
+- **User Management**: Role-based access control for team members
+- **Security Settings**: Two-factor authentication and session management
+- **Audit Trails**: Track user actions and system changes
+- **Data Protection**: Secure handling of sensitive business information
 
-### Life Services Platform
-- **Food Experience Module** - Discover local cuisine and cooking classes
-- **Accommodation Exchange** - Find and exchange housing options
-- **Travel Together** - Connect with travel companions
-- **Language Exchange** - Learn and teach languages
-- **Cultural Resources** - Integration assistance and cultural guidance
+## Technical Architecture
 
-## Minimum Viable Product (MVP)
+The B2B platform is built using modern web technologies:
 
-For the initial MVP release, we're focusing on the following core components:
-
-### E-Commerce MVP
-- Product browsing and search functionality
-- Shopping cart and checkout process
-- User account management
-- Basic product comparison
-- Wishlist functionality
-- Multi-language support (Chinese, Vietnamese, English)
-
-### B2B Platform MVP
-- Supplier and customer management
-- Quote creation and management
-- Order processing
-- Basic analytics dashboard
-- Document generation
-
-### Life Services Platform MVP
-- Activity listing and discovery
-- Registration system for activities
-- Basic user profiles
-- Language switching
-- Contact functionality
-
-### Technical MVP Requirements
-- Responsive design for mobile and desktop
-- Core state management for cart, wishlist, and user preferences
-- Basic localization support for key markets
-- Simplified checkout process
-- Essential B2B document generation
-- Activity registration forms
-
-## Future Enhancements
-
-Post-MVP, we plan to implement:
-
-- **AR/VR Experiences** - Virtual try-on and immersive shopping
-- **Blockchain Integration** - Secure payments and NFT marketplace
-- **IoT Connectivity** - Smart device integration for automated shopping
-- **Advanced Analytics** - Deep insights with machine learning
-- **Collaborative Shopping** - Real-time shared shopping experiences
-- **Mobile App** - Native mobile experience with offline capabilities
-- **Advanced AI Features**:
-  - Sentiment analysis for reviews
-  - Visual search capabilities
-  - Chatbot customer service
-  - Predictive inventory management
-  - Fraud detection systems
+- **Frontend**: Next.js 15 with React and TypeScript
+- **UI Framework**: Tailwind CSS with shadcn/ui components
+- **State Management**: React Context API with custom providers
+- **Data Visualization**: Recharts for interactive charts and graphs
+- **Internationalization**: i18next for multi-language support
 
 ## Getting Started
+
+To run the B2B platform locally:
 
 ```bash
 # Install dependencies
 npm install
 
-# Run the development server
+# Start the development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
 ```
 
-## Project Structure
+## B2B Platform Structure
 
-- `/app` - Next.js application routes and pages
-- `/components` - Reusable UI components
-- `/components/store` - Store-specific components and providers
-- `/components/ui` - Base UI components from shadcn/ui
-- `/contexts` - Global context providers
-- `/hooks` - Custom React hooks
-- `/lib` - Utility functions and shared logic
-- `/public` - Static assets
+The B2B platform is organized into several key modules:
+
+```
+app/store/b2b/
+├── page.tsx                # Main dashboard
+├── products/               # Product management
+├── quotes/                 # Quote management
+├── orders/                 # Order management
+├── customers/              # Customer management
+├── suppliers/              # Supplier management
+├── rfq/                    # Request for Quotation
+├── payments/               # Payment management
+├── analytics/              # Advanced analytics
+└── settings/               # Platform settings
+```
+
+## Customization
+
+The B2B platform can be customized to meet specific business needs:
+
+- **Document Templates**: Customize quote, invoice, and other business documents
+- **Workflow Configuration**: Adjust approval processes and notification settings
+- **Integration Options**: Connect with ERP, CRM, and accounting systems
+- **Branding**: Apply your company's branding and visual identity
+
+## International Trade Support
+
+The platform is designed for international trade with features like:
+
+- **Multi-language Support**: Interface available in multiple languages
+- **Multi-currency Transactions**: Support for different currencies and exchange rates
+- **International Documentation**: Generate compliant international trade documents
+- **Regional Settings**: Adapt to different business practices and regulations
+
+## Security Features
+
+The B2B platform includes robust security measures:
+
+- **User Authentication**: Secure login with optional two-factor authentication
+- **Role-Based Access**: Control what different team members can view and modify
+- **Data Encryption**: Protect sensitive business information
+- **Session Management**: Automatic timeouts and secure session handling
+
+## Future Enhancements
+
+Planned enhancements for the B2B platform include:
+
+- **AI-Powered Insights**: Advanced analytics with predictive capabilities
+- **Mobile Applications**: Native mobile apps for on-the-go business management
+- **Blockchain Integration**: Secure contracts and payment verification
+- **Advanced Logistics**: Enhanced shipping and tracking integration
+- **Expanded Marketplace**: Connect with more suppliers and customers globally
 
 ## Contributing
 
-Please read our contributing guidelines before submitting pull requests.
+We welcome contributions to improve the B2B platform. Please follow our contribution guidelines when submitting changes.
 
 ## License
 
