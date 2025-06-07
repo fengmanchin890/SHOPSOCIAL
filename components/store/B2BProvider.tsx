@@ -313,6 +313,38 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
       ],
       createdAt: Date.now() - 3 * 24 * 60 * 60 * 1000,
     },
+    {
+      id: "order-2",
+      quoteId: "quote-2",
+      customerId: "user-customer-2",
+      middlemanId: "user-middleman-1",
+      supplierId: "user-supplier-2",
+      status: "pending",
+      totalAmount: 16000,
+      currency: "USD",
+      paymentStatus: "pending",
+      shippingAddress: {
+        company: "European Distributors",
+        street: "456 Euro Street",
+        city: "Berlin",
+        state: "",
+        country: "Germany",
+        postalCode: "10115",
+        contact: "Hans Mueller",
+        phone: "+49-555-0123",
+      },
+      documents: [],
+      timeline: [
+        {
+          id: "event-3",
+          type: "created",
+          description: "Order created from accepted quote",
+          timestamp: Date.now() - 1 * 24 * 60 * 60 * 1000,
+          userId: "user-customer-2",
+        },
+      ],
+      createdAt: Date.now() - 1 * 24 * 60 * 60 * 1000,
+    },
   ])
 
   const [payments, setPayments] = useState<Payment[]>([
@@ -375,7 +407,7 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
   }
 
   const sendQuote = (quoteId: string, recipientId: string) => {
-    updateQuote(quoteId, { status: "sent" })
+    updateQuote(quoteId, { status: "sent", customerId: recipientId })
   }
 
   const acceptQuote = (quoteId: string): string => {
@@ -493,6 +525,14 @@ export function B2BProvider({ children }: { children: React.ReactNode }) {
     setOrders((prev) =>
       prev.map((order) => (order.id === paymentData.orderId ? { ...order, paymentStatus: "paid" } : order)),
     )
+
+    // Add payment event to order timeline
+    addOrderEvent(paymentData.orderId, {
+      type: "payment_received",
+      description: `Payment of ${paymentData.amount} ${paymentData.currency} received via ${paymentData.method.replace('_', ' ')}`,
+      timestamp: Date.now(),
+      userId: currentUser?.id || "",
+    })
 
     return newPayment.id
   }
