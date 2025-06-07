@@ -40,6 +40,7 @@ const resources = {
       "b2b.payments": "付款管理",
       "b2b.analytics": "數據分析",
       "b2b.settings": "系統設置",
+      "b2b.logout": "登出系統",
       
       // Life Trade Platform
       "lifeTrade.title": "生活服務平台",
@@ -193,23 +194,6 @@ const resources = {
       "compare.clearCompare": "清空比較清單",
       "compare.addToCart": "加入購物車",
       "compare.viewDetails": "查看詳情",
-      
-      // Common actions
-      "view": "查看",
-      "edit": "編輯",
-      "delete": "刪除",
-      "save": "保存",
-      "cancel": "取消",
-      "actions": "操作",
-      "status": "狀態",
-      "active": "活躍",
-      "inactive": "非活躍",
-      "settings": "設置",
-      "logout": "登出",
-      "customers": "客戶",
-      "suppliers": "供應商",
-      "quotes": "報價",
-      "analytics": "分析"
     }
   },
   vi: {
@@ -236,6 +220,7 @@ const resources = {
       "b2b.payments": "Quản lý thanh toán",
       "b2b.analytics": "Phân tích dữ liệu",
       "b2b.settings": "Cài đặt hệ thống",
+      "b2b.logout": "Đăng xuất",
       
       // Life Trade Platform
       "lifeTrade.title": "Nền tảng thương mại đời sống",
@@ -389,23 +374,6 @@ const resources = {
       "compare.clearCompare": "Xóa danh sách so sánh",
       "compare.addToCart": "Thêm vào giỏ hàng",
       "compare.viewDetails": "Xem chi tiết",
-      
-      // Common actions
-      "view": "Xem",
-      "edit": "Sửa",
-      "delete": "Xóa",
-      "save": "Lưu",
-      "cancel": "Hủy",
-      "actions": "Thao tác",
-      "status": "Trạng thái",
-      "active": "Hoạt động",
-      "inactive": "Không hoạt động",
-      "settings": "Cài đặt",
-      "logout": "Đăng xuất",
-      "customers": "Khách hàng",
-      "suppliers": "Nhà cung cấp",
-      "quotes": "Báo giá",
-      "analytics": "Phân tích"
     }
   },
   en: {
@@ -423,15 +391,16 @@ const resources = {
       
       // B2B Platform
       "b2b.dashboard": "B2B Dashboard",
-      "b2b.products": "Product Management",
-      "b2b.orders": "Order Management",
-      "b2b.customers": "Customer Management",
-      "b2b.suppliers": "Supplier Management",
-      "b2b.quotes": "Quote Management",
-      "b2b.rfq": "Request for Quotation",
-      "b2b.payments": "Payment Management",
-      "b2b.analytics": "Data Analytics",
-      "b2b.settings": "System Settings",
+      "b2b.products": "Products",
+      "b2b.orders": "Orders",
+      "b2b.customers": "Customers",
+      "b2b.suppliers": "Suppliers",
+      "b2b.quotes": "Quotes",
+      "b2b.rfq": "RFQ",
+      "b2b.payments": "Payments",
+      "b2b.analytics": "Analytics",
+      "b2b.settings": "Settings",
+      "b2b.logout": "Logout",
       
       // Life Trade Platform
       "lifeTrade.title": "Life Services Platform",
@@ -585,23 +554,6 @@ const resources = {
       "compare.clearCompare": "Clear Compare List",
       "compare.addToCart": "Add to Cart",
       "compare.viewDetails": "View Details",
-      
-      // Common actions
-      "view": "View",
-      "edit": "Edit",
-      "delete": "Delete",
-      "save": "Save",
-      "cancel": "Cancel",
-      "actions": "Actions",
-      "status": "Status",
-      "active": "Active",
-      "inactive": "Inactive",
-      "settings": "Settings",
-      "logout": "Logout",
-      "customers": "Customers",
-      "suppliers": "Suppliers",
-      "quotes": "Quotes",
-      "analytics": "Analytics"
     }
   }
 }
@@ -662,9 +614,15 @@ initializeI18n()
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState('en') // Start with fallback language
+  const [hasMounted, setHasMounted] = useState(false)
   
   // Define the translation function
   const { t } = useTranslation()
+  
+  // Set mounted state after hydration
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
   
   // Define changeLanguage callback
   const changeLanguage = useMemo(() => {
@@ -681,6 +639,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   // Listen for language changes and detect language on client side only
   useEffect(() => {
+    if (!hasMounted) return;
+    
     const handleLanguageChanged = () => {
       setLanguage(i18n.language);
     };
@@ -694,7 +654,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return () => {
       i18n.off('languageChanged', handleLanguageChanged);
     };
-  }, []);
+  }, [hasMounted]);
 
   // Create context value with useMemo to prevent unnecessary re-renders
   const contextValue = useMemo(() => ({

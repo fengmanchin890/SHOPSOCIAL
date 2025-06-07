@@ -44,11 +44,11 @@ export function DashboardHeader() {
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
-                {t("settings")}
+                {t("profile.settings")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <LogOut className="mr-2 h-4 w-4" />
-                {t("logout")}
+                {t("b2b.logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

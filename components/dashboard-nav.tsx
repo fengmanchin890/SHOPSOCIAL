@@ -24,15 +24,15 @@ export function DashboardNav() {
 
   const navigation = [
     { name: t("b2b.dashboard"), href: "/store/b2b", icon: Home },
-    { name: t("products"), href: "/store/b2b/products", icon: Package },
+    { name: t("b2b.products"), href: "/store/b2b/products", icon: Package },
     { name: t("b2b.orders"), href: "/store/b2b/orders", icon: ShoppingCart },
-    { name: t("customers"), href: "/store/b2b/customers", icon: Users },
-    { name: t("suppliers"), href: "/store/b2b/suppliers", icon: Building2 },
-    { name: t("quotes"), href: "/store/b2b/quotes", icon: FileText },
-    { name: "RFQ", href: "/store/b2b/rfq", icon: MessageSquare },
+    { name: t("b2b.customers"), href: "/store/b2b/customers", icon: Users },
+    { name: t("b2b.suppliers"), href: "/store/b2b/suppliers", icon: Building2 },
+    { name: t("b2b.quotes"), href: "/store/b2b/quotes", icon: FileText },
+    { name: t("b2b.rfq"), href: "/store/b2b/rfq", icon: MessageSquare },
     { name: t("b2b.payments"), href: "/store/b2b/payments", icon: CreditCard },
-    { name: t("analytics"), href: "/store/b2b/analytics", icon: BarChart3 },
-    { name: t("settings"), href: "/store/b2b/settings", icon: Settings },
+    { name: t("b2b.analytics"), href: "/store/analytics", icon: BarChart3 },
+    { name: t("b2b.settings"), href: "/store/b2b/settings", icon: Settings },
   ]
 
   return (
