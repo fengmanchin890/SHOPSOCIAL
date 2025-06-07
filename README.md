@@ -2,9 +2,36 @@
 
 LiveTrade Connect is a comprehensive trading platform that integrates e-commerce, B2B trading, and lifestyle services into a single, unified experience. This README focuses on the B2B platform component, which provides powerful tools for businesses to manage their trading operations.
 
-## B2B Platform Overview
+## Technology Stack
 
-The B2B platform is designed to streamline business-to-business transactions with a comprehensive suite of tools for managing products, quotes, orders, clients, and analytics. The platform supports multiple languages and provides a robust foundation for international trade.
+The B2B platform is built using modern web technologies:
+
+- **Frontend**: Next.js 15 with React and TypeScript
+- **UI Framework**: Tailwind CSS with shadcn/ui components
+- **State Management**: React Context API with custom providers
+- **Data Visualization**: Recharts for interactive charts and graphs
+- **Internationalization**: i18next for multi-language support
+- **Client-side Rendering**: Hydration-safe patterns for reliable rendering
+
+## AI-Powered Features
+
+The platform leverages artificial intelligence to enhance business operations:
+
+### Current AI Features
+- **Smart Analytics Dashboard**: AI-driven insights and trend analysis
+- **Intelligent Quote Generation**: Automated pricing recommendations based on market data
+- **Supplier Matching Algorithm**: Finds optimal suppliers based on requirements
+- **Predictive Lead Time Calculation**: Estimates delivery times using historical data
+- **Anomaly Detection**: Identifies unusual patterns in orders and payments
+
+### Planned AI Enhancements
+- **Demand Forecasting**: Predict future product demand using machine learning
+- **Price Optimization**: Dynamically adjust pricing based on market conditions
+- **Fraud Detection**: Identify suspicious transactions using pattern recognition
+- **Sentiment Analysis**: Monitor customer feedback and satisfaction
+- **Automated Document Processing**: Extract data from invoices and purchase orders
+
+## B2B Platform Overview
 
 ### Key Features
 
@@ -33,21 +60,33 @@ The B2B platform is designed to streamline business-to-business transactions wit
 - **Profit Analysis**: Margin calculations and profitability metrics
 - **Currency Support**: Multi-currency transactions and conversions
 
-#### Team & Security
-- **User Management**: Role-based access control for team members
-- **Security Settings**: Two-factor authentication and session management
-- **Audit Trails**: Track user actions and system changes
-- **Data Protection**: Secure handling of sensitive business information
+## Minimum Viable Product (MVP)
 
-## Technical Architecture
+For the initial MVP release, we're focusing on the following core components:
 
-The B2B platform is built using modern web technologies:
+### MVP Features
+1. **Basic Dashboard**: Essential KPIs and metrics
+2. **Customer & Supplier Management**: Simple CRM functionality
+3. **Quote Management**: Create, send, and track basic quotes
+4. **Order Processing**: Convert quotes to orders
+5. **Document Generation**: Generate standard business documents
+6. **Multi-language Support**: Support for key markets (English, Chinese, Vietnamese)
 
-- **Frontend**: Next.js 15 with React and TypeScript
-- **UI Framework**: Tailwind CSS with shadcn/ui components
-- **State Management**: React Context API with custom providers
-- **Data Visualization**: Recharts for interactive charts and graphs
-- **Internationalization**: i18next for multi-language support
+### MVP Technical Requirements
+- **Responsive Design**: Mobile and desktop compatibility
+- **Core State Management**: For quotes, orders, and user preferences
+- **Basic Authentication**: User login and role-based access
+- **Document Templates**: Standard templates for quotes and orders
+- **Data Visualization**: Simple charts for business metrics
+- **Internationalization**: Language switching for key interfaces
+
+### Post-MVP Roadmap
+1. **Advanced Analytics**: AI-powered business intelligence
+2. **Automated Workflows**: Custom approval processes
+3. **API Integrations**: Connect with ERP, CRM, and accounting systems
+4. **Mobile App**: Native mobile experience
+5. **Advanced Document Management**: Custom templates and digital signatures
+6. **Blockchain Integration**: Secure contracts and payment verification
 
 ## Getting Started
 
@@ -59,6 +98,12 @@ npm install
 
 # Start the development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
 ## B2B Platform Structure
@@ -79,15 +124,6 @@ app/store/b2b/
 └── settings/               # Platform settings
 ```
 
-## Customization
-
-The B2B platform can be customized to meet specific business needs:
-
-- **Document Templates**: Customize quote, invoice, and other business documents
-- **Workflow Configuration**: Adjust approval processes and notification settings
-- **Integration Options**: Connect with ERP, CRM, and accounting systems
-- **Branding**: Apply your company's branding and visual identity
-
 ## International Trade Support
 
 The platform is designed for international trade with features like:
@@ -105,16 +141,6 @@ The B2B platform includes robust security measures:
 - **Role-Based Access**: Control what different team members can view and modify
 - **Data Encryption**: Protect sensitive business information
 - **Session Management**: Automatic timeouts and secure session handling
-
-## Future Enhancements
-
-Planned enhancements for the B2B platform include:
-
-- **AI-Powered Insights**: Advanced analytics with predictive capabilities
-- **Mobile Applications**: Native mobile apps for on-the-go business management
-- **Blockchain Integration**: Secure contracts and payment verification
-- **Advanced Logistics**: Enhanced shipping and tracking integration
-- **Expanded Marketplace**: Connect with more suppliers and customers globally
 
 ## Contributing
 
