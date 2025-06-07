@@ -16,22 +16,24 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
-const navigation = [
-  { name: "Dashboard", href: "/store/b2b", icon: Home },
-  { name: "Products", href: "/store/b2b/products", icon: Package },
-  { name: "Orders", href: "/store/b2b/orders", icon: ShoppingCart },
-  { name: "Customers", href: "/store/b2b/customers", icon: Users },
-  { name: "Suppliers", href: "/store/b2b/suppliers", icon: Building2 },
-  { name: "Quotes", href: "/store/b2b/quotes", icon: FileText },
-  { name: "RFQ", href: "/store/b2b/rfq", icon: MessageSquare },
-  { name: "Payments", href: "/store/b2b/payments", icon: CreditCard },
-  { name: "Analytics", href: "/store/analytics", icon: BarChart3 },
-  { name: "Settings", href: "/store/b2b/settings", icon: Settings },
-]
+import { useI18n } from "@/contexts/i18n-context"
 
 export function DashboardNav() {
   const pathname = usePathname()
+  const { t } = useI18n()
+
+  const navigation = [
+    { name: t("b2b.dashboard"), href: "/store/b2b", icon: Home },
+    { name: t("products"), href: "/store/b2b/products", icon: Package },
+    { name: t("b2b.orders"), href: "/store/b2b/orders", icon: ShoppingCart },
+    { name: t("customers"), href: "/store/b2b/customers", icon: Users },
+    { name: t("suppliers"), href: "/store/b2b/suppliers", icon: Building2 },
+    { name: t("quotes"), href: "/store/b2b/quotes", icon: FileText },
+    { name: "RFQ", href: "/store/b2b/rfq", icon: MessageSquare },
+    { name: t("b2b.payments"), href: "/store/b2b/payments", icon: CreditCard },
+    { name: t("analytics"), href: "/store/b2b/analytics", icon: BarChart3 },
+    { name: t("settings"), href: "/store/b2b/settings", icon: Settings },
+  ]
 
   return (
     <nav className="w-64 border-r bg-white">

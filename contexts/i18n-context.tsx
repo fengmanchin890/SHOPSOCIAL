@@ -29,6 +29,18 @@ const resources = {
       "nav.b2b": "B2B平台",
       "nav.lifeServices": "生活服務平台",
       
+      // B2B Platform
+      "b2b.dashboard": "B2B 儀表板",
+      "b2b.products": "產品管理",
+      "b2b.orders": "訂單管理",
+      "b2b.customers": "客戶管理",
+      "b2b.suppliers": "供應商管理",
+      "b2b.quotes": "報價管理",
+      "b2b.rfq": "詢價請求",
+      "b2b.payments": "付款管理",
+      "b2b.analytics": "數據分析",
+      "b2b.settings": "系統設置",
+      
       // Life Trade Platform
       "lifeTrade.title": "生活服務平台",
       "lifeTrade.description": "連接在國外的台灣人和在台灣的外國人社區",
@@ -109,7 +121,7 @@ const resources = {
       "button.processing": "處理中...",
       
       // Search
-      "search.placeholder": "搜尋商品...",
+      "search.placeholder": "搜尋...",
       
       // Products
       "products": "產品",
@@ -181,6 +193,23 @@ const resources = {
       "compare.clearCompare": "清空比較清單",
       "compare.addToCart": "加入購物車",
       "compare.viewDetails": "查看詳情",
+      
+      // Common actions
+      "view": "查看",
+      "edit": "編輯",
+      "delete": "刪除",
+      "save": "保存",
+      "cancel": "取消",
+      "actions": "操作",
+      "status": "狀態",
+      "active": "活躍",
+      "inactive": "非活躍",
+      "settings": "設置",
+      "logout": "登出",
+      "customers": "客戶",
+      "suppliers": "供應商",
+      "quotes": "報價",
+      "analytics": "分析"
     }
   },
   vi: {
@@ -195,6 +224,18 @@ const resources = {
       "nav.products": "Sản phẩm",
       "nav.b2b": "Nền tảng B2B",
       "nav.lifeServices": "Nền tảng thương mại đời sống",
+      
+      // B2B Platform
+      "b2b.dashboard": "Bảng điều khiển B2B",
+      "b2b.products": "Quản lý sản phẩm",
+      "b2b.orders": "Quản lý đơn hàng",
+      "b2b.customers": "Quản lý khách hàng",
+      "b2b.suppliers": "Quản lý nhà cung cấp",
+      "b2b.quotes": "Quản lý báo giá",
+      "b2b.rfq": "Yêu cầu báo giá",
+      "b2b.payments": "Quản lý thanh toán",
+      "b2b.analytics": "Phân tích dữ liệu",
+      "b2b.settings": "Cài đặt hệ thống",
       
       // Life Trade Platform
       "lifeTrade.title": "Nền tảng thương mại đời sống",
@@ -276,7 +317,7 @@ const resources = {
       "button.processing": "Đang xử lý...",
       
       // Search
-      "search.placeholder": "Tìm kiếm sản phẩm...",
+      "search.placeholder": "Tìm kiếm...",
       
       // Products
       "products": "Sản phẩm",
@@ -348,340 +389,23 @@ const resources = {
       "compare.clearCompare": "Xóa danh sách so sánh",
       "compare.addToCart": "Thêm vào giỏ hàng",
       "compare.viewDetails": "Xem chi tiết",
-    }
-  },
-  th: {
-    translation: {
-      // Common
-      "platform.name": "LiveTrade Connect",
-      "platform.description": "แพลตฟอร์มการค้าแบบครบวงจร",
-      "platform.slogan": "เชื่อมต่อการพาณิชย์อิเล็กทรอนิกส์ การซื้อขาย B2B และบริการไลฟ์สไตล์",
       
-      // Navigation
-      "nav.home": "หน้าแรก",
-      "nav.products": "สินค้า",
-      "nav.b2b": "แพลตฟอร์ม B2B",
-      "nav.lifeServices": "แพลตฟอร์มบริการไลฟ์สไตล์",
-      
-      // Life Trade Platform
-      "lifeTrade.title": "แพลตฟอร์มบริการไลฟ์สไตล์",
-      "lifeTrade.description": "เชื่อมต่อชุมชนชาวไทยในต่างประเทศและชาวต่างชาติในไทย",
-      "lifeTrade.overview": "ภาพรวม",
-      "lifeTrade.food": "อาหาร",
-      "lifeTrade.accommodation": "ที่พัก",
-      "lifeTrade.travel": "ท่องเที่ยวด้วยกัน",
-      "lifeTrade.language": "ภาษา",
-      "lifeTrade.culture": "หลากวัฒนธรรม",
-      
-      // Target Users
-      "targetUsers.title": "กลุ่มผู้ใช้เป้าหมาย",
-      "targetUsers.students": "นักเรียนต่างชาติ",
-      "targetUsers.students.desc": "ไม่คุ้นเคยกับภาษา ต้องการหาเพื่อน ต้องการสัมผัสวัฒนธรรมและอาหารท้องถิ่น",
-      "targetUsers.married": "ชาวต่างชาติที่แต่งงานและตั้งถิ่นฐาน",
-      "targetUsers.married.desc": "ต้องการปรับตัวเข้ากับชีวิตท้องถิ่น เข้าร่วมกิจกรรมชุมชน",
-      "targetUsers.workers": "แรงงานต่างชาติ",
-      "targetUsers.workers.desc": "ผู้เชี่ยวชาญ แรงงานทั่วไป และนักท่องเที่ยวดิจิทัล",
-      
-      // Features
-      "features.title": "คุณสมบัติหลัก",
-      "features.food": "ประสบการณ์อาหาร",
-      "features.food.desc": "สำรวจอาหารท้องถิ่น",
-      "features.accommodation": "แลกเปลี่ยนที่พัก",
-      "features.accommodation.desc": "หาหรือแลกเปลี่ยนที่พัก",
-      "features.travel": "ท่องเที่ยวด้วยกัน",
-      "features.travel.desc": "หาเพื่อนร่วมเดินทาง",
-      "features.language": "แลกเปลี่ยนภาษา",
-      "features.language.desc": "เรียนและสอนภาษา",
-      "features.culture": "ศูนย์หลากวัฒนธรรม",
-      "features.culture.desc": "ทรัพยากรการปรับตัว",
-      
-      // Recent Activities
-      "recentActivities.title": "กิจกรรมล่าสุด",
-      "recentActivities.cookingClass": "คลาสทำอาหารไทย",
-      "recentActivities.cookingClass.desc": "เรียนรู้วิธีทำต้มยำและอาหารดั้งเดิม",
-      "recentActivities.languageExchange": "แลกเปลี่ยนภาษาไทย-อังกฤษ",
-      "recentActivities.languageExchange.desc": "พบปะกันทุกสัปดาห์ที่ร้านกาแฟ",
-      "recentActivities.marketTour": "ทัวร์ตลาดจตุจักร",
-      "recentActivities.marketTour.desc": "สำรวจอาหารและวัฒนธรรมของตลาดดั้งเดิม",
-      
-      // Food Section
-      "food.title": "สำรวจอาหาร (Eat & Meet)",
-      "food.addExperience": "เพิ่มประสบการณ์",
-      "food.smartDiscovery": "ระบบค้นพบอาหารอัจฉริยะ",
-      "food.locationBased": "คำแนะนำตามตำแหน่ง",
-      "food.locationBased.desc": "แนะนำร้านอาหารไทยและอาหารท้องถิ่นในรัศมี 5-10 กม. โดยอัตโนมัติ",
-      "food.tasteProfile": "โปรไฟล์รสชาติส่วนตัว",
-      "food.tasteProfile.desc": "สร้างโปรไฟล์รสชาติ (ระดับความเผ็ด ความชอบความหวาน ข้อจำกัดด้านอาหาร) เพื่อรับคำแนะนำส่วนบุคคล",
-      "food.homesickMode": "โหมดคิดถึงบ้าน",
-      "food.homesickMode.desc": "หาอาหารที่มีรสชาติใกล้เคียงกับอาหารไทยเฉพาะภูมิภาค (เหนือ อีสาน กลาง ใต้)",
-      
-      // Accommodation Section
-      "accommodation.title": "แลกเปลี่ยนที่พัก (Live & Help)",
-      "accommodation.addListing": "เพิ่มที่พัก",
-      
-      // Travel Section
-      "travel.title": "ท่องเที่ยวด้วยกัน (Explore Together)",
-      "travel.addActivity": "เพิ่มกิจกรรม",
-      
-      // Language Section
-      "language.title": "แลกเปลี่ยนภาษา (Language Swap)",
-      "language.addClass": "เพิ่มคลาสเรียน",
-      
-      // Culture Section
-      "culture.title": "ศูนย์หลากวัฒนธรรม (Multicultural Hub)",
-      "culture.addResource": "เพิ่มทรัพยากร",
-      
-      // Buttons
-      "button.viewMore": "ดูเพิ่มเติม",
-      "button.register": "ลงทะเบียน",
-      "button.join": "เข้าร่วม",
-      "button.contact": "ติดต่อ",
-      "button.cancel": "ยกเลิก",
-      "button.save": "บันทึก",
-      "button.back": "กลับ",
-      "button.add": "เพิ่ม",
-      "button.processing": "กำลังประมวลผล...",
-      
-      // Search
-      "search.placeholder": "ค้นหาสินค้า...",
-      
-      // Products
-      "products": "สินค้า",
-      "products.all": "สินค้าทั้งหมด",
-      "products.featured": "สินค้าแนะนำ",
-      "products.popular": "สินค้ายอดนิยม",
-      "products.new": "สินค้าใหม่",
-      "products.sale": "สินค้าลดราคา",
-      
-      // User Profile
-      "profile.title": "ศูนย์สมาชิก",
-      "profile.info": "ข้อมูลส่วนตัว",
-      "profile.orders": "ประวัติการสั่งซื้อ",
-      "profile.settings": "ตั้งค่าบัญชี",
-      "profile.basicInfo": "ข้อมูลพื้นฐาน",
-      "profile.name": "ชื่อ-นามสกุล",
-      "profile.email": "อีเมล",
-      "profile.phone": "เบอร์โทรศัพท์",
-      "profile.address": "ที่อยู่",
-      "profile.joinDate": "วันที่สมัคร",
-      "profile.edit": "แก้ไข",
-      "profile.save": "บันทึก",
-      "profile.cancel": "ยกเลิก",
-      "profile.stats": "สถิติสมาชิก",
-      "profile.totalOrders": "จำนวนคำสั่งซื้อทั้งหมด",
-      "profile.totalSpent": "ยอดใช้จ่ายทั้งหมด",
-      
-      // Cart
-      "cart.title": "ตะกร้าสินค้า",
-      "cart.empty": "ตะกร้าสินค้าว่างเปล่า",
-      "cart.emptyMessage": "ไม่มีสินค้าในตะกร้าของคุณ",
-      "cart.startShopping": "เริ่มช้อปปิ้ง",
-      "cart.summary": "สรุปคำสั่งซื้อ",
-      "cart.subtotal": "ยอดรวมสินค้า",
-      "cart.shipping": "ค่าจัดส่ง",
-      "cart.freeShipping": "ฟรี",
-      "cart.total": "ยอดรวมทั้งหมด",
-      "cart.checkout": "ชำระเงิน",
-      "cart.continueShopping": "ช้อปปิ้งต่อ",
-      "cart.clearCart": "ล้างตะกร้า",
-      "cart.shippingInfo": "• จัดส่งฟรีสำหรับคำสั่งซื้อ $1,000 ขึ้นไป",
-      "cart.deliveryInfo": "• จัดส่งภายใน 2-3 วันทำการ",
-      "cart.returnInfo": "• รับคืนสินค้าภายใน 7 วันโดยไม่มีเงื่อนไข",
-      
-      // Wishlist
-      "wishlist.title": "รายการโปรด",
-      "wishlist.empty": "รายการโปรดว่างเปล่า",
-      "wishlist.emptyMessage": "ไม่มีสินค้าในรายการโปรดของคุณ",
-      "wishlist.startShopping": "เริ่มช้อปปิ้ง",
-      "wishlist.viewCompare": "ดูการเปรียบเทียบ",
-      "wishlist.clearWishlist": "ล้างรายการโปรด",
-      "wishlist.addToCart": "เพิ่มลงตะกร้า",
-      "wishlist.addToCompare": "เพิ่มในการเปรียบเทียบ",
-      
-      // Compare
-      "compare.title": "เปรียบเทียบสินค้า",
-      "compare.empty": "รายการเปรียบเทียบว่างเปล่า",
-      "compare.emptyMessage": "เพิ่มสินค้าจากรายการโปรดหรือหน้าสินค้าเพื่อเปรียบเทียบ",
-      "compare.viewProducts": "ดูสินค้า",
-      "compare.viewWishlist": "ดูรายการโปรด",
-      "compare.social": "โซเชียล",
-      "compare.collaborate": "ร่วมมือ",
-      "compare.priceAlert": "แจ้งเตือนราคา",
-      "compare.filter": "กรอง",
-      "compare.save": "บันทึก",
-      "compare.history": "ประวัติ",
-      "compare.share": "แชร์",
-      "compare.export": "ส่งออก",
-      "compare.clearCompare": "ล้างรายการเปรียบเทียบ",
-      "compare.addToCart": "เพิ่มลงตะกร้า",
-      "compare.viewDetails": "ดูรายละเอียด",
-    }
-  },
-  hi: {
-    translation: {
-      // Common
-      "platform.name": "LiveTrade Connect",
-      "platform.description": "एकीकृत व्यापार मंच",
-      "platform.slogan": "ई-कॉमर्स, B2B व्यापार और जीवनशैली सेवाओं को जोड़ना",
-      
-      // Navigation
-      "nav.home": "होम",
-      "nav.products": "उत्पाद",
-      "nav.b2b": "B2B प्लेटफॉर्म",
-      "nav.lifeServices": "जीवनशैली व्यापार मंच",
-      
-      // Life Trade Platform
-      "lifeTrade.title": "जीवनशैली व्यापार मंच",
-      "lifeTrade.description": "विदेश में भारतीय समुदाय और भारत में विदेशियों को जोड़ना",
-      "lifeTrade.overview": "अवलोकन",
-      "lifeTrade.food": "भोजन",
-      "lifeTrade.accommodation": "आवास",
-      "lifeTrade.travel": "एक साथ यात्रा",
-      "lifeTrade.language": "भाषा",
-      "lifeTrade.culture": "बहुसांस्कृतिक",
-      
-      // Target Users
-      "targetUsers.title": "लक्षित उपयोगकर्ता समूह",
-      "targetUsers.students": "अंतर्राष्ट्रीय छात्र",
-      "targetUsers.students.desc": "भाषा से अपरिचित, दोस्त बनाना चाहते हैं, स्थानीय संस्कृति और भोजन का अनुभव करना चाहते हैं",
-      "targetUsers.married": "विदेशी विवाहित और बसे हुए",
-      "targetUsers.married.desc": "स्थानीय जीवन में घुलना-मिलना चाहते हैं, सामुदायिक गतिविधियों में भाग लेना चाहते हैं",
-      "targetUsers.workers": "विदेशी कर्मचारी",
-      "targetUsers.workers.desc": "पेशेवर, सामान्य श्रमिक और डिजिटल नोमैड",
-      
-      // Features
-      "features.title": "मुख्य विशेषताएँ",
-      "features.food": "भोजन अनुभव",
-      "features.food.desc": "स्थानीय व्यंजनों की खोज",
-      "features.accommodation": "आवास विनिमय",
-      "features.accommodation.desc": "आवास खोजें या विनिमय करें",
-      "features.travel": "एक साथ खोज",
-      "features.travel.desc": "यात्रा साथी खोजें",
-      "features.language": "भाषा विनिमय",
-      "features.language.desc": "भाषा सीखें और सिखाएँ",
-      "features.culture": "बहुसांस्कृतिक केंद्र",
-      "features.culture.desc": "एकीकरण संसाधन",
-      
-      // Recent Activities
-      "recentActivities.title": "हाल की गतिविधियाँ",
-      "recentActivities.cookingClass": "भारतीय खाना पकाने की कक्षा",
-      "recentActivities.cookingClass.desc": "बिरयानी और पारंपरिक व्यंजन बनाना सीखें",
-      "recentActivities.languageExchange": "हिंदी-अंग्रेजी विनिमय",
-      "recentActivities.languageExchange.desc": "कॉफी शॉप में साप्ताहिक मुलाकात",
-      "recentActivities.marketTour": "चांदनी चौक मार्केट टूर",
-      "recentActivities.marketTour.desc": "पारंपरिक बाजार के भोजन और संस्कृति की खोज",
-      
-      // Food Section
-      "food.title": "भोजन खोज (Eat & Meet)",
-      "food.addExperience": "अनुभव जोड़ें",
-      "food.smartDiscovery": "स्मार्ट फूड डिस्कवरी सिस्टम",
-      "food.locationBased": "स्थान-आधारित सिफारिशें",
-      "food.locationBased.desc": "5-10 किमी के दायरे में भारतीय रेस्तरां और स्थानीय व्यंजनों की स्वचालित सिफारिशें",
-      "food.tasteProfile": "स्वाद प्रोफाइल मिलान",
-      "food.tasteProfile.desc": "व्यक्तिगत सिफारिशें प्राप्त करने के लिए स्वाद प्रोफाइल (मसालेदार स्तर, मिठास पसंद, आहार प्रतिबंध) बनाएँ",
-      "food.homesickMode": "होमसिक मोड",
-      "food.homesickMode.desc": "विशिष्ट भारतीय क्षेत्रीय व्यंजनों (उत्तरी, दक्षिणी, पूर्वी, पश्चिमी) के सबसे करीबी स्वाद वाले व्यंजन खोजें",
-      
-      // Accommodation Section
-      "accommodation.title": "आवास विनिमय (Live & Help)",
-      "accommodation.addListing": "आवास जोड़ें",
-      
-      // Travel Section
-      "travel.title": "एक साथ खोज (Explore Together)",
-      "travel.addActivity": "गतिविधि जोड़ें",
-      
-      // Language Section
-      "language.title": "भाषा विनिमय (Language Swap)",
-      "language.addClass": "कक्षा जोड़ें",
-      
-      // Culture Section
-      "culture.title": "बहुसांस्कृतिक केंद्र (Multicultural Hub)",
-      "culture.addResource": "संसाधन जोड़ें",
-      
-      // Buttons
-      "button.viewMore": "और देखें",
-      "button.register": "पंजीकरण",
-      "button.join": "शामिल हों",
-      "button.contact": "संपर्क करें",
-      "button.cancel": "रद्द करें",
-      "button.save": "सहेजें",
-      "button.back": "वापस",
-      "button.add": "जोड़ें",
-      "button.processing": "प्रोसेसिंग...",
-      
-      // Search
-      "search.placeholder": "उत्पाद खोजें...",
-      
-      // Products
-      "products": "उत्पाद",
-      "products.all": "सभी उत्पाद",
-      "products.featured": "विशेष उत्पाद",
-      "products.popular": "लोकप्रिय उत्पाद",
-      "products.new": "नए उत्पाद",
-      "products.sale": "बिक्री पर उत्पाद",
-      
-      // User Profile
-      "profile.title": "सदस्य केंद्र",
-      "profile.info": "व्यक्तिगत जानकारी",
-      "profile.orders": "ऑर्डर इतिहास",
-      "profile.settings": "खाता सेटिंग्स",
-      "profile.basicInfo": "बुनियादी जानकारी",
-      "profile.name": "नाम",
-      "profile.email": "ईमेल",
-      "profile.phone": "फोन नंबर",
-      "profile.address": "पता",
-      "profile.joinDate": "शामिल होने की तिथि",
-      "profile.edit": "संपादित करें",
-      "profile.save": "सहेजें",
-      "profile.cancel": "रद्द करें",
-      "profile.stats": "सदस्य आंकड़े",
-      "profile.totalOrders": "कुल ऑर्डर",
-      "profile.totalSpent": "कुल खर्च",
-      
-      // Cart
-      "cart.title": "शॉपिंग कार्ट",
-      "cart.empty": "आपका कार्ट खाली है",
-      "cart.emptyMessage": "आपके कार्ट में कोई आइटम नहीं है",
-      "cart.startShopping": "शॉपिंग शुरू करें",
-      "cart.summary": "ऑर्डर सारांश",
-      "cart.subtotal": "उप-योग",
-      "cart.shipping": "शिपिंग",
-      "cart.freeShipping": "मुफ्त",
-      "cart.total": "कुल",
-      "cart.checkout": "चेकआउट",
-      "cart.continueShopping": "शॉपिंग जारी रखें",
-      "cart.clearCart": "कार्ट खाली करें",
-      "cart.shippingInfo": "• $1,000 से अधिक के ऑर्डर पर मुफ्त शिपिंग",
-      "cart.deliveryInfo": "• 2-3 कार्य दिवसों में डिलीवरी",
-      "cart.returnInfo": "• 7 दिनों के भीतर बिना कारण बताए वापसी",
-      
-      // Wishlist
-      "wishlist.title": "इच्छा-सूची",
-      "wishlist.empty": "आपकी इच्छा-सूची खाली है",
-      "wishlist.emptyMessage": "आपकी इच्छा-सूची में कोई आइटम नहीं है",
-      "wishlist.startShopping": "शॉपिंग शुरू करें",
-      "wishlist.viewCompare": "तुलना देखें",
-      "wishlist.clearWishlist": "इच्छा-सूची खाली करें",
-      "wishlist.addToCart": "कार्ट में जोड़ें",
-      "wishlist.addToCompare": "तुलना में जोड़ें",
-      
-      // Compare
-      "compare.title": "उत्पाद तुलना",
-      "compare.empty": "तुलना सूची खाली है",
-      "compare.emptyMessage": "तुलना करने के लिए इच्छा-सूची या उत्पाद पृष्ठ से उत्पाद जोड़ें",
-      "compare.viewProducts": "उत्पाद देखें",
-      "compare.viewWishlist": "इच्छा-सूची देखें",
-      "compare.social": "सामाजिक",
-      "compare.collaborate": "सहयोग",
-      "compare.priceAlert": "मूल्य अलर्ट",
-      "compare.filter": "फ़िल्टर",
-      "compare.save": "सहेजें",
-      "compare.history": "इतिहास",
-      "compare.share": "साझा करें",
-      "compare.export": "निर्यात",
-      "compare.clearCompare": "तुलना सूची साफ़ करें",
-      "compare.addToCart": "कार्ट में जोड़ें",
-      "compare.viewDetails": "विवरण देखें",
+      // Common actions
+      "view": "Xem",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "save": "Lưu",
+      "cancel": "Hủy",
+      "actions": "Thao tác",
+      "status": "Trạng thái",
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động",
+      "settings": "Cài đặt",
+      "logout": "Đăng xuất",
+      "customers": "Khách hàng",
+      "suppliers": "Nhà cung cấp",
+      "quotes": "Báo giá",
+      "analytics": "Phân tích"
     }
   },
   en: {
@@ -696,6 +420,18 @@ const resources = {
       "nav.products": "Products",
       "nav.b2b": "B2B Platform",
       "nav.lifeServices": "Life Services Platform",
+      
+      // B2B Platform
+      "b2b.dashboard": "B2B Dashboard",
+      "b2b.products": "Product Management",
+      "b2b.orders": "Order Management",
+      "b2b.customers": "Customer Management",
+      "b2b.suppliers": "Supplier Management",
+      "b2b.quotes": "Quote Management",
+      "b2b.rfq": "Request for Quotation",
+      "b2b.payments": "Payment Management",
+      "b2b.analytics": "Data Analytics",
+      "b2b.settings": "System Settings",
       
       // Life Trade Platform
       "lifeTrade.title": "Life Services Platform",
@@ -777,7 +513,7 @@ const resources = {
       "button.processing": "Processing...",
       
       // Search
-      "search.placeholder": "Search products...",
+      "search.placeholder": "Search...",
       
       // Products
       "products": "Products",
@@ -849,6 +585,23 @@ const resources = {
       "compare.clearCompare": "Clear Compare List",
       "compare.addToCart": "Add to Cart",
       "compare.viewDetails": "View Details",
+      
+      // Common actions
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "actions": "Actions",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "settings": "Settings",
+      "logout": "Logout",
+      "customers": "Customers",
+      "suppliers": "Suppliers",
+      "quotes": "Quotes",
+      "analytics": "Analytics"
     }
   }
 }

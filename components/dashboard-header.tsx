@@ -11,19 +11,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useI18n } from "@/contexts/i18n-context"
 
 export function DashboardHeader() {
+  const { t } = useI18n()
+  
   return (
     <header className="border-b bg-white">
       <div className="flex h-16 items-center px-6">
         <div className="flex items-center space-x-4">
-          <h1 className="text-xl font-bold">B2B Dashboard</h1>
+          <h1 className="text-xl font-bold">{t("b2b.dashboard")}</h1>
         </div>
 
         <div className="ml-auto flex items-center space-x-4">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search..." className="pl-8 w-64" />
+            <Input type="search" placeholder={t("search.placeholder")} className="pl-8 w-64" />
           </div>
 
           <Button variant="ghost" size="icon">
@@ -37,15 +40,15 @@ export function DashboardHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("profile.title")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
-                Settings
+                {t("settings")}
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <LogOut className="mr-2 h-4 w-4" />
-                Log out
+                {t("logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
